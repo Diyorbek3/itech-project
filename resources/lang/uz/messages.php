@@ -1,0 +1,108 @@
+<?php
+
+return [
+    // Navigation
+    'home' => 'Asosiy',
+    'about_us' => 'Biz haqimizda',
+    'why_us' => 'Nega aynan biz?',
+    'courses' => 'Kurslar',
+    'projects' => 'Loyihalar',
+    'sections' => 'Bo\'limlar',
+    'contact_us' => 'Aloqaga chiqish',
+    
+    // Header
+    'header_title' => 'Kelajak dasturchilarini tayyorlaymiz',
+    'header_description' => 'iTech o‘quv markazi zamonaviy IT yo‘nalishlarda kuchli mutaxassislarni tayyorlaydi. Amaliy darslar, real loyihalar va tajribali mentorlar yordamida siz noldan boshlab professional dasturchi darajasiga chiqishingiz mumkin.',
+    'learn_more' => 'Batafsil',
+    'contact' => 'Bog‘lanish',
+    
+    // Statistics
+    'graduates' => 'Bitiruvchilar',
+    'active_courses' => 'Faol Kurslar',
+    'employed_students' => 'Ishga joylashgan talabalar',
+    'years_experience' => 'Yillik tajriba',
+    
+    // Introduction
+    'intro_title' => 'iTech — zamonaviy IT kasblarini o‘rgatuvchi o‘quv markazi',
+    'intro_description' => 'iTech o‘quv markazi dasturlash va IT sohasida amaliy bilim berishga ixtisoslashgan. O‘quv dasturlarimiz real loyiha tajribasiga asoslangan bo‘lib, talabalarni ish bozoriga tayyor mutaxassis sifatida shakllantirishga qaratilgan. Har bir kurs zamonaviy texnologiyalar, mentorlik yordami va amaliy topshiriqlar bilan olib boriladi. Maqsadimiz — kuchli, mustaqil va talabgir dasturchilarni yetishtirish.',
+    
+    // Details 1
+    'details1_title' => 'Zamonaviy ta\'lim yondashuvi va real loyiha tajribasi',
+    'details1_item1' => 'Amaliy darslar orqali talabalar real IT loyihalar ustida ishlaydi.',
+    'details1_item2' => 'Mentorlar tomonidan doimiy qo‘llab-quvvatlash va individual yondashuv.',
+    'details1_item3' => 'Zamonaviy texnologiyalar: Frontend, Backend, Mobile va boshqa yo‘nalishlar.',
+    'details1_item4' => 'Bitiruvchilarga portfolio tayyorlash va ishga joylashish bo‘yicha yordam.',
+    'start_course' => 'Kursni boshlash',
+    
+    // Services/Courses
+    'our_courses' => 'Kurslarimiz',
+    'courses_desc1' => 'Zamonaviy veb-interfeyslar yaratishni o‘rganing. HTML, CSS, JavaScript va zamonaviy frameworklar yordamida tezkor, chiroyli va foydalanuvchiga qulay saytlar ishlab chiqishni o‘zlashtirasiz.',
+    'courses_desc2' => 'Server tomoni dasturlashni o‘rganing. Ma’lumotlar bazasi, API va xavfsizlik bilan ishlashni amaliy tarzda bajarib, to‘liq web ilovalar yarata olasiz.',
+    'courses_item1' => 'Nazariy bilimlar amaliy mashg‘ulotlar bilan mustahkamlanadi',
+    'courses_item2' => 'Har bir talaba real loyihalar ustida ishlaydi.',
+    'courses_item3' => 'Bitiruvchilarga portfolio va ishga joylashishda yordam beriladi.',
+    'python' => 'Python',
+    'computer_literacy' => 'Kompyuter savodxonligi',
+    'frontend' => 'Frontend',
+    'backend' => 'Backend',
+    'cybersecurity' => 'Kiber xavfsizlik',
+    'ai_developer' => 'AI Dasturchi',
+    
+    // Details 2
+    'details2_title' => 'IT karyerangizni shu yerdan boshlang',
+    'details2_description' => 'IT sohasida muvaffaqiyatga erishish uchun amaliyot va real loyihalar eng muhimdir. Har bir kursimiz sizni nafaqat nazariy bilim bilan, balki ishga tayyor tajriba bilan ta’minlaydi. Mentorlarimiz sizni doimiy qo‘llab-quvvatlaydi va individual yondashuv bilan rivojlanishingizni kafolatlaydi.',
+    'start' => 'Boshlash',
+    
+    // Invitation
+    'invitation_text' => 'Bizning tajribali dizaynerlar va ichki qurilish mutaxassislari jamoamiz sizning kutganingizdan ham yuqori natijalarni taqdim etadi.',
+    
+    // Projects Section
+    'projects_title' => 'Loyihalar',
+    'project1_title' => 'Banklar uchun ofis maydoni',
+    'project1_desc' => 'Zamonaviy va funksional ofis, xodimlar uchun qulay ish muhiti yaratildi.',
+    'project2_title' => 'Startaplar uchun reja va dizayn',
+    'project2_desc' => 'Startaplar uchun ijodiy va samarali ish joylarini rejalashtirish va dizayn qilish.',
+    'project3_title' => 'Rang va materiallarni yangilash',
+    'project3_desc' => 'Ichki makon uchun rang va materiallarni zamonaviylashtirish, estetik va amaliy yechimlar bilan.',
+    'project4_title' => 'Bino tartibi va pollar dizayni',
+    'project4_desc' => 'Bino ichki tartibini tahlil qilish va optimal pollar dizaynini ishlab chiqish.',
+    'project5_title' => 'Ofis makonlarini bezash',
+    'project5_desc' => 'Ofislarni bezash, qulay va ilhom beruvchi muhit yaratish.',
+    'project6_title' => 'Bolalar maydonchasi',
+    'project6_desc' => 'Bolalar bog‘chalari uchun xavfsiz va qiziqarli o‘yin maydonchalari loyihasi.',
+    'read_more' => 'Batafsil',
+    
+    // Testimonials
+    'testimonial_author1' => 'Marlene Visconte',
+    'testimonial_position1' => 'Bosh direktor - Scouter',
+    'testimonial_author2' => 'John Spiker',
+    'testimonial_position2' => 'Jamoa rahbari - Vanquish',
+    'testimonial_author3' => 'Stella Virtuoso',
+    'testimonial_position3' => 'Bosh dizayner - Bikegirl',
+    
+    // Contact Form
+    'contact_title' => 'Itech academyga aloqaga chiqish',
+    'your_name' => 'Ismingiz',
+    'email' => 'Email',
+    'message' => 'Xabar',
+    'send' => 'Yuborish',
+    'success_message' => 'Xabaringiz muvaffaqiyatli yuborildi!',
+    
+    // Footer
+    'about_website' => 'Website haqida',
+    'footer_description' => 'iTech Academy web-sayti orqali kurslar, yo‘nalishlar va loyihalar haqida barcha ma’lumotlarni topishingiz mumkin. Saytimiz foydalanuvchi uchun qulay va tezkor ishlaydi.',
+    'address' => 'Manzil',
+    'address_details' => 'Manzil: Olmaliq shahar Ucell bosh ofisi',
+    'follow_us' => 'Bizni kuzatishda davom eting!',
+    'copyright' => 'Copyright © :year ITECH',
+    'design_by' => 'Dizayn :name',
+    'error' => 'Iltimos, barcha maydonlarni to‘ldiring.',
+    'success' => 'Xabaringiz muvaffaqiyatli yuborildi!',
+    'language' => 'Til',
+    'english' => 'Ingliz tili',
+    'russian' => 'Rus tili',
+    'uzbek' => 'O\'zbek tili',
+        'new_request' => 'Yangi ariza keldi!',
+    'name' => 'Ism',
+    'time' => 'Vaqt',
+];
