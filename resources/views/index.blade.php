@@ -188,59 +188,241 @@ a.btn-outline-sm.dropdown-toggle {
     margin-right: 8px;
 }
 
-/* Для мобильной версии */
-@media (max-width: 991.98px) {
-    .navbar-nav .nav-item .dropdown-menu {
-        position: absolute !important;
+
+/* Login va Sign Up uchun maxsus kichik uslub */
+/* Auth konteyneri uchun */
+.auth-container {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Tugmalar orasidagi masofa */
+    flex-wrap: nowrap; /* Tugmalarni bitta qatorda saqlaydi */
+}
+
+.auth-btn {
+    padding: 8px 16px !important; /* Bo'yiga balandroq, eniga yetarli joy */
+    font-size: 13px !important;
+    font-weight: 600;
+    border-radius: 20px !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-width: fit-content; /* Matn sig'ishiga qarab kengayadi */
+    white-space: nowrap; /* Matnni pastga tushirmaydi */
+    transition: all 0.3s ease;
+    text-decoration: none !important;
+}
+
+/* O'zbek tili uchun maxsus: agar matn juda uzun bo'lsa shriftni biroz kichraytiramiz */
+[lang="uz"] .auth-btn {
+    font-size: 10px !important;
+    padding: 7px 10px !important;
+}
+
+/* Mobil qurilmalarda tugmalar bir-birining ostiga tushishi uchun */
+@media (max-width: 991px) {
+    .auth-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .auth-btn {
+        margin: 4px 0;
+        width: 100%;
     }
 }
-        
+
+/* Mobil qurilmalar uchun tugmalar yopishib qolmasligi uchun */
+@media (max-width: 991px) {
+    .auth-btn {
+        display: block;
+        margin: 5px auto;
+        max-width: 150px;
+    }
+}
+
+.btn-login-custom {
+    border: 1px solid #eb427e;
+    color: #eb427e;
+    background: transparent;
+}
+
+.btn-signup-custom {
+    background-color: #eb427e;
+    border: 1px solid #eb427e;
+    color: #fff !important;
+}
+
+/* Kursor olib borilganda ham chiziqcha chiqmasligi uchun */
+.auth-btn:hover {
+    text-decoration: none !important;
+    opacity: 0.9;
+}
+.auth-btn {
+    padding: 6px 18px !important;
+    font-size: 13px !important;
+    font-weight: 600;
+    border-radius: 20px !important;
+    display: inline-block;
+    text-align: center;
+    min-width: 90px;
+    margin: 0 4px;
+    transition: all 0.3s ease; /* Silliq o'tish */
+    text-decoration: none !important;
+}
+
+/* Login tugmasi (Dastlab ramkali) */
+.btn-login-custom {
+    border: 1px solid #eb427e !important;
+    color: #ffffff !important;
+    background-color: #eb427e !important;
+}
+
+/* Sichqoncha ustiga kelganda yoki bosilganda */
+.btn-login-custom:hover, .btn-login-custom:active {
+    background-color: #ffffff !important;
+    color: #eb427e !important;
+    text-decoration: none !important;
+}
+
+/* Sign Up tugmasi (Dastlab to'la rangli) */
+.btn-signup-custom {
+    background-color: #eb427e !important;
+    border: 1px solid #eb427e !important;
+    color: #fff !important;
+}
+
+/* Sichqoncha ustiga kelganda yoki bosilganda */
+.btn-signup-custom:hover, .btn-signup-custom:active {
+    background-color: transparent !important;
+    color: #eb427e !important;
+    text-decoration: none !important;
+}
+/* Menyu elementlari orasidagi masofani biroz kamaytiramiz */
+.navbar-nav .nav-link {
+    padding-right: 0.8rem !important;
+    padding-left: 0.8rem !important;
+}
+
+/* Auth tugmalarining o'lchamini jilovlaymiz */
+.auth-btn {
+    min-width: 80px !important;
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+}
+
+/* Katta ekranlarda hamma narsa sig'ishi uchun konteynerni kengaytiramiz */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1300px;
+    }
+}
+
+/* O'zbek tili uchun shriftni kichraytirish qoidasini biroz yumshatamiz */
+[lang="uz"] .auth-btn {
+    font-size: 11px !important;
+}       
+/* Konteynerni kengaytiramiz */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1350px !important;
+    }
+}
+
+/* Navigatsiya elementlari orasidagi masofani qisqartiramiz */
+.navbar-nav .nav-link {
+    padding-right: 12px !important;
+    padding-left: 12px !important;
+    font-size: 15px;
+}
+
+/* Tugmalar siqilib qolmasligi uchun */
+.auth-container {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Tugmalar orasidagi masofa */
+}
+
+.auth-btn {
+    min-width: 85px !important;
+    padding: 6px 12px !important;
+    font-size: 13px !important;
+    white-space: nowrap; /* Matn pastga tushib ketmasligi uchun */
+}
+
+/* Logotip va menyu orasidagi bo'shliq */
+.navbar-collapse {
+    justify-content: space-between;
+}
     </style>
 </head>
 
 <body>
     <!-- Navigation -->
-    <nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-light" aria-label="Main navigation">
-        <div class="container">
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-light">
+    <div class="container">
 
-            <!-- Image Logo -->
-            <a class="" href="/"><img src="{{ asset('images/logo.png') }}" class='img-fluid rounded-circle'
-                    style='width: 80px; height: 80px;' alt="alternative"></a>
+        <a class="navbar-brand" href="/">
+            <img src="{{ asset('images/logo.png') }}" class='img-fluid rounded-circle'
+                 style='width: 70px; height: 70px;' alt="logo">
+        </a>
 
-            <!-- Text Logo - Use this if you don't have a graphic logo -->
-            <!-- <a class="navbar-brand logo-text" href="index.html">Yavin</a> -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-                <ul class="navbar-nav ms-auto navbar-nav-scroll">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#header">@lang('messages.about_us')</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#details">@lang('messages.why_us')</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#services">@lang('messages.courses')</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#projects">@lang('messages.projects')</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
-                            aria-expanded="false">@lang('messages.sections')</a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                            <li><a class="dropdown-item" href="#header">@lang('messages.about_us')</a></li>
-                            <li><a class="dropdown-item" href="#details">@lang('messages.why_us')</a></li>
-                            <li><a class="dropdown-item" href="#services">@lang('messages.courses')</a></li>
-                            <li><a class="dropdown-item" href="#projects">@lang('messages.projects')</a></li>
-                        </ul>
-                    </li>
-                </ul>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mx-auto navbar-nav-scroll">
+                <li class="nav-item"><a class="nav-link active" href="#header">@lang('messages.about_us')</a></li>
+                <li class="nav-item"><a class="nav-link" href="#details">@lang('messages.why_us')</a></li>
+                <li class="nav-item"><a class="nav-link" href="#services">@lang('messages.courses')</a></li>
+                <li class="nav-item"><a class="nav-link" href="#projects">@lang('messages.projects')</a></li>
+            </ul>
+            
+            <div class="d-flex align-items-center">
                 
+                <div class="dropdown me-3">
+                    <a class="btn-outline-sm dropdown-toggle d-flex align-items-center" href="#" role="button" id="languageDropdown" data-bs-toggle="dropdown">
+                        @php $locale = app()->getLocale(); @endphp
+                        <img src="{{ asset('flags/'.$locale.'.png') }}" alt="{{ $locale }}" class="flag-icon me-1" style="width: 20px; height: 14px; object-fit: cover;"> 
+                        {{ ucfirst($locale) }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="{{ route('language.switch', 'en') }}"><img src="{{ asset('flags/en.png') }}" width="20" class="me-2"> English</a></li>
+                        <li><a class="dropdown-item" href="{{ route('language.switch', 'ru') }}"><img src="{{ asset('flags/ru.png') }}" width="20" class="me-2"> Russian</a></li>
+                        <li><a class="dropdown-item" href="{{ route('language.switch', 'uz') }}"><img src="{{ asset('flags/uz.png') }}" width="20" class="me-2"> Uzbek</a></li>
+                    </ul>
+                </div>
+
+                <div class="auth-container me-3">
+                    @guest
+                        <a class="auth-btn btn-login-custom" href="{{ route('login') }}">Login</a>
+                        <a class="auth-btn btn-signup-custom" href="{{ route('register') }}">Sign Up</a>
+                    @else
+                        <div class="dropdown">
+                            <a class="btn-outline-sm dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-user-circle"></i> {{ Auth::user()->name }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="{{ route('profile.edit') }}">@lang('messages.profile')</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item text-danger border-0 bg-transparent w-100 text-start">Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    @endguest
+                </div>
+
+                <a class="btn-outline-sm" href="#contact" style="white-space: nowrap;">@lang('messages.contact_us')</a>
+            </div> 
+        </div> </div> </nav>
+                
+                
+                
+            
    <!-- Language Switcher - точно такой же стиль как contact_us -->
 <!-- Language Switcher - в стиле contact us -->
 <span class="nav-item">
@@ -260,30 +442,63 @@ a.btn-outline-sm.dropdown-toggle {
                     <img src="{{ asset('flags/en.png') }}" alt="EN" class="flag-icon me-1" style="width: 20px; height: 15px; object-fit: cover;"> En
             @endswitch
         </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown" style="min-width: 120px;">
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown" style="min-width: 120px;">
+                <li>
+                    <a class="dropdown-item {{ app()->getLocale() == 'en' ? 'active' : '' }}" href="{{ route('language.switch', 'en') }}">
+                        <img src="{{ asset('flags/en.png') }}" alt="English" class="flag-icon me-2" style="width: 20px; height: 15px; object-fit: cover;"> 
+                        <span>@lang('messages.english')</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item {{ app()->getLocale() == 'ru' ? 'active' : '' }}" href="{{ route('language.switch', 'ru') }}">
+                        <img src="{{ asset('flags/ru.png') }}" alt="Russian" class="flag-icon me-2" style="width: 20px; height: 15px; object-fit: cover;"> 
+                        <span>@lang('messages.russian')</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item {{ app()->getLocale() == 'uz' ? 'active' : '' }}" href="{{ route('language.switch', 'uz') }}">
+                        <img src="{{ asset('flags/uz.png') }}" alt="Uzbek" class="flag-icon me-2" style="width: 20px; height: 15px; object-fit: cover;"> 
+                        <span>@lang('messages.uzbek')</span>
+                    </a>
+                </li>
+            </ul>
+    </div>
+</span>
+                
+<span class="nav-item ms-2">
+    @guest
+        {{-- Tizimga kirmaganlar uchun tugmalar --}}
+        <a class="auth-btn btn-login-custom" href="{{ route('login') }}">
+            {{ app()->getLocale() == 'en' ? 'Login' : __('messages.login') }}
+        </a>
+        <a class="auth-btn btn-signup-custom" href="{{ route('register') }}">
+            {{ app()->getLocale() == 'en' ? 'Sign Up' : __('messages.sign_up') }}
+        </a>
+    @else
+    {{-- TIZIMGA KIRGANLAR UCHUN PROFIL --}}
+    <div class="dropdown d-inline-block">
+        <a class="btn-outline-sm dropdown-toggle d-flex align-items-center" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user-circle me-1"></i> {{ Auth::user()->name }}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
             <li>
-                <a class="dropdown-item {{ app()->getLocale() == 'en' ? 'active' : '' }}" href="{{ route('language.switch', 'en') }}">
-                    <img src="{{ asset('flags/en.png') }}" alt="English" class="flag-icon me-2" style="width: 20px; height: 15px; object-fit: cover;"> 
-                    <span>@lang('messages.english')</span>
+                <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                    <i class="fas fa-user-edit me-2"></i> @lang('messages.profile')
                 </a>
             </li>
+            <li><hr class="dropdown-divider"></li>
             <li>
-                <a class="dropdown-item {{ app()->getLocale() == 'ru' ? 'active' : '' }}" href="{{ route('language.switch', 'ru') }}">
-                    <img src="{{ asset('flags/ru.png') }}" alt="Russian" class="flag-icon me-2" style="width: 20px; height: 15px; object-fit: cover;"> 
-                    <span>@lang('messages.russian')</span>
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-item {{ app()->getLocale() == 'uz' ? 'active' : '' }}" href="{{ route('language.switch', 'uz') }}">
-                    <img src="{{ asset('flags/uz.png') }}" alt="Uzbek" class="flag-icon me-2" style="width: 20px; height: 15px; object-fit: cover;"> 
-                    <span>@lang('messages.uzbek')</span>
-                </a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="dropdown-item text-danger border-0 bg-transparent w-100 text-start">
+                        <i class="fas fa-sign-out-alt me-2"></i> @lang('messages.logout')
+                    </button>
+                </form>
             </li>
         </ul>
     </div>
+@endguest
 </span>
-
-
                 
                 <span class="nav-item">
                     <a class="btn-outline-sm" href="#contact">@lang('messages.contact_us')</a>
@@ -397,7 +612,7 @@ a.btn-outline-sm.dropdown-toggle {
                                 <i class="fas fa-square"></i>
                                 <div class="flex-grow-1">
                                     @lang('messages.details1_item1')
-                                </div>
+                                </div>  
                             </li>
                             <li class="d-flex">
                                 <i class="fas fa-square"></i>

@@ -103,3 +103,20 @@ function topFunction() {
 	document.body.scrollTop = 0; // for Safari
 	document.documentElement.scrollTop = 0; // for Chrome, Firefox, IE and Opera
 }
+// Parolni ko'rsatish va yashirish funksiyasi
+document.addEventListener('DOMContentLoaded', function() {
+    const eyeIcon = document.querySelector('#eye-icon');
+    const passwordField = document.querySelector('#password');
+
+    if (eyeIcon && passwordField) {
+        eyeIcon.addEventListener('click', function() {
+            // Tipni o'zgartirish
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            
+            // Iconni almashtirish (FontAwesome klasslari)
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+    }
+});
