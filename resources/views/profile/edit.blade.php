@@ -35,12 +35,6 @@
             box-shadow: 0 0 0 4px rgba(235, 66, 126, 0.1);
         }
 
-        /* Tugmalar orasini ochish (yopishib qolmasligi uchun) */
-        .form-actions {
-            margin-top: 2rem;
-            display: block;
-        }
-
         .btn-pink {
             background: #eb427e;
             color: white;
@@ -51,26 +45,39 @@
             transition: 0.3s;
             cursor: pointer;
             display: inline-block;
+            text-decoration: none;
         }
 
         .btn-pink:hover { 
             background: #d6336c; 
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(235, 66, 126, 0.3);
+            color: white;
         }
 
         .section-title { font-size: 1.6rem; font-weight: 800; color: #1a202c; margin-bottom: 0.5rem; }
         .section-desc { color: #718096; font-size: 0.95rem; margin-bottom: 2rem; }
         
-        /* O'chirish bo'limi uchun maxsus rang */
         .card-danger { border-left: 6px solid #f56565 !important; }
+
+        /* Tepada Go Home tugmasi uchun maxsus joylashuv */
+        .header-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 1.5rem;
+        }
     </style>
 
     <div class="profile-container">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <div class="profile-card">
+            <div class="header-actions">
+    <a href="{{ url('/') }}" class="btn-pink" style="padding: 10px 25px; font-size: 0.9rem;">
+        ← {{ __('messages.home') }}
+    </a>
+</div>      
 
+            <div class="profile-card">
                 <div class="mt-6">
                     @include('profile.partials.update-profile-information-form')
                 </div>
@@ -83,7 +90,6 @@
             </div>
 
             <div class="profile-card card-danger">
-               
                 <div class="mt-6">
                     @include('profile.partials.delete-user-form')
                 </div>
