@@ -379,45 +379,58 @@ a.btn-outline-sm.dropdown-toggle {
             </ul>
             
             <div class="d-flex align-items-center">
-                
-                <div class="dropdown me-3">
-                    <a class="btn-outline-sm dropdown-toggle d-flex align-items-center" href="#" role="button" id="languageDropdown" data-bs-toggle="dropdown">
-                        @php $locale = app()->getLocale(); @endphp
-                        <img src="{{ asset('flags/'.$locale.'.png') }}" alt="{{ $locale }}" class="flag-icon me-1" style="width: 20px; height: 14px; object-fit: cover;"> 
-                        {{ ucfirst($locale) }}
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="{{ route('language.switch', 'en') }}"><img src="{{ asset('flags/en.png') }}" width="20" class="me-2"> English</a></li>
-                        <li><a class="dropdown-item" href="{{ route('language.switch', 'ru') }}"><img src="{{ asset('flags/ru.png') }}" width="20" class="me-2"> Russian</a></li>
-                        <li><a class="dropdown-item" href="{{ route('language.switch', 'uz') }}"><img src="{{ asset('flags/uz.png') }}" width="20" class="me-2"> Uzbek</a></li>
-                    </ul>
-                </div>
+    
+    <div class="dropdown me-3">
+        <a class="btn-outline-sm dropdown-toggle d-flex align-items-center" href="#" role="button" id="languageDropdown" data-bs-toggle="dropdown">
+            @php $locale = app()->getLocale(); @endphp
+            <img src="{{ asset('flags/'.$locale.'.png') }}" alt="{{ $locale }}" class="flag-icon me-1" style="width: 20px; height: 14px; object-fit: cover;"> 
+            {{ ucfirst($locale) }}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="{{ route('language.switch', 'en') }}"><img src="{{ asset('flags/en.png') }}" width="20" class="me-2"> English</a></li>
+            <li><a class="dropdown-item" href="{{ route('language.switch', 'ru') }}"><img src="{{ asset('flags/ru.png') }}" width="20" class="me-2"> Russian</a></li>
+            <li><a class="dropdown-item" href="{{ route('language.switch', 'uz') }}"><img src="{{ asset('flags/uz.png') }}" width="20" class="me-2"> Uzbek</a></li>
+        </ul>
+    </div>
 
-                <div class="auth-container me-3">
-                    @guest
-                        <a class="auth-btn btn-login-custom" href="{{ route('login') }}">Login</a>
-                        <a class="auth-btn btn-signup-custom" href="{{ route('register') }}">Sign Up</a>
-                    @else
-                        <div class="dropdown">
-                            <a class="btn-outline-sm dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-user-circle"></i> {{ Auth::user()->name }}
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="{{ route('profile.edit') }}">@lang('messages.profile')</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-                                        <button type="submit" class="dropdown-item text-danger border-0 bg-transparent w-100 text-start">Logout</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                    @endguest
-                </div>
+    <a class="btn-outline-sm me-3 p-4" href="#contact" style="white-space: nowrap;">
+        @lang('messages.contact_us')
+    </a>
+    
+    <div class="auth-container">
+        @guest
+            <a class="btn-outline-sm me-2" href="{{ route('login') }}">
+                <i class="fas fa-sign-in-alt"></i>
+            </a>
+            <a class="btn-outline-sm" href="{{ route('register') }}">
+                <i class="fas fa-user-plus"></i>
+            </a>
+        @else
+            <div class="dropdown">
+                <a class="btn-outline-sm dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                    <i class="fas fa-user-circle"></i> {{ Auth::user()->name }}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                        <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                            @lang('messages.profile')
+                        </a>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="dropdown-item text-danger border-0 bg-transparent w-100 text-start">
+                                Logout
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        @endguest
+    </div>
 
-                <a class="btn-outline-sm" href="#contact" style="white-space: nowrap;">@lang('messages.contact_us')</a>
-            </div> 
+</div>
         </div> </div> </nav>
                 
                 
