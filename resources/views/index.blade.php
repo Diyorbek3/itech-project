@@ -1,36 +1,5 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="@lang('messages.meta_description')">
-    <meta name="author" content="@lang('messages.meta_author')">
-
-    <!-- OG Meta Tags to improve the way the post looks when you share the page on Facebook, Twitter, LinkedIn -->
-    <meta property="og:site_name" content="@lang('messages.og_site_name')" /> <!-- website name -->
-    <meta property="og:site" content="@lang('messages.og_site')" /> <!-- website link -->
-    <meta property="og:title" content="@lang('messages.og_title')" /> <!-- title shown in the actual shared post -->
-    <meta property="og:description" content="@lang('messages.og_description')" /> <!-- description shown in the actual shared post -->
-    <meta property="og:image" content="@lang('messages.og_image')" /> <!-- image link, make sure it's jpg -->
-    <meta property="og:url" content="@lang('messages.og_url')" /> <!-- where do you want your post to link to -->
-    <meta name="twitter:card" content="summary_large_image"> <!-- to have large image post format in Twitter -->
-
-    <!-- Webpage Title -->
-    <title>@lang('messages.contact_title')</title>
-
-    <!-- Styles -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap"
-        rel="stylesheet">
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css" rel="stylesheet">
-    <link href="/css/swiper.css" rel="stylesheet">
-    <link href="/css/styles.css" rel="stylesheet">
-
-    <!-- Favicon  -->
-    <link rel="icon" href="/images/logo.png">
+@extends('layouts.app')
+@section('styles')
  <style>
         .custom-shape {
             border-top-left-radius: 120px;
@@ -354,174 +323,138 @@ a.btn-outline-sm.dropdown-toggle {
     justify-content: space-between;
 }
     </style>
-</head>
 
-<body>
-    <!-- Navigation -->
-    <nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-light">
-    <div class="container">
+    <style>
+/* Стили для ссылок карточек */
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    cursor: pointer; /* Курсор-указатель при наведении */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-        <a class="navbar-brand" href="/">
-            <img src="{{ asset('images/logo.png') }}" class='img-fluid rounded-circle'
-                 style='width: 70px; height: 70px;' alt="logo">
-        </a>
+.card-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+/* Сохраняем исходные стили для card-item */
+.card-item {
+    /* ваши существующие стили */
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    height: 100%;
+}
 
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mx-auto navbar-nav-scroll">
-                <li class="nav-item"><a class="nav-link active" href="#header">@lang('messages.about_us')</a></li>
-                <li class="nav-item"><a class="nav-link" href="#details">@lang('messages.why_us')</a></li>
-                <li class="nav-item"><a class="nav-link" href="#services">@lang('messages.courses')</a></li>
-                <li class="nav-item"><a class="nav-link" href="#projects">@lang('messages.projects')</a></li>
-            </ul>
-            
-            <div class="d-flex align-items-center">
-    
-    <div class="dropdown me-3">
-        <a class="btn-outline-sm dropdown-toggle d-flex align-items-center" href="#" role="button" id="languageDropdown" data-bs-toggle="dropdown">
-            @php $locale = app()->getLocale(); @endphp
-            <img src="{{ asset('flags/'.$locale.'.png') }}" alt="{{ $locale }}" class="flag-icon me-1" style="width: 20px; height: 14px; object-fit: cover;"> 
-            {{ ucfirst($locale) }}
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="{{ route('language.switch', 'en') }}"><img src="{{ asset('flags/en.png') }}" width="20" class="me-2"> English</a></li>
-            <li><a class="dropdown-item" href="{{ route('language.switch', 'ru') }}"><img src="{{ asset('flags/ru.png') }}" width="20" class="me-2"> Russian</a></li>
-            <li><a class="dropdown-item" href="{{ route('language.switch', 'uz') }}"><img src="{{ asset('flags/uz.png') }}" width="20" class="me-2"> Uzbek</a></li>
-        </ul>
-    </div>
+/* Стили для иконок */
+.icon-box {
+    margin-bottom: 15px;
+}
 
-    <a class="btn-outline-sm me-3 p-4" href="#contact" style="white-space: nowrap;">
-        @lang('messages.contact_us')
-    </a>
-    
-    <div class="auth-container">
-        @guest
-            <a class="btn-outline-sm me-2" href="{{ route('login') }}">
-                <i class="fas fa-sign-in-alt"></i>
-            </a>
-            <a class="btn-outline-sm" href="{{ route('register') }}">
-                <i class="fas fa-user-plus"></i>
-            </a>
-        @else
-            <div class="dropdown">
-                <a class="btn-outline-sm dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                    <i class="fas fa-user-circle"></i> {{ Auth::user()->name }}
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                        <a class="dropdown-item" href="{{ route('profile.edit') }}">
-                            @lang('messages.profile')
-                        </a>
-                    </li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="dropdown-item text-danger border-0 bg-transparent w-100 text-start">
-                                Logout
-                            </button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        @endguest
-    </div>
+.icon-box img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
 
-</div>
-        </div> </div> </nav>
-                
-                
-                
-            
-   <!-- Language Switcher - точно такой же стиль как contact_us -->
-<!-- Language Switcher - в стиле contact us -->
-<span class="nav-item">
-    <div class="dropdown">
-        <a class="btn-outline-sm dropdown-toggle d-flex align-items-center" href="#" role="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            @switch(app()->getLocale())
-                @case('en')
-                    <img src="{{ asset('flags/en.png') }}" alt="EN" class="flag-icon me-1" style="width: 20px; height: 15px; object-fit: cover;"> En
-                    @break
-                @case('ru')
-                    <img src="{{ asset('flags/ru.png') }}" alt="RU" class="flag-icon me-1" style="width: 20px; height: 15px; object-fit: cover;"> Ru
-                    @break
-                @case('uz')
-                    <img src="{{ asset('flags/uz.png') }}" alt="UZ" class="flag-icon me-1" style="width: 20px; height: 15px; object-fit: cover;"> Uz
-                    @break
-                @default
-                    <img src="{{ asset('flags/en.png') }}" alt="EN" class="flag-icon me-1" style="width: 20px; height: 15px; object-fit: cover;"> En
-            @endswitch
-        </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown" style="min-width: 120px;">
-                <li>
-                    <a class="dropdown-item {{ app()->getLocale() == 'en' ? 'active' : '' }}" href="{{ route('language.switch', 'en') }}">
-                        <img src="{{ asset('flags/en.png') }}" alt="English" class="flag-icon me-2" style="width: 20px; height: 15px; object-fit: cover;"> 
-                        <span>@lang('messages.english')</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item {{ app()->getLocale() == 'ru' ? 'active' : '' }}" href="{{ route('language.switch', 'ru') }}">
-                        <img src="{{ asset('flags/ru.png') }}" alt="Russian" class="flag-icon me-2" style="width: 20px; height: 15px; object-fit: cover;"> 
-                        <span>@lang('messages.russian')</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item {{ app()->getLocale() == 'uz' ? 'active' : '' }}" href="{{ route('language.switch', 'uz') }}">
-                        <img src="{{ asset('flags/uz.png') }}" alt="Uzbek" class="flag-icon me-2" style="width: 20px; height: 15px; object-fit: cover;"> 
-                        <span>@lang('messages.uzbek')</span>
-                    </a>
-                </li>
-            </ul>
-    </div>
-</span>
-                
-<span class="nav-item ms-2">
-    @guest
-        {{-- Tizimga kirmaganlar uchun tugmalar --}}
-        <a class="auth-btn btn-login-custom" href="{{ route('login') }}">
-            {{ app()->getLocale() == 'en' ? 'Login' : __('messages.login') }}
-        </a>
-        <a class="auth-btn btn-signup-custom" href="{{ route('register') }}">
-            {{ app()->getLocale() == 'en' ? 'Sign Up' : __('messages.sign_up') }}
-        </a>
-    @else
-    {{-- TIZIMGA KIRGANLAR UCHUN PROFIL --}}
-    <div class="dropdown d-inline-block">
-        <a class="btn-outline-sm dropdown-toggle d-flex align-items-center" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-user-circle me-1"></i> {{ Auth::user()->name }}
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-            <li>
-                <a class="dropdown-item" href="{{ route('profile.edit') }}">
-                    <i class="fas fa-user-edit me-2"></i> @lang('messages.profile')
-                </a>
-            </li>
-            <li><hr class="dropdown-divider"></li>
-            <li>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="dropdown-item text-danger border-0 bg-transparent w-100 text-start">
-                        <i class="fas fa-sign-out-alt me-2"></i> @lang('messages.logout')
-                    </button>
-                </form>
-            </li>
-        </ul>
-    </div>
-@endguest
-</span>
-                
-                <span class="nav-item">
-                    <a class="btn-outline-sm" href="#contact">@lang('messages.contact_us')</a>
-                </span>
-            </div> <!-- end of navbar-collapse -->
-        </div> <!-- end of container -->
-    </nav> <!-- end of navbar -->
-    <!-- end of navigation -->
+/* Стили для сетки карточек */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
 
+/* Адаптивность */
+@media (max-width: 768px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
 
+@media (max-width: 480px) {
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Дополнительный стиль для курсора при наведении на картинки */
+.icon-box img {
+    cursor: pointer;
+}
+</style>
+
+@endsection
+
+@section('scripts')
+ <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script> <!-- Bootstrap framework -->
+    <script src="{{ asset('js/swiper.min.js') }}"></script> <!-- Swiper for image and text sliders -->
+    <script src="{{ asset('js/purecounter.min.js') }}"></script> <!-- Purecounter counter for statistics numbers -->
+    <script src="{{ asset('js/scripts.js') }}"></script> <!-- Custom scripts -->
+    <script>
+        $(document).ready(function () {
+
+            $("#contactForm").submit(function (e) {
+
+                e.preventDefault()
+
+                var form = $(this)
+                var url = form.attr("action")
+
+                $.ajax({
+                    url: '/contact-send',
+                    type: "POST",
+                    data: form.serialize(),
+                    success: function (result) {
+                        console.log(result)
+                        Swal.fire({
+                            icon: 'success',
+                            toast: true,
+                            position: 'top-end',
+                            title: result.message,
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            background: '#d3fddd',
+                            color: '#000000'
+                        })
+                        
+                        // Formani tozalash
+                        form[0].reset();
+
+                    },
+                    error: function (data) {
+                        let message = "Xatolik yuz berdi!";
+
+                            if (data.responseJSON && data.responseJSON.message) {
+                                message = data.responseJSON.message;
+                            }
+                        Swal.fire({
+                            icon: 'error',
+                            toast: true,
+                            position: 'top-end',
+                            title: message,
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            background: '#fdd3d6',
+                            color: '#000000'
+                        })
+                    }
+                })
+
+            })
+
+        })
+    </script>
+
+@endsection
+
+@section('content')
     <!-- Header -->
     <header id="header" class="header">
         <img class="decoration-star" src="{{ asset('images/decoration-star.svg') }}" alt="alternative">
@@ -646,7 +579,7 @@ a.btn-outline-sm.dropdown-toggle {
                                 </div>
                             </li>
                         </ul>
-                        <a class="btn-solid-reg" href="#contact">@lang('messages.start_course')</a>
+                        <a class="btn-solid-reg" href="#services">@lang('messages.start_course')</a>
                     </div>
                 </div>
             </div>
@@ -655,31 +588,32 @@ a.btn-outline-sm.dropdown-toggle {
 
 
     <div id="services" class="cards-1 bg-gray">
-        <div class="container">
-            <div class="row align-items-start">
-                <div class="col-lg-5">
-                    <div class="text-container">
-                        <h2>@lang('messages.our_courses')</h2>
-                        <p>@lang('messages.courses_desc1')</p>
-                        <p>@lang('messages.courses_desc2')</p>
-                        <ul class="list-unstyled li-space-lg">
-                            <li class="d-flex">
-                                <i class="fas fa-square"></i>
-                                <div class="flex-grow-1">@lang('messages.courses_item1')</div>
-                            </li>
-                            <li class="d-flex">
-                                <i class="fas fa-square"></i>
-                                <div class="flex-grow-1">@lang('messages.courses_item2')</div>
-                            </li>
-                            <li class="d-flex">
-                                <i class="fas fa-square"></i>
-                                <div class="flex-grow-1">@lang('messages.courses_item3')</div>
-                            </li>
-                        </ul>
-                    </div>
+    <div class="container">
+        <div class="row align-items-start">
+            <div class="col-lg-5">
+                <div class="text-container">
+                    <h2>@lang('messages.our_courses')</h2>
+                    <p>@lang('messages.courses_desc1')</p>
+                    <p>@lang('messages.courses_desc2')</p>
+                    <ul class="list-unstyled li-space-lg">
+                        <li class="d-flex">
+                            <i class="fas fa-square"></i>
+                            <div class="flex-grow-1">@lang('messages.courses_item1')</div>
+                        </li>
+                        <li class="d-flex">
+                            <i class="fas fa-square"></i>
+                            <div class="flex-grow-1">@lang('messages.courses_item2')</div>
+                        </li>
+                        <li class="d-flex">
+                            <i class="fas fa-square"></i>
+                            <div class="flex-grow-1">@lang('messages.courses_item3')</div>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-lg-7">
-                    <div class="card-grid">
+            </div>
+            <div class="col-lg-7">
+                <div class="card-grid">
+                    <a href="{{ route('cources.python') }}" class="card-link">
                         <div class="card-item">
                             <div class="icon-box">
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1280px-Python-logo-notext.svg.png"
@@ -687,6 +621,8 @@ a.btn-outline-sm.dropdown-toggle {
                             </div>
                             <h5 class="card-title">@lang('messages.python')</h5>
                         </div>
+                    </a>
+                    <a href="/courses/computer-literacy" class="card-link">
                         <div class="card-item">
                             <div class="icon-box">
                                 <img src="https://img.freepik.com/premium-vector/digital-precision-designing-modern-computer-logos-innovative-tech-branding_579306-22156.jpg?semt=ais_rp_50_assets&w=740&q=80"
@@ -694,6 +630,8 @@ a.btn-outline-sm.dropdown-toggle {
                             </div>
                             <h5 class="card-title">@lang('messages.computer_literacy')</h5>
                         </div>
+                    </a>
+                    <a href="{{ route('cources.frontend') }}" class="card-link">
                         <div class="card-item">
                             <div class="icon-box">
                                 <img src="https://us.123rf.com/450wm/dxinerz/dxinerz1601/dxinerz160103363/51258851-code-seo-web-symbol-vektor-bild-kann-auch-f%C3%BCr-seo-und-entwicklungsdienste-verwendet-werden.jpg?ver=6"
@@ -701,6 +639,8 @@ a.btn-outline-sm.dropdown-toggle {
                             </div>
                             <h5 class="card-title">@lang('messages.frontend')</h5>
                         </div>
+                    </a>
+                    <a href="/courses/backend" class="card-link">
                         <div class="card-item">
                             <div class="icon-box">
                                 <img src="https://www.shutterstock.com/image-vector/backend-developer-icon-mixed-vector-600nw-2655399835.jpg"
@@ -708,6 +648,8 @@ a.btn-outline-sm.dropdown-toggle {
                             </div>
                             <h5 class="card-title">@lang('messages.backend')</h5>
                         </div>
+                    </a>
+                    <a href="/courses/cybersecurity" class="card-link">
                         <div class="card-item">
                             <div class="icon-box">
                                 <img src="https://img.icons8.com/sci-fi/1200/cyber-security.jpg"
@@ -715,6 +657,8 @@ a.btn-outline-sm.dropdown-toggle {
                             </div>
                             <h5 class="card-title">@lang('messages.cybersecurity')</h5>
                         </div>
+                    </a>
+                    <a href="/courses/ai-developer" class="card-link">
                         <div class="card-item">
                             <div class="icon-box">
                                 <img src="https://www.nicepng.com/png/full/962-9625201_ai-developer-bootcamp-circle.png"
@@ -722,11 +666,14 @@ a.btn-outline-sm.dropdown-toggle {
                             </div>
                             <h5 class="card-title">@lang('messages.ai_developer')</h5>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+
 
 
     <!-- Details 2 -->
@@ -738,7 +685,7 @@ a.btn-outline-sm.dropdown-toggle {
                     <div class="text-container">
                         <h2>@lang('messages.details2_title')</h2>
                         <p>@lang('messages.details2_description')</p>
-                        <a class="btn-solid-reg" href="article.html">@lang('messages.start')</a>
+                        <a class="btn-solid-reg" href="{{ route('career.index') }}">@lang('messages.start')</a>
                     </div> <!-- end of text-container -->
                 </div> <!-- end of col -->
                 <div class="col-lg-6 col-xl-5">
@@ -954,148 +901,4 @@ a.btn-outline-sm.dropdown-toggle {
         </div>
     </div>
 
-
-
-    <!-- Footer -->
-    <div class="footer bg-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="footer-col first">
-                        <h6>@lang('messages.about_website')</h6>
-                        <p class="p-small">@lang('messages.footer_description')</p>
-                    </div> <!-- end of footer-col -->
-                    <div class="footer-col second">
-                        <h6>@lang('messages.address')</h6>
-                        <ul class="list-unstyled li-space-lg p-small">
-                            <li> <a style="font-size: 15px;" href="">@lang('messages.address_details')</a></li>
-                        </ul>
-                    </div> <!-- end of footer-col -->
-                    <div class="footer-col third">
-                        <span class="fa-stack">
-                            <a href="#your-link">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-facebook-f fa-stack-1x"></i>
-                            </a>
-                        </span>
-                        <span class="fa-stack">
-                            <a href="#your-link">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-twitter fa-stack-1x"></i>
-                            </a>
-                        </span>
-                        <span class="fa-stack">
-                            <a href="#your-link">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-telegram fa-stack-1x"></i>
-                            </a>
-                        </span>
-                        <span class="fa-stack">
-                            <a href="#your-link">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-instagram fa-stack-1x"></i>
-                            </a>
-                        </span>
-                        <p class="p-small">@lang('messages.follow_us') <a
-                                href="mailto:contact@site.com"><strong>ITECH@site.com</strong></a></p>
-                    </div> <!-- end of footer-col -->
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of footer -->
-    <!-- end of footer -->
-
-
-    <!-- Copyright -->
-    <div class="copyright bg-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p class="p-small">@lang('messages.copyright', ['year' => date('Y')]) <a href="#your-link">ITECH</a></p>
-                </div> <!-- end of col -->
-            </div> <!-- enf of row -->
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <p class="p-small">@lang('messages.design_by') <a href="https://themewagon.com/">Themewagon</a></p>
-                </div> <!-- end of col -->
-            </div> <!-- enf of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of copyright -->
-    <!-- end of copyright -->
-
-
-    <!-- Back To Top Button -->
-    <button onclick="topFunction()" id="myBtn">
-        <img src="{{ asset('images/up-arrow.png') }}" alt="alternative">
-    </button>
-    <!-- end of back to top button -->
-
-    <!-- Scripts -->
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script> <!-- Bootstrap framework -->
-    <script src="{{ asset('js/swiper.min.js') }}"></script> <!-- Swiper for image and text sliders -->
-    <script src="{{ asset('js/purecounter.min.js') }}"></script> <!-- Purecounter counter for statistics numbers -->
-    <script src="{{ asset('js/scripts.js') }}"></script> <!-- Custom scripts -->
-</body>
-
-<script>
-    $(document).ready(function () {
-
-        $("#contactForm").submit(function (e) {
-
-            e.preventDefault()
-
-            var form = $(this)
-            var url = form.attr("action")
-
-            $.ajax({
-                url: '/contact-send',
-                type: "POST",
-                data: form.serialize(),
-                success: function (result) {
-                    console.log(result)
-                    Swal.fire({
-                        icon: 'success',
-                        toast: true,
-                        position: 'top-end',
-                        title: result.message,
-                        showConfirmButton: false,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        background: '#d3fddd',
-                        color: '#000000'
-                    })
-                    
-                    // Formani tozalash
-                    form[0].reset();
-
-                },
-                error: function (data) {
-                    let message = "Xatolik yuz berdi!";
-
-                        if (data.responseJSON && data.responseJSON.message) {
-                            message = data.responseJSON.message;
-                        }
-                    Swal.fire({
-                        icon: 'error',
-                        toast: true,
-                        position: 'top-end',
-                        title: message,
-                        showConfirmButton: false,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        background: '#fdd3d6',
-                        color: '#000000'
-                    })
-                }
-            })
-
-        })
-
-    })
-</script>
-
-</html>
+@endsection
