@@ -973,25 +973,26 @@ a.btn-outline-sm.dropdown-toggle {
                     </div> <!-- end of footer-col -->
                     <div class="footer-col third">
                         <span class="fa-stack">
-                            <a href="#your-link">
+                            <a href="https://youtube.com/channel/UCyT9VMShx345r45zLTr9BUw">
                                 <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-facebook-f fa-stack-1x"></i>
+                                <i class="fab fa-youtube fa-stack-1x"></i>
                             </a>
                         </span>
                         <span class="fa-stack">
-                            <a href="#your-link">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-twitter fa-stack-1x"></i>
+                            <a href="https://t.me/itechacademy_edu_bot" target="_blank" class="icon-circle icon-telegram-bot">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fas fa-robot fa-stack-1x"></i> </a>
+                            <i class=" "></i>
                             </a>
                         </span>
                         <span class="fa-stack">
-                            <a href="#your-link">
+                            <a href="https://t.me/itechacademy_uz">
                                 <i class="fas fa-circle fa-stack-2x"></i>
                                 <i class="fab fa-telegram fa-stack-1x"></i>
                             </a>
                         </span>
                         <span class="fa-stack">
-                            <a href="#your-link">
+                            <a href="https://www.instagram.com/itechacademy_uz?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
                                 <i class="fas fa-circle fa-stack-2x"></i>
                                 <i class="fab fa-instagram fa-stack-1x"></i>
                             </a>
