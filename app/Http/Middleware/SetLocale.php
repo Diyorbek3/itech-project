@@ -9,22 +9,13 @@ use Illuminate\Support\Facades\Session;
 
 class SetLocale
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
     public function handle(Request $request, Closure $next)
     {
         if (Session::has('locale')) {
-            $locale = Session::get(key: 'locale');
-            
-            // Til mavjudligini tekshirish
-            if (in_array($locale, ['en', 'ru', 'uz'])) {
-                App::setLocale($locale);
-            }
+            App::setLocale(Session::get('locale'));
+        } else {
+            App::setLocale('uz');
+            Session::put('locale', 'uz');
         }
         
         return $next($request);
