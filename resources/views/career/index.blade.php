@@ -1,160 +1,115 @@
-<!-- index.html -->
-<!DOCTYPE html>
-<html lang="uz">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ITech Career</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+@extends('layouts.app')
 
-<header>
-  <h1>Bizning jamoaga qo‘shiling</h1>
-  <p>ITech Call Center bilan kelajagingizni birga quring</p>
-</header>
+@section('styles')
+<style>
+  body {
+    font-family: Arial;
+    background: #f1f5f9;
+    margin: 0;
+  }
+
+  header {
+    background: #3b82f6;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 24px;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+  }
+
+  .card {
+    background: white;
+    width: 250px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .card h3 {
+    margin: 10px 0 5px;
+  }
+
+  .card p {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+</style>
+@endsection
+
+@section('content')
+<header>💻 Dasturchilar haqida</header>
 
 <div class="container">
 
-  <div class="section">
-    <h2>Biz haqimizda</h2>
-    <p class="about-text">
-      ITech Call Center — bu mijozlarga yuqori sifatli xizmat ko‘rsatadigan zamonaviy kompaniya.
-      Biz doimiy rivojlanish va xodimlarimizning o‘sishini qo‘llab-quvvatlaymiz.
-    </p>
+  <div class="card">
+    <img src="https://heartdirected.com/wp-content/uploads/2023/06/Front-End-Develop2.jpg">
+    <h3>Frontend Developer</h3>
+    <p>🕒 2 yil tajriba</p>
+    <p>HTML, CSS, JavaScript orqali web saytlar yaratadi.</p>
   </div>
 
-  <div class="section">
-    <h2>Nima uchun biz?</h2>
-    <div class="cards">
-      <div class="card">✔️ Qulay ish muhiti</div>
-      <div class="card">✔️ O‘qitish va treninglar</div>
-      <div class="card">✔️ Moslashuvchan ish vaqti</div>
-      <div class="card">✔️ Yaxshi maosh va bonuslar</div>
-    </div>
+  <div class="card">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdRaKRSFts6z-_VEg7LkeSNBxF_RH2n0N5_A&s">
+    <h3>Backend Developer</h3>
+    <p>🕒 3 yil tajriba</p>
+    <p>Server, database va API bilan ishlaydi.</p>
   </div>
 
-  <div class="section">
-    <h2>Vakansiyalar</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>Call Center Operator</h3>
-        <p>Mijozlar bilan muloqot qilish</p>
-      </div>
-      <div class="card">
-        <h3>Support Manager</h3>
-        <p>Mijozlarga yordam berish</p>
-      </div>
-    </div>
+  <div class="card">
+    <img src="https://xaltam.com/blogs/wp-content/uploads/2024/11/mobile-app-development-trends-xaltam.png">
+    <h3>Mobile Developer</h3>
+    <p>🕒 2.5 yil tajriba</p>
+    <p>Android va iOS ilovalar yaratadi.</p>
   </div>
 
-  <div class="section">
-    <h2>Talablar</h2>
-    <ul class="requirements">
-      <li>✔️ Yaxshi muloqot qobiliyati</li>
-      <li>✔️ Kompyuter savodxonligi</li>
-      <li>✔️ Mas’uliyatlilik</li>
-      <li>✔️ Rus yoki Ingliz tili (afzal)</li>
-    </ul>
+  <div class="card">
+    <img src="https://eu-images.contentstack.com/v3/assets/blt69509c9116440be8/blt25ac3c488d76676a/671a7a173fe49b837e2e389a/AI_technology-AkarapongChairean-AlamyStockPhoto.jpg">
+    <h3>AI Engineer</h3>
+    <p>🕒 4 yil tajriba</p>
+    <p>Sun'iy intellekt va machine learning bilan ishlaydi.</p>
   </div>
 
-  <div class="section cta">
-    <h2>Bizga qo‘shiling!</h2>
-    <button onclick="applyNow()">Apply Now</button>
+  <div class="card">
+    <img src="https://heartdirected.com/wp-content/uploads/2023/06/Front-End-Develop2.jpg">
+    <h3>Full-stack Developer</h3>
+    <p>🕒 2 yil tajriba</p>
+    <p>Frontend + backend to'liq yaratadi.</p>
+  </div>
+
+  <div class="card">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdRaKRSFts6z-_VEg7LkeSNBxF_RH2n0N5_A&s">
+    <h3>DevOps Engineer</h3>
+    <p>🕒 3 yil tajriba</p>
+    <p>Server, database va API bilan ishlaydi.</p>
+  </div>
+
+  <div class="card">
+    <img src="https://xaltam.com/blogs/wp-content/uploads/2024/11/mobile-app-development-trends-xaltam.png">
+    <h3>Mobile Developer</h3>
+    <p>🕒 2.5 yil tajriba</p>
+    <p>Android va iOS ilovalar yaratadi.</p>
+  </div>
+
+  <div class="card">
+    <img src="https://eu-images.contentstack.com/v3/assets/blt69509c9116440be8/blt25ac3c488d76676a/671a7a173fe49b837e2e389a/AI_technology-AkarapongChairean-AlamyStockPhoto.jpg">
+    <h3>AI Engineer</h3>
+    <p>🕒 4 yil tajriba</p>
+    <p>Sun'iy intellekt va machine learning bilan ishlaydi.</p>
   </div>
 
 </div>
-
-<footer>
-  <p>© 2026 ITech Call Center</p>
-</footer>
-
-<script src="script.js"></script>
-</body>
-</html>
-
-
-/* style.css */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f7fa;
-}
-
-header {
-  background: linear-gradient(135deg, #007bff, #00c6ff);
-  color: white;
-  text-align: center;
-  padding: 60px 20px;
-}
-
-.container {
-  width: 90%;
-  max-width: 1100px;
-  margin: auto;
-  padding: 40px 0;
-}
-
-.section {
-  margin-bottom: 40px;
-}
-
-.section h2 {
-  text-align: center;
-}
-
-.about-text {
-  text-align: center;
-  max-width: 700px;
-  margin: auto;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.card {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-}
-
-.requirements {
-  text-align: center;
-  list-style: none;
-  padding: 0;
-}
-
-button {
-  background: #28a745;
-  color: white;
-  padding: 15px 30px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #218838;
-}
-
-footer {
-  background: #222;
-  color: white;
-  text-align: center;
-  padding: 20px;
-}
-
-
-// script.js
-function applyNow() {
-  alert("Ariza topshirish bo‘limi tez orada ishga tushadi!");
-}
+@endsection
