@@ -58,30 +58,30 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="course-hero p-4 p-md-5 mb-5 shadow-lg">
         <div class="row align-items-center">
             <div class="col-lg-7">
-                <span class="badge bg-primary mb-3 px-3 py-2 rounded-pill shadow-sm">{{ __('messages.frontend_badge') }}</span>
-                <h1 class="display-3 fw-bold mb-3">{!! __('messages.frontend_title') !!}</h1>
-                <p class="fs-5 opacity-75 mb-4 lh-lg">{{ __('messages.frontend_description') }}</p>
+                <span class="badge bg-primary mb-3 px-3 py-2 rounded-pill shadow-sm">{{ __('messages.cybersecurity_badge') }}</span>
+                <h1 class="display-3 fw-bold mb-3">{!! __('messages.cybersecurity_title') !!}</h1>
+                <p class="fs-5 opacity-75 mb-4 lh-lg">{{ __('messages.cybersecurity_description') }}</p>
                 <div class="d-flex gap-3">
                     <div class="row g-4 mb-5">
                         <div class="col-md-6">
                             <div class="p-4 rounded-4 shadow-sm border bg-white d-flex align-items-center">
                                 <div class="p-3 rounded-3 me-3 d-flex align-items-center justify-content-center" style="background-color: #e0f2fe !important; width: 70px; height: 70px;">
-                                    <i class="fa-brands fa-html5" style="color: #e34c26 !important; font-size: 40px !important;"></i>
+                                    <i class="fa-solid fa-shield-halved" style="color: #0ea5e9 !important; font-size: 40px !important;"></i>
                                 </div>
                                 <div>
-                                    <h5 class="fw-bold mb-1">{{ __('messages.frontend_tech1_title') }}</h5>
-                                    <p class="text-secondary mb-0 small">{{ __('messages.frontend_tech1_desc') }}</p>
+                                    <h5 class="fw-bold mb-1">{{ __('messages.cybersecurity_tech1_title') }}</h5>
+                                    <p class="text-secondary mb-0 small">{{ __('messages.cybersecurity_tech1_desc') }}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="p-4 rounded-4 shadow-sm border bg-white d-flex align-items-center">
                                 <div class="p-3 rounded-3 me-3 d-flex align-items-center justify-content-center" style="background-color: #fee2e2 !important; width: 70px; height: 70px;">
-                                    <i class="fa-brands fa-js" style="color: #f7df1e !important; font-size: 40px !important;"></i>
+                                    <i class="fa-solid fa-laptop-code" style="color: #ef4444 !important; font-size: 40px !important;"></i>
                                 </div>
                                 <div>
-                                    <h5 class="fw-bold mb-1">{{ __('messages.frontend_tech2_title') }}</h5>
-                                    <p class="text-secondary mb-0 small">{{ __('messages.frontend_tech2_desc') }}</p>
+                                    <h5 class="fw-bold mb-1">{{ __('messages.cybersecurity_tech2_title') }}</h5>
+                                    <p class="text-secondary mb-0 small">{{ __('messages.cybersecurity_tech2_desc') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
             <div class="col-lg-5 d-none d-lg-block">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/512px-HTML5_logo_and_wordmark.svg.png" alt="Frontend" class="img-fluid rounded-4 shadow-2xl float-end" style="max-height: 300px;">
+                <img src="https://img.icons8.com/sci-fi/1200/cyber-security.jpg" alt="Cybersecurity" class="img-fluid rounded-4 shadow-2xl float-end" style="max-height: 300px;">
             </div>
         </div>
     </div>
@@ -98,18 +98,18 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="col-lg-8">
             <h3 class="fw-bold mb-4 d-flex align-items-center">
                 <span class="bg-primary p-2 rounded-3 me-3 text-white" style="width: 40px; height: 40px;"><i class="fa-solid fa-graduation-cap"></i></span>
-                {{ __('messages.frontend_learn_section') }}
+                {{ __('messages.cybersecurity_learn_section') }}
             </h3>
             <div class="row g-4 mb-5">
-                @php $skills = [['frontend_skill1_title','frontend_skill1_desc'],['frontend_skill2_title','frontend_skill2_desc'],['frontend_skill3_title','frontend_skill3_desc'],['frontend_skill4_title','frontend_skill4_desc'],['frontend_skill5_title','frontend_skill5_desc']]; @endphp
+                @php $skills = [['cybersecurity_skill1_title','cybersecurity_skill1_desc'],['cybersecurity_skill2_title','cybersecurity_skill2_desc'],['cybersecurity_skill3_title','cybersecurity_skill3_desc'],['cybersecurity_skill4_title','cybersecurity_skill4_desc'],['cybersecurity_skill5_title','cybersecurity_skill5_desc']]; @endphp
                 @foreach($skills as $skill)
                 <div class="col-12"><div class="tech-card p-4 rounded-4 shadow-sm d-flex align-items-start"><div class="check-icon me-3"><i class="fa-solid fa-check"></i></div><div><h5 class="fw-bold mb-1 text-dark">{{ __("messages.{$skill[0]}") }}</h5><p class="text-secondary mb-0 small">{{ __("messages.{$skill[1]}") }}</p></div></div></div>
                 @endforeach
             </div>
-            <div class="bg-light p-4 rounded-4 border-start border-primary border-4"><h4 class="fw-bold">{{ __('messages.frontend_for_whom_title') }}</h4><p class="text-secondary mb-0 fs-5">{{ __('messages.frontend_for_whom_desc') }}</p></div>
+            <div class="bg-light p-4 rounded-4 border-start border-primary border-4"><h4 class="fw-bold">{{ __('messages.cybersecurity_for_whom_title') }}</h4><p class="text-secondary mb-0 fs-5">{{ __('messages.cybersecurity_for_whom_desc') }}</p></div>
         </div>
         <div class="col-lg-4">
-            <div class="card sticky-price-card shadow-lg rounded-5 p-3"><div class="card-body"><h5 class="fw-bold mb-4 text-center">{{ __('messages.frontend_card_title') }}</h5><div class="d-flex align-items-center mb-3"><i class="fa-solid fa-calendar-day text-primary me-3 fs-4"></i><div><small class="text-muted d-block">{{ __('messages.frontend_duration_label') }}</small><span class="fw-bold">{{ __('messages.frontend_duration_value') }}</span></div></div><div class="d-flex align-items-center mb-3"><i class="fa-solid fa-user-tie text-primary me-3 fs-4"></i><div><small class="text-muted d-block">{{ __('messages.frontend_mentor_label') }}</small><span class="fw-bold">{{ __('messages.frontend_mentor_value') }}</span></div></div><hr><div class="text-center mb-4"><h6 class="text-muted text-decoration-line-through mb-1">{{ __('messages.frontend_old_price') }}</h6><h2 class="fw-bold text-primary mb-0">{{ __('messages.frontend_new_price') }} <small class="fs-6">{{ __('messages.frontend_price_period') }}</small></h2></div><a href="{{ url('/#contact') }}" class="btn btn-primary btn-lg w-100 rounded-pill py-3 shadow fw-bold mb-3"><i class="fa-solid fa-bolt me-2"></i> {{ __('messages.frontend_enroll_button') }}</a><p class="text-center small text-muted mb-0"><i class="fa-solid fa-shield-halved me-1 text-success"></i> {{ __('messages.frontend_certificate_text') }}</p></div></div>
+            <div class="card sticky-price-card shadow-lg rounded-5 p-3"><div class="card-body"><h5 class="fw-bold mb-4 text-center">{{ __('messages.cybersecurity_card_title') }}</h5><div class="d-flex align-items-center mb-3"><i class="fa-solid fa-calendar-day text-primary me-3 fs-4"></i><div><small class="text-muted d-block">{{ __('messages.cybersecurity_duration_label') }}</small><span class="fw-bold">{{ __('messages.cybersecurity_duration_value') }}</span></div></div><div class="d-flex align-items-center mb-3"><i class="fa-solid fa-user-tie text-primary me-3 fs-4"></i><div><small class="text-muted d-block">{{ __('messages.cybersecurity_mentor_label') }}</small><span class="fw-bold">{{ __('messages.cybersecurity_mentor_value') }}</span></div></div><hr><div class="text-center mb-4"><h6 class="text-muted text-decoration-line-through mb-1">{{ __('messages.cybersecurity_old_price') }}</h6><h2 class="fw-bold text-primary mb-0">{{ __('messages.cybersecurity_new_price') }} <small class="fs-6">{{ __('messages.cybersecurity_price_period') }}</small></h2></div><a href="{{ url('/#contact') }}" class="btn btn-primary btn-lg w-100 rounded-pill py-3 shadow fw-bold mb-3"><i class="fa-solid fa-bolt me-2"></i> {{ __('messages.cybersecurity_enroll_button') }}</a><p class="text-center small text-muted mb-0"><i class="fa-solid fa-shield-halved me-1 text-success"></i> {{ __('messages.cybersecurity_certificate_text') }}</p></div></div>
         </div>
     </div>
 </div>

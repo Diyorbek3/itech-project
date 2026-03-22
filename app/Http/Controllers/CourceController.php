@@ -18,5 +18,24 @@ class CourceController extends Controller
     {
         return view('cource.frontend');
     }
+    
+    public function backend() 
+    {
+        return view('cource.backend'); // Bu to'g'ri, view faylingiz shu yerda bo'lishi kerak
+    }   
 
+    public function cybersecurity() 
+    {
+        return view('cource.cybersecurity');
+    }
+
+    public function computerLiteracy() 
+    {
+        return view('cource.computer-literacy');
+    }
+
+    public function aiDeveloper() 
+    {
+        return view('cource.ai-developer');
+    }
 }
