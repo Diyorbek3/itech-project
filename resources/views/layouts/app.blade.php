@@ -23,12 +23,13 @@
         window.location.href = '/language/' + locale;
     }
     </script>
+        @include('components.header')
 
     <div class="container">
-        @include('components.header')
         @yield('content')
-        @include('components.footer')
     </div>
+        @include('components.footer')
+
 
     @yield('scripts')
     <script src="{{ asset('js/scripts.js') }}"></script>
