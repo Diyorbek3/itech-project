@@ -1,7 +1,7 @@
 <?php
 
 return [
-    // Navigation
+    // ==================== NAVIGATION ====================
     'home' => 'Главная',
     'about_us' => 'О нас',
     'why_us' => 'Почему мы?',
@@ -10,27 +10,23 @@ return [
     'sections' => 'Разделы',
     'contact_us' => 'Связаться с нами',
     
-    // Header
+    // ==================== HEADER ====================
     'header_title' => 'Готовим будущих программистов',
     'header_description' => 'Учебный центр iTech готовит сильных специалистов в современных IT-направлениях. С помощью практических занятий, реальных проектов и опытных наставников вы можете пройти путь от новичка до профессионального разработчика.',
     'learn_more' => 'Узнать больше',
     'contact' => 'Связаться',
     
-    // Statistics
+    // ==================== STATISTICS ====================
     'graduates' => 'Выпускников',
     'active_courses' => 'Активных курсов',
     'employed_students' => 'Трудоустроенных студентов',
     'years_experience' => 'Лет опыта',
-     'new_request' => 'Поступила новая заявка!',
-    'name' => 'Имя',
-    'email' => 'Эл. почта',
-    'message' => 'Сообщение',
-    'time' => 'Время',
-    // Introduction
+    
+    // ==================== INTRODUCTION ====================
     'intro_title' => 'iTech — учебный центр современных IT-профессий',
     'intro_description' => 'Учебный центр iTech специализируется на предоставлении практических знаний в области программирования и IT. Наши учебные программы основаны на реальном опыте проектов и направлены на подготовку студентов как готовых специалистов для рынка труда. Каждый курс проводится с использованием современных технологий, поддержкой наставников и практическими заданиями. Наша цель — подготовить сильных, самостоятельных и востребованных программистов.',
     
-    // Details 1
+    // ==================== DETAILS 1 ====================
     'details1_title' => 'Современный подход к обучению и реальный опыт проектов',
     'details1_item1' => 'На практических занятиях студенты работают над реальными IT-проектами.',
     'details1_item2' => 'Постоянная поддержка наставников и индивидуальный подход.',
@@ -38,7 +34,7 @@ return [
     'details1_item4' => 'Помощь в подготовке портфолио и трудоустройстве для выпускников.',
     'start_course' => 'Начать курс',
     
-    // Services/Courses
+    // ==================== OUR COURSES ====================
     'our_courses' => 'Наши курсы',
     'courses_desc1' => 'Научитесь создавать современные веб-интерфейсы. Освойте HTML, CSS, JavaScript и современные фреймворки для разработки быстрых, красивых и удобных сайтов.',
     'courses_desc2' => 'Изучите серверное программирование. Практически работайте с базами данных, API и безопасностью, сможете создавать полноценные веб-приложения.',
@@ -52,15 +48,15 @@ return [
     'cybersecurity' => 'Кибербезопасность',
     'ai_developer' => 'AI разработчик',
     
-    // Details 2
+    // ==================== DETAILS 2 ====================
     'details2_title' => 'Начните свою IT-карьеру здесь',
     'details2_description' => 'Для успеха в IT необходимы практика и реальные проекты. Каждый наш курс предоставляет вам не только теоретические знания, но и готовый к работе опыт. Наши наставники постоянно поддерживают вас и гарантируют ваше развитие с индивидуальным подходом.',
     'start' => 'Начать',
     
-    // Invitation
+    // ==================== INVITATION ====================
     'invitation_text' => 'Наша команда опытных дизайнеров и специалистов по внутренней отделке обеспечивает результаты, превосходящие ваши ожидания.',
     
-    // Projects Section
+    // ==================== PROJECTS ====================
     'projects_title' => 'Проекты',
     'project1_title' => 'Офисное помещение для банков',
     'project1_desc' => 'Современный и функциональный офис, создана комфортная рабочая среда для сотрудников.',
@@ -76,7 +72,7 @@ return [
     'project6_desc' => 'Проект безопасной и интересной игровой площадки для детских садов.',
     'read_more' => 'Читать далее',
     
-    // Testimonials
+    // ==================== TESTIMONIALS ====================
     'testimonial_author1' => 'Марлен Висконте',
     'testimonial_position1' => 'Генеральный директор - Scouter',
     'testimonial_author2' => 'Джон Спайкер',
@@ -84,7 +80,7 @@ return [
     'testimonial_author3' => 'Стелла Виртуозо',
     'testimonial_position3' => 'Главный дизайнер - Bikegirl',
     
-    // Contact Form
+    // ==================== CONTACT FORM ====================
     'contact_title' => 'Связаться с Itech Academy',
     'your_name' => 'Ваше имя',
     'email' => 'Эл. почта',
@@ -92,7 +88,7 @@ return [
     'send' => 'Отправить',
     'success_message' => 'Ваше сообщение успешно отправлено!',
     
-    // Footer
+    // ==================== FOOTER ====================
     'about_website' => 'О сайте',
     'footer_description' => 'Через сайт iTech Academy вы можете найти всю информацию о курсах, направлениях и проектах. Наш сайт удобен для пользователя и работает быстро.',
     'address' => 'Адрес',
@@ -102,25 +98,16 @@ return [
     'design_by' => 'Дизайн от :name',
     'error' => 'Пожалуйста, заполните все поля.',
     'success' => 'Ваше сообщение успешно отправлено!',
-    // Language Switcher
+    
+    // ==================== LANGUAGE ====================
     'language' => 'Язык',
     'english' => 'Английский',
     'russian' => 'Русский',
     'uzbek' => 'Узбекский',
+    
+    // ==================== AUTH ====================
     'login' => 'Вход',
     'sign_up' => 'Регистрация',
-    'create_account' => 'Создать аккаунт',
-    'full_name' => 'Полное имя',
-    'email_address' => 'Email адрес',
-    'password' => 'Пароль',
-    'already_have_account' => 'Уже есть аккаунт?',
-    'sign_in' => 'Войти',
-    'name_placeholder' => 'Введите ваше имя',
-    'forgot_password' => 'Забыли пароль',
-    'new_to_academy' => 'Впервые у нас',
-    'already_have_account' => 'Уже есть аккаунт?',
-    'log_in' => 'Войти',
-    'create_account' => 'Создать аккаунт',
     'profile' => 'Профиль',
     'logout' => 'Выйти',
     'create_account' => 'Создать аккаунт',
@@ -129,38 +116,224 @@ return [
     'password' => 'Пароль',
     'confirm_password' => 'Подтвердите пароль',
     'already_have_account' => 'Уже есть аккаунт?',
+    'sign_in' => 'Войти',
+    'name_placeholder' => 'Введите ваше имя',
+    'forgot_password' => 'Забыли пароль',
+    'new_to_academy' => 'Впервые в Академии?',
     'log_in' => 'Войти',
-    'sign_in' => 'Вход в систему',
-    'forgot_password' => 'Забыли пароль?',
-    'new_to_academy' => 'Впервые в Академии?',
-    // Umumiy
-    'sign_in' => 'Вход',
-    'log_in' => 'Войти в систему',
-    'email_address' => 'Email адрес',
-    'password' => 'Пароль',
-    'confirm_password' => 'Подтвердите пароль',
-    'full_name' => 'Полное имя',
-    'create_account' => 'Создать аккаунт',
-    'new_to_academy' => 'Впервые в Академии?',
-    'already_have_account' => 'Уже есть аккаунт?',
-
-    // Тексты для страницы забытого пароля
-    'forgot_password' => 'Забыли пароль?',
+    
+    // ==================== FORGOT PASSWORD ====================
     'forgot_password_intro' => 'Забыли пароль? Не проблема. Введите ваш email, и мы отправим вам ссылку для восстановления пароля.',
     'send_reset_link' => 'Отправить ссылку',
     'back_to_signin' => 'Назад к входу',
+    
+    // ==================== PROFILE ====================
     'profile_info' => 'Информация профиля',
     'profile_desc' => 'Обновите информацию профиля вашего аккаунта и адрес электронной почты.',
-    'full_name' => 'Полное имя',
-    'email' => 'Email адрес',
-    'save' => 'Сохранить изменения',
     'security' => 'Безопасность',
     'security_desc' => 'Убедитесь, что ваш аккаунт использует длинный случайный пароль для обеспечения безопасности.',
     'current_password' => 'Текущий пароль',
     'new_password' => 'Новый пароль',
-    'confirm_password' => 'Подтвердите новый пароль',
     'delete_account' => 'Удалить аккаунт',
     'delete_desc' => 'После удаления вашего аккаунта все данные будут безвозвратно утеряны.',
     'delete_confirm_title' => 'Вы уверены?',
     'delete_confirm_text' => 'Это действие невозможно отменить!',
+    
+    // ==================== OTHER ====================
+    'new_request' => 'Поступила новая заявка!',
+    'name' => 'Имя',
+    'time' => 'Время',
+    
+    // ==================== BACKEND PAGE ====================
+    'backend_badge' => '🚀 Профессиональный курс',
+    'backend_title' => 'Backend <span class="gradient-text">Developer</span>',
+    'backend_description' => 'Научитесь создавать "сердце" веб-сайтов и сложных систем. Станьте экспертом по архитектуре данных, серверной логике и безопасности.',
+    'backend_php_title' => 'PHP 8.x Modern',
+    'backend_php_desc' => 'Основа backend и логика ООП',
+    'backend_laravel_title' => 'Laravel 11 Framework',
+    'backend_laravel_desc' => 'Создание профессиональных веб-систем',
+    'backend_learn_section' => 'Что вы изучите на курсе?',
+    'backend_skill1_title' => 'PHP и ООП',
+    'backend_skill1_desc' => 'Основная логика программирования и объектно-ориентированное программирование.',
+    'backend_skill2_title' => 'Laravel Framework',
+    'backend_skill2_desc' => 'Создание сложных проектов на самом популярном PHP фреймворке.',
+    'backend_skill3_title' => 'Базы данных и MySQL',
+    'backend_skill3_desc' => 'Профессиональная работа с базами данных и оптимизация.',
+    'backend_skill4_title' => 'REST API',
+    'backend_skill4_desc' => 'Создание безопасных API для мобильных приложений и Frontend.',
+    'backend_skill5_title' => 'Безопасность систем',
+    'backend_skill5_desc' => 'Защита от хакерских атак и основы кибербезопасности.',
+    'backend_for_whom_title' => 'Для кого этот курс?',
+    'backend_for_whom_desc' => 'Для тех, кто любит логическое мышление, интересуется работой сайтов и хочет стать высокооплачиваемым Senior Developer.',
+    'backend_card_title' => 'Набор на курс открыт',
+    'backend_duration_label' => 'Длительность',
+    'backend_duration_value' => '6 месяцев (3 раза в неделю)',
+    'backend_mentor_label' => 'Ментор',
+    'backend_mentor_value' => 'Senior Backend Engineer',
+    'backend_old_price' => '1 800 000 сум',
+    'backend_new_price' => '1 500 000',
+    'backend_price_period' => 'сум/мес',
+    'backend_enroll_button' => 'Записаться сейчас',
+    'backend_certificate_text' => 'Выдаётся диплом и сертификат',
+    
+    // ==================== PYTHON COURSE ====================
+    'python_badge' => '🚀 Профессиональный курс',
+    'python_title' => 'Python <span class="gradient-text">Developer</span>',
+    'python_description' => 'Изучите язык программирования Python с нуля. Станьте специалистом в области анализа данных, искусственного интеллекта и веб-разработки.',
+    'python_tech1_title' => 'Python 3.x',
+    'python_tech1_desc' => 'Современное программирование на Python',
+    'python_tech2_title' => 'Анализ данных',
+    'python_tech2_desc' => 'Pandas, NumPy, Matplotlib',
+    'python_learn_section' => 'Что вы изучите на курсе?',
+    'python_skill1_title' => 'Основы Python',
+    'python_skill1_desc' => 'Синтаксис, переменные, типы данных и циклы',
+    'python_skill2_title' => 'Функции и модули',
+    'python_skill2_desc' => 'Повторное использование кода и модульное программирование',
+    'python_skill3_title' => 'ООП',
+    'python_skill3_desc' => 'Объектно-ориентированное программирование и классы',
+    'python_skill4_title' => 'Анализ данных',
+    'python_skill4_desc' => 'Работа с библиотеками Pandas, NumPy',
+    'python_skill5_title' => 'API и web',
+    'python_skill5_desc' => 'Создание REST API и знакомство с Django',
+    'python_for_whom_title' => 'Для кого этот курс?',
+    'python_for_whom_desc' => 'Для начинающих программистов, желающих заниматься анализом данных и интересующихся искусственным интеллектом.',
+    'python_card_title' => 'Набор на курс открыт',
+    'python_duration_label' => 'Длительность',
+    'python_duration_value' => '5 месяцев (3 раза в неделю)',
+    'python_mentor_label' => 'Ментор',
+    'python_mentor_value' => 'Senior Python Developer',
+    'python_old_price' => '1 600 000 сум',
+    'python_new_price' => '1 400 000',
+    'python_price_period' => 'сум/мес',
+    'python_enroll_button' => 'Записаться сейчас',
+    'python_certificate_text' => 'Выдаётся диплом и сертификат',
+
+    // ==================== FRONTEND KURSI ====================
+'frontend_badge' => '🎨 Профессиональный курс',
+'frontend_title' => 'Frontend <span class="gradient-text">Developer</span>',
+'frontend_description' => 'Научитесь создавать внешний вид веб-сайтов. Работа с HTML, CSS, JavaScript и современными фреймворками.',
+'frontend_tech1_title' => 'HTML5 & CSS3',
+'frontend_tech1_desc' => 'Структура и дизайн веб-страниц',
+'frontend_tech2_title' => 'JavaScript',
+'frontend_tech2_desc' => 'Динамические и интерактивные веб-страницы',
+'frontend_learn_section' => 'Что вы изучите на курсе?',
+'frontend_skill1_title' => 'HTML5',
+'frontend_skill1_desc' => 'Структура веб-страницы и семантические теги',
+'frontend_skill2_title' => 'CSS3',
+'frontend_skill2_desc' => 'Дизайн, анимации, адаптивная верстка',
+'frontend_skill3_title' => 'JavaScript',
+'frontend_skill3_desc' => 'Динамические элементы, события, DOM',
+'frontend_skill4_title' => 'Bootstrap & Tailwind',
+'frontend_skill4_desc' => 'Быстрый и красивый дизайн',
+'frontend_skill5_title' => 'React.js',
+'frontend_skill5_desc' => 'Современный фронтенд фреймворк',
+'frontend_for_whom_title' => 'Для кого этот курс?',
+'frontend_for_whom_desc' => 'Для тех, кто хочет начать программировать, совмещать веб-дизайн и разработку, креативно и технически мыслить.',
+'frontend_card_title' => 'Набор на курс открыт',
+'frontend_duration_label' => 'Длительность',
+'frontend_duration_value' => '6 месяцев (3 раза в неделю)',
+'frontend_mentor_label' => 'Ментор',
+'frontend_mentor_value' => 'Senior Frontend Developer',
+'frontend_old_price' => '1 800 000 сум',
+'frontend_new_price' => '1 500 000',
+'frontend_price_period' => 'сум/мес',
+'frontend_enroll_button' => 'Записаться сейчас',
+'frontend_certificate_text' => 'Выдаётся диплом и сертификат',
+
+// ==================== CYBERSECURITY KURSI ====================
+'cybersecurity_badge' => '🔒 Курс безопасности',
+'cybersecurity_title' => 'Кибер <span class="gradient-text">Безопасность</span>',
+'cybersecurity_description' => 'Научитесь защищать системы от хакерских атак. Penetration testing, network security и ethical hacking.',
+'cybersecurity_tech1_title' => 'Network Security',
+'cybersecurity_tech1_desc' => 'Основы сетевой безопасности',
+'cybersecurity_tech2_title' => 'Ethical Hacking',
+'cybersecurity_tech2_desc' => 'Легальный хакинг и методы защиты',
+'cybersecurity_learn_section' => 'Что вы изучите на курсе?',
+'cybersecurity_skill1_title' => 'Основы сетей',
+'cybersecurity_skill1_desc' => 'TCP/IP, DNS, Firewall и сетевые протоколы',
+'cybersecurity_skill2_title' => 'Криптография',
+'cybersecurity_skill2_desc' => 'Шифрование, хеширование и защита данных',
+'cybersecurity_skill3_title' => 'Penetration Testing',
+'cybersecurity_skill3_desc' => 'Выявление уязвимостей и тестирование',
+'cybersecurity_skill4_title' => 'Web Security',
+'cybersecurity_skill4_desc' => 'Защита от SQL Injection, XSS, CSRF',
+'cybersecurity_skill5_title' => 'SOC и Мониторинг',
+'cybersecurity_skill5_desc' => 'Отслеживание систем и обнаружение угроз',
+'cybersecurity_for_whom_title' => 'Для кого этот курс?',
+'cybersecurity_for_whom_desc' => 'Для специалистов IT, интересующихся безопасностью систем и желающих стать этичным хакером.',
+'cybersecurity_card_title' => 'Набор на курс открыт',
+'cybersecurity_duration_label' => 'Длительность',
+'cybersecurity_duration_value' => '7 месяцев (3 раза в неделю)',
+'cybersecurity_mentor_label' => 'Ментор',
+'cybersecurity_mentor_value' => 'Security Expert',
+'cybersecurity_old_price' => '2 000 000 сум',
+'cybersecurity_new_price' => '1 800 000',
+'cybersecurity_price_period' => 'сум/мес',
+'cybersecurity_enroll_button' => 'Записаться сейчас',
+'cybersecurity_certificate_text' => 'Выдаётся диплом и сертификат',
+
+// ==================== AI DEVELOPER KURSI ====================
+'ai_badge' => '🤖 Современный курс',
+'ai_title' => 'AI <span class="gradient-text">Developer</span>',
+'ai_description' => 'Научитесь создавать модели искусственного интеллекта и машинного обучения. Python, TensorFlow, PyTorch и Machine Learning.',
+'ai_tech1_title' => 'Machine Learning',
+'ai_tech1_desc' => 'Основы машинного обучения',
+'ai_tech2_title' => 'Deep Learning',
+'ai_tech2_desc' => 'TensorFlow, PyTorch, Keras',
+'ai_learn_section' => 'Что вы изучите на курсе?',
+'ai_skill1_title' => 'Python для AI',
+'ai_skill1_desc' => 'Библиотеки NumPy, Pandas, Matplotlib',
+'ai_skill2_title' => 'Machine Learning',
+'ai_skill2_desc' => 'Регрессия, классификация, кластеризация',
+'ai_skill3_title' => 'Deep Learning',
+'ai_skill3_desc' => 'Нейронные сети, CNN, RNN, Transformers',
+'ai_skill4_title' => 'Computer Vision',
+'ai_skill4_desc' => 'Анализ изображений и видео',
+'ai_skill5_title' => 'NLP',
+'ai_skill5_desc' => 'Обработка естественного языка и ChatGPT',
+'ai_for_whom_title' => 'Для кого этот курс?',
+'ai_for_whom_desc' => 'Для тех, кто знает Python, интересуется искусственным интеллектом и хочет стать ML-инженером.',
+'ai_card_title' => 'Набор на курс открыт',
+'ai_duration_label' => 'Длительность',
+'ai_duration_value' => '8 месяцев (3 раза в неделю)',
+'ai_mentor_label' => 'Ментор',
+'ai_mentor_value' => 'AI/ML Engineer',
+'ai_old_price' => '2 200 000 сум',
+'ai_new_price' => '2 000 000',
+'ai_price_period' => 'сум/мес',
+'ai_enroll_button' => 'Записаться сейчас',
+'ai_certificate_text' => 'Выдаётся диплом и сертификат',
+
+// ==================== COMPUTER LITERACY KURSI ====================
+'computer_badge' => '💻 Начальный курс',
+'computer_title' => 'Компьютерная <span class="gradient-text">Грамотность</span>',
+'computer_description' => 'Изучите работу с компьютером с нуля. Windows, офисные программы, интернет и основы электронной безопасности.',
+'computer_tech1_title' => 'Windows 11',
+'computer_tech1_desc' => 'Работа с операционной системой',
+'computer_tech2_title' => 'Microsoft Office',
+'computer_tech2_desc' => 'Word, Excel, PowerPoint',
+'computer_learn_section' => 'Что вы изучите на курсе?',
+'computer_skill1_title' => 'Устройство компьютера',
+'computer_skill1_desc' => 'Комплектующие компьютера и их функции',
+'computer_skill2_title' => 'Работа с Windows',
+'computer_skill2_desc' => 'Файлы, папки, установка программ',
+'computer_skill3_title' => 'Интернет и email',
+'computer_skill3_desc' => 'Браузеры, поисковые системы, электронная почта',
+'computer_skill4_title' => 'Microsoft Word',
+'computer_skill4_desc' => 'Работа с текстовым редактором',
+'computer_skill5_title' => 'Excel и PowerPoint',
+'computer_skill5_desc' => 'Создание таблиц и презентаций',
+'computer_for_whom_title' => 'Для кого этот курс?',
+'computer_for_whom_desc' => 'Для тех, кто только начинает изучать компьютер, хочет освоить офисные программы и повысить компьютерную грамотность.',
+'computer_card_title' => 'Набор на курс открыт',
+'computer_duration_label' => 'Длительность',
+'computer_duration_value' => '3 месяца (3 раза в неделю)',
+'computer_mentor_label' => 'Ментор',
+'computer_mentor_value' => 'IT Specialist',
+'computer_old_price' => '1 200 000 сум',
+'computer_new_price' => '1 000 000',
+'computer_price_period' => 'сум/мес',
+'computer_enroll_button' => 'Записаться сейчас',
+'computer_certificate_text' => 'Выдаётся диплом и сертификат',
+
 ];
