@@ -14,25 +14,26 @@
                     </div> <!-- end of footer-col -->
                     <div class="footer-col third">
                         <span class="fa-stack">
-                            <a href="#your-link">
+                            <a href="https://youtube.com/channel/UCyT9VMShx345r45zLTr9BUw">
                                 <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-facebook-f fa-stack-1x"></i>
+                                <i class="fab fa-youtube fa-stack-1x"></i>
                             </a>
                         </span>
                         <span class="fa-stack">
-                            <a href="#your-link">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-twitter fa-stack-1x"></i>
+                            <a href="https://t.me/itechacademy_edu_bot" target="_blank" class="icon-circle icon-telegram-bot">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fas fa-robot fa-stack-1x"></i> </a>
+                            <i class=" "></i>
                             </a>
                         </span>
                         <span class="fa-stack">
-                            <a href="#your-link">
+                            <a href="https://t.me/itechacademy_uz">
                                 <i class="fas fa-circle fa-stack-2x"></i>
                                 <i class="fab fa-telegram fa-stack-1x"></i>
                             </a>
                         </span>
                         <span class="fa-stack">
-                            <a href="#your-link">
+                            <a href="https://www.instagram.com/itechacademy_uz?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
                                 <i class="fas fa-circle fa-stack-2x"></i>
                                 <i class="fab fa-instagram fa-stack-1x"></i>
                             </a>
@@ -45,28 +46,3 @@
         </div> <!-- end of container -->
     </div> <!-- end of footer -->
     <!-- end of footer -->
-
-
-    <!-- Copyright -->
-    <div class="copyright bg-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p class="p-small">@lang('messages.copyright', ['year' => date('Y')]) <a href="#your-link">ITECH</a></p>
-                </div> <!-- end of col -->
-            </div> <!-- enf of row -->
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <p class="p-small">@lang('messages.design_by') <a href="https://themewagon.com/">Themewagon</a></p>
-                </div> <!-- end of col -->
-            </div> <!-- enf of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of copyright -->
-    <!-- end of copyright -->
-
-
-    <!-- Back To Top Button -->
-    <button onclick="topFunction()" id="myBtn">
-        <img src="{{ asset('images/up-arrow.png') }}" alt="alternative">
-    </button>
