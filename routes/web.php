@@ -36,3 +36,9 @@ Route::auto('career', CareerController::class);
 
 // Breeze autentifikatsiya marshrutlari
 require __DIR__.'/auth.php';
+
+
+
+
+
+
