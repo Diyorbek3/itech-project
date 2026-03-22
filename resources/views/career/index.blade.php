@@ -84,29 +84,29 @@
   </div>
 
   <div class="card">
-    <img src="https://heartdirected.com/wp-content/uploads/2023/06/Front-End-Develop2.jpg">
+    <img src="https://www.gyansetu.in/wp-content/uploads/2024/02/What-is-Full-stack-development-and-How-to-become-Full-Stack-Developer-810x4301_1-637x637.webp">
     <h3>Full-stack Developer</h3>
     <p>🕒 2 yil tajriba</p>
     <p>Frontend + backend to'liq yaratadi.</p>
   </div>
 
   <div class="card">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdRaKRSFts6z-_VEg7LkeSNBxF_RH2n0N5_A&s">
+    <img src="https://assets.techrepublic.com/uploads/2023/10/tr_20231018-devops-engineer-roles-and-responsibilities.png">
     <h3>DevOps Engineer</h3>
     <p>🕒 3 yil tajriba</p>
     <p>Server, database va API bilan ishlaydi.</p>
   </div>
 
   <div class="card">
-    <img src="https://xaltam.com/blogs/wp-content/uploads/2024/11/mobile-app-development-trends-xaltam.png">
-    <h3>Mobile Developer</h3>
+    <img src="https://humanfocus.co.uk/wp-content/uploads/what-is-cyber-security.jpg">
+    <h3>Cybersecurity</h3>
     <p>🕒 2.5 yil tajriba</p>
     <p>Android va iOS ilovalar yaratadi.</p>
   </div>
 
   <div class="card">
     <img src="https://eu-images.contentstack.com/v3/assets/blt69509c9116440be8/blt25ac3c488d76676a/671a7a173fe49b837e2e389a/AI_technology-AkarapongChairean-AlamyStockPhoto.jpg">
-    <h3>AI Engineer</h3>
+    <h3>Game ai_developer</h3>
     <p>🕒 4 yil tajriba</p>
     <p>Sun'iy intellekt va machine learning bilan ishlaydi.</p>
   </div>
