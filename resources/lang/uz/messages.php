@@ -327,5 +327,12 @@ return [
 'computer_price_period' => 'so\'m/oy',
 'computer_enroll_button' => 'Hoziroq qo\'shilish',
 'computer_certificate_text' => 'Diplom va Sertifikat beriladi',
-
+    'profile_info' => 'Profil ma’lumotlari',
+    'profile_desc' => 'Hisobingizning profil ma’lumotlari va elektron pochta manzilingizni yangilang.',
+    'full_name' => 'To‘liq ism',
+    'email' => 'Email manzili',
+    'save' => 'O‘zgarishlarni saqlash',
+    'confirm_password' => 'Parolni tasdiqlang',
+    'password_mismatch' => 'Parollar mos kelmadi!',
+    
 ];

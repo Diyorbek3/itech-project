@@ -121,7 +121,7 @@ return [
     'forgot_password' => 'Forgot password',
     'new_to_academy' => 'New to Academy',
     'log_in' => 'Log in',
-    
+
     // ==================== FORGOT PASSWORD ====================
     'forgot_password_intro' => 'Forgot your password? No problem. Just let us know your email address and we will email you a password reset link.',
     'send_reset_link' => 'Send Reset Link',
@@ -336,4 +336,9 @@ return [
 'computer_enroll_button' => 'Enroll now',
 'computer_certificate_text' => 'Diploma and Certificate awarded',
 
+    'create_account' => 'create account',
+    'profile' => 'Profile',
+    'logout' => 'Logout',
+    'confirm_password' => 'Confirm Password',
+    'password_mismatch' => 'The passwords do not match!',
 ];
