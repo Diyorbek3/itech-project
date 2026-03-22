@@ -121,4 +121,6 @@ return [
     'create_account' => 'create account',
     'profile' => 'Profile',
     'logout' => 'Logout',
+    'confirm_password' => 'Confirm Password',
+    'password_mismatch' => 'The passwords do not match!',
 ];
