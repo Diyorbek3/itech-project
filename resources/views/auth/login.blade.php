@@ -11,15 +11,22 @@
 
     <style>
         body {
-            background-color: #0d1117;
-            color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0;
-        }
+    /* Rasmni asset orqali chaqiramiz va ustiga xira qora qatlam beramiz */
+    background: linear-gradient(rgba(13, 17, 23, 0.7), rgba(13, 17, 23, 0.7)), 
+                url('{{ asset('images/AP2.jpg') }}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Rasm qotib turishi uchun */
+    
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
         .login-container {
             width: 100%;
             max-width: 340px;
@@ -54,6 +61,10 @@
             box-shadow: 0 0 0 3px rgba(31, 111, 235, 0.3) !important;
             outline: none;
         }
+        /* Xato bo'lganda input qizil bo'lishi uchun */
+        .form-control.is-invalid {
+            border-color: #f85149 !important;
+        }
         .btn-login-style {
             background-color: #238636;
             color: white;
@@ -63,6 +74,7 @@
             padding: 8px;
             font-weight: 600;
             margin-top: 15px;
+            cursor: pointer;
         }
         .btn-login-style:hover {
             background-color: #2ea043;
@@ -85,6 +97,12 @@
             color: #58a6ff;
             text-decoration: none;
         }
+        .error-text {
+            color: #f85149;
+            font-size: 12px;
+            margin-top: 4px;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -102,7 +120,11 @@
             
             <div class="mb-3">
                 <label class="form-label">{{ __('messages.email_address') }}</label>
-                <input type="email" name="email" class="form-control" value="{{ old('email') }}" required autofocus>
+                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" 
+                       value="{{ old('email') }}" required autofocus>
+                @error('email')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
             </div>
 
             <div class="mb-3">
@@ -113,10 +135,14 @@
                     @endif
                 </label>
                 <div style="position: relative;">
-                    <input type="password" id="login-password" name="password" class="form-control" required>
+                    <input type="password" id="login-password" name="password" 
+                           class="form-control @error('password') is-invalid @enderror" required>
                     <i class="fas fa-eye" id="toggle-login-password" 
                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #58a6ff;"></i>
                 </div>
+                @error('password')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
             </div>
 
             <button type="submit" class="btn btn-login-style">{{ __('messages.log_in') }}</button>
@@ -136,6 +162,7 @@
         const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
         password.setAttribute('type', type);
         this.classList.toggle('fa-eye-slash');
+        this.classList.toggle('fa-eye');
     });
 </script>
 
