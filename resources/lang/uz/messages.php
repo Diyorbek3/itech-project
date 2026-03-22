@@ -165,5 +165,8 @@ return [
     'full_name' => 'To‘liq ism',
     'email' => 'Email manzili',
     'save' => 'O‘zgarishlarni saqlash',
+    'confirm_password' => 'Parolni tasdiqlang',
+    'password_mismatch' => 'Parollar mos kelmadi!',
+    
 ];
 
