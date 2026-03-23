@@ -341,4 +341,55 @@ return [
     'logout' => 'Logout',
     'confirm_password' => 'Confirm Password',
     'password_mismatch' => 'The passwords do not match!',
+
+
+    // Hero Section
+    'backend_course_badge' => 'Professional Backend Course',
+    'backend_course_title' => 'The Path to Becoming a <span class="gradient-text">Backend</span> Developer',
+    'backend_course_description' => 'Learn modern backend technologies and master important topics like API, databases, authentication through practical projects.',
+    
+    // Tech Cards
+    'backend_course_tech1_title' => 'PHP & MySQL',
+    'backend_course_tech1_desc' => 'Server-side programming and database fundamentals',
+    'backend_course_tech2_title' => 'Laravel Framework',
+    'backend_course_tech2_desc' => 'Modern PHP framework and RESTful API development',
+    
+    // Learning Section
+    'backend_course_learn_section' => 'What will you learn in this course?',
+    'backend_course_skill1_title' => 'PHP Basics & OOP',
+    'backend_course_skill1_desc' => 'PHP syntax, object-oriented programming, namespace and traits',
+    'backend_course_skill2_title' => 'MySQL & Databases',
+    'backend_course_skill2_desc' => 'Complex queries, indexing, optimization and normalization',
+    'backend_course_skill3_title' => 'Laravel Framework',
+    'backend_course_skill3_desc' => 'Eloquent ORM, Blade, Middleware, Service Provider, Facades',
+    'backend_course_skill4_title' => 'Building RESTful APIs',
+    'backend_course_skill4_desc' => 'API design, authentication (Sanctum/Passport), API resources',
+    'backend_course_skill5_title' => 'Deployment & DevOps',
+    'backend_course_skill5_desc' => 'Git, CI/CD, server configuration (Forge, Envoyer)',
+    
+    // For Whom Section
+    'backend_course_for_whom_title' => '👨‍💻 Who is this course for?',
+    'backend_course_for_whom_desc' => 'Frontend developers, beginners, developers looking to strengthen their skills, and those who want to enter the backend development field.',
+    
+    // Schedule Section
+    'backend_course_schedule_title' => 'Course Schedule',
+    'backend_course_schedule_desc' => '3 times a week (Monday, Wednesday, Friday) at 19:00 - 21:00',
+    
+    // Price Card
+    'backend_course_card_title' => 'Course Information',
+    'backend_course_duration_label' => 'Course Duration',
+    'backend_course_duration_value' => '2 months (48 hours)',
+    'backend_course_mentor_label' => 'Course Mentor',
+    'backend_course_mentor_value' => 'Jamshidbek Rakhimov (Senior Backend Dev)',
+    'backend_course_language_label' => 'Course Language',
+    'backend_course_language_value' => 'Uzbek language',
+    'backend_course_old_price' => '1,500,000 UZS',
+    'backend_course_new_price' => '999,000 UZS',
+    'backend_course_price_period' => '/ month',
+    'backend_course_enroll_button' => 'Enroll Now',
+    'backend_course_certificate_text' => 'Upon completion, you will receive an official certificate',
+    'backend_course_support_text' => '24/7 mentor support and practical projects',
+    'backend_course_hero_alt' => 'Backend development course',
+
+
 ];

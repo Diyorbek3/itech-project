@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CourceController; 
+use App\Http\Controllers\CourceController; // <-- BU CourceController (Course emas!)
 use App\Http\Controllers\CareerController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// 4. Kurslar yo'nalishlari
+// 4. Kurslar yo'nalishlari (CourceController bilan!)
 Route::get('/courses/python', [CourceController::class, 'python'])->name('courses.python');
 Route::get('/courses/frontend', [CourceController::class, 'frontend'])->name('courses.frontend');
 Route::get('/courses/backend', [CourceController::class, 'backend'])->name('courses.backend');
@@ -41,5 +41,8 @@ Route::get('/courses/ai-developer', [CourceController::class, 'aiDeveloper'])->n
 
 // 5. Career route
 Route::get('/career', [CareerController::class, 'index'])->name('career.index');
+
+// 6. Kursga yozilish route (CourceController bilan!)
+Route::post('/enroll/submit', [CourceController::class, 'enrollSubmit'])->name('enroll.submit');
 
 require __DIR__.'/auth.php';
