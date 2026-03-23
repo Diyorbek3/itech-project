@@ -40,6 +40,54 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
+    
+    /* Kartochkalar uchun bir xil balandlik */
+    .course-card {
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 20px;
+        padding: 1.5rem;
+        transition: all 0.3s ease;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    .course-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
+        border-color: #3b82f6;
+    }
+    .course-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    .course-icon.python {
+        background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+    }
+    .course-icon.data {
+        background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    }
+    .course-icon i {
+        font-size: 36px;
+    }
+    .course-content h5 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+        color: #1e293b;
+    }
+    .course-content p {
+        font-size: 0.85rem;
+        color: #64748b;
+        margin-bottom: 0;
+        line-height: 1.4;
+    }
 </style>
 @endsection
 
@@ -61,32 +109,34 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="course-hero p-4 p-md-5 mb-5 shadow-lg">
         <div class="row align-items-center">
             <div class="col-lg-7">
-                <span class="badge bg-primary mb-3 px-3 py-2 rounded-pill shadow-sm">{{ __('messages.python_badge') }}</span>
                 <h1 class="display-3 fw-bold mb-3">{!! __('messages.python_title') !!}</h1>
                 <p class="fs-5 opacity-75 mb-4 lh-lg">
                     {{ __('messages.python_description') }}
                 </p>
                 <div class="d-flex gap-3">
                     <div class="row g-4 mb-5">
+                        {{-- KARTOCHKA 1: Python 3.x --}}
                         <div class="col-md-6">
-                            <div class="p-4 rounded-4 shadow-sm border bg-white d-flex align-items-center">
-                                <div class="p-3 rounded-3 me-3 d-flex align-items-center justify-content-center" style="background-color: #e0f2fe !important; width: 70px; height: 70px;">
-                                    <i class="fa-brands fa-python" style="color: #0ea5e9 !important; font-size: 40px !important;"></i>
+                            <div class="course-card">
+                                <div class="course-icon python">
+                                    <i class="fa-brands fa-python" style="color: #0ea5e9;"></i>
                                 </div>
-                                <div>
-                                    <h5 class="fw-bold mb-1">{{ __('messages.python_tech1_title') }}</h5>
-                                    <p class="text-secondary mb-0 small">{{ __('messages.python_tech1_desc') }}</p>
+                                <div class="course-content">
+                                    <h5>{{ __('messages.python_tech1_title') }}</h5>
+                                    <p>{{ __('messages.python_tech1_desc') }}</p>
                                 </div>
                             </div>
                         </div>
+
+                        {{-- KARTOCHKA 2: Ma'lumotlar tahlili --}}
                         <div class="col-md-6">
-                            <div class="p-4 rounded-4 shadow-sm border bg-white d-flex align-items-center">
-                                <div class="p-3 rounded-3 me-3 d-flex align-items-center justify-content-center" style="background-color: #fee2e2 !important; width: 70px; height: 70px;">
-                                    <i class="fa-solid fa-chart-line" style="color: #ef4444 !important; font-size: 40px !important;"></i>
+                            <div class="course-card">
+                                <div class="course-icon data">
+                                    <i class="fa-solid fa-chart-line" style="color: #ef4444;"></i>
                                 </div>
-                                <div>
-                                    <h5 class="fw-bold mb-1">{{ __('messages.python_tech2_title') }}</h5>
-                                    <p class="text-secondary mb-0 small">{{ __('messages.python_tech2_desc') }}</p>
+                                <div class="course-content">
+                                    <h5>{{ __('messages.python_tech2_title') }}</h5>
+                                    <p>{{ __('messages.python_tech2_desc') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -172,13 +222,39 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                     
                     <a href="{{ url('/#contact') }}" class="btn btn-primary btn-lg w-100 rounded-pill py-3 shadow fw-bold mb-3">
-                        <i class="fa-solid fa-bolt me-2"></i> {{ __('messages.python_enroll_button') }}
+                        <i class="fa-solid fa-rocket me-2"></i> {{ __('messages.python_enroll_button') }}
                     </a>
                     
-                    <p class="text-center small text-muted mb-0">
-                        <i class="fa-solid fa-shield-halved me-1 text-success"></i> 
-                        {{ __('messages.python_certificate_text') }}
-                    </p>
+                    <div class="certificate-box mt-4 p-4 rounded-4 text-center" style="background: linear-gradient(135deg, #fff9e6 0%, #fff5e0 100%); border: 1px solid #ffd966; border-radius: 20px;">
+    <div class="d-flex justify-content-center gap-4 mb-3">
+        <div class="text-center">
+            <div class="bg-warning bg-opacity-10 p-2 rounded-circle" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                <i class="fa-solid fa-scroll fa-2x" style="color: #b8860b;"></i>
+            </div>
+            <p class="small fw-bold mb-0 mt-2">Diplom</p>
+            <small class="text-muted">Davlat tomonidan</small>
+        </div>
+        <div class="text-center">
+            <div class="bg-primary bg-opacity-10 p-2 rounded-circle" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                <i class="fa-solid fa-certificate fa-2x" style="color: #0ea5e9;"></i>
+            </div>
+            <p class="small fw-bold mb-0 mt-2">Sertifikat</p>
+            <small class="text-muted">Xalqaro standart</small>
+        </div>
+        <div class="text-center">
+            <div class="bg-success bg-opacity-10 p-2 rounded-circle" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                <i class="fa-solid fa-briefcase fa-2x" style="color: #22c55e;"></i>
+            </div>
+            <p class="small fw-bold mb-0 mt-2">Karyera</p>
+            <small class="text-muted">Ishga joylashish</small>
+        </div>
+    </div>
+    <hr class="my-3">
+    <p class="small text-muted mb-0">
+        <i class="fa-solid fa-star me-1 text-warning"></i> 
+        {{ __('messages.python_certificate_text') }}
+    </p>
+</div>
                 </div>
             </div>
         </div>

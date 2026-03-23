@@ -335,4 +335,53 @@ return [
 'computer_enroll_button' => 'Записаться сейчас',
 'computer_certificate_text' => 'Выдаётся диплом и сертификат',
 
+
+    // Hero Section
+    'backend_course_badge' => 'Профессиональный курс Backend',
+    'backend_course_title' => 'Путь к становлению <span class="gradient-text">Backend</span> Разработчиком',
+    'backend_course_description' => 'Изучите современные backend технологии и закрепите важные темы, такие как API, базы данных, аутентификация, с помощью практических проектов.',
+    
+    // Tech Cards
+    'backend_course_tech1_title' => 'PHP & MySQL',
+    'backend_course_tech1_desc' => 'Серверное программирование и основы баз данных',
+    'backend_course_tech2_title' => 'Laravel Framework',
+    'backend_course_tech2_desc' => 'Современный PHP фреймворк и создание RESTful API',
+    
+    // Learning Section
+    'backend_course_learn_section' => 'Что вы изучите на курсе?',
+    'backend_course_skill1_title' => 'Основы PHP и ООП',
+    'backend_course_skill1_desc' => 'Синтаксис PHP, объектно-ориентированное программирование, namespace и трейты',
+    'backend_course_skill2_title' => 'MySQL и базы данных',
+    'backend_course_skill2_desc' => 'Сложные запросы, индексация, оптимизация и нормализация',
+    'backend_course_skill3_title' => 'Laravel Framework',
+    'backend_course_skill3_desc' => 'Eloquent ORM, Blade, Middleware, Service Provider, Facades',
+    'backend_course_skill4_title' => 'Создание RESTful API',
+    'backend_course_skill4_desc' => 'Дизайн API, аутентификация (Sanctum/Passport), API ресурсы',
+    'backend_course_skill5_title' => 'Deployment и DevOps',
+    'backend_course_skill5_desc' => 'Git, CI/CD, настройка сервера (Forge, Envoyer)',
+    
+    // For Whom Section
+    'backend_course_for_whom_title' => '👨‍💻 Для кого этот курс?',
+    'backend_course_for_whom_desc' => 'Для frontend разработчиков, новичков, разработчиков желающих укрепить свои знания и тех, кто хочет войти в сферу backend разработки.',
+    
+    // Schedule Section
+    'backend_course_schedule_title' => 'Расписание курса',
+    'backend_course_schedule_desc' => '3 раза в неделю (Понедельник, Среда, Пятница) в 19:00 - 21:00',
+    
+    // Price Card
+    'backend_course_card_title' => 'Информация о курсе',
+    'backend_course_duration_label' => 'Длительность курса',
+    'backend_course_duration_value' => '2 месяца (48 часов)',
+    'backend_course_mentor_label' => 'Ментор курса',
+    'backend_course_mentor_value' => 'Жамшидбек Рахимов (Senior Backend Dev)',
+    'backend_course_language_label' => 'Язык курса',
+    'backend_course_language_value' => 'На узбекском языке',
+    'backend_course_old_price' => '1,500,000 сум',
+    'backend_course_new_price' => '999,000 сум',
+    'backend_course_price_period' => '/ в месяц',
+    'backend_course_enroll_button' => 'Записаться сейчас',
+    'backend_course_certificate_text' => 'По окончании курса вы получите официальный сертификат',
+    'backend_course_support_text' => 'Поддержка ментора 24/7 и практические проекты',
+    'backend_course_hero_alt' => 'Курс backend разработки',
+
 ];
