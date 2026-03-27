@@ -2,8 +2,15 @@
 
 @section('styles')
 <style>
+    .dev-bright {
+        color: #ffffff !important;
+        font-weight: 800;
+        text-shadow: 0 0 15px rgba(59, 130, 246, 0.6), 0 0 5px rgba(255, 255, 255, 0.3); 
+        letter-spacing: 1px;
+        opacity: 1 !important;
+    }
     .course-hero {
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        background: linear-gradient(135deg, #10182b 0%, #1e293b 100%);
         color: white;
         border-radius: 30px;
         overflow: hidden;
@@ -41,7 +48,6 @@
         -webkit-text-fill-color: transparent;
     }
     
-    /* Kartochkalar uchun bir xil balandlik */
     .course-card {
         background: white;
         border: 1px solid #e2e8f0;
@@ -67,15 +73,10 @@
         justify-content: center;
         flex-shrink: 0;
     }
-    .course-icon.python {
-        background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
-    }
-    .course-icon.data {
-        background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-    }
-    .course-icon i {
-        font-size: 36px;
-    }
+    .course-icon.python { background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%); }
+    .course-icon.data { background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); }
+    .course-icon i { font-size: 36px; }
+    
     .course-content h5 {
         font-size: 1.1rem;
         font-weight: 700;
@@ -88,34 +89,44 @@
         margin-bottom: 0;
         line-height: 1.4;
     }
+
+    /* Yangi Sertifikat Bo'limi Stili */
+    .benefit-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 20px;
+        text-align: left;
+    }
+    .benefit-icon {
+        font-size: 1.5rem;
+        flex-shrink: 0;
+        margin-top: 3px;
+    }
+    .benefit-text {
+        font-size: 0.95rem;
+        color: #475569;
+        line-height: 1.5;
+        font-weight: 500;
+    }
 </style>
 @endsection
 
 @section('content')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const scrollPos = urlParams.get('scroll');
-    if (scrollPos) {
-        setTimeout(function() {
-            window.scrollTo(0, parseInt(scrollPos));
-        }, 100);
-    }
-});
-</script>
-
 <div class="container py-5">
     
     <div class="course-hero p-4 p-md-5 mb-5 shadow-lg">
         <div class="row align-items-center">
             <div class="col-lg-7">
-                <h1 class="display-3 fw-bold mb-3">{!! __('messages.python_title') !!}</h1>
+              <h1 class="display-3 fw-bold mb-3">
+                <span class="gradient-text">Python</span> 
+                <span class="dev-bright">Developer</span>
+              </h1>
                 <p class="fs-5 opacity-75 mb-4 lh-lg">
                     {{ __('messages.python_description') }}
                 </p>
                 <div class="d-flex gap-3">
                     <div class="row g-4 mb-5">
-                        {{-- KARTOCHKA 1: Python 3.x --}}
                         <div class="col-md-6">
                             <div class="course-card">
                                 <div class="course-icon python">
@@ -128,7 +139,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                         </div>
 
-                        {{-- KARTOCHKA 2: Ma'lumotlar tahlili --}}
                         <div class="col-md-6">
                             <div class="course-card">
                                 <div class="course-icon data">
@@ -221,40 +231,22 @@ document.addEventListener('DOMContentLoaded', function() {
                         <h2 class="fw-bold text-primary mb-0">{{ __('messages.python_new_price') }} <small class="fs-6 text-dark text-opacity-50">{{ __('messages.python_price_period') }}</small></h2>
                     </div>
                     
-                    <a href="{{ url('/#contact') }}" class="btn btn-primary btn-lg w-100 rounded-pill py-3 shadow fw-bold mb-3">
+                    <a href="{{ url('/#contact') }}" class="btn btn-primary btn-lg w-100 rounded-pill py-3 shadow fw-bold mb-4">
                         <i class="fa-solid fa-rocket me-2"></i> {{ __('messages.python_enroll_button') }}
                     </a>
                     
-                    <div class="certificate-box mt-4 p-4 rounded-4 text-center" style="background: linear-gradient(135deg, #fff9e6 0%, #fff5e0 100%); border: 1px solid #ffd966; border-radius: 20px;">
-    <div class="d-flex justify-content-center gap-4 mb-3">
-        <div class="text-center">
-            <div class="bg-warning bg-opacity-10 p-2 rounded-circle" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
-                <i class="fa-solid fa-scroll fa-2x" style="color: #b8860b;"></i>
-            </div>
-            <p class="small fw-bold mb-0 mt-2">Diplom</p>
-            <small class="text-muted">Davlat tomonidan</small>
-        </div>
-        <div class="text-center">
-            <div class="bg-primary bg-opacity-10 p-2 rounded-circle" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
-                <i class="fa-solid fa-certificate fa-2x" style="color: #0ea5e9;"></i>
-            </div>
-            <p class="small fw-bold mb-0 mt-2">Sertifikat</p>
-            <small class="text-muted">Xalqaro standart</small>
-        </div>
-        <div class="text-center">
-            <div class="bg-success bg-opacity-10 p-2 rounded-circle" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
-                <i class="fa-solid fa-briefcase fa-2x" style="color: #22c55e;"></i>
-            </div>
-            <p class="small fw-bold mb-0 mt-2">Karyera</p>
-            <small class="text-muted">Ishga joylashish</small>
-        </div>
-    </div>
-    <hr class="my-3">
-    <p class="small text-muted mb-0">
-        <i class="fa-solid fa-star me-1 text-warning"></i> 
-        {{ __('messages.python_certificate_text') }}
-    </p>
-</div>
+                    <div class="mt-2 px-2">
+                        <div class="benefit-item">
+                            <span class="benefit-icon">✨</span>
+                            <p class="benefit-text">Kursni tamomlagach, rasmiy sertifikat bilan taqdirlanasiz</p>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <span class="benefit-icon">🎧</span>
+                            <p class="benefit-text">24/7 mentor yordami va amaliy loyihalar</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
