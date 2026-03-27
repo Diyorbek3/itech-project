@@ -4,104 +4,121 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
-    <title>{{ __('messages.sign_in') }} | ITech Academy</title>
+
+    <title>{{ __('messages.log_in') }} | ITech Academy</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         body {
-    /* Rasmni asset orqali chaqiramiz va ustiga xira qora qatlam beramiz */
-    background: linear-gradient(rgba(13, 17, 23, 0.7), rgba(13, 17, 23, 0.7)), 
-                url('{{ asset('images/AP2.jpg') }}');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Rasm qotib turishi uchun */
-    
-    color: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-}
+            background: linear-gradient(rgba(13, 17, 23, 0.7), rgba(13, 17, 23, 0.7)), 
+                        url('{{ asset('images/AP2.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
         .login-container {
             width: 100%;
-            max-width: 340px;
+            max-width: 360px;
+            z-index: 10;
+            text-align: center;
         }
         .brand-logo {
             display: block;
-            margin: 0 auto 25px;
-            width: 60px;
+            margin: 0 auto 15px;
+            width: 75px;
             border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
         .login-card {
-            background-color: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            padding: 20px;
+            background: none;
+            border: none;
+            padding: 10px;
+            text-align: left;
         }
         .form-label {
+            color: #ffffff !important;
             font-size: 14px;
+            margin-bottom: 5px;
             display: block;
-            margin-bottom: 8px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            font-weight: 500;
         }
         .form-control {
-            background-color: #0d1117 !important;
-            border: 1px solid #30363d !important;
+            background-color: rgba(13, 17, 23, 0.7) !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
             color: #ffffff !important;
-            padding: 5px 12px;
+            height: 40px;
             font-size: 14px;
             border-radius: 6px;
+            transition: 0.2s;
         }
         .form-control:focus {
+            background-color: rgba(13, 17, 23, 0.9) !important;
             border-color: #58a6ff !important;
             box-shadow: 0 0 0 3px rgba(31, 111, 235, 0.3) !important;
             outline: none;
         }
-        /* Xato bo'lganda input qizil bo'lishi uchun */
-        .form-control.is-invalid {
-            border-color: #f85149 !important;
-        }
         .btn-login-style {
             background-color: #238636;
-            color: white;
+            color: #ffffff;
             width: 100%;
-            border: 1px solid rgba(240, 246, 252, 0.1);
+            padding: 10px;
+            border: none;
             border-radius: 6px;
-            padding: 8px;
             font-weight: 600;
             margin-top: 15px;
             cursor: pointer;
+            transition: all 0.2s;
         }
         .btn-login-style:hover {
             background-color: #2ea043;
+            transform: translateY(-1px);
         }
-        .signup-callout {
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            padding: 15px;
+        .register-callout {
+            margin-top: 20px;
             text-align: center;
-            margin-top: 15px;
             font-size: 14px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
         }
-        .signup-callout a {
+        .register-callout a {
             color: #58a6ff;
             text-decoration: none;
+            font-weight: 600;
         }
-        .forgot-password {
-            float: right;
-            font-size: 12px;
-            color: #58a6ff;
-            text-decoration: none;
+        h3 {
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
+            margin-bottom: 15px;
+            font-size: 24px;
+            font-weight: 300;
         }
-        .error-text {
-            color: #f85149;
-            font-size: 12px;
-            margin-top: 4px;
-            display: block;
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8b949e;
+            cursor: pointer;
+            z-index: 20;
+        }
+        .position-relative {
+            position: relative;
+        }
+        .swal2-popup {
+            border-radius: 16px !important;
+        }
+        .swal2-timer-progress-bar {
+            background: #f85149 !important;
         }
     </style>
 </head>
@@ -112,58 +129,125 @@
         <img src="{{ asset('images/logo.png') }}" alt="Logo" class="brand-logo">
     </a>
     
-    <h3 class="text-center fw-light mb-3" style="font-size: 24px;">{{ __('messages.sign_in') }}</h3>
+    <h3>{{ __('messages.log_in') }}</h3>
 
     <div class="login-card">
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('login') }}" id="loginForm">
             @csrf
-            
-            <div class="mb-3">
+
+            <div>
                 <label class="form-label">{{ __('messages.email_address') }}</label>
-                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" 
-                       value="{{ old('email') }}" required autofocus>
-                @error('email')
-                    <span class="error-text">{{ $message }}</span>
-                @enderror
+                <input type="email" name="email" id="email" class="form-control" 
+                       placeholder="example@gmail.com" value="{{ old('email') }}" required>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label">
-                    {{ __('messages.password') }}
-                    @if (Route::has('password.request'))
-                        <a class="forgot-password" href="{{ route('password.request') }}">{{ __('messages.forgot_password') }}</a>
-                    @endif
-                </label>
-                <div style="position: relative;">
-                    <input type="password" id="login-password" name="password" 
-                           class="form-control @error('password') is-invalid @enderror" required>
-                    <i class="fas fa-eye" id="toggle-login-password" 
-                       style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #58a6ff;"></i>
+            <div class="mt-3">
+                <label class="form-label">{{ __('messages.password') }}</label>
+                <div class="position-relative">
+                    <input type="password" id="password" name="password" class="form-control" 
+                           placeholder="••••••••" required>
+                    <i class="fas fa-eye toggle-password" data-target="password"></i>
                 </div>
-                @error('password')
-                    <span class="error-text">{{ $message }}</span>
-                @enderror
             </div>
 
-            <button type="submit" class="btn btn-login-style">{{ __('messages.log_in') }}</button>
+            <div class="mt-2 text-end">
+                <a href="{{ route('password.request') }}" style="color: #58a6ff; font-size: 12px; text-decoration: none;">
+                    {{ __('messages.forgot_password') }}?
+                </a>
+            </div>
+
+            <button type="submit" class="btn btn-login-style">
+                {{ __('messages.log_in') }}
+            </button>
         </form>
     </div>
 
-    <div class="signup-callout">
-        {{ __('messages.new_to_academy') }} <a href="{{ route('register') }}">{{ __('messages.create_account') }} →</a>
+    <div class="register-callout">
+        {{ __('messages.new_to_academy') }} <a href="{{ route('register') }}">→ {{ __('messages.sign_up') }}</a>
     </div>
 </div>
 
 <script>
-    const togglePassword = document.querySelector('#toggle-login-password');
-    const password = document.querySelector('#login-password');
-
-    togglePassword.addEventListener('click', function () {
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
-        this.classList.toggle('fa-eye-slash');
-        this.classList.toggle('fa-eye');
+    document.querySelectorAll('.toggle-password').forEach(icon => {
+        icon.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-target');
+            const input = document.getElementById(targetId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
+            }
+        });
     });
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        let errors = [];
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        
+        if (email === '') {
+            errors.push('Email manzilini kiriting');
+        } else if (!email.includes('@')) {
+            errors.push('Email manzilida "@" belgisi bo\'lishi kerak');
+        } else if (!email.includes('.')) {
+            errors.push('Email manzilida "." belgisi bo\'lishi kerak');
+        } else if (email.includes('@')) {
+            const domain = email.split('@')[1];
+            if (domain !== 'gmail.com') {
+                errors.push('Faqat Gmail manzilidan foydalaning! (example@gmail.com)');
+            }
+        }
+        
+        if (password === '') {
+            errors.push('Parolni kiriting');
+        } else if (password.length < 8) {
+            errors.push('Parol kamida 8 ta belgidan iborat bo\'lishi kerak');
+        }
+        
+        if (errors.length > 0) {
+            Swal.fire({
+                title: 'Xatolik!',
+                html: errors.map(err => `• ${err}`).join('<br>'),
+                icon: 'error',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 5000,
+                timerProgressBar: true,
+                background: '#1e1e2e',
+                color: '#fff',
+                iconColor: '#f85149'
+            });
+        } else {
+            this.submit();
+        }
+    });
+    
+    @if($errors->any())
+        let serverErrors = [];
+        @foreach($errors->all() as $error)
+            serverErrors.push('{{ $error }}');
+        @endforeach
+        Swal.fire({
+            title: 'Kirishda xatolik!',
+            html: serverErrors.map(err => `• ${err}`).join('<br>'),
+            icon: 'error',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true,
+            background: '#1e1e2e',
+            color: '#fff',
+            iconColor: '#f85149'
+        });
+    @endif
 </script>
 
 </body>

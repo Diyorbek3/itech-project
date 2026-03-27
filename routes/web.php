@@ -39,6 +39,16 @@ Route::get('/courses/cybersecurity', [CourceController::class, 'cybersecurity'])
 Route::get('/courses/computer-literacy', [CourceController::class, 'computerLiteracy'])->name('courses.computer_literacy');
 Route::get('/courses/ai-developer', [CourceController::class, 'aiDeveloper'])->name('courses.ai_developer');
 
+// ========== YANGI QO'SHILGAN KURSLAR ==========
+Route::get('/courses/algorithm', [CourceController::class, 'algorithm'])->name('courses.algorithm');
+Route::get('/courses/office', [CourceController::class, 'office'])->name('courses.office');
+Route::get('/courses/robotics', [CourceController::class, 'robotics'])->name('courses.robotics');
+Route::get('/courses/digital-kids', [CourceController::class, 'digitalKids'])->name('courses.digital_kids');
+Route::get('/courses/system-engineering', [CourceController::class, 'systemEngineering'])->name('courses.system_engineering');
+Route::get('/courses/devops', [CourceController::class, 'devops'])->name('courses.devops');
+Route::get('/courses/data-analytics', [CourceController::class, 'dataAnalytics'])->name('courses.data_analytics');
+Route::get('/courses/network-admin', [CourceController::class, 'networkAdmin'])->name('courses.network_admin');
+
 // 5. Career route
 Route::get('/career', [CareerController::class, 'index'])->name('career.index');
 
