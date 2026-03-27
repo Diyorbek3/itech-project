@@ -78,9 +78,28 @@
             outline: none;
         }
         .btn-register-style {
-        .is-invalid {
-            border-color: #f85149 !important;
+            background-color: #2ea44f; /* Yashil rang (yoki o'zingizga ma'qul rang) */
+            color: white !important;   /* Matn rangi oq bo'lishi uchun */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;               /* Formaga mos tushishi uchun */
+            margin-top: 20px;
+            display: block;
+            text-align: center;
+            transition: 0.3s;
         }
+
+        .btn-register-style:hover {
+    background-color: #2c974b; /* Sichqoncha borgandagi rangi */
+        }
+
+/* Xatolik holati uchun siz yozgan qism */
+.btn-register-style.is-invalid {
+    border: 2px solid #f85149 !important;
+}
         .error-message {
             color: #f85149;
             font-size: 12px;
@@ -180,8 +199,8 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-register-style">
-                {{ __('messages.sign_up') }}
+            <button type="submit" class="btn-register-style">
+                Ro'yxatdan o'tish
             </button>
         </form>
     </div>
