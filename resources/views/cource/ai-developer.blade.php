@@ -40,6 +40,24 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
+    .benefit-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 15px;
+        text-align: left;
+    }
+    .benefit-icon {
+        font-size: 1.3rem;
+        flex-shrink: 0;
+    }
+    .benefit-text {
+        font-size: 0.9rem;
+        color: #475569;
+        line-height: 1.4;
+        font-weight: 500;
+        margin-bottom: 0;
+    }
 </style>
 @endsection
 
@@ -109,7 +127,48 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="bg-light p-4 rounded-4 border-start border-primary border-4"><h4 class="fw-bold">{{ __('messages.ai_for_whom_title') }}</h4><p class="text-secondary mb-0 fs-5">{{ __('messages.ai_for_whom_desc') }}</p></div>
         </div>
         <div class="col-lg-4">
-            <div class="card sticky-price-card shadow-lg rounded-5 p-3"><div class="card-body"><h5 class="fw-bold mb-4 text-center">{{ __('messages.ai_card_title') }}</h5><div class="d-flex align-items-center mb-3"><i class="fa-solid fa-calendar-day text-primary me-3 fs-4"></i><div><small class="text-muted d-block">{{ __('messages.ai_duration_label') }}</small><span class="fw-bold">{{ __('messages.ai_duration_value') }}</span></div></div><div class="d-flex align-items-center mb-3"><i class="fa-solid fa-user-tie text-primary me-3 fs-4"></i><div><small class="text-muted d-block">{{ __('messages.ai_mentor_label') }}</small><span class="fw-bold">{{ __('messages.ai_mentor_value') }}</span></div></div><hr><div class="text-center mb-4"><h6 class="text-muted text-decoration-line-through mb-1">{{ __('messages.ai_old_price') }}</h6><h2 class="fw-bold text-primary mb-0">{{ __('messages.ai_new_price') }} <small class="fs-6">{{ __('messages.ai_price_period') }}</small></h2></div><a href="{{ url('/#contact') }}" class="btn btn-primary btn-lg w-100 rounded-pill py-3 shadow fw-bold mb-3"><i class="fa-solid fa-bolt me-2"></i> {{ __('messages.ai_enroll_button') }}</a><p class="text-center small text-muted mb-0"><i class="fa-solid fa-shield-halved me-1 text-success"></i> {{ __('messages.ai_certificate_text') }}</p></div></div>
+            <div class="card sticky-price-card shadow-lg rounded-5 p-3">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-4 text-center">{{ __('messages.ai_card_title') }}</h5>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fa-solid fa-calendar-day text-primary me-3 fs-4"></i>
+                        <div>
+                            <small class="text-muted d-block">{{ __('messages.ai_duration_label') }}</small>
+                            <span class="fw-bold">{{ __('messages.ai_duration_value') }}</span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fa-solid fa-user-tie text-primary me-3 fs-4"></i>
+                        <div>
+                            <small class="text-muted d-block">{{ __('messages.ai_mentor_label') }}</small>
+                            <span class="fw-bold">{{ __('messages.ai_mentor_value') }}</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="text-center mb-4">
+                        <h6 class="text-muted text-decoration-line-through mb-1">{{ __('messages.ai_old_price') }}</h6>
+                        <h2 class="fw-bold text-primary mb-0">{{ __('messages.ai_new_price') }} <small class="fs-6">{{ __('messages.ai_price_period') }}</small></h2>
+                    </div>
+                    <a href="{{ url('/#contact') }}" class="btn btn-primary btn-lg w-100 rounded-pill py-3 shadow fw-bold mb-4">
+                        <i class="fa-solid fa-bolt me-2"></i> {{ __('messages.ai_enroll_button') }}
+                    </a>
+                    
+                    <div class="mt-2 px-2">
+                        <div class="benefit-item">
+                            <span class="benefit-icon">🤖</span>
+                            <p class="benefit-text">Kursni tamomlagach, rasmiy sertifikat bilan taqdirlanasiz</p>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">🚀</span>
+                            <p class="benefit-text">24/7 mentor yordami va amaliy loyihalar</p>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">🧠</span>
+                            <p class="benefit-text">Zamonaviy AI texnologiyalari asosida o'qitish</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
