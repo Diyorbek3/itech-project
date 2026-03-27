@@ -377,4 +377,20 @@ return [
 'your_name' => 'Ismingiz',
 'your_phone' => 'Telefon raqamingiz',
 'months' => 'oy',
+
+    // ... oldingi kalitlar ...
+    
+    // ==================== ALGORITM KURSI ====================
+    'algorithm_badge' => 'Algoritm',
+    'algorithm_title' => 'Algoritm asoslari',
+    'algorithm_description' => 'Dasturlash algoritmlari va ma\'lumotlar tuzilmalari. Samarali kod yozish, muammolarni yechish usullari.',
+    'algorithm_full_desc' => 'Algoritm asoslari kursida siz dasturlash algoritmlari, ma\'lumotlar tuzilmalari, muammolarni samarali yechish usullarini o\'rganasiz. Bu kurs dasturchi bo\'lish yo\'lidagi eng muhim qadamlardan biridir.',
+    'algorithm_duration' => '4 oy',
+    'algorithm_price' => '720,000 so\'m',
+    'algorithm_old_price' => '820,000 so\'m',
+    'algorithm_teacher' => 'Saparaliyev Sharifjon',
+    'algorithm_teacher_position' => 'Algoritmika bo\'yicha ekspert',
+    'algorithm_for_who' => 'Dasturlashni o\'rganayotganlar, IT sohasiga kirishni xohlovchilar, mantiqiy fikrlashni rivojlantirmoqchi bo\'lganlar, dasturlash intervyulariga tayyorlanayotganlar.',
+
+
 ];

@@ -210,22 +210,23 @@
 
 @section('content')
 <div class="container py-4 py-md-5">
+    <!-- Hero Section -->
     <div class="course-hero">
         <div class="row align-items-center">
             <div class="col-lg-8">
                 <span class="course-badge">
-                    <i class="fas fa-graduation-cap me-2"></i> Backend Development
+                    <i class="fas fa-graduation-cap me-2"></i> {{ $course['badge'] ?? 'Professional kurs' }}
                 </span>
-                <h1 class="course-title">Backend Dasturchi</h1>
-                <p class="course-description">PHP, Laravel va MySQL bilan server tomon dasturlashni o'rganing. API, ma'lumotlar bazasi va autentifikatsiya kabi muhim mavzularni amaliy loyihalar bilan mustahkamlang.</p>
+                <h1 class="course-title">{{ $course['name'] }}</h1>
+                <p class="course-description">{{ $course['description'] }}</p>
                 <div class="d-flex gap-3 flex-wrap">
                     <div class="d-flex align-items-center gap-2">
                         <i class="fas fa-clock text-primary"></i>
-                        <span>5 oy</span>
+                        <span>{{ $course['duration'] }} oy</span>
                     </div>
                     <div class="d-flex align-items-center gap-2">
                         <i class="fas fa-users text-primary"></i>
-                        <span>200+ talaba</span>
+                        <span>{{ $course['students'] ?? '100' }}+ talaba</span>
                     </div>
                     <div class="d-flex align-items-center gap-2">
                         <i class="fas fa-certificate text-primary"></i>
@@ -234,79 +235,50 @@
                 </div>
             </div>
             <div class="col-lg-4 text-center d-none d-lg-block">
-                <i class="fas fa-server" style="font-size: 100px; color: rgba(59,130,246,0.5);"></i>
+                <i class="fas {{ $course['icon'] }}" style="font-size: 100px; color: rgba(59,130,246,0.5);"></i>
             </div>
         </div>
     </div>
     
     <div class="row g-4">
+        <!-- Main Content -->
         <div class="col-lg-8">
             <div class="info-card">
                 <h3 class="fw-bold mb-3">📖 Kurs haqida</h3>
-                <p class="text-secondary">Backend dasturchi kursida siz PHP dasturlash tilini, Laravel frameworkini, MySQL ma'lumotlar bazasini va REST API yaratishni o'rganasiz. Kurs davomida real loyihalar ustida ishlaysiz va bitiruv portfoliyo tayyorlaysiz.</p>
+                <p class="text-secondary">{{ $course['full_description'] }}</p>
             </div>
             
             <div class="info-card">
                 <h3 class="fw-bold mb-3">📚 O'quv dasturi</h3>
                 <div class="row g-2">
+                    @foreach($course['modules'] as $module)
                     <div class="col-md-6">
                         <div class="skill-item">
-                            <div class="skill-check"><i class="fas fa-check"></i></div>
+                            <div class="skill-check">
+                                <i class="fas fa-check"></i>
+                            </div>
                             <div>
-                                <div class="skill-title">PHP asoslari va OOP</div>
-                                <div class="skill-desc">PHP sintaksisi, obyektga yo'naltirilgan dasturlash</div>
+                                <div class="skill-title">{{ $module['title'] }}</div>
+                                <div class="skill-desc">{{ $module['desc'] }}</div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="skill-item">
-                            <div class="skill-check"><i class="fas fa-check"></i></div>
-                            <div>
-                                <div class="skill-title">Laravel Framework</div>
-                                <div class="skill-desc">Eloquent ORM, Blade, Middleware, Service Provider</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="skill-item">
-                            <div class="skill-check"><i class="fas fa-check"></i></div>
-                            <div>
-                                <div class="skill-title">MySQL va ma'lumotlar bazasi</div>
-                                <div class="skill-desc">Murakkab so'rovlar, indekslash, optimizatsiya</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="skill-item">
-                            <div class="skill-check"><i class="fas fa-check"></i></div>
-                            <div>
-                                <div class="skill-title">RESTful API yaratish</div>
-                                <div class="skill-desc">API dizayn, autentifikatsiya, API resurslari</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="skill-item">
-                            <div class="skill-check"><i class="fas fa-check"></i></div>
-                            <div>
-                                <div class="skill-title">Deployment va DevOps</div>
-                                <div class="skill-desc">Git, CI/CD, server sozlamalari</div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
             
             <div class="info-card">
                 <h3 class="fw-bold mb-3">👨‍💻 Kimlar uchun?</h3>
-                <p class="text-secondary">Frontend dasturchilar, yangi boshlovchilar, o'z bilimini mustahkamoqchi bo'lgan dasturchilar va backend sohasiga kirishni xohlovchilar uchun.</p>
+                <p class="text-secondary">{{ $course['target_audience'] }}</p>
             </div>
             
             <div class="teacher-card">
-                <div class="teacher-avatar"><i class="fas fa-chalkboard-user"></i></div>
+                <div class="teacher-avatar">
+                    <i class="fas fa-chalkboard-user"></i>
+                </div>
                 <div>
-                    <div class="teacher-name">Ergashev Sardor, Madiyarov Bilol</div>
-                    <div class="teacher-position">Senior Backend Developer</div>
+                    <div class="teacher-name">{{ $course['teacher'] }}</div>
+                    <div class="teacher-position">{{ $course['teacher_position'] }}</div>
                 </div>
             </div>
         </div>
@@ -314,47 +286,55 @@
         <div class="col-lg-4">
             <div class="price-card">
                 <div class="text-center mb-3">
-                    <span class="price-old">750,000 so'm</span>
-                    <div class="price-new">600,000 so'm</div>
-                    <span class="price-period">/ oy</span>
+                    @if(isset($course['old_price']))
+                        <span class="price-old">{{ $course['old_price'] }}</span>
+                    @endif
+                    <div class="price-new">{{ $course['price'] }}</div>
+                    <span class="price-period">{{ $course['price_period'] }}</span>
                 </div>
+                
                 <hr>
+                
                 <div class="mb-3">
                     <div class="d-flex justify-content-between mb-2">
                         <span><i class="fas fa-clock me-2 text-primary"></i> Davomiyligi</span>
-                        <span class="fw-bold">5 oy</span>
+                        <span class="fw-bold">{{ $course['duration'] }} oy</span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
                         <span><i class="fas fa-calendar me-2 text-primary"></i> Darslar</span>
-                        <span class="fw-bold">Haftada 3 kun</span>
+                        <span class="fw-bold">{{ $course['schedule'] ?? 'Haftada 3 kun' }}</span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
                         <span><i class="fas fa-language me-2 text-primary"></i> Til</span>
-                        <span class="fw-bold">O'zbek tilida</span>
+                        <span class="fw-bold">{{ $course['language'] }}</span>
                     </div>
                     <div class="d-flex justify-content-between">
                         <span><i class="fas fa-certificate me-2 text-primary"></i> Sertifikat</span>
                         <span class="fw-bold">✓ Bor</span>
                     </div>
                 </div>
+                
                 <hr>
+                
                 <button class="btn btn-enroll text-white" data-bs-toggle="modal" data-bs-target="#enrollModal">
                     <i class="fas fa-bolt me-2"></i> Hoziroq yozilish
                 </button>
+                
                 <div class="text-center mt-3">
-                    <small class="text-muted"><i class="fas fa-headset me-1"></i> 24/7 mentor yordami</small>
+                    <small class="text-muted">
+                        <i class="fas fa-headset me-1"></i> 24/7 mentor yordami
+                    </small>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal -->
 <div class="modal fade" id="enrollModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-4">
             <div class="modal-header border-0">
-                <h5 class="modal-title fw-bold">Backend kursiga yozilish</h5>
+                <h5 class="modal-title fw-bold">{{ $course['name'] }} ga yozilish</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
@@ -380,4 +360,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsectionw

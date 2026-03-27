@@ -31,17 +31,17 @@
         margin-right: 0.5rem;
     }
 
-    /* Karta panjarasi (Grid) - 3 ta ustun */
+    /* Karta panjarasi (Grid) - 4 ta ustun */
     .cards-1 .card-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
     }
 
     /* Har bir karta elementi */
     .cards-1 .card-item {
         background-color: #fff;
-        padding: 2.5rem 1.5rem;
+        padding: 1.5rem 1rem;
         border-radius: 0.5rem;
         text-align: center;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
@@ -49,13 +49,21 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        transition: all 0.3s ease-out;
+        cursor: pointer;
+        height: 100%;
+    }
+
+    .cards-1 .card-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }
 
     /* Belgilar qutisi (Icon box) */
     .cards-1 .icon-box {
-        width: 80px;
-        height: 80px;
-        margin-bottom: 1.5rem;
+        width: 70px;
+        height: 70px;
+        margin-bottom: 1rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -71,19 +79,19 @@
     /* Karta sarlavhasi */
     .cards-1 .card-title {
         margin-bottom: 0;
-        font-size: 1.125rem;
-        line-height: 1.5rem;
-    }
-
-    .cards-1 .card-item {
-        transition: all 0.3s ease-out;
-    }
-
-    .cards-1 .card-item:hover {
-        transform: scale(1.05);
+        font-size: 0.9rem;
+        line-height: 1.3rem;
+        font-weight: 600;
+        color: #1e293b;
     }
 
     /* Kichik ekranlar uchun moslashuvchanlik */
+    @media (max-width: 1200px) {
+        .cards-1 .card-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
     @media (max-width: 991px) {
         .cards-1 .card-grid {
             grid-template-columns: repeat(2, 1fr);
@@ -255,55 +263,11 @@
         justify-content: space-between;
     }
 
-    /* Стили для ссылок карточек */
     .card-link {
         text-decoration: none;
         color: inherit;
         display: block;
         cursor: pointer;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card-link:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-
-    .card-item {
-        background: #fff;
-        border-radius: 8px;
-        padding: 20px;
-        text-align: center;
-        height: 100%;
-    }
-
-    .icon-box {
-        margin-bottom: 15px;
-    }
-
-    .icon-box img {
-        width: 80px;
-        height: 80px;
-        object-fit: contain;
-        cursor: pointer;
-    }
-
-    .card-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-    }
-
-    @media (max-width: 768px) {
-        .card-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (max-width: 480px) {
-        .card-grid {
-            grid-template-columns: 1fr;
-        }
     }
 </style>
 @endsection
@@ -474,7 +438,7 @@
     </div>
 </div>
 
-<!-- Services / Courses -->
+<!-- Services / Courses - 12 TA KURS -->
 <div id="services" class="cards-1 bg-gray">
     <div class="container">
         <div class="row align-items-start">
@@ -501,57 +465,135 @@
             </div>
             <div class="col-lg-7">
                 <div class="card-grid">
-                    <a href="{{ route('courses.python') }}" class="card-link">
+                    <!-- 1. Ofis menejerligi -->
+                    <a href="#" class="card-link">
                         <div class="card-item">
                             <div class="icon-box">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1280px-Python-logo-notext.svg.png" alt="Python logo">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2721/2721292.png" alt="Ofis menejerligi">
                             </div>
-                            <h5 class="card-title">{{ __('messages.python') }}</h5>
+                            <h5 class="card-title">Ofis menejerligi</h5>
                         </div>
                     </a>
 
-                    <a href="/courses/computer-literacy" class="card-link">
+                    <!-- 2. Algoritm asoslari -->
+                    <a href="{{ route('courses.algorithm') }}" class="card-link">   <!-- <-- BU QATORNI TO'G'RILANG -->
                         <div class="card-item">
                             <div class="icon-box">
-                                <img src="https://img.freepik.com/premium-vector/digital-precision-designing-modern-computer-logos-innovative-tech-branding_579306-22156.jpg?semt=ais_rp_50_assets&w=740&q=80" alt="Computer literacy logo">
+                                <img src="https://cdn-icons-png.flaticon.com/512/1995/1995530.png" alt="Algoritm">
                             </div>
-                            <h5 class="card-title">{{ __('messages.computer_literacy') }}</h5>
+                            <h5 class="card-title">Algoritm asoslari</h5>
                         </div>
                     </a>
 
+                    <!-- 3. Frontend -->
                     <a href="{{ route('courses.frontend') }}" class="card-link">
                         <div class="card-item">
                             <div class="icon-box">
-                                <img src="https://us.123rf.com/450wm/dxinerz/dxinerz1601/dxinerz160103363/51258851-code-seo-web-symbol-vektor-bild-kann-auch-f%C3%BCr-seo-und-entwicklungsdienste-verwendet-werden.jpg?ver=6" alt="Frontend development logo">
+                                <img src="https://us.123rf.com/450wm/dxinerz/dxinerz1601/dxinerz160103363/51258851-code-seo-web-symbol-vektor-bild-kann-auch-f%C3%BCr-seo-und-entwicklungsdienste-verwendet-werden.jpg?ver=6" alt="Frontend">
                             </div>
-                            <h5 class="card-title">{{ __('messages.frontend') }}</h5>
+                            <h5 class="card-title">Frontend</h5>
                         </div>
                     </a>
 
-                    <a href="/courses/backend" class="card-link">
+
+                    <!-- 1. Ofis menejerligi -->
+<a href="/courses/office" class="card-link">
+    <div class="card-item">
+        <div class="icon-box">
+            <img src="https://cdn-icons-png.flaticon.com/512/2721/2721292.png" alt="Ofis menejerligi">
+        </div>
+        <h5 class="card-title">Ofis menejerligi</h5>
+    </div>
+</a>
+
+
+                    <!-- 4. Backend -->
+                    <a href="{{ route('courses.backend') }}" class="card-link">
                         <div class="card-item">
                             <div class="icon-box">
-                                <img src="https://www.shutterstock.com/image-vector/backend-developer-icon-mixed-vector-600nw-2655399835.jpg" alt="Backend development logo">
+                                <img src="https://www.shutterstock.com/image-vector/backend-developer-icon-mixed-vector-600nw-2655399835.jpg" alt="Backend">
                             </div>
-                            <h5 class="card-title">{{ __('messages.backend') }}</h5>
+                            <h5 class="card-title">Backend</h5>
                         </div>
                     </a>
 
-                    <a href="/courses/cybersecurity" class="card-link">
+                    <!-- 5. Python -->
+                    <a href="{{ route('courses.python') }}" class="card-link">
                         <div class="card-item">
                             <div class="icon-box">
-                                <img src="https://img.icons8.com/sci-fi/1200/cyber-security.jpg" alt="Cybersecurity logo">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1280px-Python-logo-notext.svg.png" alt="Python">
                             </div>
-                            <h5 class="card-title">{{ __('messages.cybersecurity') }}</h5>
+                            <h5 class="card-title">Python</h5>
                         </div>
                     </a>
 
-                    <a href="/courses/ai-developer" class="card-link">
+                    <!-- 6. Robototexnika -->
+                    <a href="#" class="card-link">
                         <div class="card-item">
                             <div class="icon-box">
-                                <img src="https://www.nicepng.com/png/full/962-9625201_ai-developer-bootcamp-circle.png" alt="AI Developer logo">
+                                <img src="https://cdn-icons-png.flaticon.com/512/1998/1998178.png" alt="Robototexnika">
                             </div>
-                            <h5 class="card-title">{{ __('messages.ai_developer') }}</h5>
+                            <h5 class="card-title">Robototexnika</h5>
+                        </div>
+                    </a>
+
+                    <!-- 7. Raqamli bolalar -->
+                    <a href="#" class="card-link">
+                        <div class="card-item">
+                            <div class="icon-box">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3688/3688127.png" alt="Raqamli bolalar">
+                            </div>
+                            <h5 class="card-title">Raqamli bolalar</h5>
+                        </div>
+                    </a>
+
+                    <!-- 8. Tizim muhandisligi -->
+                    <a href="#" class="card-link">
+                        <div class="card-item">
+                            <div class="icon-box">
+                                <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="Tizim muhandisligi">
+                            </div>
+                            <h5 class="card-title">Tizim muhandisligi</h5>
+                        </div>
+                    </a>
+
+                    <!-- 9. DevOps asoslari -->
+                    <a href="#" class="card-link">
+                        <div class="card-item">
+                            <div class="icon-box">
+                                <img src="https://cdn-icons-png.flaticon.com/512/919/919851.png" alt="DevOps">
+                            </div>
+                            <h5 class="card-title">DevOps asoslari</h5>
+                        </div>
+                    </a>
+
+                    <!-- 10. Data analitika -->
+                    <a href="#" class="card-link">
+                        <div class="card-item">
+                            <div class="icon-box">
+                                <img src="https://cdn-icons-png.flaticon.com/512/1055/1055685.png" alt="Data analitika">
+                            </div>
+                            <h5 class="card-title">Data analitika</h5>
+                        </div>
+                    </a>
+
+                    <!-- 11. Tarmoq administratorligi -->
+                    <a href="#" class="card-link">
+                        <div class="card-item">
+                            <div class="icon-box">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2240/2240419.png" alt="Tarmoq">
+                            </div>
+                            <h5 class="card-title">Tarmoq administratorligi</h5>
+                        </div>
+                    </a>
+
+                    <!-- 12. Buxgalteriya -->
+                    <a href="#" class="card-link">
+                        <div class="card-item">
+                            <div class="icon-box">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2331/2331966.png" alt="Buxgalteriya">
+                            </div>
+                            <h5 class="card-title">Buxgalteriya</h5>
                         </div>
                     </a>
                 </div>

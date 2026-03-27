@@ -10,7 +10,6 @@
         position: relative;
         overflow: hidden;
     }
-    
     .course-hero::before {
         content: '';
         position: absolute;
@@ -22,12 +21,10 @@
         background-size: 50px 50px;
         animation: moveGrid 20s linear infinite;
     }
-    
     @keyframes moveGrid {
         0% { transform: translate(0, 0); }
         100% { transform: translate(50px, 50px); }
     }
-    
     .course-badge {
         display: inline-block;
         background: rgba(59,130,246,0.2);
@@ -39,21 +36,18 @@
         color: #3b82f6;
         margin-bottom: 1rem;
     }
-    
     .course-title {
         font-size: 2.5rem;
         font-weight: 800;
         margin-bottom: 1rem;
         color: white;
     }
-    
     .course-description {
         font-size: 1rem;
         color: rgba(255,255,255,0.8);
         line-height: 1.6;
         margin-bottom: 1.5rem;
     }
-    
     .info-card {
         background: white;
         border-radius: 20px;
@@ -62,12 +56,10 @@
         box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         transition: all 0.3s ease;
     }
-    
     .info-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 15px 30px rgba(0,0,0,0.1);
     }
-    
     .price-card {
         background: white;
         border-radius: 24px;
@@ -77,24 +69,20 @@
         box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
         border: 1px solid rgba(59,130,246,0.2);
     }
-    
     .price-old {
         font-size: 0.9rem;
         color: #94a3b8;
         text-decoration: line-through;
     }
-    
     .price-new {
         font-size: 2rem;
         font-weight: 800;
         color: #3b82f6;
     }
-    
     .price-period {
         font-size: 0.8rem;
         color: #64748b;
     }
-    
     .btn-enroll {
         background: linear-gradient(135deg, #3b82f6, #2563eb);
         border: none;
@@ -106,12 +94,10 @@
         margin-top: 1.5rem;
         transition: all 0.3s ease;
     }
-    
     .btn-enroll:hover {
         transform: translateY(-2px);
         box-shadow: 0 10px 25px rgba(59,130,246,0.4);
     }
-    
     .skill-item {
         display: flex;
         align-items: flex-start;
@@ -122,12 +108,10 @@
         margin-bottom: 0.75rem;
         transition: all 0.3s ease;
     }
-    
     .skill-item:hover {
         background: #f1f5f9;
         transform: translateX(5px);
     }
-    
     .skill-check {
         width: 28px;
         height: 28px;
@@ -140,19 +124,16 @@
         font-size: 0.7rem;
         flex-shrink: 0;
     }
-    
     .skill-title {
         font-weight: 700;
         color: #0f172a;
         margin-bottom: 0.25rem;
         font-size: 0.95rem;
     }
-    
     .skill-desc {
         font-size: 0.75rem;
         color: #64748b;
     }
-    
     .teacher-card {
         background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
         border-radius: 20px;
@@ -162,7 +143,6 @@
         gap: 1rem;
         margin-top: 1.5rem;
     }
-    
     .teacher-avatar {
         width: 60px;
         height: 60px;
@@ -175,35 +155,22 @@
         color: white;
         flex-shrink: 0;
     }
-    
     .teacher-name {
         font-weight: 700;
         font-size: 1rem;
         color: #0f172a;
     }
-    
     .teacher-position {
         font-size: 0.75rem;
         color: #64748b;
     }
-    
     @media (max-width: 991px) {
-        .course-title {
-            font-size: 1.8rem;
-        }
-        .price-card {
-            position: relative;
-            margin-top: 2rem;
-        }
+        .course-title { font-size: 1.8rem; }
+        .price-card { position: relative; margin-top: 2rem; }
     }
-    
     @media (max-width: 768px) {
-        .course-hero {
-            padding: 1.5rem;
-        }
-        .course-title {
-            font-size: 1.5rem;
-        }
+        .course-hero { padding: 1.5rem; }
+        .course-title { font-size: 1.5rem; }
     }
 </style>
 @endsection
@@ -213,39 +180,26 @@
     <div class="course-hero">
         <div class="row align-items-center">
             <div class="col-lg-8">
-                <span class="course-badge">
-                    <i class="fas fa-graduation-cap me-2"></i> Backend Development
-                </span>
-                <h1 class="course-title">Backend Dasturchi</h1>
-                <p class="course-description">PHP, Laravel va MySQL bilan server tomon dasturlashni o'rganing. API, ma'lumotlar bazasi va autentifikatsiya kabi muhim mavzularni amaliy loyihalar bilan mustahkamlang.</p>
+                <span class="course-badge"><i class="fas fa-code-branch me-2"></i> Algoritm</span>
+                <h1 class="course-title">Algoritm asoslari</h1>
+                <p class="course-description">Dasturlash algoritmlari va ma'lumotlar tuzilmalari. Samarali kod yozish, muammolarni yechish usullari.</p>
                 <div class="d-flex gap-3 flex-wrap">
-                    <div class="d-flex align-items-center gap-2">
-                        <i class="fas fa-clock text-primary"></i>
-                        <span>5 oy</span>
-                    </div>
-                    <div class="d-flex align-items-center gap-2">
-                        <i class="fas fa-users text-primary"></i>
-                        <span>200+ talaba</span>
-                    </div>
-                    <div class="d-flex align-items-center gap-2">
-                        <i class="fas fa-certificate text-primary"></i>
-                        <span>Sertifikat beriladi</span>
-                    </div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-clock text-primary"></i><span>4 oy</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>120+ talaba</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-certificate text-primary"></i><span>Sertifikat beriladi</span></div>
                 </div>
             </div>
             <div class="col-lg-4 text-center d-none d-lg-block">
-                <i class="fas fa-server" style="font-size: 100px; color: rgba(59,130,246,0.5);"></i>
+                <i class="fas fa-code-branch" style="font-size: 100px; color: rgba(59,130,246,0.5);"></i>
             </div>
         </div>
     </div>
-    
     <div class="row g-4">
         <div class="col-lg-8">
             <div class="info-card">
                 <h3 class="fw-bold mb-3">📖 Kurs haqida</h3>
-                <p class="text-secondary">Backend dasturchi kursida siz PHP dasturlash tilini, Laravel frameworkini, MySQL ma'lumotlar bazasini va REST API yaratishni o'rganasiz. Kurs davomida real loyihalar ustida ishlaysiz va bitiruv portfoliyo tayyorlaysiz.</p>
+                <p class="text-secondary">Algoritm asoslari kursida siz dasturlash algoritmlari, ma'lumotlar tuzilmalari, muammolarni samarali yechish usullarini o'rganasiz. Bu kurs dasturchi bo'lish yo'lidagi eng muhim qadamlardan biridir.</p>
             </div>
-            
             <div class="info-card">
                 <h3 class="fw-bold mb-3">📚 O'quv dasturi</h3>
                 <div class="row g-2">
@@ -253,8 +207,8 @@
                         <div class="skill-item">
                             <div class="skill-check"><i class="fas fa-check"></i></div>
                             <div>
-                                <div class="skill-title">PHP asoslari va OOP</div>
-                                <div class="skill-desc">PHP sintaksisi, obyektga yo'naltirilgan dasturlash</div>
+                                <div class="skill-title">Algoritm tushunchasi</div>
+                                <div class="skill-desc">Algoritm turlari, murakkablik tahlili (Big O notation)</div>
                             </div>
                         </div>
                     </div>
@@ -262,8 +216,8 @@
                         <div class="skill-item">
                             <div class="skill-check"><i class="fas fa-check"></i></div>
                             <div>
-                                <div class="skill-title">Laravel Framework</div>
-                                <div class="skill-desc">Eloquent ORM, Blade, Middleware, Service Provider</div>
+                                <div class="skill-title">Massivlar va ro'yxatlar</div>
+                                <div class="skill-desc">Dinamik massivlar, bog'langan ro'yxatlar</div>
                             </div>
                         </div>
                     </div>
@@ -271,8 +225,8 @@
                         <div class="skill-item">
                             <div class="skill-check"><i class="fas fa-check"></i></div>
                             <div>
-                                <div class="skill-title">MySQL va ma'lumotlar bazasi</div>
-                                <div class="skill-desc">Murakkab so'rovlar, indekslash, optimizatsiya</div>
+                                <div class="skill-title">Qidiruv algoritmlari</div>
+                                <div class="skill-desc">Binary search, linear search, hash table</div>
                             </div>
                         </div>
                     </div>
@@ -280,8 +234,8 @@
                         <div class="skill-item">
                             <div class="skill-check"><i class="fas fa-check"></i></div>
                             <div>
-                                <div class="skill-title">RESTful API yaratish</div>
-                                <div class="skill-desc">API dizayn, autentifikatsiya, API resurslari</div>
+                                <div class="skill-title">Saralash algoritmlari</div>
+                                <div class="skill-desc">Quick sort, Merge sort, Bubble sort, Insertion sort</div>
                             </div>
                         </div>
                     </div>
@@ -289,40 +243,64 @@
                         <div class="skill-item">
                             <div class="skill-check"><i class="fas fa-check"></i></div>
                             <div>
-                                <div class="skill-title">Deployment va DevOps</div>
-                                <div class="skill-desc">Git, CI/CD, server sozlamalari</div>
+                                <div class="skill-title">Stek va navbat</div>
+                                <div class="skill-desc">Stack, Queue, Deque tuzilmalari</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="skill-item">
+                            <div class="skill-check"><i class="fas fa-check"></i></div>
+                            <div>
+                                <div class="skill-title">Daraxtlar</div>
+                                <div class="skill-desc">Binary tree, Binary search tree, AVL tree</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="skill-item">
+                            <div class="skill-check"><i class="fas fa-check"></i></div>
+                            <div>
+                                <div class="skill-title">Graf algoritmlari</div>
+                                <div class="skill-desc">BFS, DFS, Dijkstra, Floyd-Warshall</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="skill-item">
+                            <div class="skill-check"><i class="fas fa-check"></i></div>
+                            <div>
+                                <div class="skill-title">Dinamik dasturlash</div>
+                                <div class="skill-desc">Knapsack, LCS, Fibonacci optimizatsiyasi</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
             <div class="info-card">
                 <h3 class="fw-bold mb-3">👨‍💻 Kimlar uchun?</h3>
-                <p class="text-secondary">Frontend dasturchilar, yangi boshlovchilar, o'z bilimini mustahkamoqchi bo'lgan dasturchilar va backend sohasiga kirishni xohlovchilar uchun.</p>
+                <p class="text-secondary">Dasturlashni o'rganayotganlar, IT sohasiga kirishni xohlovchilar, mantiqiy fikrlashni rivojlantirmoqchi bo'lganlar, dasturlash intervyulariga tayyorlanayotganlar.</p>
             </div>
-            
             <div class="teacher-card">
                 <div class="teacher-avatar"><i class="fas fa-chalkboard-user"></i></div>
                 <div>
-                    <div class="teacher-name">Ergashev Sardor, Madiyarov Bilol</div>
-                    <div class="teacher-position">Senior Backend Developer</div>
+                    <div class="teacher-name">Saparaliyev Sharifjon</div>
+                    <div class="teacher-position">Algoritmika bo'yicha ekspert</div>
                 </div>
             </div>
         </div>
-        
         <div class="col-lg-4">
             <div class="price-card">
                 <div class="text-center mb-3">
-                    <span class="price-old">750,000 so'm</span>
-                    <div class="price-new">600,000 so'm</div>
+                    <span class="price-old">820,000 so'm</span>
+                    <div class="price-new">720,000 so'm</div>
                     <span class="price-period">/ oy</span>
                 </div>
                 <hr>
                 <div class="mb-3">
                     <div class="d-flex justify-content-between mb-2">
                         <span><i class="fas fa-clock me-2 text-primary"></i> Davomiyligi</span>
-                        <span class="fw-bold">5 oy</span>
+                        <span class="fw-bold">4 oy</span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
                         <span><i class="fas fa-calendar me-2 text-primary"></i> Darslar</span>
@@ -349,12 +327,11 @@
     </div>
 </div>
 
-<!-- Modal -->
 <div class="modal fade" id="enrollModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-4">
             <div class="modal-header border-0">
-                <h5 class="modal-title fw-bold">Backend kursiga yozilish</h5>
+                <h5 class="modal-title fw-bold">Algoritm kursiga yozilish</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">

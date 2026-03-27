@@ -39,6 +39,48 @@ class CourceController extends Controller
         return view('cource.ai-developer');
     }
 
+    // ========== YANGI QO'SHILGAN KURSLAR ==========
+    public function algorithm()
+    {
+        return view('cource.algorithm');
+    }
+
+    public function office()
+    {
+        return view('cource.office');
+    }
+
+    public function robotics()
+    {
+        return view('cource.robotics');
+    }
+
+    public function digitalKids()
+    {
+        return view('cource.digital-kids');
+    }
+
+    public function systemEngineering()
+    {
+        return view('cource.system-engineering');
+    }
+
+    public function devops()
+    {
+        return view('cource.devops');
+    }
+
+    public function dataAnalytics()
+    {
+        return view('cource.data-analytics');
+    }
+
+    public function networkAdmin()
+    {
+        return view('cource.network-admin');
+    }
+    // ========== YANGI QO'SHILGAN KURSLAR TUGADI ==========
+
     // ========== QO'SHILGAN METOD ==========
     public function enrollSubmit(Request $request)
     {
