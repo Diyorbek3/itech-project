@@ -194,25 +194,25 @@
     <div class="course-hero">
         <div class="row align-items-center">
             <div class="col-lg-8">
-                <span class="course-badge"><i class="fas fa-server me-2"></i> Backend Development</span>
-                <h1 class="course-title">Backend Dasturchi</h1>
-                <p class="course-description">PHP, Laravel va MySQL bilan server tomon dasturlashni o'rganing. API, ma'lumotlar bazasi va autentifikatsiya kabi muhim mavzularni amaliy loyihalar bilan mustahkamlang.</p>
+                <span class="course-badge"><i class="fas fa-network-wired me-2"></i> Network Administration</span>
+                <h1 class="course-title">Tarmoq administratorligi</h1>
+                <p class="course-description">Cisco, tarmoq protokollari, router va switch sozlash, tarmoq xavfsizligi va monitoring. CCNA asoslari va amaliy ko'nikmalar.</p>
                 <div class="d-flex gap-3 flex-wrap">
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-clock text-primary"></i><span>5 oy</span></div>
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>200+ talaba</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-clock text-primary"></i><span>4 oy</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>90+ talaba</span></div>
                     <div class="d-flex align-items-center gap-2"><i class="fas fa-certificate text-primary"></i><span>Sertifikat beriladi</span></div>
                 </div>
                 <div class="tech-stack">
-                    <span class="tech-badge">PHP</span>
-                    <span class="tech-badge">Laravel</span>
-                    <span class="tech-badge">MySQL</span>
-                    <span class="tech-badge">REST API</span>
-                    <span class="tech-badge">Git</span>
-                    <span class="tech-badge">Postman</span>
+                    <span class="tech-badge">Cisco</span>
+                    <span class="tech-badge">TCP/IP</span>
+                    <span class="tech-badge">Router</span>
+                    <span class="tech-badge">Switch</span>
+                    <span class="tech-badge">Firewall</span>
+                    <span class="tech-badge">Wireshark</span>
                 </div>
             </div>
             <div class="col-lg-4 text-center d-none d-lg-block">
-                <i class="fas fa-server" style="font-size: 100px; color: rgba(59,130,246,0.5);"></i>
+                <i class="fas fa-network-wired" style="font-size: 100px; color: rgba(59,130,246,0.5);"></i>
             </div>
         </div>
     </div>
@@ -220,41 +220,41 @@
         <div class="col-lg-8">
             <div class="info-card">
                 <h3 class="fw-bold mb-3">📖 Kurs haqida</h3>
-                <p class="text-secondary">Backend dasturchi kursida siz PHP dasturlash tilini, Laravel frameworkini, MySQL ma'lumotlar bazasini va REST API yaratishni o'rganasiz. Kurs davomida real loyihalar ustida ishlaysiz va bitiruv portfoliyo tayyorlaysiz.</p>
+                <p class="text-secondary">Tarmoq administratorligi kursida siz tarmoq asoslari, Cisco router va switchlarni sozlash, tarmoq protokollari, tarmoq xavfsizligi va monitoringni o'rganasiz. Kurs yakunida siz CCNA darajasidagi bilimlarga ega bo'lasiz va real tarmoq infratuzilmalarini boshqara olasiz.</p>
             </div>
             <div class="info-card">
                 <h3 class="fw-bold mb-3">📚 O'quv dasturi</h3>
                 <div class="row g-2">
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">PHP asoslari va OOP</div><div class="skill-desc">PHP sintaksisi, obyektga yo'naltirilgan dasturlash, namespace, traitlar</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Laravel Framework</div><div class="skill-desc">Eloquent ORM, Blade, Middleware, Service Provider, Facades</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">MySQL va ma'lumotlar bazasi</div><div class="skill-desc">Murakkab so'rovlar, indekslash, optimizatsiya, normalizatsiya</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">RESTful API yaratish</div><div class="skill-desc">API dizayn, autentifikatsiya (Sanctum/Passport), API resurslari</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Deployment va DevOps</div><div class="skill-desc">Git, CI/CD, server sozlamalari (Forge, Envoyer)</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Xavfsizlik</div><div class="skill-desc">SQL injection, XSS, CSRF himoyasi, autentifikatsiya</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Tarmoq asoslari</div><div class="skill-desc">OSI model, TCP/IP, IP manzillash, subnetting, VLAN</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Cisco router sozlash</div><div class="skill-desc">Static routing, OSPF, EIGRP, BGP asoslari</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Switch sozlash</div><div class="skill-desc">STP, VLAN, trunk, port security, EtherChannel</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Tarmoq xavfsizligi</div><div class="skill-desc">Firewall, ACL, VPN, AAA, 802.1X</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Monitoring va troubleshooting</div><div class="skill-desc">Wireshark, SNMP, syslog, ping, traceroute</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Simulyatsiya</div><div class="skill-desc">Cisco Packet Tracer, GNS3 bilan ishlash</div></div></div></div>
                 </div>
             </div>
             <div class="info-card">
                 <h3 class="fw-bold mb-3">👨‍💻 Kimlar uchun?</h3>
-                <p class="text-secondary">Frontend dasturchilar, yangi boshlovchilar, o'z bilimini mustahkamoqchi bo'lgan dasturchilar va backend sohasiga kirishni xohlovchilar. Mantiqiy fikrlashni yaxshi ko'radiganlar uchun.</p>
+                <p class="text-secondary">IT sohasiga qiziqqanlar, tarmoq administratori bo'lishni xohlovchilar, Cisco sertifikatiga tayyorlanayotganlar, sistem administratorlar, tarmoq xavfsizligiga qiziqadiganlar.</p>
             </div>
             <div class="teacher-card">
                 <div class="teacher-avatar"><i class="fas fa-chalkboard-user"></i></div>
                 <div>
-                    <div class="teacher-name">Ergashev Sardor, Madiyarov Bilol</div>
-                    <div class="teacher-position">Senior Backend Developer</div>
+                    <div class="teacher-name">Qodirov Shohijahon</div>
+                    <div class="teacher-position">Network Engineer, CCNA Certified</div>
                 </div>
             </div>
         </div>
         <div class="col-lg-4">
             <div class="price-card">
                 <div class="text-center mb-3">
-                    <span class="price-old">750,000 so'm</span>
-                    <div class="price-new">600,000 so'm</div>
+                    <span class="price-old">1,200,000 so'm</span>
+                    <div class="price-new">1,000,000 so'm</div>
                     <span class="price-period">/ oy</span>
                 </div>
                 <hr>
                 <div class="mb-3">
-                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-clock me-2 text-primary"></i> Davomiyligi</span><span class="fw-bold">5 oy</span></div>
+                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-clock me-2 text-primary"></i> Davomiyligi</span><span class="fw-bold">4 oy</span></div>
                     <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-calendar me-2 text-primary"></i> Darslar</span><span class="fw-bold">Haftada 3 kun</span></div>
                     <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-language me-2 text-primary"></i> Til</span><span class="fw-bold">O'zbek tilida</span></div>
                     <div class="d-flex justify-content-between"><span><i class="fas fa-certificate me-2 text-primary"></i> Sertifikat</span><span class="fw-bold">✓ Bor</span></div>
@@ -275,7 +275,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-4">
             <div class="modal-header border-0">
-                <h5 class="modal-title fw-bold">Backend kursiga yozilish</h5>
+                <h5 class="modal-title fw-bold">Tarmoq administratorligi kursiga yozilish</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">

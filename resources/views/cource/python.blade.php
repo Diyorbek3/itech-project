@@ -1,264 +1,293 @@
 @extends('layouts.app')
-<<<<<<< HEAD
-@section('styles')<style>/* same styles */</style>@endsection
-@section('content')
-<div class="container py-4 py-md-5">
-    <div class="course-hero"><div class="row align-items-center"><div class="col-lg-8"><span class="course-badge"><i class="fab fa-python me-2"></i> Python Development</span><h1 class="course-title">Python Dasturchi</h1><p class="course-description">Python dasturlash tilini noldan o'rganing. Ma'lumotlar tahlili, sun'iy intellekt va veb-dasturlash sohalarida mutaxassis bo'ling.</p><div class="d-flex gap-3 flex-wrap"><div class="d-flex align-items-center gap-2"><i class="fas fa-clock text-primary"></i><span>5 oy</span></div><div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>150+ talaba</span></div><div class="d-flex align-items-center gap-2"><i class="fas fa-certificate text-primary"></i><span>Sertifikat beriladi</span></div></div></div><div class="col-lg-4 text-center d-none d-lg-block"><i class="fab fa-python" style="font-size: 100px; color: rgba(59,130,246,0.5);"></i></div></div></div>
-    <div class="row g-4"><div class="col-lg-8"><div class="info-card"><h3 class="fw-bold mb-3">📖 Kurs haqida</h3><p class="text-secondary">Python dasturchi kursida siz Python dasturlash tilini, Django frameworkini, ma'lumotlar tahlili va sun'iy intellekt asoslarini o'rganasiz.</p></div><div class="info-card"><h3 class="fw-bold mb-3">📚 O'quv dasturi</h3><div class="row g-2"><div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Python asoslari</div><div class="skill-desc">Sintaksis, o'zgaruvchilar, ma'lumot turlari</div></div></div></div><div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Funksiyalar va modullar</div><div class="skill-desc">Kodni qayta ishlatish va modulli dasturlash</div></div></div></div><div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">OOP</div><div class="skill-desc">Obektga yo'naltirilgan dasturlash</div></div></div></div><div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Ma'lumotlar tahlili</div><div class="skill-desc">Pandas, NumPy kutubxonalari</div></div></div></div><div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">API va web</div><div class="skill-desc">REST API yaratish va Django</div></div></div></div></div></div><div class="info-card"><h3 class="fw-bold mb-3">👨‍💻 Kimlar uchun?</h3><p class="text-secondary">Dasturlashni endi boshlayotganlar, ma'lumotlar tahlili bilan shug'ullanmoqchi bo'lganlar va sun'iy intellekt sohasiga qiziqadiganlar uchun.</p></div><div class="teacher-card"><div class="teacher-avatar"><i class="fas fa-chalkboard-user"></i></div><div><div class="teacher-name">Kim Andrey</div><div class="teacher-position">Senior Python Developer</div></div></div></div><div class="col-lg-4"><div class="price-card"><div class="text-center mb-3"><span class="price-old">750,000 so'm</span><div class="price-new">650,000 so'm</div><span class="price-period">/ oy</span></div><hr><div class="mb-3"><div class="d-flex justify-content-between mb-2"><span><i class="fas fa-clock me-2 text-primary"></i> Davomiyligi</span><span class="fw-bold">5 oy</span></div><div class="d-flex justify-content-between mb-2"><span><i class="fas fa-calendar me-2 text-primary"></i> Darslar</span><span class="fw-bold">Haftada 3 kun</span></div><div class="d-flex justify-content-between mb-2"><span><i class="fas fa-language me-2 text-primary"></i> Til</span><span class="fw-bold">Rus tilida</span></div><div class="d-flex justify-content-between"><span><i class="fas fa-certificate me-2 text-primary"></i> Sertifikat</span><span class="fw-bold">✓ Bor</span></div></div><hr><button class="btn btn-enroll text-white" data-bs-toggle="modal" data-bs-target="#enrollModal"><i class="fas fa-bolt me-2"></i> Hoziroq yozilish</button><div class="text-center mt-3"><small class="text-muted"><i class="fas fa-headset me-1"></i> 24/7 mentor yordami</small></div></div></div></div>
-=======
 
 @section('styles')
 <style>
-    .dev-bright {
-        color: #ffffff !important;
-        font-weight: 800;
-        text-shadow: 0 0 15px rgba(59, 130, 246, 0.6), 0 0 5px rgba(255, 255, 255, 0.3); 
-        letter-spacing: 1px;
-        opacity: 1 !important;
-    }
     .course-hero {
-        background: linear-gradient(135deg, #10182b 0%, #1e293b 100%);
-        color: white;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         border-radius: 30px;
-        overflow: hidden;
+        padding: 3rem;
+        margin-bottom: 3rem;
         position: relative;
+        overflow: hidden;
     }
-    .tech-card {
-        transition: all 0.3s ease;
-        border: 1px solid rgba(0,0,0,0.05);
-        background: #ffffff;
+    .course-hero::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(59,130,246,0.1) 1px, transparent 1px);
+        background-size: 50px 50px;
+        animation: moveGrid 20s linear infinite;
     }
-    .tech-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
-        border-color: #3b82f6;
+    @keyframes moveGrid {
+        0% { transform: translate(0, 0); }
+        100% { transform: translate(50px, 50px); }
     }
-    .sticky-price-card {
-        border: none;
-        background: rgba(255, 255, 255, 0.9);
+    .course-badge {
+        display: inline-block;
+        background: rgba(59,130,246,0.2);
         backdrop-filter: blur(10px);
-        border: 1px solid rgba(255,255,255,0.4);
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #3b82f6;
+        margin-bottom: 1rem;
     }
-    .check-icon {
-        width: 35px;
-        height: 35px;
-        background: #dcfce7;
-        color: #16a34a;
+    .course-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        color: white;
+    }
+    .course-description {
+        font-size: 1rem;
+        color: rgba(255,255,255,0.8);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+    .info-card {
+        background: white;
+        border-radius: 20px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+    }
+    .info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    .price-card {
+        background: white;
+        border-radius: 24px;
+        padding: 2rem;
+        position: sticky;
+        top: 20px;
+        box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
+        border: 1px solid rgba(59,130,246,0.2);
+    }
+    .price-old {
+        font-size: 0.9rem;
+        color: #94a3b8;
+        text-decoration: line-through;
+    }
+    .price-new {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #3b82f6;
+    }
+    .price-period {
+        font-size: 0.8rem;
+        color: #64748b;
+    }
+    .btn-enroll {
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        border: none;
+        border-radius: 50px;
+        padding: 0.9rem;
+        font-weight: 700;
+        font-size: 1rem;
+        width: 100%;
+        margin-top: 1.5rem;
+        transition: all 0.3s ease;
+    }
+    .btn-enroll:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(59,130,246,0.4);
+    }
+    .skill-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1rem;
+        background: #f8fafc;
+        border-radius: 12px;
+        margin-bottom: 0.75rem;
+        transition: all 0.3s ease;
+    }
+    .skill-item:hover {
+        background: #f1f5f9;
+        transform: translateX(5px);
+    }
+    .skill-check {
+        width: 28px;
+        height: 28px;
+        background: #3b82f6;
+        border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 10px;
+        color: white;
+        font-size: 0.7rem;
+        flex-shrink: 0;
     }
-    .gradient-text {
-        background: linear-gradient(90deg, #3b82f6, #2dd4bf);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+    .skill-title {
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 0.25rem;
+        font-size: 0.95rem;
     }
-    
-    .course-card {
-        background: white;
-        border: 1px solid #e2e8f0;
+    .skill-desc {
+        font-size: 0.75rem;
+        color: #64748b;
+    }
+    .teacher-card {
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
         border-radius: 20px;
         padding: 1.5rem;
-        transition: all 0.3s ease;
-        height: 100%;
         display: flex;
         align-items: center;
         gap: 1rem;
+        margin-top: 1.5rem;
     }
-    .course-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
-        border-color: #3b82f6;
-    }
-    .course-icon {
-        width: 70px;
-        height: 70px;
-        border-radius: 18px;
+    .teacher-avatar {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-shrink: 0;
-    }
-    .course-icon.python { background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%); }
-    .course-icon.data { background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); }
-    .course-icon i { font-size: 36px; }
-    
-    .course-content h5 {
-        font-size: 1.1rem;
-        font-weight: 700;
-        margin-bottom: 0.25rem;
-        color: #1e293b;
-    }
-    .course-content p {
-        font-size: 0.85rem;
-        color: #64748b;
-        margin-bottom: 0;
-        line-height: 1.4;
-    }
-
-    /* Yangi Sertifikat Bo'limi Stili */
-    .benefit-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 12px;
-        margin-bottom: 20px;
-        text-align: left;
-    }
-    .benefit-icon {
         font-size: 1.5rem;
+        color: white;
         flex-shrink: 0;
-        margin-top: 3px;
     }
-    .benefit-text {
-        font-size: 0.95rem;
-        color: #475569;
-        line-height: 1.5;
-        font-weight: 500;
+    .teacher-name {
+        font-weight: 700;
+        font-size: 1rem;
+        color: #0f172a;
+    }
+    .teacher-position {
+        font-size: 0.75rem;
+        color: #64748b;
+    }
+    .tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+    .tech-badge {
+        background: #f1f5f9;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: #3b82f6;
+    }
+    @media (max-width: 991px) {
+        .course-title { font-size: 1.8rem; }
+        .price-card { position: relative; margin-top: 2rem; }
+    }
+    @media (max-width: 768px) {
+        .course-hero { padding: 1.5rem; }
+        .course-title { font-size: 1.5rem; }
     }
 </style>
 @endsection
 
 @section('content')
-<div class="container py-5">
-    
-    <div class="course-hero p-4 p-md-5 mb-5 shadow-lg">
+<div class="container py-4 py-md-5">
+    <div class="course-hero">
         <div class="row align-items-center">
-            <div class="col-lg-7">
-              <h1 class="display-3 fw-bold mb-3">
-                <span class="gradient-text">Python</span> 
-                <span class="dev-bright">Developer</span>
-              </h1>
-                <p class="fs-5 opacity-75 mb-4 lh-lg">
-                    {{ __('messages.python_description') }}
-                </p>
-                <div class="d-flex gap-3">
-                    <div class="row g-4 mb-5">
-                        <div class="col-md-6">
-                            <div class="course-card">
-                                <div class="course-icon python">
-                                    <i class="fa-brands fa-python" style="color: #0ea5e9;"></i>
-                                </div>
-                                <div class="course-content">
-                                    <h5>{{ __('messages.python_tech1_title') }}</h5>
-                                    <p>{{ __('messages.python_tech1_desc') }}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="course-card">
-                                <div class="course-icon data">
-                                    <i class="fa-solid fa-chart-line" style="color: #ef4444;"></i>
-                                </div>
-                                <div class="course-content">
-                                    <h5>{{ __('messages.python_tech2_title') }}</h5>
-                                    <p>{{ __('messages.python_tech2_desc') }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="col-lg-8">
+                <span class="course-badge"><i class="fab fa-python me-2"></i> Python Development</span>
+                <h1 class="course-title">Python Dasturchi</h1>
+                <p class="course-description">Python dasturlash tilini noldan o'rganing. Ma'lumotlar tahlili, sun'iy intellekt va veb-dasturlash sohalarida mutaxassis bo'ling.</p>
+                <div class="d-flex gap-3 flex-wrap">
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-clock text-primary"></i><span>5 oy</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>150+ talaba</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-certificate text-primary"></i><span>Sertifikat beriladi</span></div>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">Django</span>
+                    <span class="tech-badge">Flask</span>
+                    <span class="tech-badge">Pandas</span>
+                    <span class="tech-badge">NumPy</span>
+                    <span class="tech-badge">REST API</span>
                 </div>
             </div>
-            <div class="col-lg-5 d-none d-lg-block">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png" 
-                     alt="Python Development" class="img-fluid rounded-4 shadow-2xl float-end" style="max-height: 300px;">
+            <div class="col-lg-4 text-center d-none d-lg-block">
+                <i class="fab fa-python" style="font-size: 100px; color: rgba(59,130,246,0.5);"></i>
             </div>
         </div>
     </div>
-
-    <div class="row g-5">
+    <div class="row g-4">
         <div class="col-lg-8">
-            <h3 class="fw-bold mb-4 d-flex align-items-center">
-                <span class="bg-primary p-2 rounded-3 me-3 text-white" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
-                    <i class="fa-solid fa-graduation-cap"></i>
-                </span>
-                {{ __('messages.python_learn_section') }}
-            </h3>
-
-            <div class="row g-4 mb-5">
-                @php
-                    $skills = [
-                        ['title_key' => 'python_skill1_title', 'desc_key' => 'python_skill1_desc'],
-                        ['title_key' => 'python_skill2_title', 'desc_key' => 'python_skill2_desc'],
-                        ['title_key' => 'python_skill3_title', 'desc_key' => 'python_skill3_desc'],
-                        ['title_key' => 'python_skill4_title', 'desc_key' => 'python_skill4_desc'],
-                        ['title_key' => 'python_skill5_title', 'desc_key' => 'python_skill5_desc']
-                    ];
-                @endphp
-
-                @foreach($skills as $skill)
-                <div class="col-12">
-                    <div class="tech-card p-4 rounded-4 shadow-sm d-flex align-items-start">
-                        <div class="check-icon me-3 flex-shrink-0">
-                            <i class="fa-solid fa-check"></i>
-                        </div>
-                        <div>
-                            <h5 class="fw-bold mb-1 text-dark">{{ __("messages.{$skill['title_key']}") }}</h5>
-                            <p class="text-secondary mb-0 small">{{ __("messages.{$skill['desc_key']}") }}</p>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
+            <div class="info-card">
+                <h3 class="fw-bold mb-3">📖 Kurs haqida</h3>
+                <p class="text-secondary">Python dasturchi kursida siz Python dasturlash tilini, Django frameworkini, ma'lumotlar tahlili va sun'iy intellekt asoslarini o'rganasiz. Kurs davomida real loyihalar ustida ishlaysiz va bitiruv portfoliyo tayyorlaysiz.</p>
             </div>
-
-            <div class="bg-light p-4 rounded-4 border-start border-primary border-4">
-                <h4 class="fw-bold">{{ __('messages.python_for_whom_title') }}</h4>
-                <p class="text-secondary mb-0 fs-5">
-                    {{ __('messages.python_for_whom_desc') }}
-                </p>
+            <div class="info-card">
+                <h3 class="fw-bold mb-3">📚 O'quv dasturi</h3>
+                <div class="row g-2">
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Python asoslari</div><div class="skill-desc">Sintaksis, o'zgaruvchilar, ma'lumot turlari, sikllar, funksiyalar</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">OOP</div><div class="skill-desc">Obektga yo'naltirilgan dasturlash, klasslar, meros olish</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Django Framework</div><div class="skill-desc">Django arxitekturasi, modellar, viewlar, admin panel</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Ma'lumotlar tahlili</div><div class="skill-desc">Pandas, NumPy, Matplotlib kutubxonalari</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">REST API</div><div class="skill-desc">Django REST Framework, API yaratish, autentifikatsiya</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Ma'lumotlar bazasi</div><div class="skill-desc">SQLite, PostgreSQL, SQLAlchemy</div></div></div></div>
+                </div>
+            </div>
+            <div class="info-card">
+                <h3 class="fw-bold mb-3">👨‍💻 Kimlar uchun?</h3>
+                <p class="text-secondary">Dasturlashni endi boshlayotganlar, ma'lumotlar tahlili bilan shug'ullanmoqchi bo'lganlar, sun'iy intellekt va mashina o'rganish sohasiga qiziqadiganlar, veb-dasturchi bo'lishni xohlovchilar.</p>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-avatar"><i class="fas fa-chalkboard-user"></i></div>
+                <div>
+                    <div class="teacher-name">Kim Andrey</div>
+                    <div class="teacher-position">Senior Python Developer</div>
+                </div>
             </div>
         </div>
-
         <div class="col-lg-4">
-            <div class="card sticky-price-card shadow-lg rounded-5 p-3">
-                <div class="card-body">
-                    <h5 class="fw-bold mb-4 text-center">{{ __('messages.python_card_title') }}</h5>
-                    
-                    <div class="d-flex align-items-center mb-3">
-                        <i class="fa-solid fa-calendar-day text-primary me-3 fs-4"></i>
-                        <div>
-                            <small class="text-muted d-block">{{ __('messages.python_duration_label') }}</small>
-                            <span class="fw-bold">{{ __('messages.python_duration_value') }}</span>
-                        </div>
-                    </div>
-
-                    <div class="d-flex align-items-center mb-3">
-                        <i class="fa-solid fa-user-tie text-primary me-3 fs-4"></i>
-                        <div>
-                            <small class="text-muted d-block">{{ __('messages.python_mentor_label') }}</small>
-                            <span class="fw-bold">{{ __('messages.python_mentor_value') }}</span>
-                        </div>
-                    </div>
-
-                    <hr class="my-4 opacity-10">
-
-                    <div class="text-center mb-4">
-                        <h6 class="text-muted text-decoration-line-through mb-1">{{ __('messages.python_old_price') }}</h6>
-                        <h2 class="fw-bold text-primary mb-0">{{ __('messages.python_new_price') }} <small class="fs-6 text-dark text-opacity-50">{{ __('messages.python_price_period') }}</small></h2>
-                    </div>
-                    
-                    <a href="{{ url('/#contact') }}" class="btn btn-primary btn-lg w-100 rounded-pill py-3 shadow fw-bold mb-4">
-                        <i class="fa-solid fa-rocket me-2"></i> {{ __('messages.python_enroll_button') }}
-                    </a>
-                    
-                    <div class="mt-2 px-2">
-                        <div class="benefit-item">
-                            <span class="benefit-icon">✨</span>
-                            <p class="benefit-text">Kursni tamomlagach, rasmiy sertifikat bilan taqdirlanasiz</p>
-                        </div>
-                        
-                        <div class="benefit-item">
-                            <span class="benefit-icon">🎧</span>
-                            <p class="benefit-text">24/7 mentor yordami va amaliy loyihalar</p>
-                        </div>
-                    </div>
-
+            <div class="price-card">
+                <div class="text-center mb-3">
+                    <span class="price-old">750,000 so'm</span>
+                    <div class="price-new">650,000 so'm</div>
+                    <span class="price-period">/ oy</span>
+                </div>
+                <hr>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-clock me-2 text-primary"></i> Davomiyligi</span><span class="fw-bold">5 oy</span></div>
+                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-calendar me-2 text-primary"></i> Darslar</span><span class="fw-bold">Haftada 3 kun</span></div>
+                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-language me-2 text-primary"></i> Til</span><span class="fw-bold">Rus tilida</span></div>
+                    <div class="d-flex justify-content-between"><span><i class="fas fa-certificate me-2 text-primary"></i> Sertifikat</span><span class="fw-bold">✓ Bor</span></div>
+                </div>
+                <hr>
+                <button class="btn btn-enroll text-white" data-bs-toggle="modal" data-bs-target="#enrollModal">
+                    <i class="fas fa-bolt me-2"></i> Hoziroq yozilish
+                </button>
+                <div class="text-center mt-3">
+                    <small class="text-muted"><i class="fas fa-headset me-1"></i> 24/7 mentor yordami</small>
                 </div>
             </div>
         </div>
     </div>
->>>>>>> 0cd844a147b3f1c0c64771e012c3376b29ebf5bf
 </div>
-<div class="modal fade" id="enrollModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content rounded-4"><div class="modal-header border-0"><h5 class="modal-title fw-bold">Python kursiga yozilish</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><form>@csrf<div class="mb-3"><label class="form-label">Ismingiz</label><input type="text" class="form-control rounded-3" required></div><div class="mb-3"><label class="form-label">Telefon raqam</label><input type="tel" class="form-control rounded-3" placeholder="+998 __ ___ __ __" required></div><div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control rounded-3" required></div><button type="submit" class="btn btn-primary w-100 rounded-3 py-2"><i class="fas fa-paper-plane me-2"></i> Yuborish</button></form></div></div></div></div>
+
+<div class="modal fade" id="enrollModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold">Python kursiga yozilish</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    @csrf
+                    <div class="mb-3"><label class="form-label">Ismingiz</label><input type="text" class="form-control rounded-3" required></div>
+                    <div class="mb-3"><label class="form-label">Telefon raqam</label><input type="tel" class="form-control rounded-3" placeholder="+998 __ ___ __ __" required></div>
+                    <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control rounded-3" required></div>
+                    <button type="submit" class="btn btn-primary w-100 rounded-3 py-2"><i class="fas fa-paper-plane me-2"></i> Yuborish</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

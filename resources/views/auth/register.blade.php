@@ -70,38 +70,6 @@
             outline: none;
         }
         .btn-register-style {
-<<<<<<< HEAD
-=======
-            background-color: #2ea44f; /* Yashil rang (yoki o'zingizga ma'qul rang) */
-            color: white !important;   /* Matn rangi oq bo'lishi uchun */
-            padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            width: 100%;               /* Formaga mos tushishi uchun */
-            margin-top: 20px;
-            display: block;
-            text-align: center;
-            transition: 0.3s;
-        }
-
-        .btn-register-style:hover {
-    background-color: #2c974b; /* Sichqoncha borgandagi rangi */
-        }
-
-/* Xatolik holati uchun siz yozgan qism */
-.btn-register-style.is-invalid {
-    border: 2px solid #f85149 !important;
-}
-        .error-message {
-            color: #f85149;
-            font-size: 12px;
-            margin-top: 4px;
-            display: block;
-        }
-        .btn-github-style {
->>>>>>> 0cd844a147b3f1c0c64771e012c3376b29ebf5bf
             background-color: #238636;
             color: #ffffff;
             width: 100%;
@@ -253,16 +221,11 @@
             }
         }
         
+        // PAROL TEKSHIRUVI - faqat uzunligi
         if (password === '') {
             errors.push('Parolni kiriting');
         } else if (password.length < 8) {
             errors.push('Parol kamida 8 ta belgidan iborat bo\'lishi kerak');
-        } else if (!/[A-Z]/.test(password)) {
-            errors.push('Parolda kamida 1 ta katta harf bo\'lishi kerak');
-        } else if (!/[a-z]/.test(password)) {
-            errors.push('Parolda kamida 1 ta kichik harf bo\'lishi kerak');
-        } else if (!/[0-9]/.test(password)) {
-            errors.push('Parolda kamida 1 ta raqam bo\'lishi kerak');
         }
         
         if (password !== passwordConfirm) {

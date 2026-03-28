@@ -13,13 +13,11 @@
         height: auto;
     }
 
-    /* Kartaning umumiy ko'rinishi */
     .cards-1 {
         padding-top: 5rem;
         padding-bottom: 5rem;
     }
 
-    /* Matn qismi uchun */
     .cards-1 .text-container h2 {
         margin-bottom: 1.5rem;
     }
@@ -31,20 +29,18 @@
         margin-right: 0.5rem;
     }
 
-    /* Karta panjarasi (Grid) - 4 ta ustun */
     .cards-1 .card-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 1.5rem;
     }
 
-    /* Har bir karta elementi */
     .cards-1 .card-item {
         background-color: #fff;
         padding: 1.5rem 1rem;
         border-radius: 0.5rem;
         text-align: center;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -56,10 +52,9 @@
 
     .cards-1 .card-item:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     }
 
-    /* Belgilar qutisi (Icon box) */
     .cards-1 .icon-box {
         width: 70px;
         height: 70px;
@@ -69,14 +64,12 @@
         justify-content: center;
     }
 
-    /* Ikonalar tasvirlari */
     .cards-1 .icon-box img {
         max-width: 100%;
         max-height: 100%;
         object-fit: contain;
     }
 
-    /* Karta sarlavhasi */
     .cards-1 .card-title {
         margin-bottom: 0;
         font-size: 0.9rem;
@@ -85,26 +78,16 @@
         color: #1e293b;
     }
 
-    /* Kichik ekranlar uchun moslashuvchanlik */
     @media (max-width: 1200px) {
-        .cards-1 .card-grid {
-            grid-template-columns: repeat(3, 1fr);
-        }
+        .cards-1 .card-grid { grid-template-columns: repeat(3, 1fr); }
     }
-
     @media (max-width: 991px) {
-        .cards-1 .card-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
+        .cards-1 .card-grid { grid-template-columns: repeat(2, 1fr); }
     }
-
     @media (max-width: 767px) {
-        .cards-1 .card-grid {
-            grid-template-columns: 1fr;
-        }
+        .cards-1 .card-grid { grid-template-columns: 1fr; }
     }
     
-    /* Language Switcher Styles */
     .flag-icon {
         display: inline-block;
         border-radius: 3px;
@@ -150,7 +133,6 @@
         margin-right: 8px;
     }
 
-    /* Auth konteyneri uchun */
     .auth-container {
         display: flex;
         align-items: center;
@@ -283,16 +265,12 @@
     $(document).ready(function () {
         $("#contactForm").submit(function (e) {
             e.preventDefault()
-
             var form = $(this)
-            var url = form.attr("action")
-
             $.ajax({
                 url: '/contact-send',
                 type: "POST",
                 data: form.serialize(),
                 success: function (result) {
-                    console.log(result)
                     Swal.fire({
                         icon: 'success',
                         toast: true,
@@ -304,7 +282,6 @@
                         background: '#d3fddd',
                         color: '#000000'
                     })
-                    
                     form[0].reset();
                 },
                 error: function (data) {
@@ -340,9 +317,7 @@
             <div class="col-lg-6 col-xl-5">
                 <div class="text-container">
                     <h1 class="h1-large">{{ __('messages.header_title') }}</h1>
-                    <p class="p-large">
-                        {{ __('messages.header_description') }}
-                    </p>
+                    <p class="p-large">{{ __('messages.header_description') }}</p>
                     <a class="btn-solid-lg" href="#introduction">{{ __('messages.learn_more') }}</a>
                     <a class="btn-outline-lg" href="#contact">{{ __('messages.contact') }}</a>
                 </div>
@@ -363,23 +338,19 @@
             <div class="col-lg-12">
                 <div class="counter-container">
                     <div class="counter-cell">
-                        <div data-purecounter-start="0" data-purecounter-end="1200" data-purecounter-duration="3"
-                            class="purecounter">0</div>
+                        <div data-purecounter-start="0" data-purecounter-end="1200" data-purecounter-duration="3" class="purecounter">0</div>
                         <div class="counter-info">{{ __('messages.graduates') }}</div>
                     </div>
                     <div class="counter-cell">
-                        <div data-purecounter-start="0" data-purecounter-end="45" data-purecounter-duration="2"
-                            class="purecounter">0</div>
+                        <div data-purecounter-start="0" data-purecounter-end="45" data-purecounter-duration="2" class="purecounter">0</div>
                         <div class="counter-info">{{ __('messages.active_courses') }}</div>
                     </div>
                     <div class="counter-cell">
-                        <div data-purecounter-start="0" data-purecounter-end="320" data-purecounter-duration="3"
-                            class="purecounter">0</div>
+                        <div data-purecounter-start="0" data-purecounter-end="320" data-purecounter-duration="3" class="purecounter">0</div>
                         <div class="counter-info">{{ __('messages.employed_students') }}</div>
                     </div>
                     <div class="counter-cell">
-                        <div data-purecounter-start="0" data-purecounter-end="5" data-purecounter-duration="2"
-                            class="purecounter">0</div>
+                        <div data-purecounter-start="0" data-purecounter-end="5" data-purecounter-duration="2" class="purecounter">0</div>
                         <div class="counter-info">{{ __('messages.years_experience') }}</div>
                     </div>
                 </div>
@@ -414,22 +385,10 @@
                 <div class="text-container">
                     <h2>{{ __('messages.details1_title') }}</h2>
                     <ul class="list-unstyled li-space-lg">
-                        <li class="d-flex">
-                            <i class="fas fa-square"></i>
-                            <div class="flex-grow-1">{{ __('messages.details1_item1') }}</div>  
-                        </li>
-                        <li class="d-flex">
-                            <i class="fas fa-square"></i>
-                            <div class="flex-grow-1">{{ __('messages.details1_item2') }}</div>
-                        </li>
-                        <li class="d-flex">
-                            <i class="fas fa-square"></i>
-                            <div class="flex-grow-1">{{ __('messages.details1_item3') }}</div>
-                        </li>
-                        <li class="d-flex">
-                            <i class="fas fa-square"></i>
-                            <div class="flex-grow-1">{{ __('messages.details1_item4') }}</div>
-                        </li>
+                        <li class="d-flex"><i class="fas fa-square"></i><div class="flex-grow-1">{{ __('messages.details1_item1') }}</div></li>
+                        <li class="d-flex"><i class="fas fa-square"></i><div class="flex-grow-1">{{ __('messages.details1_item2') }}</div></li>
+                        <li class="d-flex"><i class="fas fa-square"></i><div class="flex-grow-1">{{ __('messages.details1_item3') }}</div></li>
+                        <li class="d-flex"><i class="fas fa-square"></i><div class="flex-grow-1">{{ __('messages.details1_item4') }}</div></li>
                     </ul>
                     <a class="btn-solid-reg" href="#services">{{ __('messages.start_course') }}</a>
                 </div>
@@ -448,153 +407,61 @@
                     <p>{{ __('messages.courses_desc1') }}</p>
                     <p>{{ __('messages.courses_desc2') }}</p>
                     <ul class="list-unstyled li-space-lg">
-                        <li class="d-flex">
-                            <i class="fas fa-square"></i>
-                            <div class="flex-grow-1">{{ __('messages.courses_item1') }}</div>
-                        </li>
-                        <li class="d-flex">
-                            <i class="fas fa-square"></i>
-                            <div class="flex-grow-1">{{ __('messages.courses_item2') }}</div>
-                        </li>
-                        <li class="d-flex">
-                            <i class="fas fa-square"></i>
-                            <div class="flex-grow-1">{{ __('messages.courses_item3') }}</div>
-                        </li>
+                        <li class="d-flex"><i class="fas fa-square"></i><div class="flex-grow-1">{{ __('messages.courses_item1') }}</div></li>
+                        <li class="d-flex"><i class="fas fa-square"></i><div class="flex-grow-1">{{ __('messages.courses_item2') }}</div></li>
+                        <li class="d-flex"><i class="fas fa-square"></i><div class="flex-grow-1">{{ __('messages.courses_item3') }}</div></li>
                     </ul>
                 </div>
             </div>
             <div class="col-lg-7">
                 <div class="card-grid">
                     <!-- 1. Ofis menejerligi -->
-                    <a href="#" class="card-link">
-                        <div class="card-item">
-                            <div class="icon-box">
-                                <img src="https://cdn-icons-png.flaticon.com/512/2721/2721292.png" alt="Ofis menejerligi">
-                            </div>
-                            <h5 class="card-title">Ofis menejerligi</h5>
-                        </div>
+                    <a href="/courses/office" class="card-link">
+                        <div class="card-item"><div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/2721/2721292.png" alt="Ofis menejerligi"></div><h5 class="card-title">Ofis menejerligi</h5></div>
                     </a>
-
                     <!-- 2. Algoritm asoslari -->
-                    <a href="{{ route('courses.algorithm') }}" class="card-link">   <!-- <-- BU QATORNI TO'G'RILANG -->
-                        <div class="card-item">
-                            <div class="icon-box">
-                                <img src="https://cdn-icons-png.flaticon.com/512/1995/1995530.png" alt="Algoritm">
-                            </div>
-                            <h5 class="card-title">Algoritm asoslari</h5>
-                        </div>
+                    <a href="/courses/algorithm" class="card-link">
+                        <div class="card-item"><div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/1995/1995530.png" alt="Algoritm"></div><h5 class="card-title">Algoritm asoslari</h5></div>
                     </a>
-
                     <!-- 3. Frontend -->
                     <a href="{{ route('courses.frontend') }}" class="card-link">
-                        <div class="card-item">
-                            <div class="icon-box">
-                                <img src="https://us.123rf.com/450wm/dxinerz/dxinerz1601/dxinerz160103363/51258851-code-seo-web-symbol-vektor-bild-kann-auch-f%C3%BCr-seo-und-entwicklungsdienste-verwendet-werden.jpg?ver=6" alt="Frontend">
-                            </div>
-                            <h5 class="card-title">Frontend</h5>
-                        </div>
+                        <div class="card-item"><div class="icon-box"><img src="https://us.123rf.com/450wm/dxinerz/dxinerz1601/dxinerz160103363/51258851-code-seo-web-symbol-vektor-bild-kann-auch-f%C3%BCr-seo-und-entwicklungsdienste-verwendet-werden.jpg?ver=6" alt="Frontend"></div><h5 class="card-title">Frontend</h5></div>
                     </a>
-
-
-                    <!-- 1. Ofis menejerligi -->
-<a href="/courses/office" class="card-link">
-    <div class="card-item">
-        <div class="icon-box">
-            <img src="https://cdn-icons-png.flaticon.com/512/2721/2721292.png" alt="Ofis menejerligi">
-        </div>
-        <h5 class="card-title">Ofis menejerligi</h5>
-    </div>
-</a>
-
-
                     <!-- 4. Backend -->
                     <a href="{{ route('courses.backend') }}" class="card-link">
-                        <div class="card-item">
-                            <div class="icon-box">
-                                <img src="https://www.shutterstock.com/image-vector/backend-developer-icon-mixed-vector-600nw-2655399835.jpg" alt="Backend">
-                            </div>
-                            <h5 class="card-title">Backend</h5>
-                        </div>
+                        <div class="card-item"><div class="icon-box"><img src="https://www.shutterstock.com/image-vector/backend-developer-icon-mixed-vector-600nw-2655399835.jpg" alt="Backend"></div><h5 class="card-title">Backend</h5></div>
                     </a>
-
                     <!-- 5. Python -->
                     <a href="{{ route('courses.python') }}" class="card-link">
-                        <div class="card-item">
-                            <div class="icon-box">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1280px-Python-logo-notext.svg.png" alt="Python">
-                            </div>
-                            <h5 class="card-title">Python</h5>
-                        </div>
+                        <div class="card-item"><div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1280px-Python-logo-notext.svg.png" alt="Python"></div><h5 class="card-title">Python</h5></div>
                     </a>
-
                     <!-- 6. Robototexnika -->
-                    <a href="#" class="card-link">
-                        <div class="card-item">
-                            <div class="icon-box">
-                                <img src="https://cdn-icons-png.flaticon.com/512/1998/1998178.png" alt="Robototexnika">
-                            </div>
-                            <h5 class="card-title">Robototexnika</h5>
-                        </div>
+                    <a href="/courses/robotics" class="card-link">
+                        <div class="card-item"><div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/1998/1998178.png" alt="Robototexnika"></div><h5 class="card-title">Robototexnika</h5></div>
                     </a>
-
                     <!-- 7. Raqamli bolalar -->
-                    <a href="#" class="card-link">
-                        <div class="card-item">
-                            <div class="icon-box">
-                                <img src="https://cdn-icons-png.flaticon.com/512/3688/3688127.png" alt="Raqamli bolalar">
-                            </div>
-                            <h5 class="card-title">Raqamli bolalar</h5>
-                        </div>
+                    <a href="/courses/digital-kids" class="card-link">
+                        <div class="card-item"><div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/3688/3688127.png" alt="Raqamli bolalar"></div><h5 class="card-title">Raqamli bolalar</h5></div>
                     </a>
-
                     <!-- 8. Tizim muhandisligi -->
-                    <a href="#" class="card-link">
-                        <div class="card-item">
-                            <div class="icon-box">
-                                <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="Tizim muhandisligi">
-                            </div>
-                            <h5 class="card-title">Tizim muhandisligi</h5>
-                        </div>
+                    <a href="/courses/system-engineering" class="card-link">
+                        <div class="card-item"><div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="Tizim muhandisligi"></div><h5 class="card-title">Tizim muhandisligi</h5></div>
                     </a>
-
                     <!-- 9. DevOps asoslari -->
-                    <a href="#" class="card-link">
-                        <div class="card-item">
-                            <div class="icon-box">
-                                <img src="https://cdn-icons-png.flaticon.com/512/919/919851.png" alt="DevOps">
-                            </div>
-                            <h5 class="card-title">DevOps asoslari</h5>
-                        </div>
+                    <a href="/courses/devops" class="card-link">
+                        <div class="card-item"><div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/919/919851.png" alt="DevOps"></div><h5 class="card-title">DevOps asoslari</h5></div>
                     </a>
-
                     <!-- 10. Data analitika -->
-                    <a href="#" class="card-link">
-                        <div class="card-item">
-                            <div class="icon-box">
-                                <img src="https://cdn-icons-png.flaticon.com/512/1055/1055685.png" alt="Data analitika">
-                            </div>
-                            <h5 class="card-title">Data analitika</h5>
-                        </div>
+                    <a href="/courses/data-analytics" class="card-link">
+                        <div class="card-item"><div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/1055/1055685.png" alt="Data analitika"></div><h5 class="card-title">Data analitika</h5></div>
                     </a>
-
                     <!-- 11. Tarmoq administratorligi -->
-                    <a href="#" class="card-link">
-                        <div class="card-item">
-                            <div class="icon-box">
-                                <img src="https://cdn-icons-png.flaticon.com/512/2240/2240419.png" alt="Tarmoq">
-                            </div>
-                            <h5 class="card-title">Tarmoq administratorligi</h5>
-                        </div>
+                    <a href="/courses/network-admin" class="card-link">
+                        <div class="card-item"><div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/2240/2240419.png" alt="Tarmoq"></div><h5 class="card-title">Tarmoq administratorligi</h5></div>
                     </a>
-
                     <!-- 12. Buxgalteriya -->
-                    <a href="#" class="card-link">
-                        <div class="card-item">
-                            <div class="icon-box">
-                                <img src="https://cdn-icons-png.flaticon.com/512/2331/2331966.png" alt="Buxgalteriya">
-                            </div>
-                            <h5 class="card-title">Buxgalteriya</h5>
-                        </div>
+                    <a href="/courses/accounting" class="card-link">
+                        <div class="card-item"><div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/2331/2331966.png" alt="Buxgalteriya"></div><h5 class="card-title">Buxgalteriya</h5></div>
                     </a>
                 </div>
             </div>
@@ -645,48 +512,12 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <div class="card">
-                    <img class="img-fluid" src="{{ asset('images/project-1.jpg') }}" alt="alternative">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ __('messages.project1_title') }}</h5>
-                        <p class="card-text">{{ __('messages.project1_desc') }}<a class="blue no-line" href="article.html"> {{ __('messages.read_more') }}</a></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="img-fluid" src="{{ asset('images/project-2.jpg') }}" alt="alternative">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ __('messages.project2_title') }}</h5>
-                        <p class="card-text">{{ __('messages.project2_desc') }} <a class="blue no-line" href="article.html"> {{ __('messages.read_more') }}</a></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="img-fluid" src="{{ asset('images/project-3.jpg') }}" alt="alternative">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ __('messages.project3_title') }}</h5>
-                        <p class="card-text">{{ __('messages.project3_desc') }}<a class="blue no-line" href="article.html"> {{ __('messages.read_more') }}</a></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="img-fluid" src="{{ asset('images/project-4.jpg') }}" alt="alternative">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ __('messages.project4_title') }}</h5>
-                        <p class="card-text">{{ __('messages.project4_desc') }} <a class="blue no-line" href="article.html"> {{ __('messages.read_more') }}</a></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="img-fluid" src="{{ asset('images/project-5.jpg') }}" alt="alternative">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ __('messages.project5_title') }}</h5>
-                        <p class="card-text">{{ __('messages.project5_desc') }}<a class="blue no-line" href="article.html"> {{ __('messages.read_more') }}</a></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="img-fluid" src="{{ asset('images/project-6.jpg') }}" alt="alternative">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ __('messages.project6_title') }}</h5>
-                        <p class="card-text">{{ __('messages.project6_desc') }} <a class="blue no-line" href="article.html"> {{ __('messages.read_more') }}</a></p>
-                    </div>
-                </div>
+                <div class="card"><img class="img-fluid" src="{{ asset('images/project-1.jpg') }}" alt="alternative"><div class="card-body"><h5 class="card-title">{{ __('messages.project1_title') }}</h5><p class="card-text">{{ __('messages.project1_desc') }}<a class="blue no-line" href="article.html"> {{ __('messages.read_more') }}</a></p></div></div>
+                <div class="card"><img class="img-fluid" src="{{ asset('images/project-2.jpg') }}" alt="alternative"><div class="card-body"><h5 class="card-title">{{ __('messages.project2_title') }}</h5><p class="card-text">{{ __('messages.project2_desc') }} <a class="blue no-line" href="article.html"> {{ __('messages.read_more') }}</a></p></div></div>
+                <div class="card"><img class="img-fluid" src="{{ asset('images/project-3.jpg') }}" alt="alternative"><div class="card-body"><h5 class="card-title">{{ __('messages.project3_title') }}</h5><p class="card-text">{{ __('messages.project3_desc') }}<a class="blue no-line" href="article.html"> {{ __('messages.read_more') }}</a></p></div></div>
+                <div class="card"><img class="img-fluid" src="{{ asset('images/project-4.jpg') }}" alt="alternative"><div class="card-body"><h5 class="card-title">{{ __('messages.project4_title') }}</h5><p class="card-text">{{ __('messages.project4_desc') }} <a class="blue no-line" href="article.html"> {{ __('messages.read_more') }}</a></p></div></div>
+                <div class="card"><img class="img-fluid" src="{{ asset('images/project-5.jpg') }}" alt="alternative"><div class="card-body"><h5 class="card-title">{{ __('messages.project5_title') }}</h5><p class="card-text">{{ __('messages.project5_desc') }}<a class="blue no-line" href="article.html"> {{ __('messages.read_more') }}</a></p></div></div>
+                <div class="card"><img class="img-fluid" src="{{ asset('images/project-6.jpg') }}" alt="alternative"><div class="card-body"><h5 class="card-title">{{ __('messages.project6_title') }}</h5><p class="card-text">{{ __('messages.project6_desc') }} <a class="blue no-line" href="article.html"> {{ __('messages.read_more') }}</a></p></div></div>
             </div>
         </div>
     </div>
@@ -701,24 +532,9 @@
                 <div class="slider-container">
                     <div class="swiper-container card-slider">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <img class="testimonial-image" src="{{ asset('images/testimonial-1.jpg') }}" alt="alternative">
-                                <p class="testimonial-text">“Expense bed any sister depend changer off piqued one. Contented continued any happiness instantly objection yet her allowance. Use correct day new brought tedious. By come this been in. Kept easy or sons my it how about some words here done”</p>
-                                <div class="testimonial-author">{{ __('messages.testimonial_author1') }}</div>
-                                <div class="testimonial-position">{{ __('messages.testimonial_position1') }}</div>
-                            </div>
-                            <div class="swiper-slide">
-                                <img class="testimonial-image" src="{{ asset('images/testimonial-2.jpg') }}" alt="alternative">
-                                <p class="testimonial-text">“Expense bed any sister depend changer off piqued one. Contented continued any happiness instantly objection yet her allowance. Use correct day new brought tedious. By come this been in. Kept easy or sons my it how about some words here done”</p>
-                                <div class="testimonial-author">{{ __('messages.testimonial_author2') }}</div>
-                                <div class="testimonial-position">{{ __('messages.testimonial_position2') }}</div>
-                            </div>
-                            <div class="swiper-slide">
-                                <img class="testimonial-image" src="{{ asset('images/testimonial-3.jpg') }}" alt="alternative">
-                                <p class="testimonial-text">“Expense bed any sister depend changer off piqued one. Contented continued any happiness instantly objection yet her allowance. Use correct day new brought tedious. By come this been in. Kept easy or sons my it how about some words here done”</p>
-                                <div class="testimonial-author">{{ __('messages.testimonial_author3') }}</div>
-                                <div class="testimonial-position">{{ __('messages.testimonial_position3') }}</div>
-                            </div>
+                            <div class="swiper-slide"><img class="testimonial-image" src="{{ asset('images/testimonial-1.jpg') }}" alt="alternative"><p class="testimonial-text">“Expense bed any sister depend changer off piqued one. Contented continued any happiness instantly objection yet her allowance. Use correct day new brought tedious. By come this been in. Kept easy or sons my it how about some words here done”</p><div class="testimonial-author">{{ __('messages.testimonial_author1') }}</div><div class="testimonial-position">{{ __('messages.testimonial_position1') }}</div></div>
+                            <div class="swiper-slide"><img class="testimonial-image" src="{{ asset('images/testimonial-2.jpg') }}" alt="alternative"><p class="testimonial-text">“Expense bed any sister depend changer off piqued one. Contented continued any happiness instantly objection yet her allowance. Use correct day new brought tedious. By come this been in. Kept easy or sons my it how about some words here done”</p><div class="testimonial-author">{{ __('messages.testimonial_author2') }}</div><div class="testimonial-position">{{ __('messages.testimonial_position2') }}</div></div>
+                            <div class="swiper-slide"><img class="testimonial-image" src="{{ asset('images/testimonial-3.jpg') }}" alt="alternative"><p class="testimonial-text">“Expense bed any sister depend changer off piqued one. Contented continued any happiness instantly objection yet her allowance. Use correct day new brought tedious. By come this been in. Kept easy or sons my it how about some words here done”</p><div class="testimonial-author">{{ __('messages.testimonial_author3') }}</div><div class="testimonial-position">{{ __('messages.testimonial_position3') }}</div></div>
                         </div>
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
@@ -735,33 +551,17 @@
     <img class="decoration-star-2" src="{{ asset('images/decoration-star.svg') }}" alt="alternative">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
-                <div class="image-container">
-                    <img class="img-fluid" src="{{ asset('images/contact.png') }}" alt="alternative">
-                </div>
-            </div>
+            <div class="col-lg-6"><div class="image-container"><img class="img-fluid" src="{{ asset('images/contact.png') }}" alt="alternative"></div></div>
             <div class="col-lg-6">
                 <div class="text-container">
                     <h2>{{ __('messages.contact_title') }}</h2>
                     <form id="contactForm">
                         @csrf
-                        <div class="form-group">
-                            <input type="text" name="name" class="form-control-input" placeholder="{{ __('messages.your_name') }}" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" name="email" class="form-control-input" placeholder="{{ __('messages.email') }}" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea name="message" class="form-control-textarea" placeholder="{{ __('messages.message') }}" required></textarea>
-                        </div>
-                        @if(session('success'))
-                            <div style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-                        <div class="form-group">
-                            <button type="submit" class="form-control-submit-button">{{ __('messages.send') }}</button>
-                        </div>
+                        <div class="form-group"><input type="text" name="name" class="form-control-input" placeholder="{{ __('messages.your_name') }}" required></div>
+                        <div class="form-group"><input type="email" name="email" class="form-control-input" placeholder="{{ __('messages.email') }}" required></div>
+                        <div class="form-group"><textarea name="message" class="form-control-textarea" placeholder="{{ __('messages.message') }}" required></textarea></div>
+                        @if(session('success'))<div style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px;">{{ session('success') }}</div>@endif
+                        <div class="form-group"><button type="submit" class="form-control-submit-button">{{ __('messages.send') }}</button></div>
                     </form>
                 </div>
             </div>

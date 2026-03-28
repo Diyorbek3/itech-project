@@ -79,6 +79,12 @@ class CourceController extends Controller
     {
         return view('cource.network-admin');
     }
+
+        public function accounting()
+    {
+        return view('cource.accounting');
+    }
+
     // ========== YANGI QO'SHILGAN KURSLAR TUGADI ==========
 
     // ========== QO'SHILGAN METOD ==========
