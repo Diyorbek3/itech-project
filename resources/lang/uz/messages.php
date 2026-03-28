@@ -56,20 +56,20 @@ return [
     // ==================== INVITATION ====================
     'invitation_text' => 'Bizning tajribali dizaynerlar va ichki qurilish mutaxassislari jamoamiz sizning kutganingizdan ham yuqori natijalarni taqdim etadi.',
     
-    // ==================== PROJECTS SECTION ====================
+// Projects Section
     'projects_title' => 'Loyihalar',
-    'project1_title' => 'Banklar uchun ofis maydoni',
-    'project1_desc' => 'Zamonaviy va funksional ofis, xodimlar uchun qulay ish muhiti yaratildi.',
-    'project2_title' => 'Startaplar uchun reja va dizayn',
-    'project2_desc' => 'Startaplar uchun ijodiy va samarali ish joylarini rejalashtirish va dizayn qilish.',
-    'project3_title' => 'Rang va materiallarni yangilash',
-    'project3_desc' => 'Ichki makon uchun rang va materiallarni zamonaviylashtirish, estetik va amaliy yechimlar bilan.',
-    'project4_title' => 'Bino tartibi va pollar dizayni',
-    'project4_desc' => 'Bino ichki tartibini tahlil qilish va optimal pollar dizaynini ishlab chiqish.',
-    'project5_title' => 'Ofis makonlarini bezash',
-    'project5_desc' => 'Ofislarni bezash, qulay va ilhom beruvchi muhit yaratish.',
-    'project6_title' => 'Bolalar maydonchasi',
-    'project6_desc' => 'Bolalar bog‘chalari uchun xavfsiz va qiziqarli o‘yin maydonchalari loyihasi.',
+    'project1_title' => 'Iqro Agency',
+    'project1_desc' => 'Iqro Agency — IT va digital marketing xizmatlarini taqdim etuvchi zamonaviy agentlik.',
+    'project2_title' => 'Delever',
+    'project2_desc' => 'Delever — bizneslar uchun yetkazib berish va buyurtmalarni avtomatlashtirish platformasi.',
+    'project3_title' => 'KIDI',
+    'project3_desc' => 'KIDI — farzandingiz uchun ta’lim, sport va ijodiy mashg‘ulotlarni bir joyda taqdim etuvchi platforma.',
+    'project4_title' => 'Growz ',
+    'project4_desc' => 'Dunyodagi oziq-ovqatning 80% kichik fermerlar yetishtiradi. Growz ularni qo‘llab-quvvatlaydi.    ',
+    'project5_title' => 'Wasteless',
+    'project5_desc' => 'Wasteless jamoasi — resurslarni aqlli boshqarish va chiqindilarni kamaytirish texnologiyalarini yaratadi.',
+    'project6_title' => ' Urecruit',
+    'project6_desc' => 'Siz mustaqil ishlovchimisiz? Urecruit orqali tadqiqotlarda qatnashing va o‘z fikringizni bildiring.',
     'read_more' => 'Batafsil',
     
     // ==================== TESTIMONIALS ====================
