@@ -194,25 +194,25 @@
     <div class="course-hero">
         <div class="row align-items-center">
             <div class="col-lg-8">
-                <span class="course-badge"><i class="fas fa-server me-2"></i> Backend Development</span>
-                <h1 class="course-title">Backend Dasturchi</h1>
-                <p class="course-description">PHP, Laravel va MySQL bilan server tomon dasturlashni o'rganing. API, ma'lumotlar bazasi va autentifikatsiya kabi muhim mavzularni amaliy loyihalar bilan mustahkamlang.</p>
+                <span class="course-badge"><i class="fas fa-child me-2"></i> Raqamli bolalar</span>
+                <h1 class="course-title">Raqamli bolalar</h1>
+                <p class="course-description">Bolalar uchun kompyuter savodxonligi va kreativ dasturlash. Scratch, blokli dasturlash, mantiqiy fikrlash va o'yin yaratish.</p>
                 <div class="d-flex gap-3 flex-wrap">
                     <div class="d-flex align-items-center gap-2"><i class="fas fa-clock text-primary"></i><span>5 oy</span></div>
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>200+ talaba</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>150+ talaba</span></div>
                     <div class="d-flex align-items-center gap-2"><i class="fas fa-certificate text-primary"></i><span>Sertifikat beriladi</span></div>
                 </div>
                 <div class="tech-stack">
-                    <span class="tech-badge">PHP</span>
-                    <span class="tech-badge">Laravel</span>
-                    <span class="tech-badge">MySQL</span>
-                    <span class="tech-badge">REST API</span>
-                    <span class="tech-badge">Git</span>
-                    <span class="tech-badge">Postman</span>
+                    <span class="tech-badge">Scratch</span>
+                    <span class="tech-badge">Blokli dasturlash</span>
+                    <span class="tech-badge">Mantiqiy fikrlash</span>
+                    <span class="tech-badge">O'yin yaratish</span>
+                    <span class="tech-badge">Animatsiya</span>
+                    <span class="tech-badge">Algoritm</span>
                 </div>
             </div>
             <div class="col-lg-4 text-center d-none d-lg-block">
-                <i class="fas fa-server" style="font-size: 100px; color: rgba(59,130,246,0.5);"></i>
+                <i class="fas fa-child" style="font-size: 100px; color: rgba(59,130,246,0.5);"></i>
             </div>
         </div>
     </div>
@@ -220,36 +220,36 @@
         <div class="col-lg-8">
             <div class="info-card">
                 <h3 class="fw-bold mb-3">📖 Kurs haqida</h3>
-                <p class="text-secondary">Backend dasturchi kursida siz PHP dasturlash tilini, Laravel frameworkini, MySQL ma'lumotlar bazasini va REST API yaratishni o'rganasiz. Kurs davomida real loyihalar ustida ishlaysiz va bitiruv portfoliyo tayyorlaysiz.</p>
+                <p class="text-secondary">Raqamli bolalar kursida bolalar kompyuter savodxonligini o'rganadi, Scratch orqali blokli dasturlashni o'zlashtiradi, o'z o'yinlari va animatsiyalarini yaratadi. Kurs davomida mantiqiy fikrlash qobiliyati rivojlanadi va dasturlashga qiziqish uyg'otiladi.</p>
             </div>
             <div class="info-card">
                 <h3 class="fw-bold mb-3">📚 O'quv dasturi</h3>
                 <div class="row g-2">
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">PHP asoslari va OOP</div><div class="skill-desc">PHP sintaksisi, obyektga yo'naltirilgan dasturlash, namespace, traitlar</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Laravel Framework</div><div class="skill-desc">Eloquent ORM, Blade, Middleware, Service Provider, Facades</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">MySQL va ma'lumotlar bazasi</div><div class="skill-desc">Murakkab so'rovlar, indekslash, optimizatsiya, normalizatsiya</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">RESTful API yaratish</div><div class="skill-desc">API dizayn, autentifikatsiya (Sanctum/Passport), API resurslari</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Deployment va DevOps</div><div class="skill-desc">Git, CI/CD, server sozlamalari (Forge, Envoyer)</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Xavfsizlik</div><div class="skill-desc">SQL injection, XSS, CSRF himoyasi, autentifikatsiya</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Kompyuter savodxonligi</div><div class="skill-desc">Kompyuter asoslari, fayllar bilan ishlash, internet xavfsizligi</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Scratch dasturlash</div><div class="skill-desc">Blokli dasturlash, o'yinlar yaratish, personajlar</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Mantiqiy fikrlash</div><div class="skill-desc">Masalalar yechish, algoritmik fikrlash, labirintlar</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Kreativ loyihalar</div><div class="skill-desc">O'z o'yinlari va animatsiyalar yaratish, taqdimot qilish</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">3D modellashtirish</div><div class="skill-desc">Tinkercad, oddiy 3D modellar yaratish</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Robototexnika asoslari</div><div class="skill-desc">Oddiy robotlarni yig'ish va boshqarish</div></div></div></div>
                 </div>
             </div>
             <div class="info-card">
                 <h3 class="fw-bold mb-3">👨‍💻 Kimlar uchun?</h3>
-                <p class="text-secondary">Frontend dasturchilar, yangi boshlovchilar, o'z bilimini mustahkamoqchi bo'lgan dasturchilar va backend sohasiga kirishni xohlovchilar. Mantiqiy fikrlashni yaxshi ko'radiganlar uchun.</p>
+                <p class="text-secondary">7-14 yoshdagi bolalar, dasturlashni o'rganishni xohlovchilar, mantiqiy fikrlashni rivojlantirmoqchi bo'lganlar, kreativ qobiliyatlarini namoyish qilmoqchi bo'lganlar.</p>
             </div>
             <div class="teacher-card">
                 <div class="teacher-avatar"><i class="fas fa-chalkboard-user"></i></div>
                 <div>
-                    <div class="teacher-name">Ergashev Sardor, Madiyarov Bilol</div>
-                    <div class="teacher-position">Senior Backend Developer</div>
+                    <div class="teacher-name">Haydarova Zulayho</div>
+                    <div class="teacher-position">Boshlang'ich dasturlash bo'yicha o'qituvchi</div>
                 </div>
             </div>
         </div>
         <div class="col-lg-4">
             <div class="price-card">
                 <div class="text-center mb-3">
-                    <span class="price-old">750,000 so'm</span>
-                    <div class="price-new">600,000 so'm</div>
+                    <span class="price-old">500,000 so'm</span>
+                    <div class="price-new">400,000 so'm</div>
                     <span class="price-period">/ oy</span>
                 </div>
                 <hr>
@@ -275,7 +275,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-4">
             <div class="modal-header border-0">
-                <h5 class="modal-title fw-bold">Backend kursiga yozilish</h5>
+                <h5 class="modal-title fw-bold">Raqamli bolalar kursiga yozilish</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
@@ -291,3 +291,5 @@
     </div>
 </div>
 @endsection
+
+

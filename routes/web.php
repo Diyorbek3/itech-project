@@ -48,6 +48,8 @@ Route::get('/courses/system-engineering', [CourceController::class, 'systemEngin
 Route::get('/courses/devops', [CourceController::class, 'devops'])->name('courses.devops');
 Route::get('/courses/data-analytics', [CourceController::class, 'dataAnalytics'])->name('courses.data_analytics');
 Route::get('/courses/network-admin', [CourceController::class, 'networkAdmin'])->name('courses.network_admin');
+Route::get('/courses/accounting', [CourceController::class, 'accounting'])->name('courses.accounting');
+
 
 // 5. Career route
 Route::get('/career', [CareerController::class, 'index'])->name('career.index');
