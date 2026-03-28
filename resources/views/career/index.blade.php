@@ -1,115 +1,226 @@
 @extends('layouts.app')
 
 @section('styles')
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>bolib otgan Master Classlar</title>
+
 <style>
-  body {
-    font-family: Arial;
-    background: #f1f5f9;
-    margin: 0;
-  }
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #f4f6f9;
+}
 
-  header {
-    background: #3b82f6;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    font-size: 24px;
-  }
+header {
+  background: linear-gradient(135deg,#4facfe,#00f2fe);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 24px;
+}
 
-  .container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
-    justify-content: center;
-  }
+h2 {
+  text-align: center;
+  margin: 20px 0;
+}
 
-  .card {
-    background: white;
-    width: 250px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    overflow: hidden;
-    text-align: center;
-  }
+.carousel {
+  width: 90%;
+  max-width: 900px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  position: relative;
+}
 
-  .card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
+.track {
+  display: flex;
+  transition: 0.5s;
+}
 
-  .card h3 {
-    margin: 10px 0 5px;
-  }
+.slide {
+  min-width: 100%;
+}
 
-  .card p {
-    font-size: 14px;
-    padding: 0 10px;
-  }
+.slide img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+}
+
+.content {
+  padding: 20px;
+}
+
+.content h3 {
+  margin-bottom: 10px;
+}
+
+.content p {
+  margin: 6px 0;
+  color: #555;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background: #4facfe;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.btn-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
 </style>
-@endsection
+</head>
 
-@section('content')
-<header>💻 Dasturchilar haqida</header>
+<body>
 
-<div class="container">
+<header>ITech Academy 🚀</header>
 
-  <div class="card">
-    <img src="https://heartdirected.com/wp-content/uploads/2023/06/Front-End-Develop2.jpg">
-    <h3>Frontend Developer</h3>
-    <p>🕒 2 yil tajriba</p>
-    <p>HTML, CSS, JavaScript orqali web saytlar yaratadi.</p>
+<h2>📚 Bo‘lib o‘tgan Master Classlar</h2>
+
+<div class="carousel">
+  <div class="track" id="track">
+
+    <!-- 1 -->
+    <div class="slide">
+      <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c">
+      <div class="content">
+        <h3>🤖 Telegram Bot Master Klass</h3>
+        <p><b>Bo‘lib o‘tgan:</b> 28-avgust 2025</p>
+        <p><b>Mavzu:</b> Telegram bot yaratish</p>
+        <p>Botlar qanday ishlaydi va pyTelegramBotAPI orqali yozish.</p>
+        
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="slide">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475">
+      <div class="content">
+        <h3>🎨 CSS Animation Master Class</h3>
+        <p><b>Bo‘lib o‘tgan:</b> 27-avgust 2025</p>
+        <p>Transition, transform va animatsiyalar yaratish.</p>
+        
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="slide">
+      <img src="https://images.unsplash.com/photo-1581091870627-3d3c3d0b9c29">
+      <div class="content">
+        <h3>🎮 XO Game Master Class</h3>
+        <p><b>Bo‘lib o‘tgan:</b> 29-avgust 2025</p>
+        <p>HTML, CSS va JavaScript orqali o‘yin yaratish.</p>
+        
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="slide">
+      <img src="https://images.unsplash.com/photo-1531498860502-7c67cf02f657">
+      <div class="content">
+        <h3>⚛️ DOM vs React DOM</h3>
+        <p><b>Bo‘lib o‘tgan:</b> 30-avgust 2025</p>
+        <p><b>Ustoz:</b> G‘ayratjon Mirzamahmudov</p>
+        <p>Virtual DOM va React tezligi sirlari.</p>
+        
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="slide">
+      <img src="https://images.unsplash.com/photo-1526378722484-cc5c510f5c65">
+      <div class="content">
+        <h3>💻 IT Master Klass</h3>
+        <p><b>Bo‘lib o‘tgan:</b> 27-aprel 2025</p>
+        <p><b>Speaker:</b> Otabek Nurmuhammad</p>
+        <p>Linux, Backend/Frontend va AI asoslari.</p>
+       
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="slide">
+      <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
+      <div class="content">
+        <h3>🎤 Savol-Javob Sessiyasi</h3>
+        <p><b>Bo‘lib o‘tgan:</b> 19-aprel</p>
+        <p><b>Mehmon:</b> Otabek Nurmuhammad</p>
+        <p>AT bo‘yicha savollarga jonli javoblar.</p>
+        
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="slide">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d">
+      <div class="content">
+        <h3>👨‍💻 Backend & Frontend Uchrashuv</h3>
+        <p><b>Bo‘lib o‘tgan:</b> 2025</p>
+        <p>Payme va Uniconsoft dasturchilari bilan uchrashuv.</p>
+        <p>Junior’dan Middle’ga o‘tish sirları.</p>
+        
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="slide">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f">
+      <div class="content">
+        <h3>🌐 IT Olamiga Sayohat</h3>
+        <p><b>Bo‘lib o‘tgan:</b> 21-dekabr</p>
+        <p><b>Speaker:</b> Eljahon Normaminov</p>
+        <p>IT ni o‘rganish va rivojlanish bosqichlari.</p>
+        
+      </div>
+    </div>
+
   </div>
 
-  <div class="card">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdRaKRSFts6z-_VEg7LkeSNBxF_RH2n0N5_A&s">
-    <h3>Backend Developer</h3>
-    <p>🕒 3 yil tajriba</p>
-    <p>Server, database va API bilan ishlaydi.</p>
-  </div>
-
-  <div class="card">
-    <img src="https://xaltam.com/blogs/wp-content/uploads/2024/11/mobile-app-development-trends-xaltam.png">
-    <h3>Mobile Developer</h3>
-    <p>🕒 2.5 yil tajriba</p>
-    <p>Android va iOS ilovalar yaratadi.</p>
-  </div>
-
-  <div class="card">
-    <img src="https://eu-images.contentstack.com/v3/assets/blt69509c9116440be8/blt25ac3c488d76676a/671a7a173fe49b837e2e389a/AI_technology-AkarapongChairean-AlamyStockPhoto.jpg">
-    <h3>AI Engineer</h3>
-    <p>🕒 4 yil tajriba</p>
-    <p>Sun'iy intellekt va machine learning bilan ishlaydi.</p>
-  </div>
-
-  <div class="card">
-    <img src="https://www.gyansetu.in/wp-content/uploads/2024/02/What-is-Full-stack-development-and-How-to-become-Full-Stack-Developer-810x4301_1-637x637.webp">
-    <h3>Full-stack Developer</h3>
-    <p>🕒 2 yil tajriba</p>
-    <p>Frontend + backend to'liq yaratadi.</p>
-  </div>
-
-  <div class="card">
-    <img src="https://assets.techrepublic.com/uploads/2023/10/tr_20231018-devops-engineer-roles-and-responsibilities.png">
-    <h3>DevOps Engineer</h3>
-    <p>🕒 3 yil tajriba</p>
-    <p>Server, database va API bilan ishlaydi.</p>
-  </div>
-
-  <div class="card">
-    <img src="https://humanfocus.co.uk/wp-content/uploads/what-is-cyber-security.jpg">
-    <h3>Cybersecurity</h3>
-    <p>🕒 2.5 yil tajriba</p>
-    <p>Android va iOS ilovalar yaratadi.</p>
-  </div>
-
-  <div class="card">
-    <img src="https://eu-images.contentstack.com/v3/assets/blt69509c9116440be8/blt25ac3c488d76676a/671a7a173fe49b837e2e389a/AI_technology-AkarapongChairean-AlamyStockPhoto.jpg">
-    <h3>Game ai_developer</h3>
-    <p>🕒 4 yil tajriba</p>
-    <p>Sun'iy intellekt va machine learning bilan ishlaydi.</p>
-  </div>
+  <button class="btn-nav prev" onclick="move(-1)">❮</button>
+  <button class="btn-nav next" onclick="move(1)">❯</button>
 
 </div>
+
+<script>
+let index = 0;
+const track = document.getElementById("track");
+const slides = document.querySelectorAll(".slide");
+
+function show(i) {
+  index = (i + slides.length) % slides.length;
+  track.style.transform = `translateX(-${index * 100}%)`;
+}
+
+function move(step) {
+  show(index + step);
+}
+
+setInterval(() => move(1), 4000);
+</script>
+
+</body>
+</html>
+
 @endsection
