@@ -92,7 +92,7 @@ return [
     'about_website' => 'Website haqida',
     'footer_description' => 'iTech Academy web-sayti orqali kurslar, yo‘nalishlar va loyihalar haqida barcha ma’lumotlarni topishingiz mumkin. Saytimiz foydalanuvchi uchun qulay va tezkor ishlaydi.',
     'address' => 'Manzil',
-    'address_details' => 'Manzil: Olmaliq shahar Ucell bosh ofisi',
+    'address_details' => 'Manzil: Olmaliq shahar, Ucell bosh ofisi tagida.',
     'follow_us' => 'Bizni kuzatishda davom eting!',
     'copyright' => 'Copyright © :year ITECH',
     'design_by' => 'Dizayn :name',

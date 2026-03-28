@@ -582,75 +582,89 @@
         </div>
     </div>
 
-    <!-- Projects -->
     <div id="projects" class="cards-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="h2-heading">{{ __('messages.projects_title') }}</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                   <div class="card" style="border: 2px solid #000; border-radius: 12px; overflow: hidden;"> <img
-                            class="img-fluid w-100" src="{{ asset('images/wasteles.png') }}" alt="Delever">
-                        <div class="card-body p-4">
-                            <h5 class="card-title fw-bold mb-2"> @lang('messages.project5_title') </h5>
-                            <p class="card-text text-secondary"> @lang('messages.project5_desc') <a
-                                    class="text-primary text-decoration-none fw-semibold" href="article.html">
-                                    @lang('messages.read_more') </a> </p>
-                        </div>
-                    </div>
-                    <div class="card" style="border: 2px solid #000; border-radius: 12px; overflow: hidden;"> <img
-                            class="img-fluid w-100" src="{{ asset('images/delever.png') }}" alt="Delever">
-                        <div class="card-body p-4">
-                            <h5 class="card-title fw-bold mb-2"> @lang('messages.project2_title') </h5>
-                            <p class="card-text text-secondary"> @lang('messages.project2_desc') <a
-                                    class="text-primary text-decoration-none fw-semibold" href="article.html">
-                                    @lang('messages.read_more') </a> </p>
-                        </div>
-                    </div>
-                    <div class="card" style="border: 2px solid #000; border-radius: 12px; overflow: hidden;"> <img
-                            class="img-fluid w-100" src="{{ asset('images/kidi.png') }}" alt="Delever">
-                        <div class="card-body p-4">
-                            <h5 class="card-title fw-bold mb-2"> @lang('messages.project3_title') </h5>
-                            <p class="card-text text-secondary"> @lang('messages.project3_desc') <a
-                                    class="text-primary text-decoration-none fw-semibold" href="article.html">
-                                    @lang('messages.read_more') </a> </p>
-                        </div>
-                    </div>
-                    <div class="card" style="border: 2px solid #000; border-radius: 12px; overflow: hidden;"> <img
-                            class="img-fluid w-100" src="{{ asset('images/growz.png') }}" alt="Delever">
-                        <div class="card-body p-4">
-                            <h5 class="card-title fw-bold mb-2"> @lang('messages.project4_title') </h5>
-                            <p class="card-text text-secondary"> @lang('messages.project4_desc') <a
-                                    class="text-primary text-decoration-none fw-semibold" href="article.html">
-                                    @lang('messages.read_more') </a> </p>
-                        </div>
-                    </div>
-                   <div class="card" style="border: 2px solid #000; border-radius: 12px; overflow: hidden;"> <img
-                            class="img-fluid w-100" src="{{ asset('images/iqro.png') }}" alt="Delever">
-                        <div class="card-body p-4">
-                            <h5 class="card-title fw-bold mb-2"> @lang('messages.project1_title') </h5>
-                            <p class="card-text text-secondary"> @lang('messages.project1_desc') <a
-                                    class="text-primary text-decoration-none fw-semibold" href="article.html">
-                                    @lang('messages.read_more') </a> </p>
-                        </div>
-                    </div>
-                    <div class="card" style="border: 2px solid #000; border-radius: 12px; overflow: hidden;"> <img
-                            class="img-fluid w-100" src="{{ asset('images/urecruit.png') }}" alt="Delever">
-                        <div class="card-body p-4">
-                            <h5 class="card-title fw-bold mb-2"> @lang('messages.project6_title') </h5>
-                            <p class="card-text text-secondary"> @lang('messages.project6_desc') <a
-                                    class="text-primary text-decoration-none fw-semibold" href="article.html">
-                                    @lang('messages.read_more') </a> </p>
-                        </div>
-                    </div>\
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="h2-heading">{{ __('messages.projects_title') }}</h2>
             </div>
         </div>
-    </div>
 
+        <div class="row justify-content-center mt-4">
+            
+            <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
+                <div class="card h-100" style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;"> 
+                    <img class="img-fluid w-100" src="{{ asset('images/wasteles.png') }}" alt="Wasteless">
+                    <div class="card-body p-4">
+                        <h5 class="card-title fw-bold mb-2"> @lang('messages.project5_title') </h5>
+                        <p class="card-text text-secondary"> @lang('messages.project5_desc') 
+                            <a class="text-primary text-decoration-none fw-semibold" href="article.html"> @lang('messages.read_more') </a> 
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
+                <div class="card h-100" style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;"> 
+                    <img class="img-fluid w-100" src="{{ asset('images/delever.png') }}" alt="Delever">
+                    <div class="card-body p-4">
+                        <h5 class="card-title fw-bold mb-2"> @lang('messages.project2_title') </h5>
+                        <p class="card-text text-secondary"> @lang('messages.project2_desc') 
+                            <a class="text-primary text-decoration-none fw-semibold" href="article.html"> @lang('messages.read_more') </a> 
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
+                <div class="card h-100" style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;"> 
+                    <img class="img-fluid w-100" src="{{ asset('images/kidi.png') }}" alt="Kidi">
+                    <div class="card-body p-4">
+                        <h5 class="card-title fw-bold mb-2"> @lang('messages.project3_title') </h5>
+                        <p class="card-text text-secondary"> @lang('messages.project3_desc') 
+                            <a class="text-primary text-decoration-none fw-semibold" href="article.html"> @lang('messages.read_more') </a> 
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
+                <div class="card h-100" style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;"> 
+                    <img class="img-fluid w-100" src="{{ asset('images/growz.png') }}" alt="Growz">
+                    <div class="card-body p-4">
+                        <h5 class="card-title fw-bold mb-2"> @lang('messages.project4_title') </h5>
+                        <p class="card-text text-secondary"> @lang('messages.project4_desc') 
+                            <a class="text-primary text-decoration-none fw-semibold" href="article.html"> @lang('messages.read_more') </a> 
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
+                <div class="card h-100" style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;"> 
+                    <img class="img-fluid w-100" src="{{ asset('images/iqro.png') }}" alt="Iqro">
+                    <div class="card-body p-4">
+                        <h5 class="card-title fw-bold mb-2"> @lang('messages.project1_title') </h5>
+                        <p class="card-text text-secondary"> @lang('messages.project1_desc') 
+                            <a class="text-primary text-decoration-none fw-semibold" href="article.html"> @lang('messages.read_more') </a> 
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
+                <div class="card h-100" style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;"> 
+                    <img class="img-fluid w-100" src="{{ asset('images/urecruit.png') }}" alt="Urecruit">
+                    <div class="card-body p-4">
+                        <h5 class="card-title fw-bold mb-2"> @lang('messages.project6_title') </h5>
+                        <p class="card-text text-secondary"> @lang('messages.project6_desc') 
+                            <a class="text-primary text-decoration-none fw-semibold" href="article.html"> @lang('messages.read_more') </a> 
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div> </div> </div>
     <!-- Testimonials -->
     <div class="slider-1 bg-gray">
         <img class="quotes-decoration" src="{{ asset('images/quotes.svg') }}" alt="alternative">

@@ -91,7 +91,7 @@ return [
     'about_website' => 'О сайте',
     'footer_description' => 'Через сайт iTech Academy вы можете найти всю информацию о курсах, направлениях и проектах. Наш сайт удобен для пользователя и работает быстро.',
     'address' => 'Адрес',
-    'address_details' => 'Адрес: г. Алмалык, главный офис Ucell',
+    'address_details' => 'Адрес: Город Алмалык, под главным офисом Ucell.',
     'follow_us' => 'Следите за нами!',
     'copyright' => 'Авторское право © :year ITECH',
     'design_by' => 'Дизайн от :name',
