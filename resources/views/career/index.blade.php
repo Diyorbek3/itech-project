@@ -104,7 +104,7 @@ h2 {
 
     <!-- 1 -->
     <div class="slide">
-      <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c">
+      <img src="http://127.0.0.1:8000/images/tg bot.png">
       <div class="content">
         <h3>🤖 Telegram Bot Master Klass</h3>
         <p><b>Bo‘lib o‘tgan:</b> 28-avgust 2025</p>
