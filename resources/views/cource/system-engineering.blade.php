@@ -178,6 +178,121 @@
         font-weight: 600;
         color: #3b82f6;
     }
+    /* Modal custom style */
+    .custom-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.65);
+        backdrop-filter: blur(6px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1050;
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0.2s, opacity 0.2s ease;
+    }
+    .custom-modal-overlay.active {
+        visibility: visible;
+        opacity: 1;
+    }
+    .modal-form-container {
+        background: #ffffff;
+        max-width: 480px;
+        width: 90%;
+        border-radius: 2rem;
+        padding: 2rem 1.8rem 2rem 1.8rem;
+        box-shadow: 0 30px 45px rgba(0, 0, 0, 0.3);
+        transform: scale(0.96);
+        transition: transform 0.2s ease;
+        text-align: center;
+        position: relative;
+    }
+    .custom-modal-overlay.active .modal-form-container {
+        transform: scale(1);
+    }
+    .modal-form-container h3 {
+        font-size: 1.9rem;
+        font-weight: 800;
+        background: linear-gradient(145deg, #0f2b3d, #1e4a76);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 0.4rem;
+    }
+    .modal-form-container p {
+        color: #4a5568;
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+    .form-group-custom {
+        margin-bottom: 1.3rem;
+        text-align: left;
+    }
+    .form-group-custom label {
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 0.4rem;
+        display: block;
+        font-size: 0.9rem;
+    }
+    .form-group-custom input {
+        width: 100%;
+        padding: 0.85rem 1rem;
+        border: 1.5px solid #e2edf7;
+        border-radius: 1.5rem;
+        font-size: 1rem;
+        transition: 0.2s;
+        outline: none;
+        background: #fefefe;
+    }
+    .form-group-custom input:focus {
+        border-color: #1e6f9f;
+        box-shadow: 0 0 0 3px rgba(30, 111, 159, 0.2);
+    }
+    .submit-modal-btn {
+        background: #0f3b5c;
+        width: 100%;
+        border: none;
+        padding: 0.9rem;
+        border-radius: 3rem;
+        font-weight: bold;
+        font-size: 1.05rem;
+        color: white;
+        transition: 0.2s;
+        margin-top: 0.5rem;
+    }
+    .submit-modal-btn:hover {
+        background: #1e5a7c;
+        transform: scale(0.98);
+    }
+    .close-modal-icon {
+        position: absolute;
+        top: 1rem;
+        right: 1.4rem;
+        background: none;
+        border: none;
+        font-size: 1.9rem;
+        cursor: pointer;
+        color: #94a3b8;
+        transition: 0.2s;
+    }
+    .close-modal-icon:hover {
+        color: #1e293b;
+    }
+    .success-toast-msg {
+        background: #dcfce7;
+        border-radius: 2rem;
+        padding: 0.7rem;
+        margin-top: 1rem;
+        color: #15803d;
+        font-weight: 500;
+        font-size: 0.85rem;
+        display: none;
+    }
     @media (max-width: 991px) {
         .course-title { font-size: 1.8rem; }
         .price-card { position: relative; margin-top: 2rem; }
@@ -185,6 +300,7 @@
     @media (max-width: 768px) {
         .course-hero { padding: 1.5rem; }
         .course-title { font-size: 1.5rem; }
+        .modal-form-container { padding: 1.5rem; }
     }
 </style>
 @endsection
@@ -260,7 +376,7 @@
                     <div class="d-flex justify-content-between"><span><i class="fas fa-certificate me-2 text-primary"></i> Sertifikat</span><span class="fw-bold">✓ Bor</span></div>
                 </div>
                 <hr>
-                <button class="btn btn-enroll text-white" data-bs-toggle="modal" data-bs-target="#enrollModal">
+                <button id="openModalBtn" class="btn btn-enroll text-white">
                     <i class="fas fa-bolt me-2"></i> Hoziroq yozilish
                 </button>
                 <div class="text-center mt-3">
@@ -271,23 +387,118 @@
     </div>
 </div>
 
-<div class="modal fade" id="enrollModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content rounded-4">
-            <div class="modal-header border-0">
-                <h5 class="modal-title fw-bold">Tizim muhandisligi kursiga yozilish</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+<!-- Custom Modal - barcha kurslardagi kabi -->
+<div id="customModal" class="custom-modal-overlay">
+    <div class="modal-form-container">
+        <button class="close-modal-icon" id="closeModalBtn"><i class="fas fa-times"></i></button>
+        <h3><i class="fas fa-pen-alt me-2" style="color:#1e4a76;"></i> Ro'yxatdan o'tish</h3>
+        <p>Tizim muhandisligi kursiga ariza qoldiring</p>
+        
+        <form id="applicationForm">
+            <div class="form-group-custom">
+                <label><i class="fas fa-user me-1"></i> Ism va Sharif</label>
+                <input type="text" id="fullName" placeholder="Masalan: Jahongir Alimov" required>
             </div>
-            <div class="modal-body">
-                <form>
-                    @csrf
-                    <div class="mb-3"><label class="form-label">Ismingiz</label><input type="text" class="form-control rounded-3" required></div>
-                    <div class="mb-3"><label class="form-label">Telefon raqam</label><input type="tel" class="form-control rounded-3" placeholder="+998 __ ___ __ __" required></div>
-                    <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control rounded-3" required></div>
-                    <button type="submit" class="btn btn-primary w-100 rounded-3 py-2"><i class="fas fa-paper-plane me-2"></i> Yuborish</button>
-                </form>
+            <div class="form-group-custom">
+                <label><i class="fas fa-phone-alt me-1"></i> Telefon raqam</label>
+                <input type="tel" id="phone" placeholder="+998 90 123 45 67" required>
             </div>
-        </div>
+            <button type="submit" class="submit-modal-btn"><i class="fas fa-paper-plane me-2"></i> Yuborish va ariza qoldirish</button>
+            <div id="successMsg" class="success-toast-msg">
+                ✅ Ariza muvaffaqiyatli qabul qilindi! Tez orada bog'lanamiz.
+            </div>
+        </form>
+        <hr>
+        <div style="font-size: 12px; color: #6c757d; text-align: center;">Sizning ma'lumotlaringiz maxfiy saqlanadi</div>
     </div>
 </div>
+
+<script>
+    (function() {
+        const modal = document.getElementById('customModal');
+        const openBtn = document.getElementById('openModalBtn');
+        const closeBtn = document.getElementById('closeModalBtn');
+        const form = document.getElementById('applicationForm');
+        const fullnameField = document.getElementById('fullName');
+        const phoneField = document.getElementById('phone');
+        const successMsg = document.getElementById('successMsg');
+
+        function openModal() {
+            if (modal) {
+                modal.classList.add('active');
+                successMsg.style.display = 'none';
+                fullnameField.value = '';
+                phoneField.value = '';
+            }
+        }
+
+        function closeModal() {
+            if (modal) {
+                modal.classList.remove('active');
+            }
+        }
+
+        if (openBtn) {
+            openBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                openModal();
+            });
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                closeModal();
+            });
+        }
+
+        if (modal) {
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+        }
+
+        if (form) {
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const fullname = fullnameField.value.trim();
+                const phone = phoneField.value.trim();
+
+                if (!fullname) {
+                    alert("Iltimos, Ism va Sharifni kiriting!");
+                    fullnameField.focus();
+                    return;
+                }
+                if (!phone) {
+                    alert("Telefon raqamni kiriting!");
+                    phoneField.focus();
+                    return;
+                }
+
+                // Telegram botga yuborish
+                const token = "8586485983:AAF-7NhRKL72j3zXWUdznuHFv3rHCh1SIVc";
+                const chatId = "-1003836558266";
+                const text = `🆕 YANGI ARIZA!\n\n📚 Kurs: Tizim muhandisligi\n👤 Ism: ${fullname}\n📞 Telefon: ${phone}\n⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}`;
+                
+                const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
+                
+                fetch(url)
+                .then(function() {
+                    successMsg.style.display = 'block';
+                    fullnameField.value = '';
+                    phoneField.value = '';
+                    setTimeout(function() {
+                        closeModal();
+                        successMsg.style.display = 'none';
+                    }, 2000);
+                })
+                .catch(function() {
+                    alert("Xatolik yuz berdi! Iltimos, qayta urinib ko'ring.");
+                });
+            });
+        }
+    })();
+</script>
 @endsection
