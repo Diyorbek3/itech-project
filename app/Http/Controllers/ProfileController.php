@@ -2,205 +2,130 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
     /**
-     * Display the user's profile form.
+     * Display the user profile with edit form.
      */
-    public function edit(Request $request): View
+    public function index()
     {
-        // User ma'lumotlarini DB dan olish
-        $user = DB::table('users')->where('id', Auth::id())->first();
-        
-        return view('profile.index', [
-            'user' => $user,
-        ]);
+        $user = auth()->user();
+        $data['email'] = $user->email;
+        $data['username'] = $user->username;
+        $data['first_name'] = $user->first_name;
+        $data['last_name'] = $user->last_name;
+        $data['avatar'] = $user->avatar;
+        $data['hotelname'] = Session::get('htlname');
+      
+        return view('profile.index', ['data' => $data]);
     }
 
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(Request $request)
     {
-        $validated = $request->validated();
+        $vD = $request->validate(
+            [
+                'first_name' => 'required|regex:/^[a-zA-Z]+$/|max:64',
+                'last_name' => 'required|regex:/^[a-zA-Z]+$/|max:64',
+                'avatar' => 'nullable|image|mimes:jpg,png|max:1024',
+            ],
+            [
+                'first_name.required' => 'First name is required.',
+                'first_name.regex' => 'First name must contain only English alphabet characters.',
+                'first_name.max' => 'First name must not exceed 64 characters.',
+                'last_name.required' => 'Last name is required.',
+                'last_name.regex' => 'Last name must contain only English alphabet characters.',
+                'last_name.max' => 'Last name must not exceed 64 characters.',
+                'avatar.image' => 'The avatar must be an image.',
+                'avatar.mimes' => 'The avatar must be a file of type: jpg, png.',
+                'avatar.max' => 'The avatar must not be larger than 1MB.',
+            ]
+        );
         
-        // Email o'zgarganligini tekshirish
-        $currentUser = DB::table('users')->where('id', Auth::id())->first();
-        
-        $updateData = [
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'updated_at' => now(),
-        ];
-        
-        // Qo'shimcha maydonlarni qo'shish (agar mavjud bo'lsa)
-        if (isset($validated['surname'])) {
-            $updateData['surname'] = $validated['surname'];
-        }
-        if (isset($validated['phone'])) {
-            $updateData['phone'] = $validated['phone'];
-        }
-        if (isset($validated['country'])) {
-            $updateData['country'] = $validated['country'];
-        }
-        if (isset($validated['city'])) {
-            $updateData['city'] = $validated['city'];
-        }
-        if (isset($validated['address'])) {
-            $updateData['address'] = $validated['address'];
-        }
-        if (isset($validated['bio'])) {
-            $updateData['bio'] = $validated['bio'];
-        }
-        
-        // Email o'zgargan bo'lsa, verified_at ni null qilish
-        if ($currentUser->email !== $validated['email']) {
-            $updateData['email_verified_at'] = null;
-        }
-        
-        // Ma'lumotlarni yangilash
-        DB::table('users')
-            ->where('id', Auth::id())
-            ->update($updateData);
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
-    }
-
-    /**
-     * Update user avatar.
-     */
-    public function updateAvatar(Request $request): \Illuminate\Http\JsonResponse
-    {
         try {
-            $request->validate([
-                'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
-            ]);
-
-            $userId = Auth::id();
+            $user = $request->user();
+            $user->first_name = $vD['first_name'];
+            $user->last_name = $vD['last_name'];
             
-            // Eski avatarni olish
-            $oldAvatar = DB::table('users')
-                ->where('id', $userId)
-                ->value('avatar');
-            
-            // Eski avatarni o'chirish (agar mavjud bo'lsa va default bo'lmasa)
-            if ($oldAvatar && !str_contains($oldAvatar, 'ui-avatars.com')) {
-                $oldPath = str_replace('/storage/', '', $oldAvatar);
-                if (Storage::disk('public')->exists($oldPath)) {
-                    Storage::disk('public')->delete($oldPath);
+            if ($request->hasFile('avatar')) {
+                $avatarFile = $request->file('avatar');
+                $newFileName = $user->id . '.' . $avatarFile->getClientOriginalExtension();
+                
+                if ($user->avatar && Storage::disk('public')->exists('avatars/' . $user->avatar)) {
+                    Storage::disk('public')->delete('avatars/' . $user->avatar);
                 }
+                
+                $avatarFile->storeAs('avatars', $newFileName, 'public');
+                $user->avatar = $newFileName;
             }
             
-            // Yangi avatarni saqlash
-            $file = $request->file('avatar');
-            $fileName = time() . '_' . $userId . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('avatars', $fileName, 'public');
+            $user->save();
             
-            // Avatarni bazaga saqlash
-            DB::table('users')
-                ->where('id', $userId)
-                ->update([
-                    'avatar' => '/storage/' . $path,
-                    'updated_at' => now()
-                ]);
+            return response()->json(['status' => 'success', 'message' => 'Profile updated successfully!']);
             
-            return response()->json([
-                'success' => true,
-                'message' => 'Avatar muvaffaqiyatli yangilandi',
-                'avatar_url' => '/storage/' . $path
+        } catch (\Exception $e) {
+            Log::error('Error during profile update', [
+                'user' => auth()->id(),
+                'error' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine()
             ]);
             
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Avatar yuklashda xatolik: ' . $e->getMessage()
-            ], 500);
+            return response()->json(['status' => 'error', 'message' => 'An error occurred while updating the profile!'], 422);
         }
     }
-
+    
     /**
-     * Delete user avatar.
+     * Update the user's password.
      */
-    public function deleteAvatar(): \Illuminate\Http\JsonResponse
+    public function updatePassword(Request $request)
     {
+        $vD = $request->validate(
+            [
+                'old_password' => 'required',
+                'password' => 'required|confirmed|min:8|max:64|regex:/^\S*$/',
+            ],
+            [
+                'password.regex' => 'The password cannot contain spaces.',
+                'old_password.required' => 'The old password field is required.',
+                'password.required' => 'The password field is required.',
+                'password.confirmed' => 'The password confirmation does not match.',
+                'password.min' => 'The password must be at least 8 characters.',
+                'password.max' => 'The password must not exceed 64 characters.',
+            ]
+        );
+        
         try {
-            $userId = Auth::id();
+            $user = auth()->user();
             
-            // Avatarni olish
-            $avatar = DB::table('users')
-                ->where('id', $userId)
-                ->value('avatar');
-            
-            // Fizik faylni o'chirish
-            if ($avatar && !str_contains($avatar, 'ui-avatars.com')) {
-                $path = str_replace('/storage/', '', $avatar);
-                if (Storage::disk('public')->exists($path)) {
-                    Storage::disk('public')->delete($path);
-                }
+            if (!Hash::check($request->old_password, $user->password)) {
+                return response()->json(['status' => 'error', 'errors' => ['old_password' => ['The old password is incorrect.']]], 422);
             }
             
-            // Bazadan avatarni o'chirish
-            DB::table('users')
-                ->where('id', $userId)
-                ->update([
-                    'avatar' => null,
-                    'updated_at' => now()
-                ]);
+            $user->password = Hash::make($vD['password']);
+            $user->save();
             
-            return response()->json([
-                'success' => true,
-                'message' => 'Avatar o\'chirildi'
+            return response()->json(['status' => 'success', 'message' => 'Password updated successfully!']);
+            
+        } catch (\Exception $e) {
+            Log::error('Error during user password update', [
+                'user' => auth()->id(),
+                'error' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine()
             ]);
             
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Avatar o\'chirishda xatolik: ' . $e->getMessage()
-            ], 500);
-        }
-    }
-
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
-    {
-        try {
-            $userId = Auth::id();
-            
-            // Avatarni o'chirish
-            $avatar = DB::table('users')
-                ->where('id', $userId)
-                ->value('avatar');
-            
-            if ($avatar && !str_contains($avatar, 'ui-avatars.com')) {
-                $path = str_replace('/storage/', '', $avatar);
-                if (Storage::disk('public')->exists($path)) {
-                    Storage::disk('public')->delete($path);
-                }
-            }
-            
-            // Userni o'chirish
-            DB::table('users')->where('id', $userId)->delete();
-            
-            Auth::logout();
-            
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
-            
-            return Redirect::to('/');
-            
-        } catch (\Exception $e) {
-            return Redirect::back()->with('error', 'Hisobni o\'chirishda xatolik yuz berdi');
+            return response()->json(['status' => 'error', 'message' => 'An error occurred while updating the password'], 422);
         }
     }
 }
