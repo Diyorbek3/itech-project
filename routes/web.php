@@ -56,5 +56,6 @@ Route::get('/career', [CareerController::class, 'index'])->name('career.index');
 
 // 6. Kursga yozilish route (CourceController bilan!)
 Route::post('/enroll/submit', [CourceController::class, 'enrollSubmit'])->name('enroll.submit');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact-send');
 
 require __DIR__.'/auth.php';
