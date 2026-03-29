@@ -2,7 +2,6 @@
 
 @section('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
     #myTabContent input {
@@ -37,7 +36,6 @@
 
 @section('scripts')
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
     
@@ -368,7 +366,7 @@
                                                 <div class="row">
                                                     <div class="mb-3 col-md-6">
                                                         <label class="form-label">{{ __("messages.email_address") }}</label>
-                                                        <input type="email"
+                                                        <input style=" type="email"
                                                                name="email" class="form-control border border-2 p-2"
                                                                value='{{ old('email', $data['email'] ?? '') }}'>
                                                     </div>
