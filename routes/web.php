@@ -24,11 +24,10 @@ Route::get('language/{locale}', function ($locale) {
 
 // 3. Profil (Auth)
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar');
-    Route::delete('/profile/avatar', [ProfileController::class, 'deleteAvatar'])->name('profile.avatar.delete');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', [ProfileController::class, 'index']);
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+Route::put('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
+Route::post('/profile/update-avatar', [ProfileController::class, 'updateAvatar'])->name('profile.update-avatar');
 });
 
 // 4. Kurslar yo'nalishlari (CourceController bilan!)
@@ -59,3 +58,7 @@ Route::post('/enroll/submit', [CourceController::class, 'enrollSubmit'])->name('
 Route::post('/contact', [ContactController::class, 'send'])->name('contact-send');
 
 require __DIR__.'/auth.php';
+// routes/web.php
+Route::get('/kurs/ofis-menejerligi', function () {
+    return view('courses.office-manager');
+})->name('courses.office-manager');
