@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CourceController; // <-- BU CourceController (Course emas!)
 use App\Http\Controllers\CareerController;
+use App\Http\Controllers\MyCourceController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\App;
@@ -54,8 +55,16 @@ Route::get('/courses/accounting', [CourceController::class, 'accounting'])->name
 // 5. Career route
 Route::get('/career', [CareerController::class, 'index'])->name('career.index');
 
-// 6. Kursga yozilish route (CourceController bilan!)
-Route::post('/enroll/submit', [CourceController::class, 'enrollSubmit'])->name('enroll.submit');
-Route::post('/contact', [ContactController::class, 'send'])->name('contact-send');
-
+Route::prefix('my-courses')->group(function () {
+    Route::get('/', [MyCourceController::class, 'index'])->name('my-courses.index');
+    Route::post('/', [MyCourceController::class, 'store']);
+    Route::get('/{id}', [MyCourceController::class, 'show']);
+    Route::put('/{id}', [MyCourceController::class, 'update']);
+    Route::delete('/{id}', [MyCourceController::class, 'destroy']);
+    Route::post('/{courseId}/add-category', [MyCourceController::class, 'addCategory']);
+    Route::delete('/delete-category/{categoryId}', [MyCourceController::class, 'deleteCategory']);
+});
+// Route::auto('my-courses', MyCourceController::class);
+// Route::auto('my-projects', [ProjectController::class, 'index']);
+// Route::auto('my-careers', [CareerController::class, 'index']);
 require __DIR__.'/auth.php';

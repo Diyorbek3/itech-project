@@ -233,6 +233,7 @@ return [
     'details2_title' => 'Start your IT career here',
     'details2_description' => 'To succeed in IT, practice and real projects are essential. Each of our courses provides you not only with theoretical knowledge but also with job-ready experience. Our mentors constantly support you and guarantee your development with an individual approach.',
     'start' => 'Start',
+    'careers' => 'Careers',
     
     // ==================== INVITATION ====================
     'invitation_text' => 'Our team of experienced designers and interior construction specialists deliver results that exceed your expectations.',

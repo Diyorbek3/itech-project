@@ -57,7 +57,25 @@
                                         <i class="fas fa-user me-2"></i> {{ __('messages.profile') }}
                                     </a>
                                 </li>
-                                <li><hr class="dropdown-divider"></li>
+
+                                @if (auth()->user()->role_id == 1) 
+                                    <li>
+                                        <a class="dropdown-item" href="/my-courses">
+                                            <i class="fas fa-graduation-cap me-2"></i> {{ __('messages.courses') }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/">
+                                           <i class="fas fa-briefcase me-2"></i> {{ __('messages.projects') }}
+                                        </a>
+                                    </li>
+                                        <li>
+                                        <a class="dropdown-item" href="/">
+                                           <i class="fas fa-chart-line me-2"></i> {{ __('messages.careers') }}
+                                        </a>
+                                    </li>
+                                @endif
+                               
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
