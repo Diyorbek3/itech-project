@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('index');
+        return view('homepage');
     }
 
     public function sendToTelegram(Request $request)

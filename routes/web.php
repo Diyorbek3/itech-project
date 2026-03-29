@@ -3,15 +3,14 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CourceController; // <-- BU CourceController (Course emas!)
 use App\Http\Controllers\CareerController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MyCourceController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\App;
 
 // 1. Asosiy sahifa
-Route::get('/', function () {
-    return view('index');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // 2. Tilni almashtirish
 Route::get('language/{locale}', function ($locale) {
