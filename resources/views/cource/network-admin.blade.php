@@ -194,21 +194,21 @@
     <div class="course-hero">
         <div class="row align-items-center">
             <div class="col-lg-8">
-                <span class="course-badge"><i class="fas fa-network-wired me-2"></i> Network Administration</span>
-                <h1 class="course-title">Tarmoq administratorligi</h1>
-                <p class="course-description">Cisco, tarmoq protokollari, router va switch sozlash, tarmoq xavfsizligi va monitoring. CCNA asoslari va amaliy ko'nikmalar.</p>
+                <span class="course-badge"><i class="fas fa-network-wired me-2"></i> {{ __('messages.network_admin_badge') }}</span>
+                <h1 class="course-title">{{ __('messages.network_admin_title') }}</h1>
+                <p class="course-description">{{ __('messages.network_admin_description') }}</p>
                 <div class="d-flex gap-3 flex-wrap">
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-clock text-primary"></i><span>4 oy</span></div>
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>90+ talaba</span></div>
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-certificate text-primary"></i><span>Sertifikat beriladi</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-clock text-primary"></i><span>{{ __('messages.network_admin_duration') }}</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>{{ __('messages.network_admin_students') }} talaba</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-certificate text-primary"></i><span>{{ __('messages.certificate') }}</span></div>
                 </div>
                 <div class="tech-stack">
-                    <span class="tech-badge">Cisco</span>
-                    <span class="tech-badge">TCP/IP</span>
-                    <span class="tech-badge">Router</span>
-                    <span class="tech-badge">Switch</span>
-                    <span class="tech-badge">Firewall</span>
-                    <span class="tech-badge">Wireshark</span>
+                    <span class="tech-badge">{{ __('messages.network_admin_tech_cisco') }}</span>
+                    <span class="tech-badge">{{ __('messages.network_admin_tech_tcpip') }}</span>
+                    <span class="tech-badge">{{ __('messages.network_admin_tech_router') }}</span>
+                    <span class="tech-badge">{{ __('messages.network_admin_tech_switch') }}</span>
+                    <span class="tech-badge">{{ __('messages.network_admin_tech_firewall') }}</span>
+                    <span class="tech-badge">{{ __('messages.network_admin_tech_wireshark') }}</span>
                 </div>
             </div>
             <div class="col-lg-4 text-center d-none d-lg-block">
@@ -219,52 +219,103 @@
     <div class="row g-4">
         <div class="col-lg-8">
             <div class="info-card">
-                <h3 class="fw-bold mb-3">📖 Kurs haqida</h3>
-                <p class="text-secondary">Tarmoq administratorligi kursida siz tarmoq asoslari, Cisco router va switchlarni sozlash, tarmoq protokollari, tarmoq xavfsizligi va monitoringni o'rganasiz. Kurs yakunida siz CCNA darajasidagi bilimlarga ega bo'lasiz va real tarmoq infratuzilmalarini boshqara olasiz.</p>
+                <h3 class="fw-bold mb-3">📖 {{ __('messages.course_about') }}</h3>
+                <p class="text-secondary">{{ __('messages.network_admin_full_desc') }}</p>
             </div>
             <div class="info-card">
-                <h3 class="fw-bold mb-3">📚 O'quv dasturi</h3>
+                <h3 class="fw-bold mb-3">📚 {{ __('messages.course_program') }}</h3>
                 <div class="row g-2">
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Tarmoq asoslari</div><div class="skill-desc">OSI model, TCP/IP, IP manzillash, subnetting, VLAN</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Cisco router sozlash</div><div class="skill-desc">Static routing, OSPF, EIGRP, BGP asoslari</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Switch sozlash</div><div class="skill-desc">STP, VLAN, trunk, port security, EtherChannel</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Tarmoq xavfsizligi</div><div class="skill-desc">Firewall, ACL, VPN, AAA, 802.1X</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Monitoring va troubleshooting</div><div class="skill-desc">Wireshark, SNMP, syslog, ping, traceroute</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Simulyatsiya</div><div class="skill-desc">Cisco Packet Tracer, GNS3 bilan ishlash</div></div></div></div>
+                    <div class="col-md-6">
+                        <div class="skill-item">
+                            <div class="skill-check"><i class="fas fa-check"></i></div>
+                            <div>
+                                <div class="skill-title">{{ __('messages.network_admin_module1_title') }}</div>
+                                <div class="skill-desc">{{ __('messages.network_admin_module1_desc') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="skill-item">
+                            <div class="skill-check"><i class="fas fa-check"></i></div>
+                            <div>
+                                <div class="skill-title">{{ __('messages.network_admin_module2_title') }}</div>
+                                <div class="skill-desc">{{ __('messages.network_admin_module2_desc') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="skill-item">
+                            <div class="skill-check"><i class="fas fa-check"></i></div>
+                            <div>
+                                <div class="skill-title">{{ __('messages.network_admin_module3_title') }}</div>
+                                <div class="skill-desc">{{ __('messages.network_admin_module3_desc') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="skill-item">
+                            <div class="skill-check"><i class="fas fa-check"></i></div>
+                            <div>
+                                <div class="skill-title">{{ __('messages.network_admin_module4_title') }}</div>
+                                <div class="skill-desc">{{ __('messages.network_admin_module4_desc') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="skill-item">
+                            <div class="skill-check"><i class="fas fa-check"></i></div>
+                            <div>
+                                <div class="skill-title">{{ __('messages.network_admin_module5_title') }}</div>
+                                <div class="skill-desc">{{ __('messages.network_admin_module5_desc') }}</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="info-card">
-                <h3 class="fw-bold mb-3">👨‍💻 Kimlar uchun?</h3>
-                <p class="text-secondary">IT sohasiga qiziqqanlar, tarmoq administratori bo'lishni xohlovchilar, Cisco sertifikatiga tayyorlanayotganlar, sistem administratorlar, tarmoq xavfsizligiga qiziqadiganlar.</p>
+                <h3 class="fw-bold mb-3">👨‍💻 {{ __('messages.course_for_who') }}</h3>
+                <p class="text-secondary">{{ __('messages.network_admin_for_who') }}</p>
             </div>
             <div class="teacher-card">
                 <div class="teacher-avatar"><i class="fas fa-chalkboard-user"></i></div>
                 <div>
-                    <div class="teacher-name">Qodirov Shohijahon</div>
-                    <div class="teacher-position">Network Engineer, CCNA Certified</div>
+                    <div class="teacher-name">{{ __('messages.network_admin_teacher') }}</div>
+                    <div class="teacher-position">{{ __('messages.network_admin_teacher_position') }}</div>
                 </div>
             </div>
         </div>
         <div class="col-lg-4">
             <div class="price-card">
                 <div class="text-center mb-3">
-                    <span class="price-old">1,200,000 so'm</span>
-                    <div class="price-new">1,000,000 so'm</div>
-                    <span class="price-period">/ oy</span>
+                    <span class="price-old">{{ __('messages.network_admin_old_price') }}</span>
+                    <div class="price-new">{{ __('messages.network_admin_price') }}</div>
+                    <span class="price-period">{{ __('messages.price_per_month') }}</span>
                 </div>
                 <hr>
                 <div class="mb-3">
-                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-clock me-2 text-primary"></i> Davomiyligi</span><span class="fw-bold">4 oy</span></div>
-                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-calendar me-2 text-primary"></i> Darslar</span><span class="fw-bold">Haftada 3 kun</span></div>
-                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-language me-2 text-primary"></i> Til</span><span class="fw-bold">O'zbek tilida</span></div>
-                    <div class="d-flex justify-content-between"><span><i class="fas fa-certificate me-2 text-primary"></i> Sertifikat</span><span class="fw-bold">✓ Bor</span></div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span><i class="fas fa-clock me-2 text-primary"></i> {{ __('messages.course_duration_label') }}</span>
+                        <span class="fw-bold">{{ __('messages.network_admin_duration') }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span><i class="fas fa-calendar me-2 text-primary"></i> {{ __('messages.course_schedule') }}</span>
+                        <span class="fw-bold">{{ __('messages.course_schedule_value') }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span><i class="fas fa-language me-2 text-primary"></i> {{ __('messages.course_language') }}</span>
+                        <span class="fw-bold">{{ __('messages.course_language_value') }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span><i class="fas fa-certificate me-2 text-primary"></i> {{ __('messages.certificate') }}</span>
+                        <span class="fw-bold">✓ {{ __('messages.has') }}</span>
+                    </div>
                 </div>
                 <hr>
                 <button class="btn btn-enroll text-white" data-bs-toggle="modal" data-bs-target="#enrollModal">
-                    <i class="fas fa-bolt me-2"></i> Hoziroq yozilish
+                    <i class="fas fa-bolt me-2"></i> {{ __('messages.network_admin_enroll_button') }}
                 </button>
                 <div class="text-center mt-3">
-                    <small class="text-muted"><i class="fas fa-headset me-1"></i> 24/7 mentor yordami</small>
+                    <small class="text-muted"><i class="fas fa-headset me-1"></i> {{ __('messages.support_text') }}</small>
                 </div>
             </div>
         </div>
@@ -275,16 +326,27 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-4">
             <div class="modal-header border-0">
-                <h5 class="modal-title fw-bold">Tarmoq administratorligi kursiga yozilish</h5>
+                <h5 class="modal-title fw-bold">{{ __('messages.network_admin_title') }} {{ __('messages.enroll_modal_title') }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <form>
                     @csrf
-                    <div class="mb-3"><label class="form-label">Ismingiz</label><input type="text" class="form-control rounded-3" required></div>
-                    <div class="mb-3"><label class="form-label">Telefon raqam</label><input type="tel" class="form-control rounded-3" placeholder="+998 __ ___ __ __" required></div>
-                    <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control rounded-3" required></div>
-                    <button type="submit" class="btn btn-primary w-100 rounded-3 py-2"><i class="fas fa-paper-plane me-2"></i> Yuborish</button>
+                    <div class="mb-3">
+                        <label class="form-label">{{ __('messages.your_name') }}</label>
+                        <input type="text" class="form-control rounded-3" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">{{ __('messages.your_phone') }}</label>
+                        <input type="tel" class="form-control rounded-3" placeholder="+998 __ ___ __ __" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">{{ __('messages.email') }}</label>
+                        <input type="email" class="form-control rounded-3" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 rounded-3 py-2">
+                        <i class="fas fa-paper-plane me-2"></i> {{ __('messages.send') }}
+                    </button>
                 </form>
             </div>
         </div>

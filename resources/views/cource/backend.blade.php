@@ -194,13 +194,13 @@
     <div class="course-hero">
         <div class="row align-items-center">
             <div class="col-lg-8">
-                <span class="course-badge"><i class="fas fa-server me-2"></i> Backend Development</span>
-                <h1 class="course-title">Backend Dasturchi</h1>
-                <p class="course-description">PHP, Laravel va MySQL bilan server tomon dasturlashni o'rganing. API, ma'lumotlar bazasi va autentifikatsiya kabi muhim mavzularni amaliy loyihalar bilan mustahkamlang.</p>
+                <span class="course-badge"><i class="fas fa-server me-2"></i> {{ __('messages.backend_badge') }}</span>
+                <h1 class="course-title">{{ __('messages.backend_title') }}</h1>
+                <p class="course-description">{{ __('messages.backend_description') }}</p>
                 <div class="d-flex gap-3 flex-wrap">
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-clock text-primary"></i><span>5 oy</span></div>
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>200+ talaba</span></div>
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-certificate text-primary"></i><span>Sertifikat beriladi</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-clock text-primary"></i><span>{{ __('messages.backend_duration') }}</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>{{ __('messages.backend_students') }} talaba</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-certificate text-primary"></i><span>{{ __('messages.certificate') }}</span></div>
                 </div>
                 <div class="tech-stack">
                     <span class="tech-badge">PHP</span>
@@ -219,52 +219,103 @@
     <div class="row g-4">
         <div class="col-lg-8">
             <div class="info-card">
-                <h3 class="fw-bold mb-3">📖 Kurs haqida</h3>
-                <p class="text-secondary">Backend dasturchi kursida siz PHP dasturlash tilini, Laravel frameworkini, MySQL ma'lumotlar bazasini va REST API yaratishni o'rganasiz. Kurs davomida real loyihalar ustida ishlaysiz va bitiruv portfoliyo tayyorlaysiz.</p>
+                <h3 class="fw-bold mb-3">📖 {{ __('messages.course_about') }}</h3>
+                <p class="text-secondary">{{ __('messages.backend_full_desc') }}</p>
             </div>
             <div class="info-card">
-                <h3 class="fw-bold mb-3">📚 O'quv dasturi</h3>
+                <h3 class="fw-bold mb-3">📚 {{ __('messages.course_program') }}</h3>
                 <div class="row g-2">
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">PHP asoslari va OOP</div><div class="skill-desc">PHP sintaksisi, obyektga yo'naltirilgan dasturlash, namespace, traitlar</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Laravel Framework</div><div class="skill-desc">Eloquent ORM, Blade, Middleware, Service Provider, Facades</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">MySQL va ma'lumotlar bazasi</div><div class="skill-desc">Murakkab so'rovlar, indekslash, optimizatsiya, normalizatsiya</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">RESTful API yaratish</div><div class="skill-desc">API dizayn, autentifikatsiya (Sanctum/Passport), API resurslari</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Deployment va DevOps</div><div class="skill-desc">Git, CI/CD, server sozlamalari (Forge, Envoyer)</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Xavfsizlik</div><div class="skill-desc">SQL injection, XSS, CSRF himoyasi, autentifikatsiya</div></div></div></div>
+                    <div class="col-md-6">
+                        <div class="skill-item">
+                            <div class="skill-check"><i class="fas fa-check"></i></div>
+                            <div>
+                                <div class="skill-title">{{ __('messages.backend_module1_title') }}</div>
+                                <div class="skill-desc">{{ __('messages.backend_module1_desc') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="skill-item">
+                            <div class="skill-check"><i class="fas fa-check"></i></div>
+                            <div>
+                                <div class="skill-title">{{ __('messages.backend_module2_title') }}</div>
+                                <div class="skill-desc">{{ __('messages.backend_module2_desc') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="skill-item">
+                            <div class="skill-check"><i class="fas fa-check"></i></div>
+                            <div>
+                                <div class="skill-title">{{ __('messages.backend_module3_title') }}</div>
+                                <div class="skill-desc">{{ __('messages.backend_module3_desc') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="skill-item">
+                            <div class="skill-check"><i class="fas fa-check"></i></div>
+                            <div>
+                                <div class="skill-title">{{ __('messages.backend_module4_title') }}</div>
+                                <div class="skill-desc">{{ __('messages.backend_module4_desc') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="skill-item">
+                            <div class="skill-check"><i class="fas fa-check"></i></div>
+                            <div>
+                                <div class="skill-title">{{ __('messages.backend_module5_title') }}</div>
+                                <div class="skill-desc">{{ __('messages.backend_module5_desc') }}</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="info-card">
-                <h3 class="fw-bold mb-3">👨‍💻 Kimlar uchun?</h3>
-                <p class="text-secondary">Frontend dasturchilar, yangi boshlovchilar, o'z bilimini mustahkamoqchi bo'lgan dasturchilar va backend sohasiga kirishni xohlovchilar. Mantiqiy fikrlashni yaxshi ko'radiganlar uchun.</p>
+                <h3 class="fw-bold mb-3">👨‍💻 {{ __('messages.course_for_who') }}</h3>
+                <p class="text-secondary">{{ __('messages.backend_for_who') }}</p>
             </div>
             <div class="teacher-card">
                 <div class="teacher-avatar"><i class="fas fa-chalkboard-user"></i></div>
                 <div>
-                    <div class="teacher-name">Ergashev Sardor, Madiyarov Bilol</div>
-                    <div class="teacher-position">Senior Backend Developer</div>
+                    <div class="teacher-name">{{ __('messages.backend_teacher') }}</div>
+                    <div class="teacher-position">{{ __('messages.backend_teacher_position') }}</div>
                 </div>
             </div>
         </div>
         <div class="col-lg-4">
             <div class="price-card">
                 <div class="text-center mb-3">
-                    <span class="price-old">750,000 so'm</span>
-                    <div class="price-new">600,000 so'm</div>
-                    <span class="price-period">/ oy</span>
+                    <span class="price-old">{{ __('messages.backend_old_price') }}</span>
+                    <div class="price-new">{{ __('messages.backend_price') }}</div>
+                    <span class="price-period">{{ __('messages.price_per_month') }}</span>
                 </div>
                 <hr>
                 <div class="mb-3">
-                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-clock me-2 text-primary"></i> Davomiyligi</span><span class="fw-bold">5 oy</span></div>
-                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-calendar me-2 text-primary"></i> Darslar</span><span class="fw-bold">Haftada 3 kun</span></div>
-                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-language me-2 text-primary"></i> Til</span><span class="fw-bold">O'zbek tilida</span></div>
-                    <div class="d-flex justify-content-between"><span><i class="fas fa-certificate me-2 text-primary"></i> Sertifikat</span><span class="fw-bold">✓ Bor</span></div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span><i class="fas fa-clock me-2 text-primary"></i> {{ __('messages.course_duration_label') }}</span>
+                        <span class="fw-bold">{{ __('messages.backend_duration') }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span><i class="fas fa-calendar me-2 text-primary"></i> {{ __('messages.course_schedule') }}</span>
+                        <span class="fw-bold">{{ __('messages.course_schedule_value') }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span><i class="fas fa-language me-2 text-primary"></i> {{ __('messages.course_language') }}</span>
+                        <span class="fw-bold">{{ __('messages.course_language_value') }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span><i class="fas fa-certificate me-2 text-primary"></i> {{ __('messages.certificate') }}</span>
+                        <span class="fw-bold">✓ {{ __('messages.has') }}</span>
+                    </div>
                 </div>
                 <hr>
                 <button class="btn btn-enroll text-white" data-bs-toggle="modal" data-bs-target="#enrollModal">
-                    <i class="fas fa-bolt me-2"></i> Hoziroq yozilish
+                    <i class="fas fa-bolt me-2"></i> {{ __('messages.backend_enroll_button') }}
                 </button>
                 <div class="text-center mt-3">
-                    <small class="text-muted"><i class="fas fa-headset me-1"></i> 24/7 mentor yordami</small>
+                    <small class="text-muted"><i class="fas fa-headset me-1"></i> {{ __('messages.support_text') }}</small>
                 </div>
             </div>
         </div>
@@ -275,16 +326,27 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-4">
             <div class="modal-header border-0">
-                <h5 class="modal-title fw-bold">Backend kursiga yozilish</h5>
+                <h5 class="modal-title fw-bold">{{ __('messages.backend_title') }} {{ __('messages.enroll_modal_title') }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <form>
                     @csrf
-                    <div class="mb-3"><label class="form-label">Ismingiz</label><input type="text" class="form-control rounded-3" required></div>
-                    <div class="mb-3"><label class="form-label">Telefon raqam</label><input type="tel" class="form-control rounded-3" placeholder="+998 __ ___ __ __" required></div>
-                    <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control rounded-3" required></div>
-                    <button type="submit" class="btn btn-primary w-100 rounded-3 py-2"><i class="fas fa-paper-plane me-2"></i> Yuborish</button>
+                    <div class="mb-3">
+                        <label class="form-label">{{ __('messages.your_name') }}</label>
+                        <input type="text" class="form-control rounded-3" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">{{ __('messages.your_phone') }}</label>
+                        <input type="tel" class="form-control rounded-3" placeholder="+998 __ ___ __ __" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">{{ __('messages.email') }}</label>
+                        <input type="email" class="form-control rounded-3" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 rounded-3 py-2">
+                        <i class="fas fa-paper-plane me-2"></i> {{ __('messages.send') }}
+                    </button>
                 </form>
             </div>
         </div>

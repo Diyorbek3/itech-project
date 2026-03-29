@@ -194,21 +194,21 @@
     <div class="course-hero">
         <div class="row align-items-center">
             <div class="col-lg-8">
-                <span class="course-badge"><i class="fas fa-child me-2"></i> Raqamli bolalar</span>
-                <h1 class="course-title">Raqamli bolalar</h1>
-                <p class="course-description">Bolalar uchun kompyuter savodxonligi va kreativ dasturlash. Scratch, blokli dasturlash, mantiqiy fikrlash va o'yin yaratish.</p>
+                <span class="course-badge"><i class="fas fa-child me-2"></i> {{ __('messages.digital_kids_badge') }}</span>
+                <h1 class="course-title">{{ __('messages.digital_kids_title') }}</h1>
+                <p class="course-description">{{ __('messages.digital_kids_description') }}</p>
                 <div class="d-flex gap-3 flex-wrap">
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-clock text-primary"></i><span>5 oy</span></div>
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>150+ talaba</span></div>
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-certificate text-primary"></i><span>Sertifikat beriladi</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-clock text-primary"></i><span>{{ __('messages.digital_kids_duration') }}</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>{{ __('messages.digital_kids_students') }} talaba</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-certificate text-primary"></i><span>{{ __('messages.certificate') }}</span></div>
                 </div>
                 <div class="tech-stack">
-                    <span class="tech-badge">Scratch</span>
-                    <span class="tech-badge">Blokli dasturlash</span>
-                    <span class="tech-badge">Mantiqiy fikrlash</span>
-                    <span class="tech-badge">O'yin yaratish</span>
-                    <span class="tech-badge">Animatsiya</span>
-                    <span class="tech-badge">Algoritm</span>
+                    <span class="tech-badge">{{ __('messages.digital_kids_tech_scratch') }}</span>
+                    <span class="tech-badge">{{ __('messages.digital_kids_tech_block') }}</span>
+                    <span class="tech-badge">{{ __('messages.digital_kids_tech_logic') }}</span>
+                    <span class="tech-badge">{{ __('messages.digital_kids_tech_games') }}</span>
+                    <span class="tech-badge">{{ __('messages.digital_kids_tech_animation') }}</span>
+                    <span class="tech-badge">{{ __('messages.digital_kids_tech_algorithm') }}</span>
                 </div>
             </div>
             <div class="col-lg-4 text-center d-none d-lg-block">
@@ -219,52 +219,94 @@
     <div class="row g-4">
         <div class="col-lg-8">
             <div class="info-card">
-                <h3 class="fw-bold mb-3">📖 Kurs haqida</h3>
-                <p class="text-secondary">Raqamli bolalar kursida bolalar kompyuter savodxonligini o'rganadi, Scratch orqali blokli dasturlashni o'zlashtiradi, o'z o'yinlari va animatsiyalarini yaratadi. Kurs davomida mantiqiy fikrlash qobiliyati rivojlanadi va dasturlashga qiziqish uyg'otiladi.</p>
+                <h3 class="fw-bold mb-3">📖 {{ __('messages.course_about') }}</h3>
+                <p class="text-secondary">{{ __('messages.digital_kids_full_desc') }}</p>
             </div>
             <div class="info-card">
-                <h3 class="fw-bold mb-3">📚 O'quv dasturi</h3>
+                <h3 class="fw-bold mb-3">📚 {{ __('messages.course_program') }}</h3>
                 <div class="row g-2">
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Kompyuter savodxonligi</div><div class="skill-desc">Kompyuter asoslari, fayllar bilan ishlash, internet xavfsizligi</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Scratch dasturlash</div><div class="skill-desc">Blokli dasturlash, o'yinlar yaratish, personajlar</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Mantiqiy fikrlash</div><div class="skill-desc">Masalalar yechish, algoritmik fikrlash, labirintlar</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Kreativ loyihalar</div><div class="skill-desc">O'z o'yinlari va animatsiyalar yaratish, taqdimot qilish</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">3D modellashtirish</div><div class="skill-desc">Tinkercad, oddiy 3D modellar yaratish</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Robototexnika asoslari</div><div class="skill-desc">Oddiy robotlarni yig'ish va boshqarish</div></div></div></div>
+                    <div class="col-md-6">
+                        <div class="skill-item">
+                            <div class="skill-check"><i class="fas fa-check"></i></div>
+                            <div>
+                                <div class="skill-title">{{ __('messages.digital_kids_module1_title') }}</div>
+                                <div class="skill-desc">{{ __('messages.digital_kids_module1_desc') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="skill-item">
+                            <div class="skill-check"><i class="fas fa-check"></i></div>
+                            <div>
+                                <div class="skill-title">{{ __('messages.digital_kids_module2_title') }}</div>
+                                <div class="skill-desc">{{ __('messages.digital_kids_module2_desc') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="skill-item">
+                            <div class="skill-check"><i class="fas fa-check"></i></div>
+                            <div>
+                                <div class="skill-title">{{ __('messages.digital_kids_module3_title') }}</div>
+                                <div class="skill-desc">{{ __('messages.digital_kids_module3_desc') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="skill-item">
+                            <div class="skill-check"><i class="fas fa-check"></i></div>
+                            <div>
+                                <div class="skill-title">{{ __('messages.digital_kids_module4_title') }}</div>
+                                <div class="skill-desc">{{ __('messages.digital_kids_module4_desc') }}</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="info-card">
-                <h3 class="fw-bold mb-3">👨‍💻 Kimlar uchun?</h3>
-                <p class="text-secondary">7-14 yoshdagi bolalar, dasturlashni o'rganishni xohlovchilar, mantiqiy fikrlashni rivojlantirmoqchi bo'lganlar, kreativ qobiliyatlarini namoyish qilmoqchi bo'lganlar.</p>
+                <h3 class="fw-bold mb-3">👨‍💻 {{ __('messages.course_for_who') }}</h3>
+                <p class="text-secondary">{{ __('messages.digital_kids_for_who') }}</p>
             </div>
             <div class="teacher-card">
                 <div class="teacher-avatar"><i class="fas fa-chalkboard-user"></i></div>
                 <div>
-                    <div class="teacher-name">Haydarova Zulayho</div>
-                    <div class="teacher-position">Boshlang'ich dasturlash bo'yicha o'qituvchi</div>
+                    <div class="teacher-name">{{ __('messages.digital_kids_teacher') }}</div>
+                    <div class="teacher-position">{{ __('messages.digital_kids_teacher_position') }}</div>
                 </div>
             </div>
         </div>
         <div class="col-lg-4">
             <div class="price-card">
                 <div class="text-center mb-3">
-                    <span class="price-old">500,000 so'm</span>
-                    <div class="price-new">400,000 so'm</div>
-                    <span class="price-period">/ oy</span>
+                    <span class="price-old">{{ __('messages.digital_kids_old_price') }}</span>
+                    <div class="price-new">{{ __('messages.digital_kids_price') }}</div>
+                    <span class="price-period">{{ __('messages.price_per_month') }}</span>
                 </div>
                 <hr>
                 <div class="mb-3">
-                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-clock me-2 text-primary"></i> Davomiyligi</span><span class="fw-bold">5 oy</span></div>
-                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-calendar me-2 text-primary"></i> Darslar</span><span class="fw-bold">Haftada 3 kun</span></div>
-                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-language me-2 text-primary"></i> Til</span><span class="fw-bold">O'zbek tilida</span></div>
-                    <div class="d-flex justify-content-between"><span><i class="fas fa-certificate me-2 text-primary"></i> Sertifikat</span><span class="fw-bold">✓ Bor</span></div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span><i class="fas fa-clock me-2 text-primary"></i> {{ __('messages.course_duration_label') }}</span>
+                        <span class="fw-bold">{{ __('messages.digital_kids_duration') }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span><i class="fas fa-calendar me-2 text-primary"></i> {{ __('messages.course_schedule') }}</span>
+                        <span class="fw-bold">{{ __('messages.course_schedule_value') }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span><i class="fas fa-language me-2 text-primary"></i> {{ __('messages.course_language') }}</span>
+                        <span class="fw-bold">{{ __('messages.course_language_value') }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span><i class="fas fa-certificate me-2 text-primary"></i> {{ __('messages.certificate') }}</span>
+                        <span class="fw-bold">✓ {{ __('messages.has') }}</span>
+                    </div>
                 </div>
                 <hr>
                 <button class="btn btn-enroll text-white" data-bs-toggle="modal" data-bs-target="#enrollModal">
-                    <i class="fas fa-bolt me-2"></i> Hoziroq yozilish
+                    <i class="fas fa-bolt me-2"></i> {{ __('messages.digital_kids_enroll_button') }}
                 </button>
                 <div class="text-center mt-3">
-                    <small class="text-muted"><i class="fas fa-headset me-1"></i> 24/7 mentor yordami</small>
+                    <small class="text-muted"><i class="fas fa-headset me-1"></i> {{ __('messages.support_text') }}</small>
                 </div>
             </div>
         </div>
@@ -275,21 +317,30 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-4">
             <div class="modal-header border-0">
-                <h5 class="modal-title fw-bold">Raqamli bolalar kursiga yozilish</h5>
+                <h5 class="modal-title fw-bold">{{ __('messages.digital_kids_title') }} {{ __('messages.enroll_modal_title') }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <form>
                     @csrf
-                    <div class="mb-3"><label class="form-label">Ismingiz</label><input type="text" class="form-control rounded-3" required></div>
-                    <div class="mb-3"><label class="form-label">Telefon raqam</label><input type="tel" class="form-control rounded-3" placeholder="+998 __ ___ __ __" required></div>
-                    <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control rounded-3" required></div>
-                    <button type="submit" class="btn btn-primary w-100 rounded-3 py-2"><i class="fas fa-paper-plane me-2"></i> Yuborish</button>
+                    <div class="mb-3">
+                        <label class="form-label">{{ __('messages.your_name') }}</label>
+                        <input type="text" class="form-control rounded-3" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">{{ __('messages.your_phone') }}</label>
+                        <input type="tel" class="form-control rounded-3" placeholder="+998 __ ___ __ __" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">{{ __('messages.email') }}</label>
+                        <input type="email" class="form-control rounded-3" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 rounded-3 py-2">
+                        <i class="fas fa-paper-plane me-2"></i> {{ __('messages.send') }}
+                    </button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 @endsection
-
-
