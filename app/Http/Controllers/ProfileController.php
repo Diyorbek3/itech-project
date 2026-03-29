@@ -2,36 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user profile with edit form.
-     */
     public function index()
     {
         $user = auth()->user();
         $data['email'] = $user->email;
-        $data['username'] = $user->username;
-        $data['first_name'] = $user->first_name;
-        $data['last_name'] = $user->last_name;
+        $data['name'] = $user->name;
         $data['avatar'] = $user->avatar;
-        $data['hotelname'] = Session::get('htlname');
-      
+     
         return view('profile.index', ['data' => $data]);
     }
 
     /**
      * Update the user's profile information.
      */
-    public function update(Request $request)
+    public function putUpdate(Request $request)
     {
         $vD = $request->validate(
             [
@@ -51,44 +42,37 @@ class ProfileController extends Controller
                 'avatar.max' => 'The avatar must not be larger than 1MB.',
             ]
         );
-        
         try {
+
             $user = $request->user();
-            $user->first_name = $vD['first_name'];
-            $user->last_name = $vD['last_name'];
-            
+            $request->user()->fill($vD);
             if ($request->hasFile('avatar')) {
                 $avatarFile = $request->file('avatar');
                 $newFileName = $user->id . '.' . $avatarFile->getClientOriginalExtension();
-                
-                if ($user->avatar && Storage::disk('public')->exists('avatars/' . $user->avatar)) {
-                    Storage::disk('public')->delete('avatars/' . $user->avatar);
+                if ($user->avatar && \Storage::disk('public')->exists('avatars/' . $user->avatar)) {
+                    \Storage::disk('public')->delete('avatars/' . $user->avatar);
                 }
-                
                 $avatarFile->storeAs('avatars', $newFileName, 'public');
                 $user->avatar = $newFileName;
             }
-            
-            $user->save();
-            
+            $request->user()->save();
             return response()->json(['status' => 'success', 'message' => 'Profile updated successfully!']);
-            
+            // session()->flash('success', 'Profile updated successfully!');
+            // return redirect('user/profile')->with('status', 'profile-updated');
         } catch (\Exception $e) {
-            Log::error('Error during profile update', [
-                'user' => auth()->id(),
-                'error' => $e->getMessage(),
-                'file' => $e->getFile(),
-                'line' => $e->getLine()
-            ]);
-            
+            \Log::info(
+                'error duriing profile update',
+                [
+                    'user' => $user->id,
+                    'error' => $e->getMessage(),
+                    'file' => $e->getFile(),
+                    'line' => $e->getLine()
+                ]
+            );
             return response()->json(['status' => 'error', 'message' => 'An error occurred while updating the profile!'], 422);
         }
     }
-    
-    /**
-     * Update the user's password.
-     */
-    public function updatePassword(Request $request)
+    public function putNewPassword(Request $request)
     {
         $vD = $request->validate(
             [
@@ -104,28 +88,27 @@ class ProfileController extends Controller
                 'password.max' => 'The password must not exceed 64 characters.',
             ]
         );
-        
         try {
             $user = auth()->user();
-            
+            //    \Log::info(Hash::make('Password'));
             if (!Hash::check($request->old_password, $user->password)) {
                 return response()->json(['status' => 'error', 'errors' => ['old_password' => ['The old password is incorrect.']]], 422);
             }
-            
             $user->password = Hash::make($vD['password']);
             $user->save();
-            
             return response()->json(['status' => 'success', 'message' => 'Password updated successfully!']);
-            
+            // session()->flash('success', 'Profile updated successfully!');
+            // return redirect('user/profile')->with('status', 'profile-updated');
         } catch (\Exception $e) {
-            Log::error('Error during user password update', [
-                'user' => auth()->id(),
+            \Log::error('Error during user password update', [
+                'user' => $user->id,
                 'error' => $e->getMessage(),
                 'file' => $e->getFile(),
                 'line' => $e->getLine()
             ]);
-            
             return response()->json(['status' => 'error', 'message' => 'An error occurred while updating the password'], 422);
+            // session()->flash('error', 'An error occurred while updating the password.');
+            // return redirect()->back();
         }
     }
 }

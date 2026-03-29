@@ -53,7 +53,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                                    <a class="dropdown-item" href="/profile">
                                         <i class="fas fa-user me-2"></i> {{ __('messages.profile') }}
                                     </a>
                                 </li>
@@ -134,41 +134,4 @@
             </li>
         </ul>
     </div>
-</span>
-                
-<span class="nav-item ms-2">
-    @guest
-        <a class="auth-btn btn-login-custom" href="{{ route('login') }}">
-            {{ app()->getLocale() == 'en' ? 'Login' : __('messages.login') }}
-        </a>
-        <a class="auth-btn btn-signup-custom" href="{{ route('register') }}">
-            {{ app()->getLocale() == 'en' ? 'Sign Up' : __('messages.sign_up') }}
-        </a>
-    @else
-    <div class="dropdown d-inline-block">
-        <a class="btn-outline-sm dropdown-toggle d-flex align-items-center" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-user-circle me-1"></i> {{ Auth::user()->name }}
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-            <li>
-                <a class="dropdown-item" href="{{ route('profile.edit') }}">
-                    <i class="fas fa-user-edit me-2"></i> {{ __('messages.profile') }}
-                </a>
-            </li>
-            <li><hr class="dropdown-divider"></li>
-            <li>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="dropdown-item text-danger border-0 bg-transparent w-100 text-start">
-                        <i class="fas fa-sign-out-alt me-2"></i> {{ __('messages.logout') }}
-                    </button>
-                </form>
-            </li>
-        </ul>
-    </div>
-    @endguest
-</span>
-                
-<span class="nav-item">
-    <a class="btn-outline-sm" href="#contact">{{ __('messages.contact_us') }}</a>
 </span>
