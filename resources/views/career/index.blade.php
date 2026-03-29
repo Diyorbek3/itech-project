@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>bolib otgan Master Classlar</title>
+<title>Bo'ib o'tgan Master Classlar</title>
 
 <style>
 body {
@@ -51,7 +51,7 @@ h2 {
 
 .slide img {
   width: 100%;
-  height: 230px;
+  height: 400px;
   object-fit: cover;
 }
 
@@ -116,7 +116,7 @@ h2 {
 
     <!-- 2 -->
     <div class="slide">
-      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475">
+      <img src="http://127.0.0.1:8000/images/animatsions.png">
       <div class="content">
         <h3>🎨 CSS Animation Master Class</h3>
         <p><b>Bo‘lib o‘tgan:</b> 27-avgust 2025</p>
@@ -127,7 +127,7 @@ h2 {
 
     <!-- 3 -->
     <div class="slide">
-      <img src="https://images.unsplash.com/photo-1581091870627-3d3c3d0b9c29">
+      <img src="http://127.0.0.1:8000/images/xo.png">
       <div class="content">
         <h3>🎮 XO Game Master Class</h3>
         <p><b>Bo‘lib o‘tgan:</b> 29-avgust 2025</p>
@@ -138,7 +138,7 @@ h2 {
 
     <!-- 4 -->
     <div class="slide">
-      <img src="https://images.unsplash.com/photo-1531498860502-7c67cf02f657">
+      <img src="http://127.0.0.1:8000/images/dom.png">
       <div class="content">
         <h3>⚛️ DOM vs React DOM</h3>
         <p><b>Bo‘lib o‘tgan:</b> 30-avgust 2025</p>
@@ -150,7 +150,7 @@ h2 {
 
     <!-- 5 -->
     <div class="slide">
-      <img src="https://images.unsplash.com/photo-1526378722484-cc5c510f5c65">
+      <img src="http://127.0.0.1:8000/images/dars.png">
       <div class="content">
         <h3>💻 IT Master Klass</h3>
         <p><b>Bo‘lib o‘tgan:</b> 27-aprel 2025</p>
@@ -162,7 +162,7 @@ h2 {
 
     <!-- 6 -->
     <div class="slide">
-      <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
+      <img src="http://127.0.0.1:8000/images/savol.png">
       <div class="content">
         <h3>🎤 Savol-Javob Sessiyasi</h3>
         <p><b>Bo‘lib o‘tgan:</b> 19-aprel</p>
@@ -174,7 +174,7 @@ h2 {
 
     <!-- 7 -->
     <div class="slide">
-      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d">
+      <img src="http://127.0.0.1:8000/images/frontend.png">
       <div class="content">
         <h3>👨‍💻 Backend & Frontend Uchrashuv</h3>
         <p><b>Bo‘lib o‘tgan:</b> 2025</p>
@@ -186,7 +186,7 @@ h2 {
 
     <!-- 8 -->
     <div class="slide">
-      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f">
+      <img src="http://127.0.0.1:8000/images/sayohat.png">
       <div class="content">
         <h3>🌐 IT Olamiga Sayohat</h3>
         <p><b>Bo‘lib o‘tgan:</b> 21-dekabr</p>
