@@ -29,6 +29,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar');
     Route::delete('/profile/avatar', [ProfileController::class, 'deleteAvatar'])->name('profile.avatar.delete');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // routes/web.php
+
+    Route::post('/feedback/store', [FeedbackController::class, 'store'])->name('feedback.store');
+    Route::get('/feedbacks', [FeedbackController::class, 'index'])->name('feedback.index');
+    Route::delete('/feedback/{id}', [FeedbackController::class, 'destroy'])->name('feedback.destroy');
+    Route::get('/feedback/statistics', [FeedbackController::class, 'statistics'])->name('feedback.statistics');
+    Route::get('/user/{userId}/feedbacks', [FeedbackController::class, 'getUserFeedbacks'])->name('feedback.user');
+
+
 });
 
 // 4. Kurslar yo'nalishlari
