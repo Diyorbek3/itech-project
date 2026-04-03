@@ -141,7 +141,7 @@
     
     .masterclass-card {
         background: white;
-        border-radius: 15px;
+        border-radius: px;
         padding: 30px;
         text-align: center;
         box-shadow: 0 10px 30px rgba(0,0,0,0.1);

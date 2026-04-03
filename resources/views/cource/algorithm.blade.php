@@ -310,25 +310,25 @@
     <div class="course-hero">
         <div class="row align-items-center">
             <div class="col-lg-8">
-                <span class="course-badge"><i class="fas fa-code me-2"></i> Frontend Development</span>
-                <h1 class="course-title">Frontend Dasturchi</h1>
-                <p class="course-description">HTML, CSS, JavaScript va React.js bilan zamonaviy veb-saytlar yaratishni o'rganing. Foydalanuvchi interfeyslari, responsive dizayn va zamonaviy frameworklar bilan ishlash.</p>
+                <span class="course-badge"><i class="fas fa-code-branch me-2"></i> Algoritm</span>
+                <h1 class="course-title">Algoritm asoslari</h1>
+                <p class="course-description">Dasturlash algoritmlari va ma'lumotlar tuzilmalari. Samarali kod yozish, muammolarni yechish usullari.</p>
                 <div class="d-flex gap-3 flex-wrap">
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-clock text-primary"></i><span>7 oy</span></div>
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>180+ talaba</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-clock text-primary"></i><span>4 oy</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>120+ talaba</span></div>
                     <div class="d-flex align-items-center gap-2"><i class="fas fa-certificate text-primary"></i><span>Sertifikat beriladi</span></div>
                 </div>
                 <div class="tech-stack">
-                    <span class="tech-badge">HTML5</span>
-                    <span class="tech-badge">CSS3</span>
-                    <span class="tech-badge">JavaScript</span>
-                    <span class="tech-badge">React.js</span>
-                    <span class="tech-badge">Tailwind</span>
-                    <span class="tech-badge">Bootstrap</span>
+                    <span class="tech-badge">Algoritm</span>
+                    <span class="tech-badge">Big O</span>
+                    <span class="tech-badge">Binary Search</span>
+                    <span class="tech-badge">Quick Sort</span>
+                    <span class="tech-badge">Daraxtlar</span>
+                    <span class="tech-badge">Graf</span>
                 </div>
             </div>
             <div class="col-lg-4 text-center d-none d-lg-block">
-                <i class="fas fa-code" style="font-size: 100px; color: rgba(59,130,246,0.5);"></i>
+                <i class="fas fa-code-branch" style="font-size: 100px; color: rgba(59,130,246,0.5);"></i>
             </div>
         </div>
     </div>
@@ -336,40 +336,41 @@
         <div class="col-lg-8">
             <div class="info-card">
                 <h3 class="fw-bold mb-3">📖 Kurs haqida</h3>
-                <p class="text-secondary">Frontend dasturchi kursida siz veb-saytlarning tashqi ko'rinishini yaratishni, HTML5, CSS3, JavaScript va zamonaviy frameworklar bilan ishlashni o'rganasiz. Kurs davomida real loyihalar ustida ishlaysiz va bitiruv portfoliyo tayyorlaysiz.</p>
+                <p class="text-secondary">Algoritm asoslari kursida siz dasturlash algoritmlari, ma'lumotlar tuzilmalari, muammolarni samarali yechish usullarini o'rganasiz. Bu kurs dasturchi bo'lish yo'lidagi eng muhim qadamlardan biridir.</p>
             </div>
             <div class="info-card">
                 <h3 class="fw-bold mb-3">📚 O'quv dasturi</h3>
                 <div class="row g-2">
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">HTML5</div><div class="skill-desc">Veb-sahifa tuzilishi, semantic teglar, SEO asoslari</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">CSS3</div><div class="skill-desc">Flexbox, Grid, Animatsiyalar, Responsive dizayn</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">JavaScript</div><div class="skill-desc">ES6+, DOM, Async/Await, API so'rovlar</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Bootstrap & Tailwind</div><div class="skill-desc">Tez va chiroyli dizayn yaratish, utility-first CSS</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">React.js</div><div class="skill-desc">Componentlar, Hooks, Router, State Management</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Algoritm tushunchasi</div><div class="skill-desc">Algoritm turlari, murakkablik tahlili (Big O notation)</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Massivlar va ro'yxatlar</div><div class="skill-desc">Dinamik massivlar, bog'langan ro'yxatlar</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Qidiruv algoritmlari</div><div class="skill-desc">Binary search, linear search, hash table</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Saralash algoritmlari</div><div class="skill-desc">Quick sort, Merge sort, Bubble sort, Insertion sort</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Stek va navbat</div><div class="skill-desc">Stack, Queue, Deque tuzilmalari</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Daraxtlar</div><div class="skill-desc">Binary tree, Binary search tree, AVL tree</div></div></div></div>
                 </div>
             </div>
             <div class="info-card">
                 <h3 class="fw-bold mb-3">👨‍💻 Kimlar uchun?</h3>
-                <p class="text-secondary">Dasturlashni boshlashni xohlovchilar, veb-dizayn va dasturlashni birga o'rganmoqchi bo'lganlar, kreativ va texnik fikrlovchilar, frontend sohasida mutaxassis bo'lishni istaganlar.</p>
+                <p class="text-secondary">Dasturlashni o'rganayotganlar, IT sohasiga kirishni xohlovchilar, mantiqiy fikrlashni rivojlantirmoqchi bo'lganlar, dasturlash intervyulariga tayyorlanayotganlar.</p>
             </div>
             <div class="teacher-card">
                 <div class="teacher-avatar"><i class="fas fa-chalkboard-user"></i></div>
                 <div>
-                    <div class="teacher-name">Abdugafforov Azimjon, Mirzamahmudov G', Asqarov Sh</div>
-                    <div class="teacher-position">Senior Frontend Developer</div>
+                    <div class="teacher-name">Saparaliyev Sharifjon</div>
+                    <div class="teacher-position">Algoritmika bo'yicha ekspert</div>
                 </div>
             </div>
         </div>
         <div class="col-lg-4">
             <div class="price-card">
                 <div class="text-center mb-3">
-                    <span class="price-old">950,000 so'm</span>
-                    <div class="price-new">850,000 so'm</div>
+                    <span class="price-old">820,000 so'm</span>
+                    <div class="price-new">720,000 so'm</div>
                     <span class="price-period">/ oy</span>
                 </div>
                 <hr>
                 <div class="mb-3">
-                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-clock me-2 text-primary"></i> Davomiyligi</span><span class="fw-bold">7 oy</span></div>
+                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-clock me-2 text-primary"></i> Davomiyligi</span><span class="fw-bold">4 oy</span></div>
                     <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-calendar me-2 text-primary"></i> Darslar</span><span class="fw-bold">Haftada 3 kun</span></div>
                     <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-language me-2 text-primary"></i> Til</span><span class="fw-bold">O'zbek tilida</span></div>
                     <div class="d-flex justify-content-between"><span><i class="fas fa-certificate me-2 text-primary"></i> Sertifikat</span><span class="fw-bold">✓ Bor</span></div>
@@ -391,7 +392,7 @@
     <div class="modal-form-container">
         <button class="close-modal-icon" id="closeModalBtn"><i class="fas fa-times"></i></button>
         <h3><i class="fas fa-pen-alt me-2" style="color:#1e4a76;"></i> Ro'yxatdan o'tish</h3>
-        <p>Frontend Dasturchi kursiga ariza qoldiring</p>
+        <p>Algoritm asoslari kursiga ariza qoldiring</p>
         
         <form id="applicationForm">
             <div class="form-group-custom">
@@ -479,7 +480,7 @@
                 // Telegram botga yuborish
                 const token = "8586485983:AAF-7NhRKL72j3zXWUdznuHFv3rHCh1SIVc";
                 const chatId = "-1003836558266";
-                const text = `🆕 YANGI ARIZA!\n\n📚 Kurs: Frontend Dasturchi\n👤 Ism: ${fullname}\n📞 Telefon: ${phone}\n⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}`;
+                const text = `🆕 YANGI ARIZA!\n\n📚 Kurs: Algoritm asoslari\n👤 Ism: ${fullname}\n📞 Telefon: ${phone}\n⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}`;
                 
                 const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
                 

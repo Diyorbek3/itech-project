@@ -9,33 +9,30 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         body {
-
-    /* Rasmni asset orqali chaqiramiz va ustiga xira qora qatlam beramiz */
-    background: linear-gradient(rgba(13, 17, 23, 0.7), rgba(13, 17, 23, 0.7)), 
-                url('{{ asset('images/AP2.jpg') }}');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Rasm qotib turishi uchun */
-    
-    color: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-}
+            background: linear-gradient(rgba(13, 17, 23, 0.7), rgba(13, 17, 23, 0.7)), 
+                        url('{{ asset('images/AP2.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
         .register-container {
             width: 100%;
             max-width: 360px;
             z-index: 10;
             text-align: center;
         }
-
         .brand-logo {
             display: block;
             margin: 0 auto 15px;
@@ -43,14 +40,12 @@
             border-radius: 50%;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
-
         .register-card {
-            background: none; /* Qora fon olib tashlandi */
+            background: none;
             border: none;
             padding: 10px;
             text-align: left;
         }
-
         .form-label {
             color: #ffffff !important;
             font-size: 14px;
@@ -59,7 +54,6 @@
             text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
             font-weight: 500;
         }
-
         .form-control {
             background-color: rgba(13, 17, 23, 0.7) !important;
             border: 1px solid rgba(255, 255, 255, 0.3) !important;
@@ -67,10 +61,8 @@
             height: 40px;
             font-size: 14px;
             border-radius: 6px;
-
             transition: 0.2s;
         }
-
         .form-control:focus {
             background-color: rgba(13, 17, 23, 0.9) !important;
             border-color: #58a6ff !important;
@@ -78,16 +70,6 @@
             outline: none;
         }
         .btn-register-style {
-        .is-invalid {
-            border-color: #f85149 !important;
-        }
-        .error-message {
-            color: #f85149;
-            font-size: 12px;
-            margin-top: 4px;
-            display: block;
-        }
-        .btn-github-style {
             background-color: #238636;
             color: #ffffff;
             width: 100%;
@@ -95,34 +77,48 @@
             border: none;
             border-radius: 6px;
             font-weight: 600;
-
             margin-top: 15px;
             cursor: pointer;
+            transition: all 0.2s;
         }
-
         .btn-register-style:hover {
             background-color: #2ea043;
             transform: translateY(-1px);
         }
-
         .login-callout {
             margin-top: 20px;
             text-align: center;
             font-size: 14px;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
         }
-
         .login-callout a {
             color: #58a6ff;
             text-decoration: none;
             font-weight: 600;
         }
-
         h3 {
             text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
             margin-bottom: 15px;
             font-size: 24px;
             font-weight: 300;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8b949e;
+            cursor: pointer;
+            z-index: 20;
+        }
+        .position-relative {
+            position: relative;
+        }
+        .swal2-popup {
+            border-radius: 16px !important;
+        }
+        .swal2-timer-progress-bar {
+            background: #f85149 !important;
         }
     </style>
 </head>
@@ -136,52 +132,41 @@
     <h3>{{ __('messages.create_account') }}</h3>
 
     <div class="register-card">
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}" id="registerForm">
             @csrf
 
             <div>
                 <label class="form-label">{{ __('messages.full_name') }}</label>
-
-                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" 
+                <input type="text" name="name" id="name" class="form-control" 
                        placeholder="{{ __('messages.name_placeholder') }}" value="{{ old('name') }}" required autofocus>
-                @error('name')
-                    <span class="error-message">{{ $message }}</span>
-                @enderror
             </div>
 
-            <div>
+            <div class="mt-3">
                 <label class="form-label">{{ __('messages.email_address') }}</label>
-                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" 
-                       placeholder="Email" value="{{ old('email') }}" required>
-                @error('email')
-                    <span class="error-message">{{ $message }}</span>
-                @enderror
+                <input type="email" name="email" id="email" class="form-control" 
+                       placeholder="example@gmail.com" value="{{ old('email') }}" required>
             </div>
 
-            <div>
+            <div class="mt-3">
                 <label class="form-label">{{ __('messages.password') }}</label>
-
-                <div class="position-relative" style="position: relative;">
-                    <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" 
+                <div class="position-relative">
+                    <input type="password" id="password" name="password" class="form-control" 
                            placeholder="••••••••" required>
                     <i class="fas fa-eye toggle-password" data-target="password"></i>
                 </div>
-                @error('password')
-                    <span class="error-message">{{ $message }}</span>
-                @enderror
             </div>
 
-            <div class="mb-3">
+            <div class="mt-3">
                 <label class="form-label">{{ __('messages.confirm_password') }}</label>
-                <div class="position-relative" style="position: relative;">
+                <div class="position-relative">
                     <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" 
                            placeholder="••••••••" required>
                     <i class="fas fa-eye toggle-password" data-target="password_confirmation"></i>
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-register-style">
-                {{ __('messages.sign_up') }}
+            <button type="submit" class="btn-register-style">
+                Ro'yxatdan o'tish
             </button>
         </form>
     </div>
@@ -190,6 +175,102 @@
         {{ __('messages.already_have_account') }} <a href="{{ route('login') }}">← {{ __('messages.log_in') }}</a>
     </div>
 </div>
+
+<script>
+    document.querySelectorAll('.toggle-password').forEach(icon => {
+        icon.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-target');
+            const input = document.getElementById(targetId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
+            }
+        });
+    });
+
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        let errors = [];
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const passwordConfirm = document.getElementById('password_confirmation').value;
+        
+        if (name === '') {
+            errors.push('To\'liq ismingizni kiriting');
+        } else if (name.length < 3) {
+            errors.push('Ism kamida 3 ta belgidan iborat bo\'lishi kerak');
+        }
+        
+        if (email === '') {
+            errors.push('Email manzilini kiriting');
+        } else if (!email.includes('@')) {
+            errors.push('Email manzilida "@" belgisi bo\'lishi kerak');
+        } else if (!email.includes('.')) {
+            errors.push('Email manzilida "." belgisi bo\'lishi kerak');
+        } else if (email.includes('@')) {
+            const domain = email.split('@')[1];
+            if (domain !== 'gmail.com') {
+                errors.push('Faqat Gmail manzilidan foydalaning! (example@gmail.com)');
+            }
+        }
+        
+        // PAROL TEKSHIRUVI - faqat uzunligi
+        if (password === '') {
+            errors.push('Parolni kiriting');
+        } else if (password.length < 8) {
+            errors.push('Parol kamida 8 ta belgidan iborat bo\'lishi kerak');
+        }
+        
+        if (password !== passwordConfirm) {
+            errors.push('Parol va parolni tasdiqlash mos kelmadi');
+        }
+        
+        if (errors.length > 0) {
+            Swal.fire({
+                title: 'Xatolik!',
+                html: errors.map(err => `• ${err}`).join('<br>'),
+                icon: 'error',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 5000,
+                timerProgressBar: true,
+                background: '#1e1e2e',
+                color: '#fff',
+                iconColor: '#f85149'
+            });
+        } else {
+            this.submit();
+        }
+    });
+    
+    @if($errors->any())
+        let serverErrors = [];
+        @foreach($errors->all() as $error)
+            serverErrors.push('{{ $error }}');
+        @endforeach
+        Swal.fire({
+            title: 'Xatolik!',
+            html: serverErrors.map(err => `• ${err}`).join('<br>'),
+            icon: 'error',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true,
+            background: '#1e1e2e',
+            color: '#fff',
+            iconColor: '#f85149'
+        });
+    @endif
+</script>
 
 </body>
 </html>

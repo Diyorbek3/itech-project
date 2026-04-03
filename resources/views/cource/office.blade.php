@@ -283,149 +283,112 @@
     .close-modal-icon:hover {
         color: #1e293b;
     }
-    .success-toast-msg {
-        background: #dcfce7;
-        border-radius: 2rem;
-        padding: 0.7rem;
-        margin-top: 1rem;
+
+    /* ========= O'NG TARAF TEPASIDAGI NOTIFICATION (FAQAT TEZ ORADA KO'RIB CHIQILADI) ========= */
+    .admin-toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1100;
+        min-width: 280px;
+        max-width: 360px;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        border-left: 5px solid #22c55e;
+        padding: 1rem 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        transform: translateX(120%);
+        transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        backdrop-filter: blur(8px);
+        background: rgba(255,255,255,0.98);
+    }
+    .admin-toast.show {
+        transform: translateX(0);
+    }
+    .admin-toast-icon {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.6rem;
+        flex-shrink: 0;
+        box-shadow: 0 4px 10px rgba(34,197,94,0.3);
+    }
+    .admin-toast-content {
+        flex: 1;
+    }
+    .admin-toast-title {
+        font-weight: 800;
+        font-size: 0.9rem;
         color: #15803d;
-        font-weight: 500;
-        font-size: 0.85rem;
-        display: none;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
     }
-    @media (max-width: 991px) {
-        .course-title { font-size: 1.8rem; }
-        .price-card { position: relative; margin-top: 2rem; }
+    .admin-toast-message {
+        font-size: 0.9rem;
+        color: #1e293b;
+        line-height: 1.4;
+        font-weight: 600;
+        margin-bottom: 0;
     }
-    @media (max-width: 768px) {
-        .course-hero { padding: 1.5rem; }
-        .course-title { font-size: 1.5rem; }
-        .modal-form-container { padding: 1.5rem; }
+    .admin-toast-note {
+        font-size: 0.8rem;
+        color: #eab308;
+        margin-top: 6px;
+        background: #fef9e3;
+        padding: 6px 10px;
+        border-radius: 12px;
+        display: inline-block;
+        font-weight: 600;
     }
+    @keyframes toastPulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    .admin-toast.show .admin-toast-icon {
+        animation: toastPulse 0.5s ease;
+    }
+    @media (max-width: 576px) {
+        .admin-toast {
+            left: 20px;
+            right: 20px;
+            min-width: auto;
+        }
+    }
+    /* ========= QO'SHIMCHA TUGADI ========= */
 </style>
 @endsection
 
-@section('content')
-<div class="container py-4 py-md-5">
-    <div class="course-hero">
-        <div class="row align-items-center">
-            <div class="col-lg-8">
-                <span class="course-badge"><i class="fas fa-code me-2"></i> Frontend Development</span>
-                <h1 class="course-title">Frontend Dasturchi</h1>
-                <p class="course-description">HTML, CSS, JavaScript va React.js bilan zamonaviy veb-saytlar yaratishni o'rganing. Foydalanuvchi interfeyslari, responsive dizayn va zamonaviy frameworklar bilan ishlash.</p>
-                <div class="d-flex gap-3 flex-wrap">
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-clock text-primary"></i><span>7 oy</span></div>
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>180+ talaba</span></div>
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-certificate text-primary"></i><span>Sertifikat beriladi</span></div>
-                </div>
-                <div class="tech-stack">
-                    <span class="tech-badge">HTML5</span>
-                    <span class="tech-badge">CSS3</span>
-                    <span class="tech-badge">JavaScript</span>
-                    <span class="tech-badge">React.js</span>
-                    <span class="tech-badge">Tailwind</span>
-                    <span class="tech-badge">Bootstrap</span>
-                </div>
-            </div>
-            <div class="col-lg-4 text-center d-none d-lg-block">
-                <i class="fas fa-code" style="font-size: 100px; color: rgba(59,130,246,0.5);"></i>
-            </div>
-        </div>
-    </div>
-    <div class="row g-4">
-        <div class="col-lg-8">
-            <div class="info-card">
-                <h3 class="fw-bold mb-3">📖 Kurs haqida</h3>
-                <p class="text-secondary">Frontend dasturchi kursida siz veb-saytlarning tashqi ko'rinishini yaratishni, HTML5, CSS3, JavaScript va zamonaviy frameworklar bilan ishlashni o'rganasiz. Kurs davomida real loyihalar ustida ishlaysiz va bitiruv portfoliyo tayyorlaysiz.</p>
-            </div>
-            <div class="info-card">
-                <h3 class="fw-bold mb-3">📚 O'quv dasturi</h3>
-                <div class="row g-2">
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">HTML5</div><div class="skill-desc">Veb-sahifa tuzilishi, semantic teglar, SEO asoslari</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">CSS3</div><div class="skill-desc">Flexbox, Grid, Animatsiyalar, Responsive dizayn</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">JavaScript</div><div class="skill-desc">ES6+, DOM, Async/Await, API so'rovlar</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Bootstrap & Tailwind</div><div class="skill-desc">Tez va chiroyli dizayn yaratish, utility-first CSS</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">React.js</div><div class="skill-desc">Componentlar, Hooks, Router, State Management</div></div></div></div>
-                </div>
-            </div>
-            <div class="info-card">
-                <h3 class="fw-bold mb-3">👨‍💻 Kimlar uchun?</h3>
-                <p class="text-secondary">Dasturlashni boshlashni xohlovchilar, veb-dizayn va dasturlashni birga o'rganmoqchi bo'lganlar, kreativ va texnik fikrlovchilar, frontend sohasida mutaxassis bo'lishni istaganlar.</p>
-            </div>
-            <div class="teacher-card">
-                <div class="teacher-avatar"><i class="fas fa-chalkboard-user"></i></div>
-                <div>
-                    <div class="teacher-name">Abdugafforov Azimjon, Mirzamahmudov G', Asqarov Sh</div>
-                    <div class="teacher-position">Senior Frontend Developer</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="price-card">
-                <div class="text-center mb-3">
-                    <span class="price-old">950,000 so'm</span>
-                    <div class="price-new">850,000 so'm</div>
-                    <span class="price-period">/ oy</span>
-                </div>
-                <hr>
-                <div class="mb-3">
-                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-clock me-2 text-primary"></i> Davomiyligi</span><span class="fw-bold">7 oy</span></div>
-                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-calendar me-2 text-primary"></i> Darslar</span><span class="fw-bold">Haftada 3 kun</span></div>
-                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-language me-2 text-primary"></i> Til</span><span class="fw-bold">O'zbek tilida</span></div>
-                    <div class="d-flex justify-content-between"><span><i class="fas fa-certificate me-2 text-primary"></i> Sertifikat</span><span class="fw-bold">✓ Bor</span></div>
-                </div>
-                <hr>
-                <button id="openModalBtn" class="btn btn-enroll text-white">
-                    <i class="fas fa-bolt me-2"></i> Hoziroq yozilish
-                </button>
-                <div class="text-center mt-3">
-                    <small class="text-muted"><i class="fas fa-headset me-1"></i> 24/7 mentor yordami</small>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Custom Modal -->
-<div id="customModal" class="custom-modal-overlay">
-    <div class="modal-form-container">
-        <button class="close-modal-icon" id="closeModalBtn"><i class="fas fa-times"></i></button>
-        <h3><i class="fas fa-pen-alt me-2" style="color:#1e4a76;"></i> Ro'yxatdan o'tish</h3>
-        <p>Frontend Dasturchi kursiga ariza qoldiring</p>
-        
-        <form id="applicationForm">
-            <div class="form-group-custom">
-                <label><i class="fas fa-user me-1"></i> Ism va Sharif</label>
-                <input type="text" id="fullName" placeholder="Masalan: Jahongir Alimov" required>
-            </div>
-            <div class="form-group-custom">
-                <label><i class="fas fa-phone-alt me-1"></i> Telefon raqam</label>
-                <input type="tel" id="phone" placeholder="+998 90 123 45 67" required>
-            </div>
-            <button type="submit" class="submit-modal-btn"><i class="fas fa-paper-plane me-2"></i> Yuborish va ariza qoldirish</button>
-            <div id="successMsg" class="success-toast-msg">
-                ✅ Ariza muvaffaqiyatli qabul qilindi! Tez orada bog'lanamiz.
-            </div>
-        </form>
-        <hr>
-        <div style="font-size: 12px; color: #6c757d; text-align: center;">Sizning ma'lumotlaringiz maxfiy saqlanadi</div>
-    </div>
-</div>
-
+@section('scripts')
 <script>
     (function() {
+        // PHP orqali autorizatsiya holatini tekshirib, JavaScript o'zgaruvchisiga joylaymiz
+        const isLoggedIn = @json(auth()->check());
+        
         const modal = document.getElementById('customModal');
         const openBtn = document.getElementById('openModalBtn');
         const closeBtn = document.getElementById('closeModalBtn');
         const form = document.getElementById('applicationForm');
         const fullnameField = document.getElementById('fullName');
         const phoneField = document.getElementById('phone');
-        const successMsg = document.getElementById('successMsg');
+        
+        // Admin toast elementi
+        const adminToast = document.getElementById('adminToast');
 
         function openModal() {
             if (modal) {
                 modal.classList.add('active');
-                successMsg.style.display = 'none';
                 fullnameField.value = '';
                 phoneField.value = '';
             }
@@ -436,11 +399,38 @@
                 modal.classList.remove('active');
             }
         }
+        
+        // Autorizatsiyani tekshirib, modalni ochish
+        function checkAuthAndOpenModal() {
+            if (isLoggedIn) {
+                openModal();
+            } else {
+                // SweetAlert orqali xabar chiqarish
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Autorizatsiya talab qilinadi',
+                    text: 'Iltimos, avval tizimga kiring yoki ro\'yxatdan o\'ting!',
+                    confirmButtonText: 'Tushundim',
+                    confirmButtonColor: '#3b82f6',
+                    backdrop: true
+                });
+            }
+        }
+        
+        // Admin uchun o'ng tepada notification chiqarish
+        function showAdminNotification() {
+            if (adminToast) {
+                adminToast.classList.add('show');
+                setTimeout(() => {
+                    adminToast.classList.remove('show');
+                }, 5000);
+            }
+        }
 
         if (openBtn) {
             openBtn.addEventListener('click', function(e) {
                 e.preventDefault();
-                openModal();
+                checkAuthAndOpenModal();
             });
         }
 
@@ -466,12 +456,22 @@
                 const phone = phoneField.value.trim();
 
                 if (!fullname) {
-                    alert("Iltimos, Ism va Sharifni kiriting!");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Xatolik',
+                        text: 'Iltimos, Ism va Sharifni kiriting!',
+                        confirmButtonColor: '#3b82f6'
+                    });
                     fullnameField.focus();
                     return;
                 }
                 if (!phone) {
-                    alert("Telefon raqamni kiriting!");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Xatolik',
+                        text: 'Telefon raqamni kiriting!',
+                        confirmButtonColor: '#3b82f6'
+                    });
                     phoneField.focus();
                     return;
                 }
@@ -479,25 +479,145 @@
                 // Telegram botga yuborish
                 const token = "8586485983:AAF-7NhRKL72j3zXWUdznuHFv3rHCh1SIVc";
                 const chatId = "-1003836558266";
-                const text = `🆕 YANGI ARIZA!\n\n📚 Kurs: Frontend Dasturchi\n👤 Ism: ${fullname}\n📞 Telefon: ${phone}\n⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}`;
+                const text = `🆕 YANGI ARIZA!\n\n📚 Kurs: Ofis menejerligi\n👤 Ism: ${fullname}\n📞 Telefon: ${phone}\n⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}\n\n📌 Holat: Tez orada ko'rib chiqiladi`;
                 
                 const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
                 
                 fetch(url)
                 .then(function() {
-                    successMsg.style.display = 'block';
+                    closeModal();
                     fullnameField.value = '';
                     phoneField.value = '';
-                    setTimeout(function() {
-                        closeModal();
-                        successMsg.style.display = 'none';
-                    }, 2000);
+                    showAdminNotification();
                 })
                 .catch(function() {
-                    alert("Xatolik yuz berdi! Iltimos, qayta urinib ko'ring.");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Xatolik',
+                        text: 'Xatolik yuz berdi! Iltimos, qayta urinib ko\'ring.',
+                        confirmButtonColor: '#3b82f6'
+                    });
                 });
             });
         }
     })();
 </script>
+@endsection
+@section('content')
+<div class="container py-4 py-md-5">
+    <div class="course-hero">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <span class="course-badge"><i class="fas fa-building me-2"></i> Ofis boshqaruvi</span>
+                <h1 class="course-title">Ofis menejerligi</h1>
+                <p class="course-description">Ofis ishlarini boshqarish va hujjat aylanishini tashkil qilish. Zamonaviy ofis dasturlari, mijozlar bilan ishlash va arxiv ishi.</p>
+                <div class="d-flex gap-3 flex-wrap">
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-clock text-primary"></i><span>2 oy</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>100+ talaba</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-certificate text-primary"></i><span>Sertifikat beriladi</span></div>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-badge">Word</span>
+                    <span class="tech-badge">Excel</span>
+                    <span class="tech-badge">PowerPoint</span>
+                    <span class="tech-badge">Arxiv ishi</span>
+                    <span class="tech-badge">Hujjat aylanishi</span>
+                </div>
+            </div>
+            <div class="col-lg-4 text-center d-none d-lg-block">
+                <i class="fas fa-building" style="font-size: 100px; color: rgba(59,130,246,0.5);"></i>
+            </div>
+        </div>
+    </div>
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="info-card">
+                <h3 class="fw-bold mb-3">📖 Kurs haqida</h3>
+                <p class="text-secondary">Ofis menejerligi kursida siz zamonaviy ofis ishlarini boshqarish, hujjat aylanishini tashkil qilish, mijozlar bilan ishlash va ofis dasturlarini mukammal o'rganasiz. Kurs yakunida siz professional ofis menejeri bo'lishingiz mumkin.</p>
+            </div>
+            <div class="info-card">
+                <h3 class="fw-bold mb-3">📚 O'quv dasturi</h3>
+                <div class="row g-2">
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Ofis dasturlari</div><div class="skill-desc">Word, Excel, PowerPoint mukammal</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Hujjat aylanishi</div><div class="skill-desc">Hujjatlarni tashkil qilish va saqlash</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Mijozlar bilan ishlash</div><div class="skill-desc">Telefon va elektron pochta orqali muloqot</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Arxiv ishi</div><div class="skill-desc">Arxiv tashkil qilish va hujjatlarni saqlash</div></div></div></div>
+                </div>
+            </div>
+            <div class="info-card">
+                <h3 class="fw-bold mb-3">👨‍💻 Kimlar uchun?</h3>
+                <p class="text-secondary">Ofis xodimlari, yangi boshlovchilar, ofis ishlarini professional darajada o'rganmoqchi bo'lganlar.</p>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-avatar"><i class="fas fa-chalkboard-user"></i></div>
+                <div>
+                    <div class="teacher-name">Haydarova Zulayho, Avalov Mirabbos</div>
+                    <div class="teacher-position">Ofis boshqaruvi ekspertlari</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="price-card">
+                <div class="text-center mb-3">
+                    <span class="price-old">950,000 so'm</span>
+                    <div class="price-new">850,000 so'm</div>
+                    <span class="price-period">/ oy</span>
+                </div>
+                <hr>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-clock me-2 text-primary"></i> Davomiyligi</span><span class="fw-bold">2 oy</span></div>
+                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-calendar me-2 text-primary"></i> Darslar</span><span class="fw-bold">Haftada 3 kun</span></div>
+                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-language me-2 text-primary"></i> Til</span><span class="fw-bold">O'zbek tilida</span></div>
+                    <div class="d-flex justify-content-between"><span><i class="fas fa-certificate me-2 text-primary"></i> Sertifikat</span><span class="fw-bold">✓ Bor</span></div>
+                </div>
+                <hr>
+                <button id="openModalBtn" class="btn btn-enroll text-white">
+                    <i class="fas fa-bolt me-2"></i> Hoziroq yozilish
+                </button>
+                <div class="text-center mt-3">
+                    <small class="text-muted"><i class="fas fa-headset me-1"></i> 24/7 mentor yordami</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom Modal - Ro'yxatdan o'tish oynasi -->
+<div id="customModal" class="custom-modal-overlay">
+    <div class="modal-form-container">
+        <button class="close-modal-icon" id="closeModalBtn"><i class="fas fa-times"></i></button>
+        <h3><i class="fas fa-pen-alt me-2" style="color:#1e4a76;"></i> Ro'yxatdan o'tish</h3>
+        <p>Ofis menejerligi kursiga ariza qoldiring</p>
+        
+        <form id="applicationForm">
+            <div class="form-group-custom">
+                <label><i class="fas fa-user me-1"></i> Ism va Sharif</label>
+                <input type="text" id="fullName" placeholder="Masalan: Jahongir Alimov" required>
+            </div>
+            <div class="form-group-custom">
+                <label><i class="fas fa-phone-alt me-1"></i> Telefon raqam</label>
+                <input type="tel" id="phone" placeholder="+998 90 123 45 67" required>
+            </div>
+            <button type="submit" class="submit-modal-btn"><i class="fas fa-paper-plane me-2"></i> Yuborish va ariza qoldirish</button>
+        </form>
+        <hr>
+        <div style="font-size: 12px; color: #6c757d; text-align: center;">Sizning ma'lumotlaringiz maxfiy saqlanadi</div>
+    </div>
+</div>
+
+<!-- O'NG TARAF TEPASIDA FAQAT "TEZ ORADA KO'RIB CHIQILADI" YOZUVLI NOTIFICATION -->
+<div id="adminToast" class="admin-toast">
+    <div class="admin-toast-icon">
+        <i class="fas fa-check-circle"></i>
+    </div>
+    <div class="admin-toast-content">
+        <div class="admin-toast-title">
+            <i class="fas fa-bell" style="font-size: 12px;"></i> ✅ Ariza qabul qilindi
+        </div>
+        <div class="admin-toast-note">
+            <i class="fas fa-clock me-1"></i> Tez orada ko'rib chiqiladi
+        </div>
+    </div>
+</div>
+
 @endsection
