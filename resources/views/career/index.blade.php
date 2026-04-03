@@ -30,7 +30,7 @@
     
     /* История компании */
     .history-section {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #9b8c9d 0%, #764ba2 100%);
         color: white;
     }
     
@@ -427,15 +427,15 @@ $(document).ready(function() {
 <!-- 1. История ITech Academy -->
 <section class="history-section section">
     <div class="container">
-        <h2 class="section-title">Наша история</h2>
+        <h2 class="section-title">Biz haqimizda</h2>
         <div class="timeline">
             <div class="row">
                 <div class="col-md-6">
                     <div class="timeline-item">
                         <div class="timeline-year">2015</div>
                         <div class="timeline-content">
-                            <h4>Основание ITech Academy</h4>
-                            <p>Начало пути с первой группы из 10 студентов, увлеченных программированием.</p>
+                            <h4>Boshlanish nuqtasi ITech Academy</h4>
+                            <p>ITech Academy kichik jamoa bilan katta maqsad sari ilk qadamini tashladi.</p>
                         </div>
                     </div>
                 </div>
@@ -443,8 +443,8 @@ $(document).ready(function() {
                     <div class="timeline-item">
                         <div class="timeline-year">2017</div>
                         <div class="timeline-content">
-                            <h4>Расширение направлений</h4>
-                            <p>Открытие курсов по веб-разработке, мобильной разработке и data science.</p>
+                            <h4>Tez rivojlanish</h4>
+                            <p>Yangi kurslar ochilib, talabalar soni bir necha barobar oshdi.</p>
                         </div>
                     </div>
                 </div>
@@ -452,8 +452,8 @@ $(document).ready(function() {
                     <div class="timeline-item">
                         <div class="timeline-year">2019</div>
                         <div class="timeline-content">
-                            <h4>Партнерство с IT-компаниями</h4>
-                            <p>Начало сотрудничества с ведущими IT-компаниями для трудоустройства выпускников.</p>
+                            <h4>Ishga yo‘naltirish</h4>
+                            <p>Talabalarni real loyihalar va ish bilan bog‘lash tizimi yo‘lga qo‘yildi..</p>
                         </div>
                     </div>
                 </div>
@@ -461,8 +461,8 @@ $(document).ready(function() {
                     <div class="timeline-item">
                         <div class="timeline-year">2024</div>
                         <div class="timeline-content">
-                            <h4>5000+ выпускников</h4>
-                            <p>Более 5000 успешных выпускников, работающих в IT-индустрии по всему миру.</p>
+                            <h4>Natija va ishonch</h4>
+                            <p>2000+ bitiruvchi va yuzlab muvaffaqiyatli karyeralar.</p>
                         </div>
                     </div>
                 </div>
@@ -479,12 +479,12 @@ $(document).ready(function() {
         <div class="row" id="teamContainer">
             @php
             $teamMembers = [
-                ['name' => 'Mustafo Qodirov', 'position' => 'CEO', 'image' => 'team-1.jpg'],
-                ['name' => 'Azamatjon Ergashev', 'position' => 'Operation Director', 'image' => 'team-2.jpg'],
-                ['name' => 'Gayratjon Mirzamahmudov', 'position' => 'Frontend Engineer', 'image' => 'team-3.jpg'],
-                ['name' => 'Eljahon Normominov', 'position' => 'Software Engineer', 'image' => 'team-4.jpg'],
-                ['name' => 'Voldia Tadjimuratova', 'position' => 'Finance Manager', 'image' => 'team-5.jpg'],
-                ['name' => 'Biloliddin Madiyorov', 'position' => 'Backend Engineer', 'image' => 'team-6.jpg']
+                ['name' => 'Mustafo Qodirov', 'position' => 'CEO', 'image' => 'team1.jpg'],
+                ['name' => 'Azamatjon Ergashev', 'position' => 'Operation Director', 'image' => 'team6.jpg'],
+                ['name' => 'Gayratjon Mirzamahmudov', 'position' => 'Frontend Engineer', 'image' => 'team7.jpg'],
+                ['name' => 'Eljahon Normominov', 'position' => 'Software Engineer', 'image' => 'team8.jpg'],
+                ['name' => 'Voldia Tadjimuratova', 'position' => 'Finance Manager', 'image' => 'team3.jpg'],
+                ['name' => 'Biloliddin Madiyorov', 'position' => 'Backend Engineer', 'image' => 'team4.jpg']
             ];
             @endphp
 
