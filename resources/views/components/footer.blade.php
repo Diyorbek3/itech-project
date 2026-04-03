@@ -39,7 +39,7 @@
                             </a>
                         </span>
                         <p class="p-small">@lang('messages.follow_us') <a
-                                href="mailto:contact@site.com"><strong>ITECH@site.com</strong></a></p>
+                                href="mailto:contact@site.com"><strong>ITECH CALL CENTER</strong></a></p>
                     </div> <!-- end of footer-col -->
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
