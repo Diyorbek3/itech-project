@@ -214,12 +214,8 @@
             errors.push('Email manzilida "@" belgisi bo\'lishi kerak');
         } else if (!email.includes('.')) {
             errors.push('Email manzilida "." belgisi bo\'lishi kerak');
-        } else if (email.includes('@')) {
-            const domain = email.split('@')[1];
-            if (domain !== 'gmail.com') {
-                errors.push('Faqat Gmail manzilidan foydalaning! (example@gmail.com)');
-            }
         }
+        // Gmail cheklovi O'CHIRILDI - endi istalgan email manzili mumkin
         
         // PAROL TEKSHIRUVI - faqat uzunligi
         if (password === '') {
