@@ -412,20 +412,28 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     (function() {
+        // PHP orqali autorizatsiya holatini tekshirish
+        const isLoggedIn = @json(auth()->check());
+        
         const modal = document.getElementById('customModal');
         const openBtn = document.getElementById('openModalBtn');
         const closeBtn = document.getElementById('closeModalBtn');
         const form = document.getElementById('applicationForm');
         const fullnameField = document.getElementById('fullName');
         const phoneField = document.getElementById('phone');
-        const successMsg = document.getElementById('successMsg');
+        
+        // Kurs nomini avtomatik olish (class="course-title" dan)
+        const courseName = document.querySelector('.course-title')?.innerText || "Backend Dasturchi";
+        
+        // Admin toast elementi (agar mavjud bo'lmasa, muammo yo'q)
+        const adminToast = document.getElementById('adminToast');
 
         function openModal() {
             if (modal) {
                 modal.classList.add('active');
-                successMsg.style.display = 'none';
                 fullnameField.value = '';
                 phoneField.value = '';
             }
@@ -436,28 +444,57 @@
                 modal.classList.remove('active');
             }
         }
+        
+        // Autorizatsiyani tekshirib, modalni ochish
+        function checkAuthAndOpenModal() {
+            if (isLoggedIn) {
+                openModal();
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Autorizatsiya talab qilinadi',
+                    text: 'Iltimos, avval tizimga kiring yoki ro\'yxatdan o\'ting!',
+                    confirmButtonText: 'Tushundim',
+                    confirmButtonColor: '#3b82f6',
+                    backdrop: true
+                });
+            }
+        }
+        
+        // Notification chiqarish
+        function showAdminNotification() {
+            if (adminToast) {
+                adminToast.classList.add('show');
+                setTimeout(() => {
+                    adminToast.classList.remove('show');
+                }, 5000);
+            } else {
+                // Agar adminToast elementi bo'lmasa, oddiy alert
+                alert("Arizangiz qabul qilindi! Tez orada bog'lanamiz.");
+            }
+        }
 
+        // Modalni ochish tugmasi - AUTORIZATSIYA TEKSHIRUVI BILAN
         if (openBtn) {
             openBtn.addEventListener('click', function(e) {
                 e.preventDefault();
-                openModal();
+                checkAuthAndOpenModal();  // 🔐 MUHIM: autorizatsiya tekshiruvi
             });
         }
 
+        // Modalni yopish
         if (closeBtn) {
-            closeBtn.addEventListener('click', function() {
-                closeModal();
-            });
+            closeBtn.addEventListener('click', closeModal);
         }
 
+        // Overlay bosganda yopish
         if (modal) {
             modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    closeModal();
-                }
+                if (e.target === modal) closeModal();
             });
         }
 
+        // Formani yuborish
         if (form) {
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
@@ -466,12 +503,22 @@
                 const phone = phoneField.value.trim();
 
                 if (!fullname) {
-                    alert("Iltimos, Ism va Sharifni kiriting!");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Xatolik',
+                        text: 'Iltimos, Ism va Sharifni kiriting!',
+                        confirmButtonColor: '#3b82f6'
+                    });
                     fullnameField.focus();
                     return;
                 }
                 if (!phone) {
-                    alert("Telefon raqamni kiriting!");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Xatolik',
+                        text: 'Telefon raqamni kiriting!',
+                        confirmButtonColor: '#3b82f6'
+                    });
                     phoneField.focus();
                     return;
                 }
@@ -479,22 +526,24 @@
                 // Telegram botga yuborish
                 const token = "8586485983:AAF-7NhRKL72j3zXWUdznuHFv3rHCh1SIVc";
                 const chatId = "-1003836558266";
-                const text = `🆕 YANGI ARIZA!\n\n📚 Kurs: Backend Dasturchi\n👤 Ism: ${fullname}\n📞 Telefon: ${phone}\n⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}`;
+                const text = `🆕 YANGI ARIZA!\n\n📚 Kurs: ${courseName}\n👤 Ism: ${fullname}\n📞 Telefon: ${phone}\n⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}\n\n📌 Holat: Tez orada ko'rib chiqiladi`;
                 
                 const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
                 
                 fetch(url)
                 .then(function() {
-                    successMsg.style.display = 'block';
+                    closeModal();
                     fullnameField.value = '';
                     phoneField.value = '';
-                    setTimeout(function() {
-                        closeModal();
-                        successMsg.style.display = 'none';
-                    }, 2000);
+                    showAdminNotification();
                 })
                 .catch(function() {
-                    alert("Xatolik yuz berdi! Iltimos, qayta urinib ko'ring.");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Xatolik',
+                        text: 'Xatolik yuz berdi! Iltimos, qayta urinib ko\'ring.',
+                        confirmButtonColor: '#3b82f6'
+                    });
                 });
             });
         }

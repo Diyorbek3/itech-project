@@ -2,6 +2,7 @@
 
 @section('styles')
 <style>
+    /* Asosiy dizayn elementlari */
     .course-hero {
         background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         border-radius: 30px;
@@ -178,6 +179,7 @@
         font-weight: 600;
         color: #3b82f6;
     }
+
     /* Modal custom style */
     .custom-modal-overlay {
         position: fixed;
@@ -283,16 +285,75 @@
     .close-modal-icon:hover {
         color: #1e293b;
     }
-    .success-toast-msg {
-        background: #dcfce7;
-        border-radius: 2rem;
-        padding: 0.7rem;
-        margin-top: 1rem;
-        color: #15803d;
-        font-weight: 500;
-        font-size: 0.85rem;
-        display: none;
+
+    /* ========= O'NG TARAF TEPASIDAGI NOTIFICATION ========= */
+    .admin-toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1100;
+        min-width: 280px;
+        max-width: 360px;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        border-left: 5px solid #22c55e;
+        padding: 1rem 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        transform: translateX(120%);
+        transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        backdrop-filter: blur(8px);
+        background: rgba(255,255,255,0.98);
     }
+    .admin-toast.show {
+        transform: translateX(0);
+    }
+    .admin-toast-icon {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.6rem;
+        flex-shrink: 0;
+        box-shadow: 0 4px 10px rgba(34,197,94,0.3);
+    }
+    .admin-toast-content {
+        flex: 1;
+    }
+    .admin-toast-title {
+        font-weight: 800;
+        font-size: 0.9rem;
+        color: #15803d;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .admin-toast-note {
+        font-size: 0.8rem;
+        color: #eab308;
+        margin-top: 6px;
+        background: #fef9e3;
+        padding: 6px 10px;
+        border-radius: 12px;
+        display: inline-block;
+        font-weight: 600;
+    }
+    @keyframes toastPulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    .admin-toast.show .admin-toast-icon {
+        animation: toastPulse 0.5s ease;
+    }
+
     @media (max-width: 991px) {
         .course-title { font-size: 1.8rem; }
         .price-card { position: relative; margin-top: 2rem; }
@@ -301,8 +362,122 @@
         .course-hero { padding: 1.5rem; }
         .course-title { font-size: 1.5rem; }
         .modal-form-container { padding: 1.5rem; }
+        .admin-toast { left: 20px; right: 20px; min-width: auto; }
     }
 </style>
+@endsection
+
+@section('scripts')
+<script>
+    (function() {
+        // 1. Autorizatsiya holatini tekshirish
+        const isLoggedIn = @json(auth()->check());
+        
+        const modal = document.getElementById('customModal');
+        const openBtn = document.getElementById('openModalBtn');
+        const closeBtn = document.getElementById('closeModalBtn');
+        const form = document.getElementById('applicationForm');
+        const fullnameField = document.getElementById('fullName');
+        const phoneField = document.getElementById('phone');
+        const adminToast = document.getElementById('adminToast');
+
+        function openModal() {
+            if (modal) {
+                modal.classList.add('active');
+                fullnameField.value = '';
+                phoneField.value = '';
+            }
+        }
+
+        function closeModal() {
+            if (modal) {
+                modal.classList.remove('active');
+            }
+        }
+        
+        // 2. Autorizatsiya tekshiruvi va SweetAlert
+        function checkAuthAndOpenModal() {
+            if (isLoggedIn) {
+                openModal();
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Autorizatsiya talab qilinadi',
+                    text: 'Iltimos, ariza qoldirish uchun avval tizimga kiring!',
+                    confirmButtonText: 'Tushundim',
+                    confirmButtonColor: '#3b82f6',
+                    backdrop: true
+                });
+            }
+        }
+        
+        function showAdminNotification() {
+            if (adminToast) {
+                adminToast.classList.add('show');
+                setTimeout(() => {
+                    adminToast.classList.remove('show');
+                }, 5000);
+            }
+        }
+
+        if (openBtn) {
+            openBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                checkAuthAndOpenModal();
+            });
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeModal);
+        }
+
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+        }
+
+        if (form) {
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const fullname = fullnameField.value.trim();
+                const phone = phoneField.value.trim();
+
+                if (!fullname || !phone) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Xatolik',
+                        text: 'Barcha maydonlarni to\'ldiring!',
+                        confirmButtonColor: '#3b82f6'
+                    });
+                    return;
+                }
+
+                // Telegram botga yuborish
+                const token = "8586485983:AAF-7NhRKL72j3zXWUdznuHFv3rHCh1SIVc";
+                const chatId = "-1003836558266";
+                const text = `🆕 YANGI ARIZA!\n\n📚 Kurs: Python va Data Science\n👤 Ism: ${fullname}\n📞 Telefon: ${phone}\n⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}\n\n📌 Holat: Tez orada ko'rib chiqiladi`;
+                
+                const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
+                
+                fetch(url)
+                .then(() => {
+                    closeModal();
+                    showAdminNotification();
+                })
+                .catch(() => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Xatolik',
+                        text: 'Xabar yuborishda xatolik yuz berdi.',
+                        confirmButtonColor: '#3b82f6'
+                    });
+                });
+            });
+        }
+    })();
+</script>
 @endsection
 
 @section('content')
@@ -332,6 +507,7 @@
             </div>
         </div>
     </div>
+
     <div class="row g-4">
         <div class="col-lg-8">
             <div class="info-card">
@@ -341,16 +517,11 @@
             <div class="info-card">
                 <h3 class="fw-bold mb-3">📚 O'quv dasturi</h3>
                 <div class="row g-2">
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Python asoslari</div><div class="skill-desc">Sintaksis, o'zgaruvchilar, sikllar, funksiyalar</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">OOP</div><div class="skill-desc">Klasslar, obyektlar, meros, polimorfizm</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Python asoslari</div><div class="skill-desc">Sintaksis, o'zgaruvchilar, sikllar</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">OOP</div><div class="skill-desc">Klasslar, obyektlar, meros</div></div></div></div>
                     <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Data Science</div><div class="skill-desc">Pandas, NumPy, Matplotlib</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Django</div><div class="skill-desc">Backend dasturlash, REST API</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">API va Web</div><div class="skill-desc">REST API yaratish, Django bilan tanishish</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Django & API</div><div class="skill-desc">Backend va REST API yaratish</div></div></div></div>
                 </div>
-            </div>
-            <div class="info-card">
-                <h3 class="fw-bold mb-3">👨‍💻 Kimlar uchun?</h3>
-                <p class="text-secondary">Dasturlashga yangi boshlovchilar, ma'lumotlar tahlili va backend dasturlashni o'rganmoqchi bo'lganlar.</p>
             </div>
             <div class="teacher-card">
                 <div class="teacher-avatar"><i class="fas fa-chalkboard-user"></i></div>
@@ -360,6 +531,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-lg-4">
             <div class="price-card">
                 <div class="text-center mb-3">
@@ -371,27 +543,23 @@
                 <div class="mb-3">
                     <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-clock me-2 text-primary"></i> Davomiyligi</span><span class="fw-bold">5 oy</span></div>
                     <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-calendar me-2 text-primary"></i> Darslar</span><span class="fw-bold">Haftada 3 kun</span></div>
-                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-language me-2 text-primary"></i> Til</span><span class="fw-bold">O'zbek tilida</span></div>
                     <div class="d-flex justify-content-between"><span><i class="fas fa-certificate me-2 text-primary"></i> Sertifikat</span><span class="fw-bold">✓ Bor</span></div>
                 </div>
                 <hr>
                 <button id="openModalBtn" class="btn btn-enroll text-white">
                     <i class="fas fa-bolt me-2"></i> Hoziroq qo'shilish
                 </button>
-                <div class="text-center mt-3">
-                    <small class="text-muted"><i class="fas fa-headset me-1"></i> 24/7 mentor yordami</small>
-                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Custom Modal -->
+<!-- Custom Modal - Ro'yxatdan o'tish oynasi -->
 <div id="customModal" class="custom-modal-overlay">
     <div class="modal-form-container">
         <button class="close-modal-icon" id="closeModalBtn"><i class="fas fa-times"></i></button>
         <h3><i class="fas fa-pen-alt me-2" style="color:#1e4a76;"></i> Ro'yxatdan o'tish</h3>
-        <p>Python va Data Science kursiga ariza qoldiring</p>
+        <p>Ofis menejerligi kursiga ariza qoldiring</p>
         
         <form id="applicationForm">
             <div class="form-group-custom">
@@ -403,101 +571,17 @@
                 <input type="tel" id="phone" placeholder="+998 90 123 45 67" required>
             </div>
             <button type="submit" class="submit-modal-btn"><i class="fas fa-paper-plane me-2"></i> Yuborish va ariza qoldirish</button>
-            <div id="successMsg" class="success-toast-msg">
-                ✅ Ariza muvaffaqiyatli qabul qilindi! Tez orada bog'lanamiz.
-            </div>
         </form>
         <hr>
         <div style="font-size: 12px; color: #6c757d; text-align: center;">Sizning ma'lumotlaringiz maxfiy saqlanadi</div>
     </div>
 </div>
 
-<script>
-    (function() {
-        const modal = document.getElementById('customModal');
-        const openBtn = document.getElementById('openModalBtn');
-        const closeBtn = document.getElementById('closeModalBtn');
-        const form = document.getElementById('applicationForm');
-        const fullnameField = document.getElementById('fullName');
-        const phoneField = document.getElementById('phone');
-        const successMsg = document.getElementById('successMsg');
-
-        function openModal() {
-            if (modal) {
-                modal.classList.add('active');
-                successMsg.style.display = 'none';
-                fullnameField.value = '';
-                phoneField.value = '';
-            }
-        }
-
-        function closeModal() {
-            if (modal) {
-                modal.classList.remove('active');
-            }
-        }
-
-        if (openBtn) {
-            openBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                openModal();
-            });
-        }
-
-        if (closeBtn) {
-            closeBtn.addEventListener('click', function() {
-                closeModal();
-            });
-        }
-
-        if (modal) {
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-        }
-
-        if (form) {
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
-
-                const fullname = fullnameField.value.trim();
-                const phone = phoneField.value.trim();
-
-                if (!fullname) {
-                    alert("Iltimos, Ism va Sharifni kiriting!");
-                    fullnameField.focus();
-                    return;
-                }
-                if (!phone) {
-                    alert("Telefon raqamni kiriting!");
-                    phoneField.focus();
-                    return;
-                }
-
-                // Telegram botga yuborish
-                const token = "8586485983:AAF-7NhRKL72j3zXWUdznuHFv3rHCh1SIVc";
-                const chatId = "-1003836558266";
-                const text = `🆕 YANGI ARIZA!\n\n📚 Kurs: Python va Data Science\n👤 Ism: ${fullname}\n📞 Telefon: ${phone}\n⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}`;
-                
-                const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
-                
-                fetch(url)
-                .then(function() {
-                    successMsg.style.display = 'block';
-                    fullnameField.value = '';
-                    phoneField.value = '';
-                    setTimeout(function() {
-                        closeModal();
-                        successMsg.style.display = 'none';
-                    }, 2000);
-                })
-                .catch(function() {
-                    alert("Xatolik yuz berdi! Iltimos, qayta urinib ko'ring.");
-                });
-            });
-        }
-    })();
-</script>
+<div id="adminToast" class="admin-toast">
+    <div class="admin-toast-icon"><i class="fas fa-check-circle"></i></div>
+    <div class="admin-toast-content">
+        <div class="admin-toast-title">✅ Ariza qabul qilindi</div>
+        <div class="admin-toast-note"><i class="fas fa-clock me-1"></i> Tez orada ko'rib chiqiladi</div>
+    </div>
+</div>
 @endsection
