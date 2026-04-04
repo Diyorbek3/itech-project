@@ -64,6 +64,114 @@
             justify-content: center;
         }
 
+        /* Projects bo'limini siqish */
+        .cards-2 {
+            padding-top: 1.5rem !important;
+            padding-bottom: 1rem !important;
+        }
+
+        .cards-2 .container {
+            padding-left: 0.5rem !important;
+            padding-right: 0.5rem !important;
+            max-width: 100% !important;
+        }
+
+        .cards-2 .h2-heading {
+            margin-bottom: 0.5rem !important;
+            font-size: 2.5rem !important;
+            font-weight: 700 !important;
+        }
+
+        .cards-2 .row {
+            margin-left: -4px !important;
+            margin-right: -4px !important;
+            display: flex !important;
+            justify-content: center !important;
+        }
+
+        .cards-2 .card {
+            display: flex;
+            flex-direction: column;
+            height: auto !important;
+            min-height: auto !important;
+            margin-bottom: 0 !important;
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+
+        .cards-2 .card-body {
+            padding: 0.75rem !important;
+            flex: 0 0 auto !important;
+        }
+
+        .cards-2 .card-title {
+            margin-bottom: 0.5rem !important;
+            font-size: 1.5rem !important;
+            font-weight: 700 !important;
+        }
+
+        .cards-2 .card-text {
+            font-size: 1.1rem !important;
+            line-height: 1.4 !important;
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
+            font-weight: 500 !important;
+        }
+
+        .cards-2 .card-text a {
+            display: block !important;
+            margin-top: 6px;
+            margin-bottom: 0 !important;
+            font-size: 1rem !important;
+            font-weight: 600 !important;
+        }
+
+        /* Yon tomondan siqish - kartalar orasidagi gorizontal masofa minimal */
+        .cards-2 .col-md-6,
+        .cards-2 .col-lg-4 {
+            margin-bottom: 2rem !important;
+            padding-left: 15px !important;
+            padding-right: 15px !important;
+            max-width: 33.333% !important;
+            flex: 0 0 33.333% !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .cards-2 .col-md-6 {
+                max-width: 50% !important;
+                flex: 0 0 50% !important;
+            }
+
+            .cards-2 .card-title {
+                font-size: 1.3rem !important;
+            }
+
+            .cards-2 .card-text {
+                font-size: 1rem !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cards-2 .col-md-6 {
+                max-width: 100% !important;
+                flex: 0 0 100% !important;
+            }
+
+            .cards-2 .container {
+                padding-left: 0.5rem !important;
+                padding-right: 0.5rem !important;
+            }
+
+            .cards-2 .card-title {
+                font-size: 1.2rem !important;
+            }
+
+            .cards-2 .card-text {
+                font-size: 0.95rem !important;
+            }
+        }
+
         .cards-1 .icon-box img {
             max-width: 100%;
             max-height: 100%;
@@ -77,6 +185,10 @@
             font-weight: 600;
             color: #1e293b;
         }
+
+        /* Projects bo'limi */
+        /* Projects bo'limi */
+
 
         @media (max-width: 1200px) {
             .cards-1 .card-grid {
@@ -149,10 +261,10 @@
         }
 
         .auth-btn {
-            padding: 8px 16px !important;
-            font-size: 13px !important;
+            padding: 8px 16px;
+            font-size: 13px;
             font-weight: 600;
-            border-radius: 20px !important;
+            border-radius: 20px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -160,12 +272,12 @@
             min-width: fit-content;
             white-space: nowrap;
             transition: all 0.3s ease;
-            text-decoration: none !important;
+            text-decoration: none;
         }
 
         [lang="uz"] .auth-btn {
-            font-size: 10px !important;
-            padding: 7px 10px !important;
+            font-size: 10px;
+            padding: 7px 10px;
         }
 
         @media (max-width: 991px) {
@@ -181,40 +293,40 @@
         }
 
         .btn-login-custom {
-            border: 1px solid #eb427e !important;
-            color: #ffffff !important;
-            background-color: #eb427e !important;
+            border: 1px solid #eb427e;
+            color: #ffffff;
+            background-color: #eb427e;
         }
 
         .btn-login-custom:hover,
         .btn-login-custom:active {
-            background-color: #ffffff !important;
-            color: #eb427e !important;
-            text-decoration: none !important;
+            background-color: #ffffff;
+            color: #eb427e;
+            text-decoration: none;
         }
 
         .btn-signup-custom {
-            background-color: #eb427e !important;
-            border: 1px solid #eb427e !important;
-            color: #fff !important;
+            background-color: #eb427e;
+            border: 1px solid #eb427e;
+            color: #fff;
         }
 
         .btn-signup-custom:hover,
         .btn-signup-custom:active {
-            background-color: transparent !important;
-            color: #eb427e !important;
-            text-decoration: none !important;
+            background-color: transparent;
+            color: #eb427e;
+            text-decoration: none;
         }
 
         .navbar-nav .nav-link {
-            padding-right: 0.8rem !important;
-            padding-left: 0.8rem !important;
+            padding-right: 0.8rem;
+            padding-left: 0.8rem;
         }
 
         .auth-btn {
-            min-width: 80px !important;
-            padding: 6px 12px !important;
-            font-size: 12px !important;
+            min-width: 80px;
+            padding: 6px 12px;
+            font-size: 12px;
         }
 
         @media (min-width: 1200px) {
@@ -224,18 +336,18 @@
         }
 
         [lang="uz"] .auth-btn {
-            font-size: 11px !important;
+            font-size: 11px;
         }
 
         @media (min-width: 1200px) {
             .container {
-                max-width: 1350px !important;
+                max-width: 1350px;
             }
         }
 
         .navbar-nav .nav-link {
-            padding-right: 12px !important;
-            padding-left: 12px !important;
+            padding-right: 12px;
+            padding-left: 12px;
             font-size: 15px;
         }
 
@@ -246,9 +358,9 @@
         }
 
         .auth-btn {
-            min-width: 85px !important;
-            padding: 6px 12px !important;
-            font-size: 13px !important;
+            min-width: 85px;
+            padding: 6px 12px;
+            font-size: 13px;
             white-space: nowrap;
         }
 
@@ -442,99 +554,127 @@
                         <!-- 1. Ofis menejerligi -->
                         <a href="/courses/office" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/2721/2721292.png"
-                                        alt="Ofis menejerligi"></div>
+                                <div class="icon-box">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/3200/3200650.png"
+                                        alt="Ofis menejerligi">
+                                </div>
                                 <h5 class="card-title">Ofis menejerligi</h5>
                             </div>
                         </a>
+
                         <!-- 2. Algoritm asoslari -->
                         <a href="/courses/algorithm" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/1995/1995530.png"
-                                        alt="Algoritm"></div>
+                                <div class="icon-box">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/11068/11068779.png"
+                                        alt="Algoritm asoslari">
+                                </div>
                                 <h5 class="card-title">Algoritm asoslari</h5>
                             </div>
                         </a>
+
                         <!-- 3. Frontend -->
                         <a href="{{ route('courses.frontend') }}" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img
-                                        src="https://us.123rf.com/450wm/dxinerz/dxinerz1601/dxinerz160103363/51258851-code-seo-web-symbol-vektor-bild-kann-auch-f%C3%BCr-seo-und-entwicklungsdienste-verwendet-werden.jpg?ver=6"
-                                        alt="Frontend"></div>
+                                <div class="icon-box">
+                                    <img src="https://us.123rf.com/450wm/dxinerz/dxinerz1601/dxinerz160103363/51258851-code-seo-web-symbol-vektor-bild-kann-auch-f%C3%BCr-seo-und-entwicklungsdienste-verwendet-werden.jpg?ver=6"
+                                        alt="Frontend">
+                                </div>
                                 <h5 class="card-title">Frontend</h5>
                             </div>
                         </a>
+
                         <!-- 4. Backend -->
                         <a href="{{ route('courses.backend') }}" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img
-                                        src="https://www.shutterstock.com/image-vector/backend-developer-icon-mixed-vector-600nw-2655399835.jpg"
-                                        alt="Backend"></div>
+                                <div class="icon-box">
+                                    <img src="https://www.shutterstock.com/image-vector/backend-developer-icon-mixed-vector-600nw-2655399835.jpg"
+                                        alt="Backend">
+                                </div>
                                 <h5 class="card-title">Backend</h5>
                             </div>
                         </a>
+
                         <!-- 5. Python -->
                         <a href="{{ route('courses.python') }}" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img
-                                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1280px-Python-logo-notext.svg.png"
-                                        alt="Python"></div>
+                                <div class="icon-box">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1280px-Python-logo-notext.svg.png"
+                                        alt="Python">
+                                </div>
                                 <h5 class="card-title">Python</h5>
                             </div>
                         </a>
+
                         <!-- 6. Robototexnika -->
                         <a href="/courses/robotics" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/1998/1998178.png"
-                                        alt="Robototexnika"></div>
+                                <div class="icon-box">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/4727/4727488.png" alt="Robototexnika">
+                                </div>
                                 <h5 class="card-title">Robototexnika</h5>
                             </div>
                         </a>
-                        <!-- 7. Raqamli bolalar -->
+
+                        <!-- 7. Raqamli bolalar (YANGI - bola + laptop raqamli o'qish) -->
                         <a href="/courses/digital-kids" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/3688/3688127.png"
+                                <div class="icon-box">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/3688/3688127.png"
                                         alt="Raqamli bolalar"></div>
                                 <h5 class="card-title">Raqamli bolalar</h5>
                             </div>
                         </a>
+
                         <!-- 8. Tizim muhandisligi -->
                         <a href="/courses/system-engineering" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png"
-                                        alt="Tizim muhandisligi"></div>
+                                <div class="icon-box">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png"
+                                        alt="Tizim muhandisligi">
+                                </div>
                                 <h5 class="card-title">Tizim muhandisligi</h5>
                             </div>
                         </a>
+
                         <!-- 9. DevOps asoslari -->
                         <a href="/courses/devops" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/919/919851.png"
-                                        alt="DevOps"></div>
+                                <div class="icon-box">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/5115/5115293.png"
+                                        alt="DevOps asoslari">
+                                </div>
                                 <h5 class="card-title">DevOps asoslari</h5>
                             </div>
                         </a>
+
                         <!-- 10. Data analitika -->
                         <a href="/courses/data-analytics" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/1055/1055685.png"
-                                        alt="Data analitika"></div>
+                                <div class="icon-box">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055685.png" alt="Data analitika">
+                                </div>
                                 <h5 class="card-title">Data analitika</h5>
                             </div>
                         </a>
+
                         <!-- 11. Tarmoq administratorligi -->
                         <a href="/courses/network-admin" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/2240/2240419.png"
-                                        alt="Tarmoq"></div>
+                                <div class="icon-box">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/14357/14357432.png"
+                                        alt="Tarmoq administratorligi">
+                                </div>
                                 <h5 class="card-title">Tarmoq administratorligi</h5>
                             </div>
                         </a>
+
                         <!-- 12. Buxgalteriya -->
                         <a href="/courses/accounting" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/2331/2331966.png"
-                                        alt="Buxgalteriya"></div>
+                                <div class="icon-box">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/9703/9703558.png" alt="Buxgalteriya">
+                                </div>
                                 <h5 class="card-title">Buxgalteriya</h5>
                             </div>
                         </a>
@@ -578,88 +718,105 @@
     </div>
 
     <div id="projects" class="cards-2">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="h2-heading">{{ __('messages.projects_title') }}</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="h2-heading">{{ __('messages.projects_title') }}</h2>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mt-4">
+
+                <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
+                    <div class="card h-100"
+                        style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;">
+                        <img class="img-fluid w-100" src="{{ asset('images/iqro.png') }}" alt="Iqro">
+                        <div class="card-body p-4">
+                            <h5 class="card-title fw-bold mb-2"> @lang('messages.project1_title') </h5>
+                            <p class="card-text text-secondary"> @lang('messages.project1_desc')
+                                <a class="text-primary text-decoration-none fw-semibold" href="https://iqroagency.uz/uz">
+                                    @lang('messages.read_more') </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
+                    <div class="card h-100"
+                        style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;">
+                        <img class="img-fluid w-100" src="{{ asset('images/delever.png') }}" alt="Delever">
+                        <div class="card-body p-4">
+                            <h5 class="card-title fw-bold mb-2"> @lang('messages.project2_title') </h5>
+                            <p class="card-text text-secondary"> @lang('messages.project2_desc')
+                                <a class="text-primary text-decoration-none fw-semibold" href="https://www.delever.uz/">
+                                    @lang('messages.read_more') </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
+                    <div class="card h-100"
+                        style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;">
+                        <img class="img-fluid w-100" src="{{ asset('images/kidi.png') }}" alt="Kidi">
+                        <div class="card-body p-4">
+                            <h5 class="card-title fw-bold mb-2"> @lang('messages.project3_title') </h5>
+                            <p class="card-text text-secondary"> @lang('messages.project3_desc')
+                                <a class="text-primary text-decoration-none fw-semibold" href="https://kidi.uz/">
+                                    @lang('messages.read_more') </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
+                    <div class="card h-100"
+                        style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;">
+                        <img class="img-fluid w-100" src="{{ asset('images/growz.png') }}" alt="Growz">
+                        <div class="card-body p-4">
+                            <h5 class="card-title fw-bold mb-2"> @lang('messages.project4_title') </h5>
+                            <p class="card-text text-secondary"> @lang('messages.project4_desc')
+                                <a class="text-primary text-decoration-none fw-semibold"
+                                    href="https://admin.growz.io/login"> @lang('messages.read_more') </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
+                    <div class="card h-100"
+                        style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;">
+                        <img class="img-fluid w-100" src="{{ asset('images/wasteles.png') }}" alt="Wasteless">
+                        <div class="card-body p-4">
+                            <h5 class="card-title fw-bold mb-2"> @lang('messages.project5_title') </h5>
+                            <p class="card-text text-secondary"> @lang('messages.project5_desc')
+                                <a class="text-primary text-decoration-none fw-semibold"
+                                    href="https://admin.wasteless.uz/login" target="_blank" rel="noopener noreferrer">
+                                    @lang('messages.read_more')
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
+                    <div class="card h-100"
+                        style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;">
+                        <img class="img-fluid w-100" src="{{ asset('images/urecruit.png') }}" alt="Urecruit">
+                        <div class="card-body p-4">
+                            <h5 class="card-title fw-bold mb-2"> @lang('messages.project6_title') </h5>
+                            <p class="card-text text-secondary"> @lang('messages.project6_desc')
+                                <a class="text-primary text-decoration-none fw-semibold"
+                                    href="https://test.admin.urecruit.udevs.io/auth/login">
+                                    @lang('messages.read_more') </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
-
-        <div class="row justify-content-center mt-4">
-            
-            <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
-                <div class="card h-100" style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;"> 
-                    <img class="img-fluid w-100" src="{{ asset('images/wasteles.png') }}" alt="Wasteless">
-                    <div class="card-body p-4">
-                        <h5 class="card-title fw-bold mb-2"> @lang('messages.project5_title') </h5>
-                        <p class="card-text text-secondary"> @lang('messages.project5_desc') 
-                            <a class="text-primary text-decoration-none fw-semibold" href="article.html"> @lang('messages.read_more') </a> 
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
-                <div class="card h-100" style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;"> 
-                    <img class="img-fluid w-100" src="{{ asset('images/delever.png') }}" alt="Delever">
-                    <div class="card-body p-4">
-                        <h5 class="card-title fw-bold mb-2"> @lang('messages.project2_title') </h5>
-                        <p class="card-text text-secondary"> @lang('messages.project2_desc') 
-                            <a class="text-primary text-decoration-none fw-semibold" href="article.html"> @lang('messages.read_more') </a> 
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
-                <div class="card h-100" style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;"> 
-                    <img class="img-fluid w-100" src="{{ asset('images/kidi.png') }}" alt="Kidi">
-                    <div class="card-body p-4">
-                        <h5 class="card-title fw-bold mb-2"> @lang('messages.project3_title') </h5>
-                        <p class="card-text text-secondary"> @lang('messages.project3_desc') 
-                            <a class="text-primary text-decoration-none fw-semibold" href="article.html"> @lang('messages.read_more') </a> 
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
-                <div class="card h-100" style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;"> 
-                    <img class="img-fluid w-100" src="{{ asset('images/growz.png') }}" alt="Growz">
-                    <div class="card-body p-4">
-                        <h5 class="card-title fw-bold mb-2"> @lang('messages.project4_title') </h5>
-                        <p class="card-text text-secondary"> @lang('messages.project4_desc') 
-                            <a class="text-primary text-decoration-none fw-semibold" href="article.html"> @lang('messages.read_more') </a> 
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
-                <div class="card h-100" style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;"> 
-                    <img class="img-fluid w-100" src="{{ asset('images/iqro.png') }}" alt="Iqro">
-                    <div class="card-body p-4">
-                        <h5 class="card-title fw-bold mb-2"> @lang('messages.project1_title') </h5>
-                        <p class="card-text text-secondary"> @lang('messages.project1_desc') 
-                            <a class="text-primary text-decoration-none fw-semibold" href="article.html"> @lang('messages.read_more') </a> 
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
-                <div class="card h-100" style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;"> 
-                    <img class="img-fluid w-100" src="{{ asset('images/urecruit.png') }}" alt="Urecruit">
-                    <div class="card-body p-4">
-                        <h5 class="card-title fw-bold mb-2"> @lang('messages.project6_title') </h5>
-                        <p class="card-text text-secondary"> @lang('messages.project6_desc') 
-                            <a class="text-primary text-decoration-none fw-semibold" href="article.html"> @lang('messages.read_more') </a> 
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-        </div> </div> </div>
+    </div>
     <!-- Testimonials -->
     <div class="slider-1 bg-gray">
         <img class="quotes-decoration" src="{{ asset('images/quotes.svg') }}" alt="alternative">
@@ -730,7 +887,8 @@
                             @if(session('success'))
                                 <div
                                     style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-                            {{ session('success') }}</div>@endif
+                                    {{ session('success') }}
+                            </div>@endif
                             <div class="form-group"><button type="submit"
                                     class="form-control-submit-button">{{ __('messages.send') }}</button></div>
                         </form>
