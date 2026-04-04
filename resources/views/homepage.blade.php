@@ -554,99 +554,127 @@
                         <!-- 1. Ofis menejerligi -->
                         <a href="/courses/office" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/2721/2721292.png"
-                                        alt="Ofis menejerligi"></div>
+                                <div class="icon-box">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/3200/3200650.png"
+                                        alt="Ofis menejerligi">
+                                </div>
                                 <h5 class="card-title">Ofis menejerligi</h5>
                             </div>
                         </a>
+
                         <!-- 2. Algoritm asoslari -->
                         <a href="/courses/algorithm" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/1995/1995530.png"
-                                        alt="Algoritm"></div>
+                                <div class="icon-box">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/11068/11068779.png"
+                                        alt="Algoritm asoslari">
+                                </div>
                                 <h5 class="card-title">Algoritm asoslari</h5>
                             </div>
                         </a>
+
                         <!-- 3. Frontend -->
                         <a href="{{ route('courses.frontend') }}" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img
-                                        src="https://us.123rf.com/450wm/dxinerz/dxinerz1601/dxinerz160103363/51258851-code-seo-web-symbol-vektor-bild-kann-auch-f%C3%BCr-seo-und-entwicklungsdienste-verwendet-werden.jpg?ver=6"
-                                        alt="Frontend"></div>
+                                <div class="icon-box">
+                                    <img src="https://us.123rf.com/450wm/dxinerz/dxinerz1601/dxinerz160103363/51258851-code-seo-web-symbol-vektor-bild-kann-auch-f%C3%BCr-seo-und-entwicklungsdienste-verwendet-werden.jpg?ver=6"
+                                        alt="Frontend">
+                                </div>
                                 <h5 class="card-title">Frontend</h5>
                             </div>
                         </a>
+
                         <!-- 4. Backend -->
                         <a href="{{ route('courses.backend') }}" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img
-                                        src="https://www.shutterstock.com/image-vector/backend-developer-icon-mixed-vector-600nw-2655399835.jpg"
-                                        alt="Backend"></div>
+                                <div class="icon-box">
+                                    <img src="https://www.shutterstock.com/image-vector/backend-developer-icon-mixed-vector-600nw-2655399835.jpg"
+                                        alt="Backend">
+                                </div>
                                 <h5 class="card-title">Backend</h5>
                             </div>
                         </a>
+
                         <!-- 5. Python -->
                         <a href="{{ route('courses.python') }}" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img
-                                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1280px-Python-logo-notext.svg.png"
-                                        alt="Python"></div>
+                                <div class="icon-box">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1280px-Python-logo-notext.svg.png"
+                                        alt="Python">
+                                </div>
                                 <h5 class="card-title">Python</h5>
                             </div>
                         </a>
+
                         <!-- 6. Robototexnika -->
                         <a href="/courses/robotics" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/1998/1998178.png"
-                                        alt="Robototexnika"></div>
+                                <div class="icon-box">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/4727/4727488.png" alt="Robototexnika">
+                                </div>
                                 <h5 class="card-title">Robototexnika</h5>
                             </div>
                         </a>
-                        <!-- 7. Raqamli bolalar -->
+
+                        <!-- 7. Raqamli bolalar (YANGI - bola + laptop raqamli o'qish) -->
                         <a href="/courses/digital-kids" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/3688/3688127.png"
+                                <div class="icon-box">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/3688/3688127.png"
                                         alt="Raqamli bolalar"></div>
                                 <h5 class="card-title">Raqamli bolalar</h5>
                             </div>
                         </a>
+
                         <!-- 8. Tizim muhandisligi -->
                         <a href="/courses/system-engineering" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png"
-                                        alt="Tizim muhandisligi"></div>
+                                <div class="icon-box">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png"
+                                        alt="Tizim muhandisligi">
+                                </div>
                                 <h5 class="card-title">Tizim muhandisligi</h5>
                             </div>
                         </a>
+
                         <!-- 9. DevOps asoslari -->
                         <a href="/courses/devops" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/919/919851.png"
-                                        alt="DevOps"></div>
+                                <div class="icon-box">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/5115/5115293.png"
+                                        alt="DevOps asoslari">
+                                </div>
                                 <h5 class="card-title">DevOps asoslari</h5>
                             </div>
                         </a>
+
                         <!-- 10. Data analitika -->
                         <a href="/courses/data-analytics" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/1055/1055685.png"
-                                        alt="Data analitika"></div>
+                                <div class="icon-box">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055685.png" alt="Data analitika">
+                                </div>
                                 <h5 class="card-title">Data analitika</h5>
                             </div>
                         </a>
+
                         <!-- 11. Tarmoq administratorligi -->
                         <a href="/courses/network-admin" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/2240/2240419.png"
-                                        alt="Tarmoq"></div>
+                                <div class="icon-box">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/14357/14357432.png"
+                                        alt="Tarmoq administratorligi">
+                                </div>
                                 <h5 class="card-title">Tarmoq administratorligi</h5>
                             </div>
                         </a>
+
                         <!-- 12. Buxgalteriya -->
                         <a href="/courses/accounting" class="card-link">
                             <div class="card-item">
-                                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/2331/2331966.png"
-                                        alt="Buxgalteriya"></div>
+                                <div class="icon-box">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/9703/9703558.png" alt="Buxgalteriya">
+                                </div>
                                 <h5 class="card-title">Buxgalteriya</h5>
                             </div>
                         </a>
