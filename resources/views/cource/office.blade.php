@@ -504,7 +504,7 @@
 </script>
 @endsection
 @section('content')
-<div class="container py-4 py-md-5">
+<div class="container-fluid">
     <div class="course-hero">
         <div class="row align-items-center">
             <div class="col-lg-8">

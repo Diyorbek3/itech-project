@@ -16,6 +16,12 @@
     <link href="/css/swiper.css" rel="stylesheet">
     <link href="/css/styles.css" rel="stylesheet">
     <link rel="icon" href="/images/logo.png">
+    <style>
+        .course-hero {
+            margin-top: 130px !important;
+        }
+
+    </style>
 
     @yield('styles')
 </head>
@@ -29,7 +35,7 @@
 
     @include('components.header')
 
-    <main class="py-4">
+    <main>
         <div class="container">
             @yield('content')
         </div>

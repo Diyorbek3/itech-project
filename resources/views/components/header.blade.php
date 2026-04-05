@@ -134,32 +134,33 @@
                     </ul>
                 </div>
 
-                <!-- Contact -->
-                <a class="btn-outline-sm px-3 py-2 d-flex align-items-center justify-content-center"
-                   href="#contact"
-                   style="font-size: 12px; min-width: 110px; border-radius: 16px; height: 42px;">
+                <a class="btn-outline-sm rounded-circle-5" href="#contact" style="padding: 20px 15px;">
                     {{ __('messages.contact_us') }}
                 </a>
+
 
                 <!-- Auth -->
                 <div class="d-flex gap-2">
                     @guest
-                        <a class="btn-outline-sm d-flex align-items-center justify-content-center rounded-circle"
+                        <a class="btn-outline-sm rounded-circle-3"
                            href="{{ route('login') }}"
-                           style="width: 42px; height: 42px;">
+                           >
                             <i class="fas fa-sign-in-alt"></i>
                         </a>
-                        <a class="btn-outline-sm d-flex align-items-center justify-content-center rounded-circle"
+                        <a class="btn-outline-sm rounded-circle-3"
                            href="{{ route('register') }}"
-                           style="width: 42px; height: 42px;">
+                           >
                             <i class="fas fa-user-plus"></i>
                         </a>
                     @else
                         <div class="dropdown">
-                            <a class="btn-outline-sm d-flex align-items-center justify-content-center rounded-circle"
-                               href="#" data-bs-toggle="dropdown"
-                               style="width: 42px; height: 42px;">
-                                <i class="fas fa-user-circle"></i>
+                            <a class="btn-outline-sm dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" style="padding: 5px 10px;">
+                                <img id="headerAvatar" 
+                                         src="{{ Auth::user()->avatar ? Storage::url('avatars/' . Auth::user()->avatar) : asset('images/avatar.png') }}"
+                                     class="rounded-circle me-2" 
+                                     style="width: 30px; height: 30px; object-fit: cover;"
+                                     onerror="this.onerror=null; this.src='{{ asset('storage/avatars/avatar.png') }}';">
+                                <span id="headerUserName">{{ Auth::user()->name }}</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="/profile">
