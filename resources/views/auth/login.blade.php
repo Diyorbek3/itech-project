@@ -202,7 +202,6 @@
             if (domain !== 'gmail.com') {
                 errors.push('Faqat Gmail manzilidan foydalaning! (example@gmail.com)');
             }
-        }
         
         if (password === '') {
             errors.push('Parolni kiriting');
