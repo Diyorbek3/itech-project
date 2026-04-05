@@ -374,6 +374,51 @@
             display: block;
             cursor: pointer;
         }
+
+                .project-card {
+            border: 2px solid #000;
+            border-radius: 12px;
+            overflow: hidden;
+            max-width: 350px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        /* To'liq atrofga (tepa, past, chap, o'ng) qora chiziq qo'shish */
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 3px solid #000;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+        }
+
+        /* Hover bo'lganda qora chiziqlar yo'qolsin */
+        .project-card:hover::before {
+            border-color: transparent;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            border-color: #007bff;
+        }
+
+        .project-card:hover .card-title {
+            color: #007bff;
+        }
+
+        /* Qo'shimcha effekt */
+        .project-card:hover img {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+        }
     </style>
 @endsection
 
@@ -621,7 +666,8 @@
                             <div class="card-item">
                                 <div class="icon-box">
                                     <img src="https://cdn-icons-png.flaticon.com/512/3688/3688127.png"
-                                        alt="Raqamli bolalar"></div>
+                                        alt="Raqamli bolalar">
+                                </div>
                                 <h5 class="card-title">Raqamli bolalar</h5>
                             </div>
                         </a>
@@ -725,11 +771,11 @@
                 </div>
             </div>
 
+
             <div class="row justify-content-center mt-4">
 
                 <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
-                    <div class="card h-100"
-                        style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;">
+                    <div class="card h-100 project-card">
                         <img class="img-fluid w-100" src="{{ asset('images/iqro.png') }}" alt="Iqro">
                         <div class="card-body p-4">
                             <h5 class="card-title fw-bold mb-2"> @lang('messages.project1_title') </h5>
@@ -742,8 +788,7 @@
                 </div>
 
                 <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
-                    <div class="card h-100"
-                        style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;">
+                    <div class="card h-100 project-card">
                         <img class="img-fluid w-100" src="{{ asset('images/delever.png') }}" alt="Delever">
                         <div class="card-body p-4">
                             <h5 class="card-title fw-bold mb-2"> @lang('messages.project2_title') </h5>
@@ -756,8 +801,7 @@
                 </div>
 
                 <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
-                    <div class="card h-100"
-                        style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;">
+                    <div class="card h-100 project-card">
                         <img class="img-fluid w-100" src="{{ asset('images/kidi.png') }}" alt="Kidi">
                         <div class="card-body p-4">
                             <h5 class="card-title fw-bold mb-2"> @lang('messages.project3_title') </h5>
@@ -770,8 +814,7 @@
                 </div>
 
                 <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
-                    <div class="card h-100"
-                        style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;">
+                    <div class="card h-100 project-card">
                         <img class="img-fluid w-100" src="{{ asset('images/growz.png') }}" alt="Growz">
                         <div class="card-body p-4">
                             <h5 class="card-title fw-bold mb-2"> @lang('messages.project4_title') </h5>
@@ -784,8 +827,7 @@
                 </div>
 
                 <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
-                    <div class="card h-100"
-                        style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;">
+                    <div class="card h-100 project-card">
                         <img class="img-fluid w-100" src="{{ asset('images/wasteles.png') }}" alt="Wasteless">
                         <div class="card-body p-4">
                             <h5 class="card-title fw-bold mb-2"> @lang('messages.project5_title') </h5>
@@ -800,8 +842,7 @@
                 </div>
 
                 <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
-                    <div class="card h-100"
-                        style="border: 2px solid #000; border-radius: 12px; overflow: hidden; max-width: 350px;">
+                    <div class="card h-100 project-card">
                         <img class="img-fluid w-100" src="{{ asset('images/urecruit.png') }}" alt="Urecruit">
                         <div class="card-body p-4">
                             <h5 class="card-title fw-bold mb-2"> @lang('messages.project6_title') </h5>

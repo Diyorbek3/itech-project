@@ -20,9 +20,7 @@ class ProfileController extends Controller
         $data = [
             'email'  => $user->email, // Ko'rish uchun qoladi, lekin o'zgartirilmaydi
             'name'   => $user->name,
-            'avatar' => $user->avatar 
-                        ? asset('storage/avatars/' . $user->avatar) 
-                        : asset('storage/avatars/avatar.png'),
+            'avatar' => $user->avatar,
         ];
      
         return view('profile.index', compact('data'));
@@ -70,7 +68,7 @@ class ProfileController extends Controller
                 'name'       => $user->name,
                 'avatar_url' => $user->avatar 
                                 ? asset('storage/avatars/' . $user->avatar) 
-                                : asset('storage/avatars/avatar.png')
+                                : asset('images/avatar.png')
             ]);
 
         } catch (\Exception $e) {
