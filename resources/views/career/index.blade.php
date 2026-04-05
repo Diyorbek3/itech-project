@@ -24,13 +24,13 @@
         transform: translateX(-50%);
         width: 80px;
         height: 4px;
-        background: linear-gradient(90deg, #4a90e2, #9b59b6);
+        background: linear-gradient(90deg, #ced4db, #9b59b6);
         border-radius: 2px;
     }
     
     /* История компании */
     .history-section {
-        background: linear-gradient(135deg, #9b8c9d 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
     }
     
@@ -79,8 +79,9 @@
     
     .team-image {
         width: 100%;
-        height: 300px;
+        height: 350px;
         object-fit: cover;
+        object-position: top;
     }
     
     .team-info {
@@ -92,11 +93,31 @@
         font-size: 1.2rem;
         font-weight: 600;
         margin-bottom: 5px;
+        color: #333;
     }
     
     .team-position {
         color: #6c757d;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
+        font-size: 0.9rem;
+    }
+    
+    .social-links a {
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        border-radius: 50%;
+        background: #f0f0f0;
+        color: #4a90e2;
+        transition: all 0.3s ease;
+        margin: 0 5px;
+    }
+    
+    .social-links a:hover {
+        background: linear-gradient(90deg, #4a90e2, #9b59b6);
+        color: white;
+        transform: translateY(-3px);
     }
     
     /* Quiz секция */
@@ -127,13 +148,6 @@
         margin-right: 10px;
     }
     
-    .quiz-result {
-        margin-top: 20px;
-        padding: 15px;
-        border-radius: 10px;
-        display: none;
-    }
-    
     /* Мастер класс */
     .masterclass-section {
         background: #f8f9fa;
@@ -141,7 +155,7 @@
     
     .masterclass-card {
         background: white;
-        border-radius: px;
+        border-radius: 15px;
         padding: 30px;
         text-align: center;
         box-shadow: 0 10px 30px rgba(0,0,0,0.1);
@@ -153,10 +167,24 @@
         transform: translateY(-5px);
     }
     
+    .masterclass-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+    
     .masterclass-icon {
         width: 80px;
         height: 80px;
         margin-bottom: 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 50%;
+        color: white;
     }
     
     .masterclass-title {
@@ -169,6 +197,11 @@
         color: #4a90e2;
         font-weight: 600;
         margin-bottom: 10px;
+    }
+    
+    .masterclass-description {
+        color: #666;
+        margin-bottom: 20px;
     }
     
     .btn-masterclass {
@@ -184,6 +217,44 @@
     .btn-masterclass:hover {
         transform: scale(1.05);
         color: white;
+    }
+    
+    /* Feedback form */
+    .form-1 {
+        padding: 80px 0;
+        background: white;
+    }
+    
+    .form-control-input,
+    .form-control-textarea {
+        width: 100%;
+        padding: 12px 20px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .form-control-input:focus,
+    .form-control-textarea:focus {
+        border-color: #4a90e2;
+        outline: none;
+        box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+    }
+    
+    .form-control-submit-button {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(90deg, #4a90e2, #9b59b6);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: transform 0.3s ease;
+    }
+    
+    .form-control-submit-button:hover {
+        transform: translateY(-2px);
     }
     
     /* Пагинация */
@@ -222,10 +293,10 @@
 @section('scripts')
 <script>
 $(document).ready(function() {
+    // Feedback form submission
     $('#contactForm').on('submit', function(e) {
         e.preventDefault();
         
-        // Disable submit button
         $('#submitBtn').prop('disabled', true).text('Отправка...');
         $('#feedbackAlert').hide().removeClass('alert-success alert-danger');
         
@@ -241,7 +312,6 @@ $(document).ready(function() {
                         .html('<i class="fas fa-check-circle"></i> ' + response.message)
                         .show();
                     
-                    // Clear form fields for guests
                     @if(!auth()->check())
                         $('#contactForm')[0].reset();
                     @else
@@ -278,7 +348,6 @@ $(document).ready(function() {
             complete: function() {
                 $('#submitBtn').prop('disabled', false).text('Отправить отзыв');
                 
-                // Auto hide alert after 5 seconds
                 setTimeout(function() {
                     $('#feedbackAlert').fadeOut();
                 }, 5000);
@@ -286,140 +355,110 @@ $(document).ready(function() {
         });
     });
 });
-</script>
 
-<script>
-    // Quiz functionality
-    let currentQuestion = 0;
-    let score = 0;
-    let userAnswers = [];
-    
-    const quizQuestions = [
-        {
-            question: "Какой язык программирования считается самым популярным для веб-разработки?",
-            options: ["Python", "Java", "JavaScript", "C++"],
-            correct: 2
-        },
-        {
-            question: "Что означает аббревиатура HTML?",
-            options: [
-                "Hyper Text Markup Language",
-                "High Tech Modern Language", 
-                "Hyper Transfer Markup Language",
-                "Home Tool Markup Language"
-            ],
-            correct: 0
-        },
-        {
-            question: "Какой фреймворк используется для разработки на Python?",
-            options: ["React", "Angular", "Django", "Vue.js"],
-            correct: 2
-        }
-    ];
-    
-    function startQuiz() {
-        currentQuestion = 0;
-        score = 0;
-        userAnswers = [];
-        showQuestion();
-        $('#quizStart').hide();
-        $('#quizContent').show();
+// Quiz functionality
+let currentQuestion = 0;
+let score = 0;
+
+const quizQuestions = [
+    {
+        question: "Какой язык программирования считается самым популярным для веб-разработки?",
+        options: ["Python", "Java", "JavaScript", "C++"],
+        correct: 2
+    },
+    {
+        question: "Что означает аббревиатура HTML?",
+        options: [
+            "Hyper Text Markup Language",
+            "High Tech Modern Language", 
+            "Hyper Transfer Markup Language",
+            "Home Tool Markup Language"
+        ],
+        correct: 0
+    },
+    {
+        question: "Какой фреймворк используется для разработки на Python?",
+        options: ["React", "Angular", "Django", "Vue.js"],
+        correct: 2
     }
-    
-    function showQuestion() {
-        if (currentQuestion < quizQuestions.length) {
-            const q = quizQuestions[currentQuestion];
-            let html = `
-                <div class="quiz-question">${currentQuestion + 1}. ${q.question}</div>
-                <div class="quiz-options">
-            `;
-            
-            q.options.forEach((option, index) => {
-                html += `
-                    <div class="quiz-option">
-                        <input type="radio" name="quizOption" value="${index}" id="option${index}">
-                        <label for="option${index}">${option}</label>
-                    </div>
-                `;
-            });
-            
+];
+
+function startQuiz() {
+    currentQuestion = 0;
+    score = 0;
+    showQuestion();
+    $('#quizStart').hide();
+    $('#quizContent').show();
+}
+
+function showQuestion() {
+    if (currentQuestion < quizQuestions.length) {
+        const q = quizQuestions[currentQuestion];
+        let html = `
+            <div class="quiz-question">${currentQuestion + 1}. ${q.question}</div>
+            <div class="quiz-options">
+        `;
+        
+        q.options.forEach((option, index) => {
             html += `
+                <div class="quiz-option">
+                    <input type="radio" name="quizOption" value="${index}" id="option${index}">
+                    <label for="option${index}">${option}</label>
                 </div>
-                <button class="btn btn-primary mt-3" onclick="nextQuestion()">Следующий вопрос</button>
             `;
-            
-            $('#quizQuestions').html(html);
-        } else {
-            showResults();
-        }
-    }
-    
-    function nextQuestion() {
-        const selected = $('input[name="quizOption"]:checked').val();
-        if (selected === undefined) {
-            alert('Пожалуйста, выберите ответ');
-            return;
-        }
-        
-        userAnswers.push(parseInt(selected));
-        if (parseInt(selected) === quizQuestions[currentQuestion].correct) {
-            score++;
-        }
-        
-        currentQuestion++;
-        showQuestion();
-    }
-    
-    function showResults() {
-        const percentage = (score / quizQuestions.length) * 100;
-        let message = '';
-        
-        if (percentage >= 80) {
-            message = 'Отлично! Вы настоящий IT-специалист! 🎉';
-        } else if (percentage >= 60) {
-            message = 'Хороший результат! Продолжайте учиться! 👍';
-        } else {
-            message = 'Неплохо, но есть куда расти. Приходите на курсы ITech Academy! 💪';
-        }
-        
-        $('#quizQuestions').html(`
-            <div class="text-center">
-                <h4>Ваш результат: ${score} из ${quizQuestions.length}</h4>
-                <p>${message}</p>
-                <button class="btn btn-success" onclick="startQuiz()">Пройти тест заново</button>
-            </div>
-        `);
-    }
-    
-    // Feedback form submission
-    $('#contactForm').on('submit', function(e) {
-        e.preventDefault();
-        
-        const formData = {
-            name: $('input[name="name"]').val(),
-            email: $('input[name="email"]').val(),
-            message: $('textarea[name="message"]').val(),
-            _token: $('input[name="_token"]').val()
-        };
-        
-        $.ajax({
-            url: '/submit-feedback',
-            method: 'POST',
-            data: formData,
-            success: function(response) {
-                alert('Спасибо за ваш отзыв!');
-                $('#contactForm')[0].reset();
-            },
-            error: function(xhr) {
-                alert('Произошла ошибка. Пожалуйста, попробуйте позже.');
-            }
         });
-    });
-    
-    // Master class registration
-    function registerMasterclass(masterclassId) {
-        alert('Функция регистрации на мастер-класс будет доступна в ближайшее время!');
+        
+        html += `
+            </div>
+            <button class="btn btn-primary mt-3" onclick="nextQuestion()">Следующий вопрос</button>
+        `;
+        
+        $('#quizQuestions').html(html);
+    } else {
+        showResults();
     }
+}
+
+function nextQuestion() {
+    const selected = $('input[name="quizOption"]:checked').val();
+    if (selected === undefined) {
+        alert('Пожалуйста, выберите ответ');
+        return;
+    }
+    
+    if (parseInt(selected) === quizQuestions[currentQuestion].correct) {
+        score++;
+    }
+    
+    currentQuestion++;
+    showQuestion();
+}
+
+function showResults() {
+    const percentage = (score / quizQuestions.length) * 100;
+    let message = '';
+    
+    if (percentage >= 80) {
+        message = 'Отлично! Вы настоящий IT-специалист! 🎉';
+    } else if (percentage >= 60) {
+        message = 'Хороший результат! Продолжайте учиться! 👍';
+    } else {
+        message = 'Неплохо, но есть куда расти. Приходите на курсы ITech Academy! 💪';
+    }
+    
+    $('#quizQuestions').html(`
+        <div class="text-center">
+            <h4>Ваш результат: ${score} из ${quizQuestions.length}</h4>
+            <p>${message}</p>
+            <button class="btn btn-success" onclick="startQuiz()">Пройти тест заново</button>
+        </div>
+    `);
+}
+
+// Master class registration
+function registerMasterclass(masterclassId) {
+    alert('Функция регистрации на мастер-класс будет доступна в ближайшее время!');
+}
 </script>
 @endsection
 
@@ -453,7 +492,7 @@ $(document).ready(function() {
                         <div class="timeline-year">2019</div>
                         <div class="timeline-content">
                             <h4>Ishga yo‘naltirish</h4>
-                            <p>Talabalarni real loyihalar va ish bilan bog‘lash tizimi yo‘lga qo‘yildi..</p>
+                            <p>Talabalarni real loyihalar va ish bilan bog‘lash tizimi yo‘lga qo‘yildi.</p>
                         </div>
                     </div>
                 </div>
@@ -471,37 +510,118 @@ $(document).ready(function() {
     </div>
 </section>
 
-<!-- 2. Наша команда с пагинацией -->
-
+<!-- 2. Наша команда -->
 <section class="team-section section">
     <div class="container">
-        <h2 class="section-title">Наша команда</h2>
-        <div class="row" id="teamContainer">
-            @php
-            $teamMembers = [
-                ['name' => 'Mustafo Qodirov', 'position' => 'CEO', 'image' => 'team1.jpg'],
-                ['name' => 'Azamatjon Ergashev', 'position' => 'Operation Director', 'image' => 'team6.jpg'],
-                ['name' => 'Gayratjon Mirzamahmudov', 'position' => 'Frontend Engineer', 'image' => 'team7.jpg'],
-                ['name' => 'Eljahon Normominov', 'position' => 'Software Engineer', 'image' => 'team8.jpg'],
-                ['name' => 'Voldia Tadjimuratova', 'position' => 'Finance Manager', 'image' => 'team3.jpg'],
-                ['name' => 'Biloliddin Madiyorov', 'position' => 'Backend Engineer', 'image' => 'team4.jpg']
-            ];
-            @endphp
-
-            @foreach($teamMembers as $member)
+        <h2 class="section-title">Bizning jamoa</h2>
+        <div class="row">
+            <!-- Mustafo Qodirov - team1.jpg -->
             <div class="col-lg-4 col-md-6">
                 <div class="team-card">
-                    <img src="{{ asset('images/team/' . $member['image']) }}" alt="{{ $member['name'] }}" class="team-image">
-                    <h3 class="team-name">{{ $member['name'] }}</h3>
-                    <p class="team-position">{{ $member['position'] }}</p>
-                    <div class="social-links">
-                        <a href="#" class="text-muted mx-1">FB</a>
-                        <a href="#" class="text-muted mx-1">IG</a>
-                        <a href="#" class="text-muted mx-1">LI</a>
+                    <img src="{{ asset('images/team1.jpg') }}" 
+                         alt="Mustafo Qodirov" 
+                         class="team-image">
+                    <div class="team-info">
+                        <h3 class="team-name">Mustafo Qodirov</h3>
+                        <p class="team-position">CEO</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
-            @endforeach
+
+            <!-- Azamatjon Ergashev - team6.jpg -->
+            <div class="col-lg-4 col-md-6">
+                <div class="team-card">
+                    <img src="{{ asset('images/team6.jpg') }}" 
+                         alt="Azamatjon Ergashev" 
+                         class="team-image">
+                    <div class="team-info">
+                        <h3 class="team-name">Azamatjon Ergashev</h3>
+                        <p class="team-position">Operation Director</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gayratjon Mirzamahmudov - team7.jpg -->
+            <div class="col-lg-4 col-md-6">
+                <div class="team-card">
+                    <img src="{{ asset('images/team7.jpg') }}" 
+                         alt="Gayratjon Mirzamahmudov" 
+                         class="team-image">
+                    <div class="team-info">
+                        <h3 class="team-name">Gayratjon Mirzamahmudov</h3>
+                        <p class="team-position">Frontend Engineer</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Eljahon Normominov - team8.jpg -->
+            <div class="col-lg-4 col-md-6">
+                <div class="team-card">
+                    <img src="{{ asset('images/team8.jpg') }}" 
+                         alt="Eljahon Normominov" 
+                         class="team-image">
+                    <div class="team-info">
+                        <h3 class="team-name">Eljahon Normominov</h3>
+                        <p class="team-position">Software Engineer</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voldia Tadjimuratova - team3.jpg -->
+            <div class="col-lg-4 col-md-6">
+                <div class="team-card">
+                    <img src="{{ asset('images/team3.jpg') }}" 
+                         alt="Voldia Tadjimuratova" 
+                         class="team-image">
+                    <div class="team-info">
+                        <h3 class="team-name">Voldia Tadjimuratova</h3>
+                        <p class="team-position">Finance Manager</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Biloliddin Madiyorov - team4.jpg -->
+            <div class="col-lg-4 col-md-6">
+                <div class="team-card">
+                    <img src="{{ asset('images/team4.jpg') }}" 
+                         alt="Biloliddin Madiyorov" 
+                         class="team-image">
+                    <div class="team-info">
+                        <h3 class="team-name">Biloliddin Madiyorov</h3>
+                        <p class="team-position">Backend Engineer</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Пагинация для команды -->
@@ -521,72 +641,171 @@ $(document).ready(function() {
     </div>
 </section>
 
-<!-- 3. Quiz от ITech Academy -->
-<section class="quiz-section section">
+
+<<!-- 4. Мастер классы - RASMLAR BILAN -->
+<section class="masterclass-section section">
     <div class="container">
-        <h2 class="section-title">IT-квиз от ITech Academy</h2>
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="quiz-card">
-                    <div id="quizStart" class="text-center">
-                        <h3>Проверьте свои знания в IT!</h3>
-                        <p>Пройдите наш тест и узнайте, насколько хорошо вы разбираетесь в IT-сфере</p>
-                        <button class="btn btn-primary btn-lg" onclick="startQuiz()">Начать тест</button>
-                    </div>
-                    <div id="quizContent" style="display: none;">
-                        <div id="quizQuestions"></div>
-                    </div>
+        <h2 class="section-title">Master class</h2>
+        <div class="row">
+            <!-- Master class 1 - class1.jpg -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="masterclass-card">
+                    <img src="{{ asset('images/class1.jpg') }}" 
+                         alt="Web Development" 
+                         class="masterclass-image"
+                         onerror="this.src='https://via.placeholder.com/400x200?text=Web+Development'">
+                    <h3 class="masterclass-title">Veb-dasturlash noldan boshlab</h3>
+                    <p class="masterclass-date">19 aprel 2024 | 16:00</p>
+                    <p class="masterclass-description">Veb-dasturlash boyicha savollar.</p>
+                    <button class="btn-masterclass" onclick="showMasterclassModal(1)">Ro‘yxatdan o‘tish</button>
+                </div>
+            </div>
+
+            <!-- Master class 2 - class2.jpg -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="masterclass-card">
+                    <img src="{{ asset('images/class2.jpg') }}" 
+                         alt="Data Science" 
+                         class="masterclass-image"
+                         onerror="this.src='https://via.placeholder.com/400x200?text=Data+Science'">
+                    <h3 class="masterclass-title">Telegram bot masterclass</h3>
+                    <p class="masterclass-date">28 avgust 2025 | 18:00</p>
+                    <p class="masterclass-description">Telegram bot haqida savollar</p>
+                    <button class="btn-masterclass" onclick="showMasterclassModal(2)">Ro‘yxatdan o‘tish</button>
+                </div>
+            </div>
+
+            <!-- Master class 3 - class3.jpg -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="masterclass-card">
+                    <img src="{{ asset('images/class3.jpg') }}" 
+                         alt="Mobile Development" 
+                         class="masterclass-image"
+                         onerror="this.src='https://via.placeholder.com/400x200?text=Mobile+Development'">
+                    <h3 class="masterclass-title">Mobilografiya bilan san'at asari yaratish</h3>
+                    <p class="masterclass-date">10 iyun 2025 | 16:00</p>
+                    <p class="masterclass-description">Mobilografiya va san'at asari boyicha savollar</p>
+                    <button class="btn-masterclass" onclick="showMasterclassModal(3)">Ro‘yxatdan o‘tish</button>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 4. Мастер классы -->
-<section class="masterclass-section section">
-    <div class="container">
-        <h2 class="section-title">Мастер-классы</h2>
-        <div class="row">
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="masterclass-card">
-                    <img src="{{ asset('images/masterclass1.jpg') }}" alt="Web Development" class="masterclass-icon">
-                    <h3 class="masterclass-title">Веб-разработка с нуля</h3>
-                    <p class="masterclass-date">15 ноября 2024 | 15:00</p>
-                    <p>Научитесь создавать современные веб-приложения с использованием React и Node.js</p>
-                    <button class="btn-masterclass" onclick="registerMasterclass(1)">Зарегистрироваться</button>
-                </div>
+<!-- Masterclass Modal -->
+<div class="modal fade" id="masterclassModal" tabindex="-1" aria-labelledby="masterclassModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <h5 class="modal-title" id="masterclassModalLabel">
+                    <i class="fas fa-graduation-cap"></i> Masterclass haqida ma'lumot
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="masterclass-card">
-                    <img src="{{ asset('images/masterclass-icon-2.svg') }}" alt="Data Science" class="masterclass-icon">
-                    <h3 class="masterclass-title">Data Science: Введение</h3>
-                    <p class="masterclass-date">22 ноября 2024 | 14:00</p>
-                    <p>Познакомьтесь с основами анализа данных и машинного обучения</p>
-                    <button class="btn-masterclass" onclick="registerMasterclass(2)">Зарегистрироваться</button>
+            <div class="modal-body">
+                <div id="masterclassInfo">
+                    <!-- AJAX orqali ma'lumotlar keladi -->
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2">Ma'lumotlar yuklanmoqda...</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="masterclass-card">
-                    <img src="{{ asset('images/masterclass-icon-3.svg') }}" alt="Mobile Development" class="masterclass-icon">
-                    <h3 class="masterclass-title">Мобильная разработка</h3>
-                    <p class="masterclass-date">29 ноября 2024 | 16:00</p>
-                    <p>Создайте свое первое мобильное приложение на Flutter</p>
-                    <button class="btn-masterclass" onclick="registerMasterclass(3)">Зарегистрироваться</button>
-                </div>
+                
+                <hr>
+                
+                <!-- Registratsiya formasi -->
+                <h5 class="mt-3 mb-3">
+                    <i class="fas fa-user-plus"></i> Ro'yxatdan o'tish
+                </h5>
+                <form id="masterclassRegisterForm">
+                    @csrf
+                    <input type="hidden" name="masterclass_id" id="masterclass_id">
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">To'liq ism *</label>
+                            <input type="text" name="full_name" id="full_name" class="form-control" 
+                                   value="{{ auth()->check() ? auth()->user()->name : '' }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Email *</label>
+                            <input type="email" name="email" id="email" class="form-control"
+                                   value="{{ auth()->check() ? auth()->user()->email : '' }}" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Telefon raqam *</label>
+                        <input type="tel" name="phone" id="phone" class="form-control" 
+                               placeholder="+998 xx xxx xx xx" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Sizning tajribangiz</label>
+                        <textarea name="experience" id="experience" class="form-control" rows="2" 
+                                  placeholder="IT sohasidagi tajribangiz haqida qisqacha..."></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Savollaringiz</label>
+                        <textarea name="questions" id="questions" class="form-control" rows="2" 
+                                  placeholder="Masterclass davomida qiziqtirgan savollaringiz..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100" id="registerSubmitBtn">
+                        <i class="fas fa-paper-plane"></i> Ro'yxatdan o'tish
+                    </button>
+                </form>
+                
+                <div id="registerMessage" class="mt-3" style="display: none;"></div>
             </div>
         </div>
     </div>
-</section>
+</div>
+
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title">
+                    <i class="fas fa-check-circle"></i> Ro'yxatdan o'tish muvaffaqiyatli!
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <i class="fas fa-envelope-open-text fa-5x text-success mb-3"></i>
+                <h4>Rahmat!</h4>
+                <p id="successMessage">Siz muvaffaqiyatli ro'yxatdan o'tdingiz. Tez orada siz bilan bog'lanamiz.</p>
+                <hr>
+                <div class="event-reminder">
+                    <i class="fas fa-calendar-alt text-primary"></i>
+                    <span id="reminderDate"></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Yopish</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- 5. Форма обратной связи -->
 <div id="contact" class="form-1 section">
     <div class="container">
-        <h2 class="section-title">Оставьте свой отзыв</h2>
-        <div class="row">
+        <h2 class="section-title">Fikringizni qoldiring</h2>
+        <div class="row align-items-center">
             <div class="col-lg-6">
-                <div class="image-container">
+                @if(file_exists(public_path('images/contact.png')))
                     <img class="img-fluid" src="{{ asset('images/contact.png') }}" alt="alternative">
-                </div>
+                @else
+                    <div class="text-center p-5 bg-light rounded">
+                        <i class="fas fa-comments fa-5x" style="color: #4a90e2;"></i>
+                        <p class="mt-3">Поделитесь своим мнением с нами</p>
+                    </div>
+                @endif
             </div>
             <div class="col-lg-6">
                 <div class="text-container">
