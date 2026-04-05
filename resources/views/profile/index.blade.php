@@ -41,7 +41,8 @@
                             <div class="col-auto">
                                 <div class="avatar position-relative mt-2 mx-3">
                                     <img id="selectedAvatar"
-                                         src="{{ (isset($data['avatar']) && $data['avatar']) ? Storage::url('avatars/' . $data['avatar']) : asset('storage/avatars/avatar.png') }}"
+                                    
+                                         src="{{ $data['avatar'] ? Storage::url('avatars/' . $data['avatar']) : asset('images/avatar.png') }}"
                                          class="rounded-circle shadow-sm cursor-pointer" 
                                          onclick="openFileInput()"
                                          style="width:80px; height:80px; object-fit: cover;" />

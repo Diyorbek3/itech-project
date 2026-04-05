@@ -1,11 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-<<<<<<< HEAD
-use App\Http\Controllers\CourceController; // Loyihangizdagi nomga ko'ra
-=======
-use App\Http\Controllers\CourceController;
->>>>>>> beda7a6394a7f1cf13ff917c48c0801b907088c5
+use App\Http\Controllers\CourceController; 
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MyCourceController;
@@ -35,7 +31,6 @@ Route::get('language/{locale}', function ($locale) {
 
 // 3. Profil (Faqat tizimga kirganlar uchun)
 Route::middleware('auth')->group(function () {
-<<<<<<< HEAD
     // Profil sahifasi
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     
@@ -80,7 +75,7 @@ Route::get('/career', [CareerController::class, 'index'])->name('career.index');
 
 // 6. Mening kurslarim (My Courses) - Dashboard qismi uchun
 Route::prefix('my-courses')->middleware('auth')->group(function () {
-=======
+
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
@@ -119,7 +114,6 @@ Route::get('/career', [CareerController::class, 'index'])->name('career.index');
 
 // 7. My courses routelari
 Route::prefix('my-courses')->group(function () {
->>>>>>> beda7a6394a7f1cf13ff917c48c0801b907088c5
     Route::get('/', [MyCourceController::class, 'index'])->name('my-courses.index');
     Route::post('/', [MyCourceController::class, 'store'])->name('my-courses.store');
     Route::get('/{id}', [MyCourceController::class, 'show'])->name('my-courses.show');
@@ -129,11 +123,9 @@ Route::prefix('my-courses')->group(function () {
     Route::delete('/delete-category/{categoryId}', [MyCourceController::class, 'deleteCategory'])->name('my-courses.delete-category');
 });
 
-<<<<<<< HEAD
 // Laravel Auth (Login, Register va h.k.)
 require __DIR__.'/auth.php';
-=======
-// 8. Office manager kursi
+
 Route::get('/kurs/ofis-menejerligi', function () {
     return view('courses.office-manager');
 })->name('courses.office-manager');
@@ -146,4 +138,3 @@ use App\Http\Controllers\MasterclassController;
 // Masterclass routelari
 Route::get('/masterclass/{id}/info', [MasterclassController::class, 'getInfo'])->name('masterclass.info');
 Route::post('/masterclass/register', [MasterclassController::class, 'register'])->name('masterclass.register');
->>>>>>> beda7a6394a7f1cf13ff917c48c0801b907088c5

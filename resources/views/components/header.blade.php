@@ -33,7 +33,7 @@
                     </ul>
                 </div>
 
-                <a class="btn-outline-sm me-3" href="{{ url('/') }}#contact" style="white-space: nowrap; padding: 10px 15px;">
+                <a class="btn-outline-sm me-3" href="#contact" style="white-space: nowrap; padding: 23px 15px;">
                     {{ __('messages.contact_us') }}
                 </a>
                 
@@ -49,7 +49,7 @@
                         <div class="dropdown">
                             <a class="btn-outline-sm dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" style="padding: 5px 10px;">
                                 <img id="headerAvatar" 
-                                     src="{{ Auth::user()->avatar ? asset('storage/avatars/' . Auth::user()->avatar) : asset('storage/avatars/avatar.png') }}" 
+                                         src="{{ Auth::user()->avatar ? Storage::url('avatars/' . Auth::user()->avatar) : asset('images/avatar.png') }}"
                                      class="rounded-circle me-2" 
                                      style="width: 30px; height: 30px; object-fit: cover;"
                                      onerror="this.onerror=null; this.src='{{ asset('storage/avatars/avatar.png') }}';">
