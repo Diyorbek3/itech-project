@@ -15,7 +15,7 @@ use Illuminate\View\View;
 class RegisteredUserController extends Controller
 {
     /**
-     * Display the registration view.
+     * Ro'yxatdan o'tish sahifasini ko'rsatish
      */
     public function create(): View
     {
@@ -23,33 +23,32 @@ class RegisteredUserController extends Controller
     }
 
     /**
-     * Handle an incoming registration request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
+     * Ro'yxatdan o'tish so'rovini qayta ishlash va bazaga saqlash
      */
-   public function store(Request $request): RedirectResponse
-{
-    $request->validate([
-        'name' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-        'password' => ['required', 'confirmed', Rules\Password::defaults()],
-    ]);
+    public function store(Request $request): RedirectResponse
+    {
+        // 1. Validatsiya
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
 
-    $user = User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-    ]);
+        // 2. Foydalanuvchini yaratish va 'avatar' ustuniga default qiymat berish
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'avatar' => 'avatar.png', // MANA SHU YERDA DEFAULT RASM BERILDI
+        ]);
 
-    event(new Registered($user));
+        // 3. Registratsiya hodisasini ishga tushirish
+        event(new Registered($user));
 
-    Auth::login($user);
+        // 4. Avtomatik login qilish
+        Auth::login($user);
 
-    // MANA SHU YERINI O'ZGARTIRING:
-    Auth::login($user);
-
-    // Dashboardga yo'naltirish:
-    return redirect('/'); 
+        // 5. Bosh sahifaga yo'naltirish
+        return redirect('/'); 
+    }
 }
-}
-
