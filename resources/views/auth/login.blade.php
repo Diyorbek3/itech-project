@@ -197,12 +197,7 @@
             errors.push('Email manzilida "@" belgisi bo\'lishi kerak');
         } else if (!email.includes('.')) {
             errors.push('Email manzilida "." belgisi bo\'lishi kerak');
-        } else if (email.includes('@')) {
-            const domain = email.split('@')[1];
-            if (domain !== 'gmail.com') {
-                errors.push('Faqat Gmail manzilidan foydalaning! (example@gmail.com)');
-            }
-        }
+        } 
         
         if (password === '') {
             errors.push('Parolni kiriting');
