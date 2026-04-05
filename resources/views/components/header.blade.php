@@ -1,7 +1,5 @@
-
-<!-- Navigation -->
-<nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-light bg-white shadow-sm">
-    <div class="container position-relative">
+<nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-light">
+    <div class="container">
         <!-- Logo -->
         <a class="navbar-brand" href="/">
             <img src="{{ asset('images/logo.png') }}"
@@ -105,6 +103,12 @@
                 <li class="nav-item"><a class="nav-link" href="#details">{{ __('messages.why_us') }}</a></li>
                 <li class="nav-item"><a class="nav-link" href="#services">{{ __('messages.courses') }}</a></li>
                 <li class="nav-item"><a class="nav-link" href="#projects">{{ __('messages.projects') }}</a></li>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mx-auto navbar-nav-scroll">
+                <li class="nav-item"><a class="nav-link" href="{{ url('/') }}#header">{{ __('messages.about_us') }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('/') }}#details">{{ __('messages.why_us') }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('/') }}#services">{{ __('messages.courses') }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('/') }}#projects">{{ __('messages.projects') }}</a></li>
             </ul>
 
             <!-- Desktop Right Side -->
@@ -138,6 +142,7 @@
                 <a class="btn-outline-sm px-3 py-2 d-flex align-items-center justify-content-center"
                    href="#contact"
                    style="font-size: 12px; min-width: 110px; border-radius: 16px; height: 42px;">
+                <a class="btn-outline-sm me-3" href="{{ url('/') }}#contact" style="white-space: nowrap; padding: 10px 15px;">
                     {{ __('messages.contact_us') }}
                 </a>
 
@@ -156,26 +161,30 @@
                         </a>
                     @else
                         <div class="dropdown">
-                            <a class="btn-outline-sm d-flex align-items-center justify-content-center rounded-circle"
-                               href="#" data-bs-toggle="dropdown"
-                               style="width: 42px; height: 42px;">
-                                <i class="fas fa-user-circle"></i>
+                            <a class="btn-outline-sm dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" style="padding: 5px 10px;">
+                                <img id="headerAvatar" 
+                                     src="{{ Auth::user()->avatar ? asset('storage/avatars/' . Auth::user()->avatar) : asset('storage/avatars/avatar.png') }}" 
+                                     class="rounded-circle me-2" 
+                                     style="width: 30px; height: 30px; object-fit: cover;"
+                                     onerror="this.onerror=null; this.src='{{ asset('storage/avatars/avatar.png') }}';">
+                                <span id="headerUserName">{{ Auth::user()->name }}</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="/profile">
-                                    <i class="fas fa-user me-2"></i> {{ __('messages.profile') }}
-                                </a></li>
-                                @if (auth()->user()->role_id == 1)
-                                <li><a class="dropdown-item" href="/my-courses">
-                                    <i class="fas fa-graduation-cap me-2"></i> {{ __('messages.courses') }}
-                                </a></li>
-                                <li><a class="dropdown-item" href="/">
-                                    <i class="fas fa-briefcase me-2"></i> {{ __('messages.projects') }}
-                                </a></li>
-                                <li><a class="dropdown-item" href="/">
-                                    <i class="fas fa-chart-line me-2"></i> {{ __('messages.careers') }}
-                                </a></li>
+                                <li>
+                                    <a class="dropdown-item" href="/profile">
+                                        <i class="fas fa-user me-2"></i> {{ __('messages.profile') }}
+                                    </a>
+                                </li>
+
+                                @if (auth()->user()->role_id == 1) 
+                                    <li>
+                                        <a class="dropdown-item" href="/my-courses">
+                                            <i class="fas fa-graduation-cap me-2"></i> {{ __('messages.courses') }}
+                                        </a>
+                                    </li>
                                 @endif
+                               
+                                <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
@@ -192,48 +201,3 @@
         </div>
     </div>
 </nav>
-<!-- end of navigation -->
-
-<!-- IKKINCHI LANGUAGE SWITCHER - butunlay olib tashlandi (takroriy edi) -->
-<!-- end of navigation -->
-
-<!-- Language Switcher - ikkinchi qism -->
-<span class="nav-item">
-    <div class="dropdown">
-        <a class="btn-outline-sm dropdown-toggle d-flex align-items-center" href="#" role="button" id="languageDropdown2" data-bs-toggle="dropdown" aria-expanded="false">
-            @switch(app()->getLocale())
-                @case('en')
-                    <img src="{{ asset('flags/en.png') }}" alt="EN" class="flag-icon me-1" style="width: 20px; height: 15px; object-fit: cover;"> En
-                    @break
-                @case('ru')
-                    <img src="{{ asset('flags/ru.png') }}" alt="RU" class="flag-icon me-1" style="width: 20px; height: 15px; object-fit: cover;"> Ru
-                    @break
-                @case('uz')
-                    <img src="{{ asset('flags/uz.png') }}" alt="UZ" class="flag-icon me-1" style="width: 20px; height: 15px; object-fit: cover;"> Uz
-                    @break
-                @default
-                    <img src="{{ asset('flags/en.png') }}" alt="EN" class="flag-icon me-1" style="width: 20px; height: 15px; object-fit: cover;"> En
-            @endswitch
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown2" style="min-width: 120px;">
-            <li>
-                <a class="dropdown-item {{ app()->getLocale() == 'en' ? 'active' : '' }}" href="javascript:void(0)" onclick="changeLanguage('en')">
-                    <img src="{{ asset('flags/en.png') }}" alt="English" class="flag-icon me-2" style="width: 20px; height: 15px; object-fit: cover;"> 
-                    <span>{{ __('messages.english') }}</span>
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-item {{ app()->getLocale() == 'ru' ? 'active' : '' }}" href="javascript:void(0)" onclick="changeLanguage('ru')">
-                    <img src="{{ asset('flags/ru.png') }}" alt="Russian" class="flag-icon me-2" style="width: 20px; height: 15px; object-fit: cover;"> 
-                    <span>{{ __('messages.russian') }}</span>
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-item {{ app()->getLocale() == 'uz' ? 'active' : '' }}" href="javascript:void(0)" onclick="changeLanguage('uz')">
-                    <img src="{{ asset('flags/uz.png') }}" alt="Uzbek" class="flag-icon me-2" style="width: 20px; height: 15px; object-fit: cover;"> 
-                    <span>{{ __('messages.uzbek') }}</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</span>
