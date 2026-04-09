@@ -7,6 +7,7 @@ use App\Http\Controllers\CareerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MyCourceController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MasterclassController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -66,6 +67,8 @@ Route::prefix('courses')->group(function () {
     Route::get('/data-analytics', [CourceController::class, 'dataAnalytics'])->name('courses.data_analytics');
     Route::get('/network-admin', [CourceController::class, 'networkAdmin'])->name('courses.network_admin');
     Route::get('/accounting', [CourceController::class, 'accounting'])->name('courses.accounting');
+
+
 });
 
 // 6. Office menejerligi kursi (alohida view)
@@ -125,3 +128,4 @@ Route::post('/masterclass/register', [MasterclassController::class, 'register'])
 Route::get('/masterclass/{id}/info', [MasterclassController::class, 'getInfo'])->name('masterclass.info');
 Route::post('/masterclass/register', [MasterclassController::class, 'register'])->name('masterclass.register');
 
+Route::post('/contact-send', [ContactController::class, 'sendContact'])->name('contact.send');

@@ -9,23 +9,23 @@ return [
     'projects' => 'Loyihalar',
     'sections' => 'Bo\'limlar',
     'contact_us' => 'Aloqaga chiqish',
-    
+
     // ==================== HEADER ====================
     'header_title' => 'Kelajak dasturchilarini tayyorlaymiz',
     'header_description' => 'iTech o‘quv markazi zamonaviy IT yo‘nalishlarda kuchli mutaxassislarni tayyorlaydi. Amaliy darslar, real loyihalar va tajribali mentorlar yordamida siz noldan boshlab professional dasturchi darajasiga chiqishingiz mumkin.',
     'learn_more' => 'Batafsil',
     'contact' => 'Bog‘lanish',
-    
+
     // ==================== STATISTICS ====================
     'graduates' => 'Bitiruvchilar',
     'active_courses' => 'Faol Kurslar',
     'employed_students' => 'Ishga joylashgan talabalar',
     'years_experience' => 'Yillik tajriba',
-    
+
     // ==================== INTRODUCTION ====================
     'intro_title' => 'iTech — zamonaviy IT kasblarini o‘rgatuvchi o‘quv markazi',
     'intro_description' => 'iTech o‘quv markazi dasturlash va IT sohasida amaliy bilim berishga ixtisoslashgan. O‘quv dasturlarimiz real loyiha tajribasiga asoslangan bo‘lib, talabalarni ish bozoriga tayyor mutaxassis sifatida shakllantirishga qaratilgan. Har bir kurs zamonaviy texnologiyalar, mentorlik yordami va amaliy topshiriqlar bilan olib boriladi. Maqsadimiz — kuchli, mustaqil va talabgir dasturchilarni yetishtirish.',
-    
+
     // ==================== DETAILS 1 ====================
     'details1_title' => 'Zamonaviy ta\'lim yondashuvi va real loyiha tajribasi',
     'details1_item1' => 'Amaliy darslar orqali talabalar real IT loyihalar ustida ishlaydi.',
@@ -33,7 +33,7 @@ return [
     'details1_item3' => 'Zamonaviy texnologiyalar: Frontend, Backend, Mobile va boshqa yo‘nalishlar.',
     'details1_item4' => 'Bitiruvchilarga portfolio tayyorlash va ishga joylashish bo‘yicha yordam.',
     'start_course' => 'Kursni boshlash',
-    
+
     // ==================== SERVICES/COURSES ====================
     'our_courses' => 'Kurslarimiz',
     'courses_desc1' => 'Zamonaviy veb-interfeyslar yaratishni o‘rganing. HTML, CSS, JavaScript va zamonaviy frameworklar yordamida tezkor, chiroyli va foydalanuvchiga qulay saytlar ishlab chiqishni o‘zlashtirasiz.',
@@ -47,7 +47,7 @@ return [
     'backend' => 'Backend',
     'cybersecurity' => 'Kiber xavfsizlik',
     'ai_developer' => 'AI Dasturchi',
-    
+
     // ==================== 12 TA KURS ====================
     // 1. Ofis menejerligi
     'office_badge' => 'Ofis boshqaruvi',
@@ -63,7 +63,7 @@ return [
     'office_for_who' => 'Ofis xodimlari, yangi boshlovchilar, ofis ishlarini professional darajada o\'rganmoqchi bo\'lganlar.',
     'office_enroll_button' => 'Hoziroq yozilish',
     'office_tech_stack' => 'Word, Excel, PowerPoint, Arxiv ishi, Hujjat aylanishi',
-    
+
     // 2. Algoritm asoslari
     'algorithm_badge' => 'Algoritm',
     'algorithm_title' => 'Algoritm asoslari',
@@ -78,7 +78,7 @@ return [
     'algorithm_for_who' => 'Dasturlashni o\'rganayotganlar, IT sohasiga kirishni xohlovchilar, mantiqiy fikrlashni rivojlantirmoqchi bo\'lganlar.',
     'algorithm_enroll_button' => 'Hoziroq yozilish',
     'algorithm_tech_stack' => 'Algoritm, Big O, Binary Search, Quick Sort, Daraxtlar, Graf',
-    
+
     // 3. Frontend
     'frontend_badge' => 'Frontend Development',
     'frontend_title' => 'Frontend Dasturchi',
@@ -93,7 +93,7 @@ return [
     'frontend_for_who' => 'Dasturlashni boshlashni xohlovchilar, veb-dizayn va dasturlashni birga o\'rganmoqchi bo\'lganlar.',
     'frontend_enroll_button' => 'Hoziroq yozilish',
     'frontend_tech_stack' => 'HTML5, CSS3, JavaScript, React.js, Tailwind, Bootstrap',
-    
+
     // 4. Backend
     'backend_badge' => 'Backend Development',
     'backend_title' => 'Backend Dasturchi',
@@ -108,7 +108,7 @@ return [
     'backend_for_who' => 'Frontend dasturchilar, yangi boshlovchilar, backend sohasiga kirishni xohlovchilar.',
     'backend_enroll_button' => 'Hoziroq yozilish',
     'backend_tech_stack' => 'PHP, Laravel, MySQL, REST API, Git, Postman',
-    
+
     // 5. Python
     'python_badge' => 'Python Development',
     'python_title' => 'Python Dasturchi',
@@ -123,7 +123,7 @@ return [
     'python_for_who' => 'Dasturlashni endi boshlayotganlar, ma\'lumotlar tahlili bilan shug\'ullanmoqchi bo\'lganlar.',
     'python_enroll_button' => 'Hoziroq yozilish',
     'python_tech_stack' => 'Python, Django, Flask, Pandas, NumPy, REST API',
-    
+
     // 6. Robototexnika
     'robotics_badge' => 'Robototexnika',
     'robotics_title' => 'Robototexnika',
@@ -138,7 +138,7 @@ return [
     'robotics_for_who' => 'Robototexnika va elektronikaga qiziqadiganlar, muhandislik sohasiga kirishni xohlovchilar.',
     'robotics_enroll_button' => 'Hoziroq yozilish',
     'robotics_tech_stack' => 'Arduino, C++, Sensorlar, Motorlar, Elektronika, IoT',
-    
+
     // 7. Raqamli bolalar
     'digital_kids_badge' => 'Raqamli bolalar',
     'digital_kids_title' => 'Raqamli bolalar',
@@ -153,7 +153,7 @@ return [
     'digital_kids_for_who' => '7-14 yoshdagi bolalar, dasturlashni o\'rganishni xohlovchilar.',
     'digital_kids_enroll_button' => 'Hoziroq yozilish',
     'digital_kids_tech_stack' => 'Scratch, Blokli dasturlash, Mantiqiy fikrlash, Animatsiya',
-    
+
     // 8. Tizim muhandisligi
     'system_engineering_badge' => 'Tizim muhandisligi',
     'system_engineering_title' => 'Tizim muhandisligi',
@@ -168,7 +168,7 @@ return [
     'system_engineering_for_who' => 'IT sohasida ishlaydiganlar, sistem administrator bo\'lishni xohlovchilar.',
     'system_engineering_enroll_button' => 'Hoziroq yozilish',
     'system_engineering_tech_stack' => 'Linux, Ubuntu, CentOS, Docker, VMware, Zabbix',
-    
+
     // 9. DevOps asoslari
     'devops_badge' => 'DevOps',
     'devops_title' => 'DevOps asoslari',
@@ -183,7 +183,7 @@ return [
     'devops_for_who' => 'Dasturchilar, sistem administratorlar, bulut texnologiyalariga qiziqadiganlar.',
     'devops_enroll_button' => 'Hoziroq yozilish',
     'devops_tech_stack' => 'Docker, Kubernetes, Jenkins, GitLab CI, AWS, Terraform',
-    
+
     // 10. Data analitika
     'data_analytics_badge' => 'Data Analytics',
     'data_analytics_title' => 'Data analitika',
@@ -198,7 +198,7 @@ return [
     'data_analytics_for_who' => 'Ma\'lumotlar bilan ishlashni xohlovchilar, analitik fikrlovchilar.',
     'data_analytics_enroll_button' => 'Hoziroq yozilish',
     'data_analytics_tech_stack' => 'SQL, Python, Pandas, NumPy, Tableau, Power BI',
-    
+
     // 11. Tarmoq administratorligi
     'network_admin_badge' => 'Network Administration',
     'network_admin_title' => 'Tarmoq administratorligi',
@@ -213,7 +213,7 @@ return [
     'network_admin_for_who' => 'IT sohasiga qiziqqanlar, tarmoq administratori bo\'lishni xohlovchilar.',
     'network_admin_enroll_button' => 'Hoziroq yozilish',
     'network_admin_tech_stack' => 'Cisco, TCP/IP, Router, Switch, Firewall, Wireshark',
-    
+
     // 12. Buxgalteriya
     'accounting_badge' => 'Buxgalteriya',
     'accounting_title' => 'Buxgalteriya',
@@ -228,16 +228,16 @@ return [
     'accounting_for_who' => 'Buxgalter bo\'lishni xohlovchilar, iqtisod sohasida ishlaydiganlar.',
     'accounting_enroll_button' => 'Hoziroq yozilish',
     'accounting_tech_stack' => '1C Buxgalteriya, Excel, Soliq hisobi, Moliyaviy hisobot',
-    
+
     // ==================== DETAILS 2 ====================
     'details2_title' => 'IT karyerangizni shu yerdan boshlang',
     'details2_description' => 'IT sohasida muvaffaqiyatga erishish uchun amaliyot va real loyihalar eng muhimdir. Har bir kursimiz sizni nafaqat nazariy bilim bilan, balki ishga tayyor tajriba bilan ta’minlaydi. Mentorlarimiz sizni doimiy qo‘llab-quvvatlaydi va individual yondashuv bilan rivojlanishingizni kafolatlaydi.',
     'start' => 'Boshlash',
-    
+
     // ==================== INVITATION ====================
     'invitation_text' => 'Bizning tajribali dizaynerlar va ichki qurilish mutaxassislari jamoamiz sizning kutganingizdan ham yuqori natijalarni taqdim etadi.',
-    
-// Projects Section
+
+    // Projects Section
     'projects_title' => 'Loyihalar',
     'project1_title' => 'Iqro Agency',
     'project1_desc' => 'Iqro Agency — IT va digital marketing xizmatlarini taqdim etuvchi zamonaviy agentlik.',
@@ -252,7 +252,7 @@ return [
     'project6_title' => ' Urecruit',
     'project6_desc' => 'Siz mustaqil ishlovchimisiz? Urecruit orqali tadqiqotlarda qatnashing va o‘z fikringizni bildiring.',
     'read_more' => 'Batafsil',
-    
+
     // ==================== TESTIMONIALS ====================
     'testimonial_author1' => 'Marlene Visconte',
     'testimonial_position1' => 'Bosh direktor - Scouter',
@@ -260,7 +260,7 @@ return [
     'testimonial_position2' => 'Jamoa rahbari - Vanquish',
     'testimonial_author3' => 'Stella Virtuoso',
     'testimonial_position3' => 'Bosh dizayner - Bikegirl',
-    
+
     // ==================== CONTACT FORM ====================
     'contact_title' => 'Itech academyga aloqaga chiqish',
     'your_name' => 'Ismingiz',
@@ -268,7 +268,7 @@ return [
     'message' => 'Xabar',
     'send' => 'Yuborish',
     'success_message' => 'Xabaringiz muvaffaqiyatli yuborildi!',
-    
+
     // ==================== FOOTER ====================
     'about_website' => 'Website haqida',
     'footer_description' => 'iTech Academy web-sayti orqali kurslar, yo‘nalishlar va loyihalar haqida barcha ma’lumotlarni topishingiz mumkin. Saytimiz foydalanuvchi uchun qulay va tezkor ishlaydi.',
@@ -283,7 +283,7 @@ return [
     'english' => 'Ingliz tili',
     'russian' => 'Rus tili',
     'uzbek' => 'O\'zbek tili',
-    
+
     // ==================== AUTH & PROFILE ====================
     'new_request' => 'Yangi ariza keldi!',
     'name' => 'Ism',
@@ -315,12 +315,12 @@ return [
     'delete_confirm_text' => 'Bu amalni ortga qaytarib bo‘lmaydi!',
     'save' => 'O‘zgarishlarni saqlash',
     'password_mismatch' => 'Parollar mos kelmadi!',
-    
+
     // ==================== FORGOT PASSWORD ====================
     'forgot_password_intro' => 'Parolingizni unutdingizmi? Hechqisi yo‘q. Email manzilingizni kiriting va biz sizga parolni yangilash havolasini yuboramiz.',
     'send_reset_link' => 'Tiklash havolasini yuborish',
     'back_to_signin' => 'Kirish sahifasiga qaytish',
-    
+
     // ==================== BACKEND COURSE ====================
     'backend_badge' => '🚀 Professional Kurs',
     'backend_title' => 'Backend <span class="gradient-text">Developer</span>',
@@ -386,196 +386,196 @@ return [
     'python_enroll_button' => 'Hoziroq qo\'shilish',
     'python_certificate_text' => 'Diplom va Sertifikat beriladi',
 
-// ==================== FRONTEND KURSI ====================
-'frontend_badge' => '🎨 Professional Kurs',
-'frontend_title' => 'Frontend <span class="gradient-text">Developer</span>',
-'frontend_description' => 'Veb-saytlarning tashqi ko\'rinishini yaratishni o\'rganing. HTML, CSS, JavaScript va zamonaviy frameworklar bilan ishlash.',
-'frontend_tech1_title' => 'HTML5 & CSS3',
-'frontend_tech1_desc' => 'Veb-sahifalar tuzilishi va dizayni',
-'frontend_tech2_title' => 'JavaScript',
-'frontend_tech2_desc' => 'Dinamik va interaktiv veb-sahifalar',
-'frontend_learn_section' => 'Kursda nimalarni o\'rganasiz?',
-'frontend_skill1_title' => 'HTML5',
-'frontend_skill1_desc' => 'Veb-sahifa tuzilishi va semantic teglar',
-'frontend_skill2_title' => 'CSS3',
-'frontend_skill2_desc' => 'Dizayn, animatsiyalar, responsive layout',
-'frontend_skill3_title' => 'JavaScript',
-'frontend_skill3_desc' => 'Dinamik elementlar, eventlar, DOM',
-'frontend_skill4_title' => 'Bootstrap & Tailwind',
-'frontend_skill4_desc' => 'Tez va chiroyli dizayn yaratish',
-'frontend_skill5_title' => 'React.js',
-'frontend_skill5_desc' => 'Zamonaviy frontend framework',
-'frontend_for_whom_title' => 'Kurs kimlar uchun?',
-'frontend_for_whom_desc' => 'Dasturlashni boshlashni xohlovchilar, veb-dizayn va dasturlashni birga o\'rganmoqchi bo\'lganlar, kreativ va texnik fikrlovchilar uchun.',
-'frontend_card_title' => 'Kursga qabul ochiq',
-'frontend_duration_label' => 'Davomiyligi',
-'frontend_duration_value' => '6 oy (Haftada 3 kun)',
-'frontend_mentor_label' => 'Mentor',
-'frontend_mentor_value' => 'Senior Frontend Developer',
-'frontend_old_price' => '1 800 000 so\'m',
-'frontend_new_price' => '1 500 000',
-'frontend_price_period' => 'so\'m/oy',
-'frontend_enroll_button' => 'Hoziroq qo\'shilish',
-'frontend_certificate_text' => 'Diplom va Sertifikat beriladi',
+    // ==================== FRONTEND KURSI ====================
+    'frontend_badge' => '🎨 Professional Kurs',
+    'frontend_title' => 'Frontend <span class="gradient-text">Developer</span>',
+    'frontend_description' => 'Veb-saytlarning tashqi ko\'rinishini yaratishni o\'rganing. HTML, CSS, JavaScript va zamonaviy frameworklar bilan ishlash.',
+    'frontend_tech1_title' => 'HTML5 & CSS3',
+    'frontend_tech1_desc' => 'Veb-sahifalar tuzilishi va dizayni',
+    'frontend_tech2_title' => 'JavaScript',
+    'frontend_tech2_desc' => 'Dinamik va interaktiv veb-sahifalar',
+    'frontend_learn_section' => 'Kursda nimalarni o\'rganasiz?',
+    'frontend_skill1_title' => 'HTML5',
+    'frontend_skill1_desc' => 'Veb-sahifa tuzilishi va semantic teglar',
+    'frontend_skill2_title' => 'CSS3',
+    'frontend_skill2_desc' => 'Dizayn, animatsiyalar, responsive layout',
+    'frontend_skill3_title' => 'JavaScript',
+    'frontend_skill3_desc' => 'Dinamik elementlar, eventlar, DOM',
+    'frontend_skill4_title' => 'Bootstrap & Tailwind',
+    'frontend_skill4_desc' => 'Tez va chiroyli dizayn yaratish',
+    'frontend_skill5_title' => 'React.js',
+    'frontend_skill5_desc' => 'Zamonaviy frontend framework',
+    'frontend_for_whom_title' => 'Kurs kimlar uchun?',
+    'frontend_for_whom_desc' => 'Dasturlashni boshlashni xohlovchilar, veb-dizayn va dasturlashni birga o\'rganmoqchi bo\'lganlar, kreativ va texnik fikrlovchilar uchun.',
+    'frontend_card_title' => 'Kursga qabul ochiq',
+    'frontend_duration_label' => 'Davomiyligi',
+    'frontend_duration_value' => '6 oy (Haftada 3 kun)',
+    'frontend_mentor_label' => 'Mentor',
+    'frontend_mentor_value' => 'Senior Frontend Developer',
+    'frontend_old_price' => '1 800 000 so\'m',
+    'frontend_new_price' => '1 500 000',
+    'frontend_price_period' => 'so\'m/oy',
+    'frontend_enroll_button' => 'Hoziroq qo\'shilish',
+    'frontend_certificate_text' => 'Diplom va Sertifikat beriladi',
 
-// ==================== BACKEND MODULLARI ====================
-'backend_module1_title' => 'PHP asoslari va OOP',
-'backend_module1_desc' => 'PHP sintaksisi, obyektga yo\'naltirilgan dasturlash',
-'backend_module2_title' => 'Laravel Framework',
-'backend_module2_desc' => 'Eloquent ORM, Blade, Middleware, Service Provider',
-'backend_module3_title' => 'MySQL va ma\'lumotlar bazasi',
-'backend_module3_desc' => 'Murakkab so\'rovlar, indekslash, optimizatsiya',
-'backend_module4_title' => 'RESTful API yaratish',
-'backend_module4_desc' => 'API dizayn, autentifikatsiya, API resurslari',
-'backend_module5_title' => 'Deployment va DevOps',
-'backend_module5_desc' => 'Git, CI/CD, server sozlamalari',
+    // ==================== BACKEND MODULLARI ====================
+    'backend_module1_title' => 'PHP asoslari va OOP',
+    'backend_module1_desc' => 'PHP sintaksisi, obyektga yo\'naltirilgan dasturlash',
+    'backend_module2_title' => 'Laravel Framework',
+    'backend_module2_desc' => 'Eloquent ORM, Blade, Middleware, Service Provider',
+    'backend_module3_title' => 'MySQL va ma\'lumotlar bazasi',
+    'backend_module3_desc' => 'Murakkab so\'rovlar, indekslash, optimizatsiya',
+    'backend_module4_title' => 'RESTful API yaratish',
+    'backend_module4_desc' => 'API dizayn, autentifikatsiya, API resurslari',
+    'backend_module5_title' => 'Deployment va DevOps',
+    'backend_module5_desc' => 'Git, CI/CD, server sozlamalari',
 
-// ==================== PYTHON MODULLARI ====================
-'python_module1_title' => 'Python asoslari',
-'python_module1_desc' => 'Sintaksis, o\'zgaruvchilar, ma\'lumot turlari',
-'python_module2_title' => 'Funksiyalar va modullar',
-'python_module2_desc' => 'Kodni qayta ishlatish va modulli dasturlash',
-'python_module3_title' => 'OOP',
-'python_module3_desc' => 'Obektga yo\'naltirilgan dasturlash va klasslar',
-'python_module4_title' => 'Ma\'lumotlar tahlili',
-'python_module4_desc' => 'Pandas, NumPy kutubxonalari',
-'python_module5_title' => 'API va web',
-'python_module5_desc' => 'REST API yaratish va Django',
+    // ==================== PYTHON MODULLARI ====================
+    'python_module1_title' => 'Python asoslari',
+    'python_module1_desc' => 'Sintaksis, o\'zgaruvchilar, ma\'lumot turlari',
+    'python_module2_title' => 'Funksiyalar va modullar',
+    'python_module2_desc' => 'Kodni qayta ishlatish va modulli dasturlash',
+    'python_module3_title' => 'OOP',
+    'python_module3_desc' => 'Obektga yo\'naltirilgan dasturlash va klasslar',
+    'python_module4_title' => 'Ma\'lumotlar tahlili',
+    'python_module4_desc' => 'Pandas, NumPy kutubxonalari',
+    'python_module5_title' => 'API va web',
+    'python_module5_desc' => 'REST API yaratish va Django',
 
-// ==================== ROBOTOTEXNIKA MODULLARI ====================
-'robotics_module1_title' => 'Arduino asoslari',
-'robotics_module1_desc' => 'Arduino platformasi, dasturlash, pinlar bilan ishlash',
-'robotics_module2_title' => 'Sensorlar',
-'robotics_module2_desc' => 'Ultraviyole, infraqizil, harorat sensorlari',
-'robotics_module3_title' => 'Motorlar',
-'robotics_module3_desc' => 'Servo, DC, step motorlarni boshqarish',
-'robotics_module4_title' => 'Robot yasash',
-'robotics_module4_desc' => 'Oddiy robotlarni loyihalash, yig\'ish va dasturlash',
-'robotics_module5_title' => 'Bluetooth boshqaruv',
-'robotics_module5_desc' => 'Telefon orqali robotlarni boshqarish',
+    // ==================== ROBOTOTEXNIKA MODULLARI ====================
+    'robotics_module1_title' => 'Arduino asoslari',
+    'robotics_module1_desc' => 'Arduino platformasi, dasturlash, pinlar bilan ishlash',
+    'robotics_module2_title' => 'Sensorlar',
+    'robotics_module2_desc' => 'Ultraviyole, infraqizil, harorat sensorlari',
+    'robotics_module3_title' => 'Motorlar',
+    'robotics_module3_desc' => 'Servo, DC, step motorlarni boshqarish',
+    'robotics_module4_title' => 'Robot yasash',
+    'robotics_module4_desc' => 'Oddiy robotlarni loyihalash, yig\'ish va dasturlash',
+    'robotics_module5_title' => 'Bluetooth boshqaruv',
+    'robotics_module5_desc' => 'Telefon orqali robotlarni boshqarish',
 
-// ==================== ROBOTOTEXNIKA TEXNOLOGIYALARI ====================
-'robotics_tech_arduino' => 'Arduino',
-'robotics_tech_cpp' => 'C++',
-'robotics_tech_sensors' => 'Sensorlar',
-'robotics_tech_motors' => 'Motorlar',
-'robotics_tech_electronics' => 'Elektronika',
-'robotics_tech_iot' => 'IoT',
+    // ==================== ROBOTOTEXNIKA TEXNOLOGIYALARI ====================
+    'robotics_tech_arduino' => 'Arduino',
+    'robotics_tech_cpp' => 'C++',
+    'robotics_tech_sensors' => 'Sensorlar',
+    'robotics_tech_motors' => 'Motorlar',
+    'robotics_tech_electronics' => 'Elektronika',
+    'robotics_tech_iot' => 'IoT',
 
-// ==================== RAQAMLI BOLALAR MODULLARI ====================
-'digital_kids_module1_title' => 'Kompyuter savodxonligi',
-'digital_kids_module1_desc' => 'Kompyuter asoslari, fayllar bilan ishlash',
-'digital_kids_module2_title' => 'Scratch dasturlash',
-'digital_kids_module2_desc' => 'Blokli dasturlash, o\'yinlar yaratish',
-'digital_kids_module3_title' => 'Mantiqiy fikrlash',
-'digital_kids_module3_desc' => 'Masalalar yechish, algoritmik fikrlash',
-'digital_kids_module4_title' => 'Kreativ loyihalar',
-'digital_kids_module4_desc' => 'O\'z o\'yinlari va animatsiyalar yaratish',
-// ==================== RAQAMLI BOLALAR TEXNOLOGIYALARI ====================
-'digital_kids_tech_scratch' => 'Scratch',
-'digital_kids_tech_block' => 'Blokli dasturlash',
-'digital_kids_tech_logic' => 'Mantiqiy fikrlash',
-'digital_kids_tech_games' => 'O\'yin yaratish',
-'digital_kids_tech_animation' => 'Animatsiya',
-'digital_kids_tech_algorithm' => 'Algoritm',
+    // ==================== RAQAMLI BOLALAR MODULLARI ====================
+    'digital_kids_module1_title' => 'Kompyuter savodxonligi',
+    'digital_kids_module1_desc' => 'Kompyuter asoslari, fayllar bilan ishlash',
+    'digital_kids_module2_title' => 'Scratch dasturlash',
+    'digital_kids_module2_desc' => 'Blokli dasturlash, o\'yinlar yaratish',
+    'digital_kids_module3_title' => 'Mantiqiy fikrlash',
+    'digital_kids_module3_desc' => 'Masalalar yechish, algoritmik fikrlash',
+    'digital_kids_module4_title' => 'Kreativ loyihalar',
+    'digital_kids_module4_desc' => 'O\'z o\'yinlari va animatsiyalar yaratish',
+    // ==================== RAQAMLI BOLALAR TEXNOLOGIYALARI ====================
+    'digital_kids_tech_scratch' => 'Scratch',
+    'digital_kids_tech_block' => 'Blokli dasturlash',
+    'digital_kids_tech_logic' => 'Mantiqiy fikrlash',
+    'digital_kids_tech_games' => 'O\'yin yaratish',
+    'digital_kids_tech_animation' => 'Animatsiya',
+    'digital_kids_tech_algorithm' => 'Algoritm',
 
-// ==================== TIZIM MUHANDISLIGI MODULLARI ====================
-'system_engineering_module1_title' => 'Linux asoslari',
-'system_engineering_module1_desc' => 'Ubuntu, CentOS, terminal buyruqlari',
-'system_engineering_module2_title' => 'Server sozlash',
-'system_engineering_module2_desc' => 'Apache, Nginx, MySQL konfiguratsiyasi',
-'system_engineering_module3_title' => 'Virtualizatsiya',
-'system_engineering_module3_desc' => 'Docker, VirtualBox, VMware',
-'system_engineering_module4_title' => 'Monitoring',
-'system_engineering_module4_desc' => 'Zabbix, Prometheus, Grafana',
-'system_engineering_module5_title' => 'Tarmoq xavfsizligi',
-'system_engineering_module5_desc' => 'Firewall, iptables, VPN, SSH',
-// ==================== TIZIM MUHANDISLIGI TEXNOLOGIYALARI ====================
-'system_engineering_tech_linux' => 'Linux',
-'system_engineering_tech_ubuntu' => 'Ubuntu',
-'system_engineering_tech_centos' => 'CentOS',
-'system_engineering_tech_docker' => 'Docker',
-'system_engineering_tech_vmware' => 'VMware',
-'system_engineering_tech_zabbix' => 'Zabbix',
+    // ==================== TIZIM MUHANDISLIGI MODULLARI ====================
+    'system_engineering_module1_title' => 'Linux asoslari',
+    'system_engineering_module1_desc' => 'Ubuntu, CentOS, terminal buyruqlari',
+    'system_engineering_module2_title' => 'Server sozlash',
+    'system_engineering_module2_desc' => 'Apache, Nginx, MySQL konfiguratsiyasi',
+    'system_engineering_module3_title' => 'Virtualizatsiya',
+    'system_engineering_module3_desc' => 'Docker, VirtualBox, VMware',
+    'system_engineering_module4_title' => 'Monitoring',
+    'system_engineering_module4_desc' => 'Zabbix, Prometheus, Grafana',
+    'system_engineering_module5_title' => 'Tarmoq xavfsizligi',
+    'system_engineering_module5_desc' => 'Firewall, iptables, VPN, SSH',
+    // ==================== TIZIM MUHANDISLIGI TEXNOLOGIYALARI ====================
+    'system_engineering_tech_linux' => 'Linux',
+    'system_engineering_tech_ubuntu' => 'Ubuntu',
+    'system_engineering_tech_centos' => 'CentOS',
+    'system_engineering_tech_docker' => 'Docker',
+    'system_engineering_tech_vmware' => 'VMware',
+    'system_engineering_tech_zabbix' => 'Zabbix',
 
-// ==================== DEVOPS MODULLARI ====================
-'devops_module1_title' => 'CI/CD asoslari',
-'devops_module1_desc' => 'GitLab CI, GitHub Actions, Jenkins pipeline',
-'devops_module2_title' => 'Containerizatsiya',
-'devops_module2_desc' => 'Docker, Docker Compose, container hayot aylanishi',
-'devops_module3_title' => 'Orchestration',
-'devops_module3_desc' => 'Kubernetes, Pods, Services, Deployments',
-'devops_module4_title' => 'Infrastructure as Code',
-'devops_module4_desc' => 'Terraform, Ansible, cloud formation',
-'devops_module5_title' => 'Monitoring',
-'devops_module5_desc' => 'Prometheus, Grafana, ELK Stack',
-// ==================== DEVOPS TEXNOLOGIYALARI ====================
-'devops_tech_docker' => 'Docker',
-'devops_tech_kubernetes' => 'Kubernetes',
-'devops_tech_jenkins' => 'Jenkins',
-'devops_tech_gitlab' => 'GitLab CI',
-'devops_tech_aws' => 'AWS',
-'devops_tech_terraform' => 'Terraform',
+    // ==================== DEVOPS MODULLARI ====================
+    'devops_module1_title' => 'CI/CD asoslari',
+    'devops_module1_desc' => 'GitLab CI, GitHub Actions, Jenkins pipeline',
+    'devops_module2_title' => 'Containerizatsiya',
+    'devops_module2_desc' => 'Docker, Docker Compose, container hayot aylanishi',
+    'devops_module3_title' => 'Orchestration',
+    'devops_module3_desc' => 'Kubernetes, Pods, Services, Deployments',
+    'devops_module4_title' => 'Infrastructure as Code',
+    'devops_module4_desc' => 'Terraform, Ansible, cloud formation',
+    'devops_module5_title' => 'Monitoring',
+    'devops_module5_desc' => 'Prometheus, Grafana, ELK Stack',
+    // ==================== DEVOPS TEXNOLOGIYALARI ====================
+    'devops_tech_docker' => 'Docker',
+    'devops_tech_kubernetes' => 'Kubernetes',
+    'devops_tech_jenkins' => 'Jenkins',
+    'devops_tech_gitlab' => 'GitLab CI',
+    'devops_tech_aws' => 'AWS',
+    'devops_tech_terraform' => 'Terraform',
 
-// ==================== DATA ANALITIKA MODULLARI ====================
-'data_analytics_module1_title' => 'SQL asoslari',
-'data_analytics_module1_desc' => 'SELECT, JOIN, GROUP BY, subqueries',
-'data_analytics_module2_title' => 'Python for Data',
-'data_analytics_module2_desc' => 'Python asoslari, ma\'lumot tuzilmalari',
-'data_analytics_module3_title' => 'Pandas & NumPy',
-'data_analytics_module3_desc' => 'DataFrame, Series, ma\'lumotlarni tozalash',
-'data_analytics_module4_title' => 'Ma\'lumotlar vizualizatsiyasi',
-'data_analytics_module4_desc' => 'Matplotlib, Seaborn, Tableau, Power BI',
-'data_analytics_module5_title' => 'Statistika asoslari',
-'data_analytics_module5_desc' => 'O\'rtacha, median, standart og\'ish, regressiya',
-// ==================== DATA ANALITIKA TEXNOLOGIYALARI ====================
-'data_analytics_tech_sql' => 'SQL',
-'data_analytics_tech_python' => 'Python',
-'data_analytics_tech_pandas' => 'Pandas',
-'data_analytics_tech_numpy' => 'NumPy',
-'data_analytics_tech_tableau' => 'Tableau',
-'data_analytics_tech_powerbi' => 'Power BI',
+    // ==================== DATA ANALITIKA MODULLARI ====================
+    'data_analytics_module1_title' => 'SQL asoslari',
+    'data_analytics_module1_desc' => 'SELECT, JOIN, GROUP BY, subqueries',
+    'data_analytics_module2_title' => 'Python for Data',
+    'data_analytics_module2_desc' => 'Python asoslari, ma\'lumot tuzilmalari',
+    'data_analytics_module3_title' => 'Pandas & NumPy',
+    'data_analytics_module3_desc' => 'DataFrame, Series, ma\'lumotlarni tozalash',
+    'data_analytics_module4_title' => 'Ma\'lumotlar vizualizatsiyasi',
+    'data_analytics_module4_desc' => 'Matplotlib, Seaborn, Tableau, Power BI',
+    'data_analytics_module5_title' => 'Statistika asoslari',
+    'data_analytics_module5_desc' => 'O\'rtacha, median, standart og\'ish, regressiya',
+    // ==================== DATA ANALITIKA TEXNOLOGIYALARI ====================
+    'data_analytics_tech_sql' => 'SQL',
+    'data_analytics_tech_python' => 'Python',
+    'data_analytics_tech_pandas' => 'Pandas',
+    'data_analytics_tech_numpy' => 'NumPy',
+    'data_analytics_tech_tableau' => 'Tableau',
+    'data_analytics_tech_powerbi' => 'Power BI',
 
-// ==================== TARMOQ ADMINISTRATORLIGI MODULLARI ====================
-'network_admin_module1_title' => 'Tarmoq asoslari',
-'network_admin_module1_desc' => 'OSI model, TCP/IP, IP manzillash, subnetting',
-'network_admin_module2_title' => 'Cisco router sozlash',
-'network_admin_module2_desc' => 'Static routing, OSPF, EIGRP',
-'network_admin_module3_title' => 'Switch sozlash',
-'network_admin_module3_desc' => 'STP, VLAN, trunk, port security',
-'network_admin_module4_title' => 'Tarmoq xavfsizligi',
-'network_admin_module4_desc' => 'Firewall, ACL, VPN, AAA',
-'network_admin_module5_title' => 'Monitoring va troubleshooting',
-'network_admin_module5_desc' => 'Wireshark, SNMP, syslog',
-// ==================== TARMOQ ADMINISTRATORLIGI TEXNOLOGIYALARI ====================
-'network_admin_tech_cisco' => 'Cisco',
-'network_admin_tech_tcpip' => 'TCP/IP',
-'network_admin_tech_router' => 'Router',
-'network_admin_tech_switch' => 'Switch',
-'network_admin_tech_firewall' => 'Firewall',
-'network_admin_tech_wireshark' => 'Wireshark',
+    // ==================== TARMOQ ADMINISTRATORLIGI MODULLARI ====================
+    'network_admin_module1_title' => 'Tarmoq asoslari',
+    'network_admin_module1_desc' => 'OSI model, TCP/IP, IP manzillash, subnetting',
+    'network_admin_module2_title' => 'Cisco router sozlash',
+    'network_admin_module2_desc' => 'Static routing, OSPF, EIGRP',
+    'network_admin_module3_title' => 'Switch sozlash',
+    'network_admin_module3_desc' => 'STP, VLAN, trunk, port security',
+    'network_admin_module4_title' => 'Tarmoq xavfsizligi',
+    'network_admin_module4_desc' => 'Firewall, ACL, VPN, AAA',
+    'network_admin_module5_title' => 'Monitoring va troubleshooting',
+    'network_admin_module5_desc' => 'Wireshark, SNMP, syslog',
+    // ==================== TARMOQ ADMINISTRATORLIGI TEXNOLOGIYALARI ====================
+    'network_admin_tech_cisco' => 'Cisco',
+    'network_admin_tech_tcpip' => 'TCP/IP',
+    'network_admin_tech_router' => 'Router',
+    'network_admin_tech_switch' => 'Switch',
+    'network_admin_tech_firewall' => 'Firewall',
+    'network_admin_tech_wireshark' => 'Wireshark',
 
-// ==================== BUXGALTERIYA MODULLARI ====================
-'accounting_module1_title' => 'Buxgalteriya asoslari',
-'accounting_module1_desc' => 'Buxgalteriya hisobi, schyotlar, provodkalar',
-'accounting_module2_title' => '1C Buxgalteriya',
-'accounting_module2_desc' => '1C dasturi bilan ishlash, hujjatlar, hisobotlar',
-'accounting_module3_title' => 'Soliq hisobi',
-'accounting_module3_desc' => 'QQS, daromad solig\'i, ijtimoiy soliq',
-'accounting_module4_title' => 'Moliyaviy hisobot',
-'accounting_module4_desc' => 'Balans, foyda-zarar hisoboti',
-'accounting_module5_title' => 'Kassa va bank operatsiyalari',
-'accounting_module5_desc' => 'Kassa kitobi, bank ko\'chirmalari',
-'accounting_module6_title' => 'Ish haqi hisobi',
-'accounting_module6_desc' => 'Ish haqini hisoblash, soliqlar',
-// ==================== BUXGALTERIYA TEXNOLOGIYALARI ====================
-'accounting_tech_1c' => '1C Buxgalteriya',
-'accounting_tech_excel' => 'Excel',
-'accounting_tech_tax' => 'Soliq hisobi',
-'accounting_tech_finance' => 'Moliyaviy hisobot',
-'accounting_tech_cash' => 'Kassa operatsiyalari',
-'accounting_tech_bank' => 'Bank operatsiyalari',
-'personal_info' => 'Shaxsiy ma\'lumotlar',
+    // ==================== BUXGALTERIYA MODULLARI ====================
+    'accounting_module1_title' => 'Buxgalteriya asoslari',
+    'accounting_module1_desc' => 'Buxgalteriya hisobi, schyotlar, provodkalar',
+    'accounting_module2_title' => '1C Buxgalteriya',
+    'accounting_module2_desc' => '1C dasturi bilan ishlash, hujjatlar, hisobotlar',
+    'accounting_module3_title' => 'Soliq hisobi',
+    'accounting_module3_desc' => 'QQS, daromad solig\'i, ijtimoiy soliq',
+    'accounting_module4_title' => 'Moliyaviy hisobot',
+    'accounting_module4_desc' => 'Balans, foyda-zarar hisoboti',
+    'accounting_module5_title' => 'Kassa va bank operatsiyalari',
+    'accounting_module5_desc' => 'Kassa kitobi, bank ko\'chirmalari',
+    'accounting_module6_title' => 'Ish haqi hisobi',
+    'accounting_module6_desc' => 'Ish haqini hisoblash, soliqlar',
+    // ==================== BUXGALTERIYA TEXNOLOGIYALARI ====================
+    'accounting_tech_1c' => '1C Buxgalteriya',
+    'accounting_tech_excel' => 'Excel',
+    'accounting_tech_tax' => 'Soliq hisobi',
+    'accounting_tech_finance' => 'Moliyaviy hisobot',
+    'accounting_tech_cash' => 'Kassa operatsiyalari',
+    'accounting_tech_bank' => 'Bank operatsiyalari',
+    'personal_info' => 'Shaxsiy ma\'lumotlar',
     'change_password' => 'Parolni o\'zgartirish',
     'save_changes' => 'O\'zgarishlarni saqlash',
     'current_password' => 'Amaldagi parol',
@@ -622,7 +622,7 @@ return [
     'error_title' => 'Xatolik!',
     'success_title' => 'Muvaffaqiyatli!',
     'password_mismatch' => 'Yangi parollar bir-biriga mos kelmadi.',
-        // lang/en/messages.php
+    // lang/en/messages.php
     'success_title' => 'Success!',
     'profile_updated' => 'Profile updated successfully',
 
@@ -642,4 +642,58 @@ return [
     'passwords_match' => 'Parollar mos keldi',
     'passwords_dont_match' => 'Parollar mos emas',
     'error_occurred' => 'Xatolik yuz berdi, qaytadan urinib ko\'ring',
+
+    //royxatdan otish joyi
+    // ==================== QO'SHIMCHA KALITLAR (Xabar maydoni olib tashlangan) ====================
+    'contact_title' => 'Itech academy bilan bog\'lanish',
+    'your_name' => 'Ismingiz',
+    'email' => 'Email manzilingiz',
+    'send' => 'Yuborish',
+    'success_message' => 'Arizangiz muvaffaqiyatli qabul qilindi!',
+    'error_message' => 'Xatolik yuz berdi. Iltimos, qaytadan urinib ko\'ring.',
+    'please_wait' => 'Iltimos, kuting...',
+    'application_received' => '✅ Ariza qabul qilindi!',
+    'we_will_contact' => 'Tez orada bizning mutaxassislarimiz siz bilan bog\'lanadi.',
+    'contact_phone' => '+998 71 123 45 67',
+    'contact_telegram' => '@itech_support',
+
+    // ==================== PROFIL UCHUN QO'SHIMCHA ====================
+    'profile_updated' => 'Profil muvaffaqiyatli yangilandi',
+    'image_updated' => 'Profil rasmi yangilandi',
+    'password_updated' => 'Parol muvaffaqiyatli o\'zgartirildi',
+    'passwords_match' => 'Parollar mos keladi',
+    'passwords_dont_match' => 'Parollar mos kelmadi',
+    'error_occurred' => 'Xatolik yuz berdi, qaytadan urinib ko\'ring',
+    'ready' => 'Tayyor!',
+    'success_title' => 'Muvaffaqiyat!',
+    'error_title' => 'Xatolik!',
+    'old_password_incorrect' => 'Eski parol noto\'g\'ri kiritildi!',
+
+    // ==================== KURS KARTALARI UCHUN ====================
+    'course_about' => '📖 Kurs haqida',
+    'course_program' => '📚 O\'quv dasturi',
+    'course_for_who' => '👨‍💻 Kimlar uchun?',
+    'course_duration_label' => 'Davomiyligi',
+    'course_schedule' => 'Darslar',
+    'course_schedule_value' => 'Haftada 3 kun',
+    'course_language' => 'Til',
+    'course_language_value' => 'O\'zbek tilida',
+    'certificate' => 'Sertifikat',
+    'has' => 'Bor',
+    'support_text' => '24/7 mentor yordami',
+    'back_to_courses' => 'Kurslarga qaytish',
+    'price_per_month' => '/ oy',
+    'months' => 'oy',
+
+    // ==================== LOADING VA SPINNER ====================
+    'loading' => 'Yuklanmoqda...',
+    'sending' => 'Yuborilmoqda...',
+    'application_received' => '✅ Ariza qabul qilindi!',
+    'we_will_contact' => 'Sizning arizangiz qabul qilindi. Tez orada bog\'lanamiz.',
+    'contact_phone' => '+998 71 123 45 67',
+    'contact_telegram' => '@itech_support',
+    'understand' => 'Tushundim',
+
+
+
 ];
