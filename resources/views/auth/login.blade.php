@@ -197,7 +197,7 @@
             errors.push('Email manzilida "@" belgisi bo\'lishi kerak');
         } else if (!email.includes('.')) {
             errors.push('Email manzilida "." belgisi bo\'lishi kerak');
-        } 
+        }
         
         if (password === '') {
             errors.push('Parolni kiriting');
