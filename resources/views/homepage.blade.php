@@ -375,51 +375,6 @@
             cursor: pointer;
         }
 
-        .project-card {
-            border: 2px solid #000;
-            border-radius: 12px;
-            overflow: hidden;
-            max-width: 350px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-        }
-
-        /* To'liq atrofga (tepa, past, chap, o'ng) qora chiziq qo'shish */
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border: 3px solid #000;
-            pointer-events: none;
-            transition: all 0.3s ease;
-            border-radius: 12px;
-        }
-
-        /* Hover bo'lganda qora chiziqlar yo'qolsin */
-        .project-card:hover::before {
-            border-color: transparent;
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-            border-color: #007bff;
-        }
-
-        .project-card:hover .card-title {
-            color: #007bff;
-        }
-
-        /* Qo'shimcha effekt */
-        .project-card:hover img {
-            transform: scale(1.02);
-            transition: transform 0.3s ease;
-        }
-
         /* Loading animatsiyasi 1 sekund */
         .spinner-border-sm {
             animation-duration: 1s;
@@ -591,6 +546,66 @@
                     rgba(255, 255, 255, 0) 50%);
             pointer-events: none;
             z-index: 1;
+        }
+
+        /* Neumorphism Cards */
+        .project-card-neo {
+            background: #e0e5ec;
+            border-radius: 40px;
+            box-shadow: 9px 9px 16px #a3b1c6, -9px -9px 16px #ffffff;
+            transition: all 0.3s ease;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .project-card-neo:hover {
+            box-shadow: 4px 4px 8px #a3b1c6, -4px -4px 8px #ffffff;
+            transform: translateY(-5px);
+        }
+
+        .project-card-neo img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 40px 40px 0 0;
+        }
+
+        .project-card-neo .card-body {
+            padding: 1.5rem;
+        }
+
+        .project-card-neo .card-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-card-neo .card-text {
+            color: #5a6e7e;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .project-card-neo .btn-neo {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #e0e5ec;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 0.85rem;
+            box-shadow: 5px 5px 10px #a3b1c6, -5px -5px 10px #ffffff;
+            transition: all 0.2s ease;
+        }
+
+        .project-card-neo .btn-neo:hover {
+            box-shadow: inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff;
+            gap: 12px;
         }
     </style>
 @endsection
@@ -998,93 +1013,96 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="h2-heading">{{ __('messages.projects_title') }}</h2>
+                    <p class="text-muted mb-4" style="font-size: 1rem;">
+                        <i class="fas fa-rocket me-2"></i> Bizning eng yaxshi loyihalarimiz
+                    </p>
                 </div>
             </div>
 
-
-            <div class="row justify-content-center mt-4">
-
+            <div class="row justify-content-center mt-4 g-4">
+                <!-- 1. Iqro Agency -->
                 <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
-                    <div class="card h-100 project-card">
+                    <div class="project-card-neo">
                         <img class="img-fluid w-100" src="{{ asset('images/iqro.png') }}" alt="Iqro">
-                        <div class="card-body p-4">
-                            <h5 class="card-title fw-bold mb-2"> @lang('messages.project1_title') </h5>
-                            <p class="card-text text-secondary"> @lang('messages.project1_desc')
-                                <a class="text-primary text-decoration-none fw-semibold" href="https://iqroagency.uz/uz">
-                                    @lang('messages.read_more') </a>
-                            </p>
+                        <div class="card-body">
+                            <h5 class="card-title">@lang('messages.project1_title')</h5>
+                            <p class="card-text">@lang('messages.project1_desc')</p>
+                            <a href="https://iqroagency.uz/uz" class="btn-neo" target="_blank">
+                                @lang('messages.read_more') <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
 
+                <!-- 2. Delever -->
                 <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
-                    <div class="card h-100 project-card">
+                    <div class="project-card-neo">
                         <img class="img-fluid w-100" src="{{ asset('images/delever.png') }}" alt="Delever">
-                        <div class="card-body p-4">
-                            <h5 class="card-title fw-bold mb-2"> @lang('messages.project2_title') </h5>
-                            <p class="card-text text-secondary"> @lang('messages.project2_desc')
-                                <a class="text-primary text-decoration-none fw-semibold" href="https://www.delever.uz/">
-                                    @lang('messages.read_more') </a>
-                            </p>
+                        <div class="card-body">
+                            <h5 class="card-title">@lang('messages.project2_title')</h5>
+                            <p class="card-text">@lang('messages.project2_desc')</p>
+                            <a href="https://www.delever.uz/" class="btn-neo" target="_blank">
+                                @lang('messages.read_more') <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
 
+                <!-- 3. KIDI -->
                 <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
-                    <div class="card h-100 project-card">
+                    <div class="project-card-neo">
                         <img class="img-fluid w-100" src="{{ asset('images/kidi.png') }}" alt="Kidi">
-                        <div class="card-body p-4">
-                            <h5 class="card-title fw-bold mb-2"> @lang('messages.project3_title') </h5>
-                            <p class="card-text text-secondary"> @lang('messages.project3_desc')
-                                <a class="text-primary text-decoration-none fw-semibold" href="https://kidi.uz/">
-                                    @lang('messages.read_more') </a>
-                            </p>
+                        <div class="card-body">
+                            <h5 class="card-title">@lang('messages.project3_title')</h5>
+                            <p class="card-text">@lang('messages.project3_desc')</p>
+                            <a href="https://kidi.uz/" class="btn-neo" target="_blank">
+                                @lang('messages.read_more') <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
 
+                <!-- 4. Growz -->
                 <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
-                    <div class="card h-100 project-card">
+                    <div class="project-card-neo">
                         <img class="img-fluid w-100" src="{{ asset('images/growz.png') }}" alt="Growz">
-                        <div class="card-body p-4">
-                            <h5 class="card-title fw-bold mb-2"> @lang('messages.project4_title') </h5>
-                            <p class="card-text text-secondary"> @lang('messages.project4_desc')
-                                <a class="text-primary text-decoration-none fw-semibold"
-                                    href="https://admin.growz.io/login"> @lang('messages.read_more') </a>
-                            </p>
+                        <div class="card-body">
+                            <h5 class="card-title">@lang('messages.project4_title')</h5>
+                            <p class="card-text">@lang('messages.project4_desc')</p>
+                            <a href="https://admin.growz.io/login" class="btn-neo" target="_blank">
+                                @lang('messages.read_more') <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
 
+                <!-- 5. Wasteless -->
                 <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
-                    <div class="card h-100 project-card">
+                    <div class="project-card-neo">
                         <img class="img-fluid w-100" src="{{ asset('images/wasteles.png') }}" alt="Wasteless">
-                        <div class="card-body p-4">
-                            <h5 class="card-title fw-bold mb-2"> @lang('messages.project5_title') </h5>
-                            <p class="card-text text-secondary"> @lang('messages.project5_desc')
-                                <a class="text-primary text-decoration-none fw-semibold"
-                                    href="https://admin.wasteless.uz/login" target="_blank" rel="noopener noreferrer">
-                                    @lang('messages.read_more')
-                                </a>
-                            </p>
+                        <div class="card-body">
+                            <h5 class="card-title">@lang('messages.project5_title')</h5>
+                            <p class="card-text">@lang('messages.project5_desc')</p>
+                            <a href="https://admin.wasteless.uz/login" class="btn-neo" target="_blank">
+                                @lang('messages.read_more') <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
 
+                <!-- 6. Urecruit -->
                 <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
-                    <div class="card h-100 project-card">
+                    <div class="project-card-neo">
                         <img class="img-fluid w-100" src="{{ asset('images/urecruit.png') }}" alt="Urecruit">
-                        <div class="card-body p-4">
-                            <h5 class="card-title fw-bold mb-2"> @lang('messages.project6_title') </h5>
-                            <p class="card-text text-secondary"> @lang('messages.project6_desc')
-                                <a class="text-primary text-decoration-none fw-semibold"
-                                    href="https://test.admin.urecruit.udevs.io/auth/login">
-                                    @lang('messages.read_more') </a>
-                            </p>
+                        <div class="card-body">
+                            <h5 class="card-title">@lang('messages.project6_title')</h5>
+                            <p class="card-text">@lang('messages.project6_desc')</p>
+                            <a href="https://test.admin.urecruit.udevs.io/auth/login" class="btn-neo" target="_blank">
+                                @lang('messages.read_more') <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
