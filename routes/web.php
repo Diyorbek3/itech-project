@@ -76,8 +76,6 @@ Route::prefix('courses')->group(function () {
 <<<<<<< HEAD
     // Office menejerligi
 =======
-    // Ofis menejerligi (Static View)
->>>>>>> 5ee9206cb330a71475252f8b663aae9165dc3283
     Route::get('/ofis-menejerligi', function () {
         return view('courses.office-manager');
     })->name('courses.office-manager');
