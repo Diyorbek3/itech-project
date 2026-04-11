@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
@@ -18,7 +17,7 @@ class ProfileController extends Controller
         $user = Auth::user();
         
         $data = [
-            'email'  => $user->email, // Ko'rish uchun qoladi, lekin o'zgartirilmaydi
+            'email'  => $user->email, 
             'name'   => $user->name,
             'avatar' => $user->avatar,
         ];
@@ -27,55 +26,57 @@ class ProfileController extends Controller
     }
 
     /**
-     * Ism va Avatarni yangilash (Email olib tashlandi)
+     * Ism va Avatarni yangilash (Xotirani tejash va keshni yangilash bilan)
      */
     public function putUpdate(Request $request)
     {
         $user = Auth::user();
 
-        // 1. Validatsiya (Email bu yerdan olib tashlandi)
         $request->validate([
             'name'   => 'required|string|max:128',
-            'avatar' => 'nullable|image|mimes:jpg,png,jpeg|max:2048', // Max 2MB
+            'avatar' => 'nullable|image|mimes:jpg,png,jpeg|max:2048', 
         ]);
 
         try {
-            // Ismni yangilash
             $user->name = $request->name;
 
-            // Rasm yuklangan bo'lsa
             if ($request->hasFile('avatar')) {
-                
-                // Eski rasmni o'chirish
+                // 1. Storage diskda 'avatars' papkasi borligini tekshirish
+                if (!Storage::disk('public')->exists('avatars')) {
+                    Storage::disk('public')->makeDirectory('avatars');
+                }
+
+                // 2. XOTIRANI TEJASH: Eski rasmni o'chirish (default rasm bo'lmasa)
                 if ($user->avatar && Storage::disk('public')->exists('avatars/' . $user->avatar)) {
                     Storage::disk('public')->delete('avatars/' . $user->avatar);
                 }
 
-                // Yangi rasmni saqlash
+                // 3. Yangi faylni olish va nomlash
                 $file = $request->file('avatar');
-                $newFileName = $user->id . '_' . time() . '.' . $file->getClientOriginalExtension();
+                // Fayl nomi unikalligi uchun vaqt va user ID dan foydalanamiz
+                $newFileName = 'user_' . $user->id . '_' . time() . '.jpg';
                 
-                $file->storeAs('avatars', $newFileName, 'public');
+                // 4. Rasmni 'public' diskiga yuklash
+                Storage::disk('public')->putFileAs('avatars', $file, $newFileName);
                 
                 $user->avatar = $newFileName;
             }
 
             $user->save();
 
+            // Brauzer keshini chetlab o'tish uchun vaqt qo'shamiz (?v=123)
+            $newAvatarUrl = asset('storage/avatars/' . $user->avatar) . '?v=' . time();
+
             return response()->json([
                 'success'    => true, 
-                'message'    => 'Profil muvaffaqiyatli yangilandi',
-                'name'       => $user->name,
-                'avatar_url' => $user->avatar 
-                                ? asset('storage/avatars/' . $user->avatar) 
-                                : asset('images/avatar.png')
+                'message'    => 'Ma\'lumotlar muvaffaqiyatli yangilandi',
+                'avatar_url' => $newAvatarUrl
             ]);
-
+            
         } catch (\Exception $e) {
-            Log::error('Profile Update Error: ' . $e->getMessage());
             return response()->json([
                 'success' => false, 
-                'message' => 'Tizimda xatolik yuz berdi'
+                'message' => 'Xatolik yuz berdi: ' . $e->getMessage()
             ], 500);
         }
     }
@@ -112,14 +113,17 @@ class ProfileController extends Controller
     }
 
     /**
-     * Avatarni o'chirish
+     * Avatarni o'chirish (Serverdan ham o'chadi)
      */
     public function deleteAvatar()
     {
         $user = Auth::user();
 
-        if ($user->avatar && Storage::disk('public')->exists('avatars/' . $user->avatar)) {
-            Storage::disk('public')->delete('avatars/' . $user->avatar);
+        if ($user->avatar) {
+            if (Storage::disk('public')->exists('avatars/' . $user->avatar)) {
+                Storage::disk('public')->delete('avatars/' . $user->avatar);
+            }
+            
             $user->avatar = null;
             $user->save();
         }
@@ -127,7 +131,7 @@ class ProfileController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Rasm o\'chirildi',
-            'default_url' => asset('storage/avatars/avatar.png')
+            'default_url' => asset('images/avatar.png') // Default rasm manzili
         ]);
     }
-}   
+}
