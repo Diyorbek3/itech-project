@@ -1,4 +1,3 @@
-
 <!-- Navigation -->
 <nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-light bg-white shadow-sm">
     <div class="container position-relative">
@@ -39,7 +38,7 @@
 
             <!-- Aloqaga chiqish -->
             <a class="btn-outline-sm px-3 py-2 d-flex align-items-center justify-content-center"
-               href="#contact"
+               href="/#contact"
                style="font-size: 12px; min-width: 110px; border-radius: 16px; height: 42px;">
                 {{ __('messages.contact_us') }}
             </a>
@@ -72,10 +71,10 @@
                             <li><a class="dropdown-item" href="/my-courses">
                                 <i class="fas fa-graduation-cap me-2"></i> {{ __('messages.courses') }}
                             </a></li>
-                            <li><a class="dropdown-item" href="/">
+                            <li><a class="dropdown-item" href="/#projects">
                                 <i class="fas fa-briefcase me-2"></i> {{ __('messages.projects') }}
                             </a></li>
-                            <li><a class="dropdown-item" href="/">
+                            <li><a class="dropdown-item" href="/#details">
                                 <i class="fas fa-chart-line me-2"></i> {{ __('messages.careers') }}
                             </a></li>
                             @endif
@@ -101,10 +100,10 @@
         <!-- ==================== DESKTOP VERSION ==================== -->
         <div class="collapse navbar-collapse justify-content-center" id="navbarsExampleDefault">
             <ul class="navbar-nav mx-auto gap-4">
-                <li class="nav-item"><a class="nav-link" href="#header">{{ __('messages.about_us') }}</a></li>
-                <li class="nav-item"><a class="nav-link" href="#details">{{ __('messages.why_us') }}</a></li>
-                <li class="nav-item"><a class="nav-link" href="#services">{{ __('messages.courses') }}</a></li>
-                <li class="nav-item"><a class="nav-link" href="#projects">{{ __('messages.projects') }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="/#header">{{ __('messages.about_us') }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="/#details">{{ __('messages.why_us') }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="/#services">{{ __('messages.courses') }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="/#projects">{{ __('messages.projects') }}</a></li>
             </ul>
 
             <!-- Desktop Right Side -->
@@ -134,10 +133,9 @@
                     </ul>
                 </div>
 
-                <a class="btn-outline-sm rounded-circle-5" href="#contact" style="padding: 20px 15px;">
+                <a class="btn-outline-sm rounded-circle-5" href="/#contact" style="padding: 20px 15px;">
                     {{ __('messages.contact_us') }}
                 </a>
-
 
                 <!-- Auth -->
                 <div class="d-flex gap-2">
@@ -170,10 +168,10 @@
                                 <li><a class="dropdown-item" href="/my-courses">
                                     <i class="fas fa-graduation-cap me-2"></i> {{ __('messages.courses') }}
                                 </a></li>
-                                <li><a class="dropdown-item" href="/">
+                                <li><a class="dropdown-item" href="/#projects">
                                     <i class="fas fa-briefcase me-2"></i> {{ __('messages.projects') }}
                                 </a></li>
-                                <li><a class="dropdown-item" href="/">
+                                <li><a class="dropdown-item" href="/#details">
                                     <i class="fas fa-chart-line me-2"></i> {{ __('messages.careers') }}
                                 </a></li>
                                 @endif
@@ -193,49 +191,3 @@
         </div>
     </div>
 </nav>
-<!-- end of navigation -->
-
-<!-- IKKINCHI LANGUAGE SWITCHER - butunlay olib tashlandi (takroriy edi) -->
-<!-- end of navigation -->
-
-<!-- Language Switcher - ikkinchi qism -->
-<span class="nav-item">
-    <div class="dropdown">
-        <a class="btn-outline-sm dropdown-toggle d-flex align-items-center" href="#" role="button" id="languageDropdown2" data-bs-toggle="dropdown" aria-expanded="false">
-            @switch(app()->getLocale())
-                @case('en')
-                    <img src="{{ asset('flags/en.png') }}" alt="EN" class="flag-icon me-1" style="width: 20px; height: 15px; object-fit: cover;"> En
-                    @break
-                @case('ru')
-                    <img src="{{ asset('flags/ru.png') }}" alt="RU" class="flag-icon me-1" style="width: 20px; height: 15px; object-fit: cover;"> Ru
-                    @break
-                @case('uz')
-                    <img src="{{ asset('flags/uz.png') }}" alt="UZ" class="flag-icon me-1" style="width: 20px; height: 15px; object-fit: cover;"> Uz
-                    @break
-                @default
-                    <img src="{{ asset('flags/en.png') }}" alt="EN" class="flag-icon me-1" style="width: 20px; height: 15px; object-fit: cover;"> En
-            @endswitch
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown2" style="min-width: 120px;">
-            <li>
-                <a class="dropdown-item {{ app()->getLocale() == 'en' ? 'active' : '' }}" href="javascript:void(0)" onclick="changeLanguage('en')">
-                    <img src="{{ asset('flags/en.png') }}" alt="English" class="flag-icon me-2" style="width: 20px; height: 15px; object-fit: cover;"> 
-                    <span>{{ __('messages.english') }}</span>
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-item {{ app()->getLocale() == 'ru' ? 'active' : '' }}" href="javascript:void(0)" onclick="changeLanguage('ru')">
-                    <img src="{{ asset('flags/ru.png') }}" alt="Russian" class="flag-icon me-2" style="width: 20px; height: 15px; object-fit: cover;"> 
-                    <span>{{ __('messages.russian') }}</span>
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-item {{ app()->getLocale() == 'uz' ? 'active' : '' }}" href="javascript:void(0)" onclick="changeLanguage('uz')">
-                    <img src="{{ asset('flags/uz.png') }}" alt="Uzbek" class="flag-icon me-2" style="width: 20px; height: 15px; object-fit: cover;"> 
-                    <span>{{ __('messages.uzbek') }}</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</span>
-
