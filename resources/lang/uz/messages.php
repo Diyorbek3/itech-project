@@ -695,5 +695,122 @@ return [
     'understand' => 'Tushundim',
 
 
+    // Modal va forma uchun
+'modal_enroll_title' => 'Ro\'yxatdan o\'tish',
+'modal_enroll_subtitle' => 'Ofis menejerligi kursiga ariza qoldiring',
+'form_name_label' => 'Ism va Sharif',
+'form_name_placeholder' => 'Masalan: Jahongir Alimov',
+'form_phone_label' => 'Telefon raqam',
+'form_phone_placeholder' => '+998 90 123 45 67',
+'form_submit_button' => 'Yuborish va ariza qoldirish',
+'form_privacy_note' => 'Sizning ma\'lumotlaringiz maxfiy saqlanadi',
 
+// Toast xabarlari
+'toast_success_title' => '✅ Ariza qabul qilindi',
+'toast_note' => 'Tez orada ko\'rib chiqiladi',
+
+// Auth va xatoliklar
+'auth_required_title' => 'Autorizatsiya talab qilinadi',
+'auth_required_text' => 'Iltimos, avval tizimga kiring yoki ro\'yxatdan o\'ting!',
+'auth_confirm_button' => 'Tushundim',
+'error_title' => 'Xatolik',
+'error_name_required' => 'Iltimos, Ism va Sharifni kiriting!',
+'error_phone_required' => 'Telefon raqamni kiriting!',
+'error_general' => 'Xatolik yuz berdi! Iltimos, qayta urinib ko\'ring.',
+
+// Qo‘shimcha
+'students_suffix' => 'talaba',  // agar kerak bo‘lsa
+
+// Algorithm tech stack
+'algorithm_tech_1' => 'Algoritm',
+'algorithm_tech_2' => 'Big O',
+'algorithm_tech_3' => 'Binary Search',
+'algorithm_tech_4' => 'Quick Sort',
+'algorithm_tech_5' => 'Daraxtlar',
+'algorithm_tech_6' => 'Graf',
+
+// Modal
+'modal_enroll_subtitle_algorithm' => 'Algoritm asoslari kursiga ariza qoldiring',
+
+// Oldingi qo‘shilgan kalitlar (agar mavjud bo‘lmasa)
+'auth_required_title' => 'Autorizatsiya talab qilinadi',
+'auth_required_text' => 'Iltimos, avval tizimga kiring yoki ro\'yxatdan o\'ting!',
+'auth_confirm_button' => 'Tushundim',
+'error_name_required' => 'Iltimos, Ism va Sharifni kiriting!',
+'error_phone_required' => 'Telefon raqamni kiriting!',
+'error_general' => 'Xatolik yuz berdi! Iltimos, qayta urinib ko\'ring.',
+'toast_success_title' => '✅ Ariza qabul qilindi',
+'toast_note' => 'Tez orada ko\'rib chiqiladi',
+'modal_enroll_title' => 'Ro\'yxatdan o\'tish',
+'form_name_label' => 'Ism va Sharif',
+'form_name_placeholder' => 'Masalan: Jahongir Alimov',
+'form_phone_label' => 'Telefon raqam',
+'form_phone_placeholder' => '+998 90 123 45 67',
+'form_submit_button' => 'Yuborish va ariza qoldirish',
+'form_privacy_note' => 'Sizning ma\'lumotlaringiz maxfiy saqlanadi',
+'students_suffix' => 'talaba',
+
+'office_tech_archive' => 'Arxiv ishi',
+'office_tech_document' => 'Hujjat aylanishi',
+
+
+// ==================== ALGORITM KURSI TEXNOLOGIYALARI ====================
+'algorithm_tech_1' => 'Algoritm',
+'algorithm_tech_2' => 'Big O',
+'algorithm_tech_3' => 'Binary Search',
+'algorithm_tech_4' => 'Quick Sort',
+'algorithm_tech_5' => 'Daraxtlar',
+'algorithm_tech_6' => 'Graf',
+
+// ==================== UMUMIY ====================
+'students_suffix' => 'talaba',
+
+// ==================== ALGORITM MODULLARI ====================
+'algorithm_module1_title' => 'Algoritm tushunchasi',
+'algorithm_module1_desc' => 'Algoritm turlari, murakkablik tahlili (Big O notation)',
+'algorithm_module2_title' => 'Massivlar va ro\'yxatlar',
+'algorithm_module2_desc' => 'Dinamik massivlar, bog\'langan ro\'yxatlar',
+'algorithm_module3_title' => 'Qidiruv algoritmlari',
+'algorithm_module3_desc' => 'Binary search, linear search, hash table',
+'algorithm_module4_title' => 'Saralash algoritmlari',
+'algorithm_module4_desc' => 'Quick sort, Merge sort, Bubble sort, Insertion sort',
+'algorithm_module5_title' => 'Stek va navbat',
+'algorithm_module5_desc' => 'Stack, Queue, Deque tuzilmalari',
+'algorithm_module6_title' => 'Daraxtlar',
+'algorithm_module6_desc' => 'Binary tree, Binary search tree, AVL tree',
+
+
+// ==================== FRONTEND KURSI ====================
+'frontend_badge' => 'Frontend Development',
+'frontend_title' => 'Frontend Dasturchi',
+'frontend_description' => 'HTML, CSS, JavaScript va React.js bilan zamonaviy veb-saytlar yaratishni o\'rganing.',
+'frontend_full_desc' => 'Frontend dasturchi kursida siz veb-saytlarning tashqi ko\'rinishini yaratishni, HTML5, CSS3, JavaScript va zamonaviy frameworklar bilan ishlashni o\'rganasiz.',
+'frontend_duration' => '7 oy',
+'frontend_price' => '850,000 so\'m',
+'frontend_old_price' => '950,000 so\'m',
+'frontend_students' => '180+',
+'frontend_teacher' => 'Abdugafforov Azimjon, Mirzamahmudov G\', Asqarov Sh',
+'frontend_teacher_position' => 'Senior Frontend Developer',
+'frontend_for_who' => 'Dasturlashni boshlashni xohlovchilar, veb-dizayn va dasturlashni birga o\'rganmoqchi bo\'lganlar.',
+'frontend_enroll_button' => 'Hoziroq yozilish',
+
+// ==================== FRONTEND TEXNOLOGIYALARI ====================
+'frontend_tech_1' => 'HTML5',
+'frontend_tech_2' => 'CSS3',
+'frontend_tech_3' => 'JavaScript',
+'frontend_tech_4' => 'React.js',
+'frontend_tech_5' => 'Tailwind',
+'frontend_tech_6' => 'Bootstrap',
+
+// ==================== FRONTEND MODULLARI ====================
+'frontend_module1_title' => 'HTML5',
+'frontend_module1_desc' => 'Veb-sahifa tuzilishi va semantic teglar',
+'frontend_module2_title' => 'CSS3',
+'frontend_module2_desc' => 'Flexbox, Grid, Animatsiyalar, Responsive dizayn',
+'frontend_module3_title' => 'JavaScript',
+'frontend_module3_desc' => 'ES6+, DOM, Async/Await, API so\'rovlar',
+'frontend_module4_title' => 'Bootstrap & Tailwind',
+'frontend_module4_desc' => 'Tez va chiroyli dizayn yaratish',
+'frontend_module5_title' => 'React.js',
+'frontend_module5_desc' => 'Componentlar, Hooks, Router, State Management',
 ];
