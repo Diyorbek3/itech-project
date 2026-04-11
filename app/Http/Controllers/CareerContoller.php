@@ -18,6 +18,7 @@ class CareerController extends Controller
         return view('career.index');
     }
 
+<<<<<<< HEAD
     /**
      * Сохранение отзыва - сначала в Telegram, потом в БД
      */
@@ -401,3 +402,11 @@ class CareerController extends Controller
         }
     }
 }
+=======
+}
+
+
+
+
+
+>>>>>>> 724d39618a1596aa532513fd757e834cc821a949

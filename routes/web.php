@@ -6,6 +6,7 @@ use App\Http\Controllers\CareerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MyCourceController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MasterclassController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
