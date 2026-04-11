@@ -306,22 +306,40 @@ $(document).ready(function() {
             data: $(this).serialize(),
             success: function(response) {
                 if (response.success) {
+                    let message = response.message;
+                    
                     $('#feedbackAlert')
                         .removeClass('alert-danger')
                         .addClass('alert-success')
-                        .html('<i class="fas fa-check-circle"></i> ' + response.message)
+                        .html('<i class="fas fa-check-circle"></i> ' + message)
                         .show();
                     
+                    // Очищаем форму только для гостей
                     @if(!auth()->check())
                         $('#contactForm')[0].reset();
                     @else
                         $('#message').val('');
                     @endif
+                    
+                    // Дополнительное уведомление о статусе отправки в Telegram
+                    if (!response.telegram_sent && response.telegram_error) {
+                        console.log('Telegram error:', response.telegram_error);
+                    }
                 } else {
+                    let errorMessage = response.message || 'Произошла ошибка';
+                    
+                    if (response.errors) {
+                        errorMessage = '<ul class="mb-0">';
+                        $.each(response.errors, function(key, value) {
+                            errorMessage += '<li>' + value[0] + '</li>';
+                        });
+                        errorMessage += '</ul>';
+                    }
+                    
                     $('#feedbackAlert')
                         .removeClass('alert-success')
                         .addClass('alert-danger')
-                        .html('<i class="fas fa-exclamation-circle"></i> ' + response.message)
+                        .html('<i class="fas fa-exclamation-circle"></i> ' + errorMessage)
                         .show();
                 }
             },
@@ -355,7 +373,6 @@ $(document).ready(function() {
         });
     });
 });
-
 // Quiz functionality
 let currentQuestion = 0;
 let score = 0;
@@ -624,20 +641,6 @@ function registerMasterclass(masterclassId) {
             </div>
         </div>
 
-        <!-- Пагинация для команды -->
-        <nav aria-label="Team pagination">
-            <ul class="pagination">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Предыдущая</a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Следующая</a>
-                </li>
-            </ul>
-        </nav>
     </div>
 </section>
 
@@ -809,15 +812,6 @@ function registerMasterclass(masterclassId) {
             </div>
             <div class="col-lg-6">
                 <div class="text-container">
-                    @if(auth()->check())
-                        <div class="alert alert-info mb-3">
-                            <i class="fas fa-user-check"></i> Вы оставляете отзыв как: <strong>{{ auth()->user()->name }}</strong>
-                            @if(auth()->user()->email)
-                                <br><small>Email: {{ auth()->user()->email }}</small>
-                            @endif
-                        </div>
-                    @endif
-                    
                     <div id="feedbackAlert" style="display: none;" class="alert"></div>
                     
                     <form id="contactForm">
@@ -825,13 +819,13 @@ function registerMasterclass(masterclassId) {
                         <div class="form-group">
                             <input type="text" name="name" id="name" class="form-control-input" 
                                    placeholder="Ваше имя" 
-                                   @if(auth()->check()) value="{{ auth()->user()->name }}" readonly @endif
+                                   @if(auth()->check()) value="{{ auth()->user()->name }}"  @endif
                                    required>
                         </div>
                         <div class="form-group">
                             <input type="email" name="email" id="email" class="form-control-input" 
                                    placeholder="Email"
-                                   @if(auth()->check()) value="{{ auth()->user()->email }}" readonly @endif
+                                   @if(auth()->check()) value="{{ auth()->user()->email }}"  @endif
                                    required>
                         </div>
                         <div class="form-group">
