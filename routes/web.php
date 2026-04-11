@@ -73,15 +73,24 @@ Route::prefix('courses')->group(function () {
     Route::get('/network-admin', [CourceController::class, 'networkAdmin'])->name('courses.network_admin');
     Route::get('/accounting', [CourceController::class, 'accounting'])->name('courses.accounting');
     
-    // Ofis menejerligi (Static View)
+<<<<<<< HEAD
+    // Office menejerligi
+=======
     Route::get('/ofis-menejerligi', function () {
         return view('courses.office-manager');
     })->name('courses.office-manager');
 });
 
+<<<<<<< HEAD
+// 6. Karyera
+Route::get('/career', [CareerController::class, 'index'])->name('career.index');
+
+// 7. Mening kurslarim (Faqat tizimga kirganlar uchun)
+=======
 // ---------------------------------------------------------
 // 4. MENING KURSLARIM (Dashboard/LMS qismi)
 // ---------------------------------------------------------
+>>>>>>> 5ee9206cb330a71475252f8b663aae9165dc3283
 Route::prefix('my-courses')->middleware('auth')->group(function () {
     Route::get('/', [MyCourceController::class, 'index'])->name('my-courses.index');
     Route::post('/', [MyCourceController::class, 'store'])->name('my-courses.store');
@@ -92,6 +101,17 @@ Route::prefix('my-courses')->middleware('auth')->group(function () {
     Route::delete('/delete-category/{categoryId}', [MyCourceController::class, 'deleteCategory'])->name('my-courses.delete-category');
 });
 
+<<<<<<< HEAD
+// 8. Masterclass routelari
+Route::get('/masterclass/{id}/info', [MasterclassController::class, 'getInfo'])->name('masterclass.info');
+Route::post('/masterclass/register', [MasterclassController::class, 'register'])->name('masterclass.register');
+
+// 9. Aloqa
+Route::post('/contact-send', [ContactController::class, 'sendContact'])->name('contact.send');
+
+// Laravel Auth (Login, Register va h.k.)
+require __DIR__ . '/auth.php';
+=======
 // ---------------------------------------------------------
 // 5. FEEDBACK (Mijozlar fikrlari)
 // ---------------------------------------------------------
@@ -117,3 +137,4 @@ Route::post('/masterclass/register', [MasterclassController::class, 'register'])
 // 8. LARAVEL AUTH (Login/Register)
 // ---------------------------------------------------------
 require __DIR__.'/auth.php';
+>>>>>>> 5ee9206cb330a71475252f8b663aae9165dc3283
