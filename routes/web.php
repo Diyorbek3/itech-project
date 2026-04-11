@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-
 use App\Http\Controllers\CourceController;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\HomeController;
@@ -18,10 +17,11 @@ use Illuminate\Support\Facades\App;
 |--------------------------------------------------------------------------
 */
 
-// 1. Asosiy sahifa
+// ---------------------------------------------------------
+// 1. ASOSIY SAHIFA VA TILNI BOSHQARISH
+// ---------------------------------------------------------
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// 2. Tilni almashtirish
 Route::get('language/{locale}', function ($locale) {
     if (in_array($locale, ['en', 'ru', 'uz'])) {
         Session::put('locale', $locale);
@@ -31,23 +31,30 @@ Route::get('language/{locale}', function ($locale) {
     return redirect()->back();
 })->name('language.switch');
 
-// 3. Profil (Faqat tizimga kirganlar uchun)
+// ---------------------------------------------------------
+// 2. PROFIL VA SHAXSIY MA'LUMOTLAR (Faqat Login qilganlar uchun)
+// ---------------------------------------------------------
 Route::middleware('auth')->group(function () {
+    // Profil sahifasi
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
-    Route::put('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
-    Route::post('/profile/update-avatar', [ProfileController::class, 'updateAvatar'])->name('profile.update-avatar');
+    
+    // Profil ma'lumotlarini (ism, email va rasm) yangilash
+    // MUHIM: Controlleringizdagi putUpdate metodiga bog'landi
+    Route::put('/profile/update', [ProfileController::class, 'putUpdate'])->name('profile.update');
+    
+    // Parolni yangilash
+    Route::put('/profile/update-password', [ProfileController::class, 'putNewPassword'])->name('profile.update-password');
+    
+    // Avatarni o'chirish (agar kerak bo'lsa)
+    Route::delete('/profile/avatar', [ProfileController::class, 'deleteAvatar'])->name('profile.avatar.delete');
+    
+    // Profilni butunlay o'chirish
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// 4. Feedback routelari
-Route::post('/feedback/store', [FeedbackController::class, 'store'])->name('feedback.store');
-Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
-Route::delete('/feedback/{id}', [FeedbackController::class, 'destroy'])->name('feedback.destroy');
-Route::get('/feedback/statistics', [FeedbackController::class, 'statistics'])->name('feedback.statistics');
-Route::get('/user/{userId}/feedbacks', [FeedbackController::class, 'getUserFeedbacks'])->name('feedback.user');
-
-// 5. Kurslar yo'nalishlari
+// ---------------------------------------------------------
+// 3. KURSLAR BO'LIMI (Prefix orqali guruhlangan)
+// ---------------------------------------------------------
 Route::prefix('courses')->group(function () {
     Route::get('/python', [CourceController::class, 'python'])->name('courses.python');
     Route::get('/frontend', [CourceController::class, 'frontend'])->name('courses.frontend');
@@ -55,8 +62,6 @@ Route::prefix('courses')->group(function () {
     Route::get('/cybersecurity', [CourceController::class, 'cybersecurity'])->name('courses.cybersecurity');
     Route::get('/computer-literacy', [CourceController::class, 'computerLiteracy'])->name('courses.computer_literacy');
     Route::get('/ai-developer', [CourceController::class, 'aiDeveloper'])->name('courses.ai_developer');
-
-    // Yangi qo'shilgan kurslar
     Route::get('/algorithm', [CourceController::class, 'algorithm'])->name('courses.algorithm');
     Route::get('/office', [CourceController::class, 'office'])->name('courses.office');
     Route::get('/robotics', [CourceController::class, 'robotics'])->name('courses.robotics');
@@ -66,41 +71,17 @@ Route::prefix('courses')->group(function () {
     Route::get('/data-analytics', [CourceController::class, 'dataAnalytics'])->name('courses.data_analytics');
     Route::get('/network-admin', [CourceController::class, 'networkAdmin'])->name('courses.network_admin');
     Route::get('/accounting', [CourceController::class, 'accounting'])->name('courses.accounting');
+    
+    // Ofis menejerligi (Static View)
+    Route::get('/ofis-menejerligi', function () {
+        return view('courses.office-manager');
+    })->name('courses.office-manager');
 });
 
-// 6. Office menejerligi kursi (alohida view)
-Route::get('/kurs/ofis-menejerligi', function () {
-    return view('courses.office-manager');
-})->name('courses.office-manager');
-
-// 7. Karyera
-Route::get('/career', [CareerController::class, 'index'])->name('career.index');
-
-// 8. Mening kurslarim
+// ---------------------------------------------------------
+// 4. MENING KURSLARIM (Dashboard/LMS qismi)
+// ---------------------------------------------------------
 Route::prefix('my-courses')->middleware('auth')->group(function () {
-
-
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
-    Route::put('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
-    Route::post('/profile/update-avatar', [ProfileController::class, 'updateAvatar'])->name('profile.update-avatar');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-// 4. Feedback routelari
-Route::post('/feedback/store', [FeedbackController::class, 'store'])->name('feedback.store');
-Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
-Route::delete('/feedback/{id}', [FeedbackController::class, 'destroy'])->name('feedback.destroy');
-Route::get('/feedback/statistics', [FeedbackController::class, 'statistics'])->name('feedback.statistics');
-Route::get('/user/{userId}/feedbacks', [FeedbackController::class, 'getUserFeedbacks'])->name('feedback.user');
-
-
-// 6. Career route
-Route::get('/career', [CareerController::class, 'index'])->name('career.index');
-
-// 7. My courses routelari
-Route::prefix('my-courses')->group(function () {
-
     Route::get('/', [MyCourceController::class, 'index'])->name('my-courses.index');
     Route::post('/', [MyCourceController::class, 'store'])->name('my-courses.store');
     Route::get('/{id}', [MyCourceController::class, 'show'])->name('my-courses.show');
@@ -110,18 +91,28 @@ Route::prefix('my-courses')->group(function () {
     Route::delete('/delete-category/{categoryId}', [MyCourceController::class, 'deleteCategory'])->name('my-courses.delete-category');
 });
 
-// Laravel Auth (Login, Register va h.k.)
+// ---------------------------------------------------------
+// 5. FEEDBACK (Mijozlar fikrlari)
+// ---------------------------------------------------------
+Route::post('/feedback/store', [FeedbackController::class, 'store'])->name('feedback.store');
+Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
+Route::delete('/feedback/{id}', [FeedbackController::class, 'destroy'])->name('feedback.destroy');
+Route::get('/feedback/statistics', [FeedbackController::class, 'statistics'])->name('feedback.statistics');
+Route::get('/user/{userId}/feedbacks', [FeedbackController::class, 'getUserFeedbacks'])->name('feedback.user');
+
+// ---------------------------------------------------------
+// 6. KARYERA VA TELEGRAM KONTAKT
+// ---------------------------------------------------------
+Route::get('/career', [CareerController::class, 'index'])->name('career.index');
+Route::post('/contact-send', [HomeController::class, 'sendToTelegram'])->name('contact.send');
+
+// ---------------------------------------------------------
+// 7. MASTERCLASSLAR
+// ---------------------------------------------------------
+Route::get('/masterclass/{id}/info', [MasterclassController::class, 'getInfo'])->name('masterclass.info');
+Route::post('/masterclass/register', [MasterclassController::class, 'register'])->name('masterclass.register');
+
+// ---------------------------------------------------------
+// 8. LARAVEL AUTH (Login/Register)
+// ---------------------------------------------------------
 require __DIR__.'/auth.php';
-
-Route::get('/kurs/ofis-menejerligi', function () {
-    return view('courses.office-manager');
-})->name('courses.office-manager');
-
-
-// Masterclass routelari
-Route::get('/masterclass/{id}/info', [MasterclassController::class, 'getInfo'])->name('masterclass.info');
-Route::post('/masterclass/register', [MasterclassController::class, 'register'])->name('masterclass.register');
-// 9. Masterclass routelari
-Route::get('/masterclass/{id}/info', [MasterclassController::class, 'getInfo'])->name('masterclass.info');
-Route::post('/masterclass/register', [MasterclassController::class, 'register'])->name('masterclass.register');
-

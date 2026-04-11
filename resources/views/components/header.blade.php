@@ -167,15 +167,12 @@
                                     <i class="fas fa-user me-2"></i> {{ __('messages.profile') }}
                                 </a></li>
                                 @if (auth()->user()->role_id == 1)
-                                <li><a class="dropdown-item" href="/my-courses">
-                                    <i class="fas fa-graduation-cap me-2"></i> {{ __('messages.courses') }}
+                                <li><a class="dropdown-item" href="/master-class">
+                                    <i class="fas fa-graduation-cap me-2"></i> Masster-class
                                 </a></li>
-                                <li><a class="dropdown-item" href="/">
+                                <!-- <li><a class="dropdown-item" href="/">
                                     <i class="fas fa-briefcase me-2"></i> {{ __('messages.projects') }}
-                                </a></li>
-                                <li><a class="dropdown-item" href="/">
-                                    <i class="fas fa-chart-line me-2"></i> {{ __('messages.careers') }}
-                                </a></li>
+                                </a></li> -->
                                 @endif
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">
