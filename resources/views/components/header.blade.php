@@ -168,7 +168,7 @@
                                 </a></li>
                                 @if (auth()->user()->role_id == 1)
                                 <li><a class="dropdown-item" href="/master-class">
-                                    <i class="fas fa-graduation-cap me-2"></i> Masster-class
+                                    <i class="fas fa-graduation-cap me-2"></i> Master-class
                                 </a></li>
                                 <!-- <li><a class="dropdown-item" href="/">
                                     <i class="fas fa-briefcase me-2"></i> {{ __('messages.projects') }}

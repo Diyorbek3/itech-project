@@ -476,6 +476,62 @@ function showResults() {
 function registerMasterclass(masterclassId) {
     alert('Функция регистрации на мастер-класс будет доступна в ближайшее время!');
 }
+function showMasterclassModal(id) {
+        // Modalni ko'rsatish
+        $('#masterclassModal').modal('show');
+        
+        // Hidden inputga masterclass ID sini yozish (ro'yxatdan o'tish uchun kerak)
+        $('#masterclass_id').val(id); 
+        
+        // Ma'lumot yuklanguncha spinner ko'rsatib turish
+        $('#masterclassInfo').html('<div class="text-center py-5"><div class="spinner-border text-primary"></div></div>');
+
+        // AJAX orqali serverdan ma'lumot olish
+        $.ajax({
+            url: `/masterclass/${id}/info`, 
+            type: 'GET',
+            success: function(response) {
+                let html = `
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img src="/storage/${response.image}" class="img-fluid rounded shadow-sm" onerror="this.src='https://via.placeholder.com/400x300'">
+                        </div>
+                        <div class="col-md-7">
+                            <h4 class="fw-bold">${response.title}</h4>
+                            <p class="text-primary"><strong><i class="far fa-calendar-check"></i> ${response.event_date}</strong></p>
+                            <div class="mt-2 text-muted" style="font-size: 0.95rem;">
+                                ${response.description}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                $('#masterclassInfo').html(html);
+            },
+            error: function() {
+                $('#masterclassInfo').html('<div class="alert alert-danger">Ma\'lumot yuklashda xatolik yuz berdi. Iltimos, qaytadan urinib ko\'ring.</div>');
+            }
+        });
+    }
+
+    // Ro'yxatdan o'tish formasi yuborilganda (Ixtiyoriy, agar formani ham ishlatmoqchi bo'lsangiz)
+    $('#masterclassRegisterForm').on('submit', function(e) {
+        e.preventDefault();
+        let formData = $(this).serialize();
+        
+        $.ajax({
+            url: '/masterclass/register', // Bu route ham web.php da bo'lishi kerak
+            type: 'POST',
+            data: formData,
+            success: function(res) {
+                $('#masterclassModal').modal('hide');
+                $('#reminderDate').text($('#masterclassInfo .text-primary').text());
+                $('#successModal').modal('show');
+            },
+            error: function() {
+                alert("Ro\'yxatdan o'tishda xatolik yuz berdi.");
+            }
+        });
+    });
 </script>
 @endsection
 
@@ -645,52 +701,55 @@ function registerMasterclass(masterclassId) {
 </section>
 
 
-<<!-- 4. Мастер классы - RASMLAR BILAN -->
+<!-- 4. Мастер классы - RASMLAR BILAN -->
 <section class="masterclass-section section">
     <div class="container">
         <h2 class="section-title">Master class</h2>
         <div class="row">
-            <!-- Master class 1 - class1.jpg -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="masterclass-card">
-                    <img src="{{ asset('images/class1.jpg') }}" 
-                         alt="Web Development" 
-                         class="masterclass-image"
-                         onerror="this.src='https://via.placeholder.com/400x200?text=Web+Development'">
-                    <h3 class="masterclass-title">Veb-dasturlash noldan boshlab</h3>
-                    <p class="masterclass-date">19 aprel 2024 | 16:00</p>
-                    <p class="masterclass-description">Veb-dasturlash boyicha savollar.</p>
-                    <button class="btn-masterclass" onclick="showMasterclassModal(1)">Ro‘yxatdan o‘tish</button>
-                </div>
-            </div>
+            @forelse($masterClasses as $mc)
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="masterclass-card">
+                        <img src="{{ asset('storage/' . $mc->image) }}" 
+                             alt="{{ $mc->title }}" 
+                             class="masterclass-image"
+                             onerror="this.src='https://via.placeholder.com/400x200?text=ITech+Masterclass'">
+                        
+                        <h3 class="masterclass-title">{{ $mc->title }}</h3>
+                        <p class="masterclass-date">
+                            <i class="far fa-calendar-alt"></i> {{ $mc->event_date }}
+                        </p>
+                        <p class="masterclass-description">
+                            {{ Str::limit($mc->description, 100) }}
+                        </p>
+                        
+                        <a href="{{ $mc->telegram_link }}" target="_blank" class="btn-masterclass text-center d-block" style="text-decoration: none;">
+    Ro‘yxatdan o‘tish
+</a>
 
-            <!-- Master class 2 - class2.jpg -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="masterclass-card">
-                    <img src="{{ asset('images/class2.jpg') }}" 
-                         alt="Data Science" 
-                         class="masterclass-image"
-                         onerror="this.src='https://via.placeholder.com/400x200?text=Data+Science'">
-                    <h3 class="masterclass-title">Telegram bot masterclass</h3>
-                    <p class="masterclass-date">28 avgust 2025 | 18:00</p>
-                    <p class="masterclass-description">Telegram bot haqida savollar</p>
-                    <button class="btn-masterclass" onclick="showMasterclassModal(2)">Ro‘yxatdan o‘tish</button>
+                        @if(auth()->check() && auth()->user()->role_id == 1)
+    <div class="mt-3 pt-3 border-top d-flex justify-content-center gap-2">
+        <a href="{{ route('master_class.edit', $mc->id) }}" class="btn btn-sm btn-outline-warning">Tahrirlash</a>
+        
+        <form id="delete-form-{{ $mc->id }}" action="{{ route('master_class.destroy', $mc->id) }}" method="POST">
+            @csrf 
+            @method('DELETE')
+            <button type="button" onclick="tasdiqlash({{ $mc->id }})" class="btn btn-sm btn-outline-danger">
+                O'chirish
+            </button>
+        </form>
+    </div>
+@endif
+                    </div>
                 </div>
-            </div>
-
-            <!-- Master class 3 - class3.jpg -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="masterclass-card">
-                    <img src="{{ asset('images/class3.jpg') }}" 
-                         alt="Mobile Development" 
-                         class="masterclass-image"
-                         onerror="this.src='https://via.placeholder.com/400x200?text=Mobile+Development'">
-                    <h3 class="masterclass-title">Mobilografiya bilan san'at asari yaratish</h3>
-                    <p class="masterclass-date">10 iyun 2025 | 16:00</p>
-                    <p class="masterclass-description">Mobilografiya va san'at asari boyicha savollar</p>
-                    <button class="btn-masterclass" onclick="showMasterclassModal(3)">Ro‘yxatdan o‘tish</button>
+            @empty
+                <div class="col-12 text-center">
+                    <p class="text-muted">Hozircha yangi master-klasslar yo'q.</p>
                 </div>
-            </div>
+            @endforelse
+        </div>
+        
+        <div class="d-flex justify-content-center">
+            {{ $masterClasses->links() }}
         </div>
     </div>
 </section>
@@ -843,4 +902,5 @@ function registerMasterclass(masterclassId) {
         </div>
     </div>
 </div>
+
 @endsection
