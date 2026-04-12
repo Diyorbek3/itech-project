@@ -84,7 +84,8 @@
         color: white; font-size: 0.7rem; flex-shrink: 0;
     }
     .skill-title { font-weight: 700; color: #0f172a; font-size: 0.95rem; }
-    .skill-desc { font-size: 0.75rem; color: #64748b; }
+    .skill-desc { font-size: 0.75rem; color: #
+    64748b; }
 
     /* O'qituvchi va Tech Stack */
     .teacher-card {

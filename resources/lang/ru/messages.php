@@ -87,7 +87,7 @@ return [
     'office_duration' => '2 месяца',
     'office_price' => '850,000 сум',
     'office_old_price' => '950,000 сум',
-    'office_students' => '100+ студентый ',
+    'office_students' => '100+ студентов ',
     'office_teacher' => 'Хайдарова Зулайхо, Авалов Мираббос',
     'office_teacher_position' => 'Эксперт по офисному управлению',
     'office_for_who' => 'Для офисных сотрудников, новичков, желающих освоить офисные работы.',
@@ -632,5 +632,67 @@ return [
     'contact_telegram' => '@itech_support',
     'understand' => 'Понятно',
 
+
+'office_tech_archive' => 'Архивное дело',
+'office_tech_document' => 'Документооборот',
+
+// ==================== ТЕХНОЛОГИИ АЛГОРИТМОВ ====================
+'algorithm_tech_1' => 'Алгоритм',
+'algorithm_tech_2' => 'Big O',
+'algorithm_tech_3' => 'Binary Search',
+'algorithm_tech_4' => 'Quick Sort',
+'algorithm_tech_5' => 'Деревья',
+'algorithm_tech_6' => 'Графы',
+
+// ==================== ОБЩИЕ ====================
+'students_suffix' => 'студентов',
+
+// ==================== МОДУЛИ АЛГОРИТМОВ ====================
+'algorithm_module1_title' => 'Понятие алгоритма',
+'algorithm_module1_desc' => 'Типы алгоритмов, анализ сложности (Big O notation)',
+'algorithm_module2_title' => 'Массивы и списки',
+'algorithm_module2_desc' => 'Динамические массивы, связные списки',
+'algorithm_module3_title' => 'Алгоритмы поиска',
+'algorithm_module3_desc' => 'Binary search, linear search, хеш-таблицы',
+'algorithm_module4_title' => 'Алгоритмы сортировки',
+'algorithm_module4_desc' => 'Quick sort, Merge sort, Bubble sort, Insertion sort',
+'algorithm_module5_title' => 'Стек и очередь',
+'algorithm_module5_desc' => 'Stack, Queue, Deque структуры',
+'algorithm_module6_title' => 'Деревья',
+'algorithm_module6_desc' => 'Binary tree, Binary search tree, AVL tree',
+
+// ==================== ФРОНТЕНД КУРС ====================
+'frontend_badge' => 'Frontend Разработка',
+'frontend_title' => 'Frontend Разработчик',
+'frontend_description' => 'HTML, CSS, JavaScript и React.js для создания современных веб-сайтов.',
+'frontend_full_desc' => 'На курсе Frontend вы изучите создание внешнего вида веб-сайтов, работу с HTML5, CSS3, JavaScript и современными фреймворками.',
+'frontend_duration' => '7 месяцев',
+'frontend_price' => '850,000 сум',
+'frontend_old_price' => '950,000 сум',
+'frontend_students' => '180+',
+'frontend_teacher' => 'Абдугаффоров Азимжон, Мирзамахмудов Г\', Аскаров Ш',
+'frontend_teacher_position' => 'Senior Frontend Developer',
+'frontend_for_who' => 'Для желающих начать программировать, совмещать веб-дизайн и разработку.',
+'frontend_enroll_button' => 'Записаться сейчас',
+
+// ==================== ТЕХНОЛОГИИ ФРОНТЕНД ====================
+'frontend_tech_1' => 'HTML5',
+'frontend_tech_2' => 'CSS3',
+'frontend_tech_3' => 'JavaScript',
+'frontend_tech_4' => 'React.js',
+'frontend_tech_5' => 'Tailwind',
+'frontend_tech_6' => 'Bootstrap',
+
+// ==================== МОДУЛИ ФРОНТЕНД ====================
+'frontend_module1_title' => 'HTML5',
+'frontend_module1_desc' => 'Структура веб-страницы и семантические теги',
+'frontend_module2_title' => 'CSS3',
+'frontend_module2_desc' => 'Flexbox, Grid, Анимации, Адаптивный дизайн',
+'frontend_module3_title' => 'JavaScript',
+'frontend_module3_desc' => 'ES6+, DOM, Async/Await, API запросы',
+'frontend_module4_title' => 'Bootstrap & Tailwind',
+'frontend_module4_desc' => 'Быстрый и красивый дизайн',
+'frontend_module5_title' => 'React.js',
+'frontend_module5_desc' => 'Компоненты, Хуки, Маршрутизация, Управление состоянием',
 
 ];

@@ -631,6 +631,51 @@ return [
     'contact_telegram' => '@itech_support',
     'understand' => 'Got it',
 
+'office_tech_archive' => 'Archive work',
+'office_tech_document' => 'Document flow',
 
 
+// ==================== ALGORITHM TECHNOLOGIES ====================
+'algorithm_tech_1' => 'Algorithm',
+'algorithm_tech_2' => 'Big O',
+'algorithm_tech_3' => 'Binary Search',
+'algorithm_tech_4' => 'Quick Sort',
+'algorithm_tech_5' => 'Trees',
+'algorithm_tech_6' => 'Graph',
+
+// ==================== COMMON ====================
+'students_suffix' => 'students',
+// ==================== FRONTEND COURSE ====================
+'frontend_badge' => 'Frontend Development',
+'frontend_title' => 'Frontend Developer',
+'frontend_description' => 'Learn to create modern websites with HTML, CSS, JavaScript and React.js.',
+'frontend_full_desc' => 'In the Frontend course, you will learn web development with HTML5, CSS3, JavaScript and modern frameworks.',
+'frontend_duration' => '7 months',
+'frontend_price' => '850,000 UZS',
+'frontend_old_price' => '950,000 UZS',
+'frontend_students' => '180+',
+'frontend_teacher' => 'Abdugafforov Azimjon, Mirzamahmudov G\', Asqarov Sh',
+'frontend_teacher_position' => 'Senior Frontend Developer',
+'frontend_for_who' => 'For those who want to start programming, combine web design and development.',
+'frontend_enroll_button' => 'Enroll Now',
+
+// ==================== FRONTEND TECHNOLOGIES ====================
+'frontend_tech_1' => 'HTML5',
+'frontend_tech_2' => 'CSS3',
+'frontend_tech_3' => 'JavaScript',
+'frontend_tech_4' => 'React.js',
+'frontend_tech_5' => 'Tailwind',
+'frontend_tech_6' => 'Bootstrap',
+
+// ==================== FRONTEND MODULES ====================
+'frontend_module1_title' => 'HTML5',
+'frontend_module1_desc' => 'Web page structure and semantic tags',
+'frontend_module2_title' => 'CSS3',
+'frontend_module2_desc' => 'Flexbox, Grid, Animations, Responsive design',
+'frontend_module3_title' => 'JavaScript',
+'frontend_module3_desc' => 'ES6+, DOM, Async/Await, API requests',
+'frontend_module4_title' => 'Bootstrap & Tailwind',
+'frontend_module4_desc' => 'Fast and beautiful design creation',
+'frontend_module5_title' => 'React.js',
+'frontend_module5_desc' => 'Components, Hooks, Router, State Management',
 ];
