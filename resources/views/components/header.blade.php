@@ -1,5 +1,6 @@
-<nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-light">
-    <div class="container">
+<!-- Navigation -->
+<nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-light bg-white shadow-sm">
+    <div class="container position-relative">
         <!-- Logo -->
         <a class="navbar-brand" href="/">
             <img src="{{ asset('images/logo.png') }}"
@@ -37,7 +38,7 @@
 
             <!-- Aloqaga chiqish -->
             <a class="btn-outline-sm px-3 py-2 d-flex align-items-center justify-content-center"
-               href="#contact"
+               href="/#contact"
                style="font-size: 12px; min-width: 110px; border-radius: 16px; height: 42px;">
                 {{ __('messages.contact_us') }}
             </a>
@@ -70,10 +71,10 @@
                             <li><a class="dropdown-item" href="/my-courses">
                                 <i class="fas fa-graduation-cap me-2"></i> {{ __('messages.courses') }}
                             </a></li>
-                            <li><a class="dropdown-item" href="/">
+                            <li><a class="dropdown-item" href="/#projects">
                                 <i class="fas fa-briefcase me-2"></i> {{ __('messages.projects') }}
                             </a></li>
-                            <li><a class="dropdown-item" href="/">
+                            <li><a class="dropdown-item" href="/#details">
                                 <i class="fas fa-chart-line me-2"></i> {{ __('messages.careers') }}
                             </a></li>
                             @endif
@@ -99,16 +100,10 @@
         <!-- ==================== DESKTOP VERSION ==================== -->
         <div class="collapse navbar-collapse justify-content-center" id="navbarsExampleDefault">
             <ul class="navbar-nav mx-auto gap-4">
-                <li class="nav-item"><a class="nav-link" href="#header">{{ __('messages.about_us') }}</a></li>
-                <li class="nav-item"><a class="nav-link" href="#details">{{ __('messages.why_us') }}</a></li>
-                <li class="nav-item"><a class="nav-link" href="#services">{{ __('messages.courses') }}</a></li>
-                <li class="nav-item"><a class="nav-link" href="#projects">{{ __('messages.projects') }}</a></li>
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mx-auto navbar-nav-scroll">
-                <li class="nav-item"><a class="nav-link" href="{{ url('/') }}#header">{{ __('messages.about_us') }}</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('/') }}#details">{{ __('messages.why_us') }}</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('/') }}#services">{{ __('messages.courses') }}</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('/') }}#projects">{{ __('messages.projects') }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="/#header">{{ __('messages.about_us') }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="/#details">{{ __('messages.why_us') }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="/#services">{{ __('messages.courses') }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="/#projects">{{ __('messages.projects') }}</a></li>
             </ul>
 
             <!-- Desktop Right Side -->
@@ -138,53 +133,48 @@
                     </ul>
                 </div>
 
-                <!-- Contact -->
-                <a class="btn-outline-sm px-3 py-2 d-flex align-items-center justify-content-center"
-                   href="#contact"
-                   style="font-size: 12px; min-width: 110px; border-radius: 16px; height: 42px;">
-                <a class="btn-outline-sm me-3" href="{{ url('/') }}#contact" style="white-space: nowrap; padding: 10px 15px;">
+                <a class="btn-outline-sm rounded-circle-5" href="/#contact" style="padding: 20px 15px;">
                     {{ __('messages.contact_us') }}
                 </a>
 
                 <!-- Auth -->
                 <div class="d-flex gap-2">
                     @guest
-                        <a class="btn-outline-sm d-flex align-items-center justify-content-center rounded-circle"
+                        <a class="btn-outline-sm rounded-circle-3"
                            href="{{ route('login') }}"
-                           style="width: 42px; height: 42px;">
+                           >
                             <i class="fas fa-sign-in-alt"></i>
                         </a>
-                        <a class="btn-outline-sm d-flex align-items-center justify-content-center rounded-circle"
+                        <a class="btn-outline-sm rounded-circle-3"
                            href="{{ route('register') }}"
-                           style="width: 42px; height: 42px;">
+                           >
                             <i class="fas fa-user-plus"></i>
                         </a>
                     @else
                         <div class="dropdown">
                             <a class="btn-outline-sm dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" style="padding: 5px 10px;">
                                 <img id="headerAvatar" 
-                                     src="{{ Auth::user()->avatar ? asset('storage/avatars/' . Auth::user()->avatar) : asset('storage/avatars/avatar.png') }}" 
+                                         src="{{ Auth::user()->avatar ? Storage::url('avatars/' . Auth::user()->avatar) : asset('images/avatar.png') }}"
                                      class="rounded-circle me-2" 
                                      style="width: 30px; height: 30px; object-fit: cover;"
                                      onerror="this.onerror=null; this.src='{{ asset('storage/avatars/avatar.png') }}';">
                                 <span id="headerUserName">{{ Auth::user()->name }}</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li>
-                                    <a class="dropdown-item" href="/profile">
-                                        <i class="fas fa-user me-2"></i> {{ __('messages.profile') }}
-                                    </a>
-                                </li>
-
-                                @if (auth()->user()->role_id == 1) 
-                                    <li>
-                                        <a class="dropdown-item" href="/my-courses">
-                                            <i class="fas fa-graduation-cap me-2"></i> {{ __('messages.courses') }}
-                                        </a>
-                                    </li>
+                                <li><a class="dropdown-item" href="/profile">
+                                    <i class="fas fa-user me-2"></i> {{ __('messages.profile') }}
+                                </a></li>
+                                @if (auth()->user()->role_id == 1)
+                                <li><a class="dropdown-item" href="/master-class">
+                                    <i class="fas fa-graduation-cap me-2"></i> Masster-class
+                                </a></li>
+                                <li><a class="dropdown-item" href="/">
+                                    <i class="fas fa-briefcase me-2"></i> {{ __('messages.projects') }}
+                                </a></li>
+                                <li><a class="dropdown-item" href="/">
+                                    <i class="fas fa-chart-line me-2"></i> {{ __('messages.careers') }}
+                                </a></li>
                                 @endif
-                               
-                                <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf

@@ -39,23 +39,23 @@ return [
     'success_title' => 'Успешно!',
     'password_mismatch' => 'Новые пароли не совпадают.',
 
-    
+
     // ==================== HEADER ====================
     'header_title' => 'Готовим будущих программистов',
     'header_description' => 'Учебный центр iTech готовит сильных специалистов в современных IT-направлениях. С помощью практических занятий, реальных проектов и опытных наставников вы можете пройти путь от новичка до профессионального разработчика.',
     'learn_more' => 'Узнать больше',
     'contact' => 'Связаться',
-    
+
     // ==================== STATISTICS ====================
     'graduates' => 'Выпускников',
     'active_courses' => 'Активных курсов',
     'employed_students' => 'Трудоустроенных студентов',
     'years_experience' => 'Лет опыта',
-    
+
     // ==================== INTRODUCTION ====================
     'intro_title' => 'iTech — учебный центр современных IT-профессий',
     'intro_description' => 'Учебный центр iTech специализируется на предоставлении практических знаний в области программирования и IT. Наши учебные программы основаны на реальном опыте проектов и направлены на подготовку студентов как готовых специалистов для рынка труда. Каждый курс проводится с использованием современных технологий, поддержкой наставников и практическими заданиями. Наша цель — подготовить сильных, самостоятельных и востребованных программистов.',
-    
+
     // ==================== DETAILS 1 ====================
     'details1_title' => 'Современный подход к обучению и реальный опыт проектов',
     'details1_item1' => 'На практических занятиях студенты работают над реальными IT-проектами.',
@@ -63,7 +63,7 @@ return [
     'details1_item3' => 'Современные технологии: Frontend, Backend, Mobile и другие направления.',
     'details1_item4' => 'Помощь в подготовке портфолио и трудоустройстве для выпускников.',
     'start_course' => 'Начать курс',
-    
+
     // ==================== SERVICES/COURSES ====================
     'our_courses' => 'Наши курсы',
     'courses_desc1' => 'Научитесь создавать современные веб-интерфейсы. Освойте HTML, CSS, JavaScript и современные фреймворки для разработки быстрых, красивых и удобных сайтов.',
@@ -77,7 +77,7 @@ return [
     'backend' => 'Backend',
     'cybersecurity' => 'Кибербезопасность',
     'ai_developer' => 'AI разработчик',
-    
+
     // ==================== 12 КУРСОВ ====================
     // 1. Офис-менеджмент
     'office_badge' => 'Офис-менеджмент',
@@ -87,13 +87,13 @@ return [
     'office_duration' => '2 месяца',
     'office_price' => '850,000 сум',
     'office_old_price' => '950,000 сум',
-    'office_students' => '100+ студентый ',
+    'office_students' => '100+ студентов ',
     'office_teacher' => 'Хайдарова Зулайхо, Авалов Мираббос',
     'office_teacher_position' => 'Эксперт по офисному управлению',
     'office_for_who' => 'Для офисных сотрудников, новичков, желающих освоить офисные работы.',
     'office_enroll_button' => 'Записаться сейчас',
     'office_tech_stack' => 'Word, Excel, PowerPoint, Архивное дело, Документооборот',
-    
+
     // 2. Основы алгоритмов
     'algorithm_badge' => 'Алгоритмы',
     'algorithm_title' => 'Основы алгоритмов',
@@ -108,7 +108,7 @@ return [
     'algorithm_for_who' => 'Для изучающих программирование, желающих развить логическое мышление.',
     'algorithm_enroll_button' => 'Записаться сейчас',
     'algorithm_tech_stack' => 'Алгоритм, Big O, Binary Search, Quick Sort, Деревья, Граф',
-    
+
     // 3. Frontend
     'frontend_badge' => 'Frontend Разработка',
     'frontend_title' => 'Frontend Разработчик',
@@ -123,7 +123,7 @@ return [
     'frontend_for_who' => 'Для желающих начать программировать, совмещать веб-дизайн и разработку.',
     'frontend_enroll_button' => 'Записаться сейчас',
     'frontend_tech_stack' => 'HTML5, CSS3, JavaScript, React.js, Tailwind, Bootstrap',
-    
+
     // 4. Backend
     'backend_badge' => 'Backend Разработка',
     'backend_title' => 'Backend Разработчик',
@@ -138,7 +138,7 @@ return [
     'backend_for_who' => 'Для frontend разработчиков, новичков, желающих войти в backend.',
     'backend_enroll_button' => 'Записаться сейчас',
     'backend_tech_stack' => 'PHP, Laravel, MySQL, REST API, Git, Postman',
-    
+
     // 5. Python
     'python_badge' => 'Python Разработка',
     'python_title' => 'Python Разработчик',
@@ -153,7 +153,7 @@ return [
     'python_for_who' => 'Для начинающих программистов, желающих заниматься анализом данных.',
     'python_enroll_button' => 'Записаться сейчас',
     'python_tech_stack' => 'Python, Django, Flask, Pandas, NumPy, REST API',
-    
+
     // 6. Робототехника
     'robotics_badge' => 'Робототехника',
     'robotics_title' => 'Робототехника',
@@ -168,7 +168,7 @@ return [
     'robotics_for_who' => 'Для интересующихся робототехникой и электроникой.',
     'robotics_enroll_button' => 'Записаться сейчас',
     'robotics_tech_stack' => 'Arduino, C++, Сенсоры, Моторы, Электроника, IoT',
-    
+
     // 7. Цифровые дети
     'digital_kids_badge' => 'Цифровые дети',
     'digital_kids_title' => 'Цифровые дети',
@@ -183,7 +183,7 @@ return [
     'digital_kids_for_who' => 'Для детей 7-14 лет, желающих изучать программирование.',
     'digital_kids_enroll_button' => 'Записаться сейчас',
     'digital_kids_tech_stack' => 'Scratch, Блочное программирование, Логическое мышление, Анимация',
-    
+
     // 8. Системная инженерия
     'system_engineering_badge' => 'Системная инженерия',
     'system_engineering_title' => 'Системная инженерия',
@@ -198,7 +198,7 @@ return [
     'system_engineering_for_who' => 'Для IT-специалистов, желающих стать системным администратором.',
     'system_engineering_enroll_button' => 'Записаться сейчас',
     'system_engineering_tech_stack' => 'Linux, Ubuntu, CentOS, Docker, VMware, Zabbix',
-    
+
     // 9. Основы DevOps
     'devops_badge' => 'DevOps',
     'devops_title' => 'Основы DevOps',
@@ -213,7 +213,7 @@ return [
     'devops_for_who' => 'Для разработчиков и системных администраторов.',
     'devops_enroll_button' => 'Записаться сейчас',
     'devops_tech_stack' => 'Docker, Kubernetes, Jenkins, GitLab CI, AWS, Terraform',
-    
+
     // 10. Аналитика данных
     'data_analytics_badge' => 'Аналитика данных',
     'data_analytics_title' => 'Аналитика данных',
@@ -228,7 +228,7 @@ return [
     'data_analytics_for_who' => 'Для желающих работать с данными, аналитиков.',
     'data_analytics_enroll_button' => 'Записаться сейчас',
     'data_analytics_tech_stack' => 'SQL, Python, Pandas, NumPy, Tableau, Power BI',
-    
+
     // 11. Сетевой администратор
     'network_admin_badge' => 'Сетевой администратор',
     'network_admin_title' => 'Сетевой администратор',
@@ -243,7 +243,7 @@ return [
     'network_admin_for_who' => 'Для желающих стать сетевым администратором.',
     'network_admin_enroll_button' => 'Записаться сейчас',
     'network_admin_tech_stack' => 'Cisco, TCP/IP, Router, Switch, Firewall, Wireshark',
-    
+
     // 12. Бухгалтерия
     'accounting_badge' => 'Бухгалтерия',
     'accounting_title' => 'Бухгалтерия',
@@ -258,16 +258,16 @@ return [
     'accounting_for_who' => 'Для желающих стать бухгалтером, работать в экономической сфере.',
     'accounting_enroll_button' => 'Записаться сейчас',
     'accounting_tech_stack' => '1С Бухгалтерия, Excel, Налоговый учет, Финансовая отчетность',
-    
+
     // ==================== DETAILS 2 ====================
     'details2_title' => 'Начните свою IT-карьеру здесь',
     'details2_description' => 'Для успеха в IT необходимы практика и реальные проекты. Каждый наш курс предоставляет вам не только теоретические знания, но и готовый к работе опыт. Наши наставники постоянно поддерживают вас и гарантируют ваше развитие с индивидуальным подходом.',
     'start' => 'Начать',
     'careers' => 'карьери',
-    
+
     // ==================== INVITATION ====================
     'invitation_text' => 'Наша команда опытных дизайнеров и специалистов по внутренней отделке обеспечивает результаты, превосходящие ваши ожидания.',
-    
+
     // ==================== PROJECTS SECTION ====================
     'projects_title' => 'Проекты',
     'project1_title' => 'Iqro Agency',
@@ -283,7 +283,7 @@ return [
     'project6_title' => ' Urecruit',
     'project6_desc' => 'Вы самозанятый? Участвуйте в исследованиях и делитесь своим мнением через Urecruit — зарабатывайте больше.',
     'read_more' => 'Читать далее',
-    
+
     // ==================== TESTIMONIALS ====================
     'testimonial_author1' => 'Марлен Висконте',
     'testimonial_position1' => 'Генеральный директор - Scouter',
@@ -291,7 +291,7 @@ return [
     'testimonial_position2' => 'Руководитель команды - Vanquish',
     'testimonial_author3' => 'Стелла Виртуозо',
     'testimonial_position3' => 'Главный дизайнер - Bikegirl',
-    
+
     // ==================== CONTACT FORM ====================
     'contact_title' => 'Связаться с Itech Academy',
     'your_name' => 'Ваше имя',
@@ -326,7 +326,7 @@ return [
     'english' => 'Английский',
     'russian' => 'Русский',
     'uzbek' => 'Узбекский',
-    
+
     // ==================== AUTH & PROFILE ====================
     'new_request' => 'Поступила новая заявка!',
     'name' => 'Имя',
@@ -358,12 +358,12 @@ return [
     'delete_confirm_text' => 'Это действие невозможно отменить!',
     'save' => 'Сохранить изменения',
     'password_mismatch' => 'Пароли не совпадают!',
-    
+
     // ==================== FORGOT PASSWORD ====================
     'forgot_password_intro' => 'Забыли пароль? Не проблема. Введите ваш email, и мы отправим вам ссылку для восстановления пароля.',
     'send_reset_link' => 'Отправить ссылку',
     'back_to_signin' => 'Назад к входу',
-    
+
     // ==================== ENROLL MODAL ====================
     'enroll_modal_title' => 'Запись на курс',
     'enroll_modules_count' => 'Количество модулей',
@@ -372,7 +372,7 @@ return [
     'enroll_form_title' => 'Запишитесь на наши курсы и сделайте важный шаг для своего будущего!',
     'your_phone' => 'Ваш телефон',
     'months' => 'мес',
-    
+
     // ==================== COMMON KEYS ====================
     'course_about' => '📖 О курсе',
     'course_program' => '📚 Учебная программа',
@@ -388,6 +388,265 @@ return [
     'back_to_courses' => 'Назад к курсам',
     'price_per_month' => '/ месяц',
 
+    // ==================== МОДУЛИ АЛГОРИТМОВ ====================
+    'algorithm_module1_title' => 'Понятие алгоритма',
+    'algorithm_module1_desc' => 'Типы алгоритмов, анализ сложности (Big O notation)',
+    'algorithm_module2_title' => 'Массивы и списки',
+    'algorithm_module2_desc' => 'Динамические массивы, связные списки',
+    'algorithm_module3_title' => 'Алгоритмы поиска',
+    'algorithm_module3_desc' => 'Binary search, linear search, хеш-таблицы',
+    'algorithm_module4_title' => 'Алгоритмы сортировки',
+    'algorithm_module4_desc' => 'Quick sort, Merge sort, Bubble sort, Insertion sort',
+    'algorithm_module5_title' => 'Стек и очередь',
+    'algorithm_module5_desc' => 'Stack, Queue, Deque структуры',
+    'algorithm_module6_title' => 'Деревья',
+    'algorithm_module6_desc' => 'Binary tree, Binary search tree, AVL tree',
+
+    // ==================== МОДУЛИ ОФИС-МЕНЕДЖМЕНТ ====================
+    'office_module1_title' => 'Офисные программы',
+    'office_module1_desc' => 'Word, Excel, PowerPoint на профессиональном уровне',
+    'office_module2_title' => 'Документооборот',
+    'office_module2_desc' => 'Организация и хранение документов',
+    'office_module3_title' => 'Работа с клиентами',
+    'office_module3_desc' => 'Общение по телефону и электронной почте',
+    'office_module4_title' => 'Архивное дело',
+    'office_module4_desc' => 'Организация архива и хранение документов',
+
+    // ==================== МОДУЛИ FRONTEND ====================
+    'frontend_module1_title' => 'HTML5',
+    'frontend_module1_desc' => 'Структура веб-страницы, семантические теги',
+    'frontend_module2_title' => 'CSS3',
+    'frontend_module2_desc' => 'Flexbox, Grid, Анимации, Адаптивная верстка',
+    'frontend_module3_title' => 'JavaScript',
+    'frontend_module3_desc' => 'ES6+, DOM, Async/Await, API запросы',
+    'frontend_module4_title' => 'Bootstrap & Tailwind',
+    'frontend_module4_desc' => 'Быстрый и красивый дизайн',
+    'frontend_module5_title' => 'React.js',
+    'frontend_module5_desc' => 'Компоненты, Hooks, Router, State Management',
+
+    // ==================== МОДУЛИ BACKEND ====================
+    'backend_module1_title' => 'Основы PHP и ООП',
+    'backend_module1_desc' => 'Синтаксис PHP, объектно-ориентированное программирование',
+    'backend_module2_title' => 'Laravel Framework',
+    'backend_module2_desc' => 'Eloquent ORM, Blade, Middleware, Service Provider',
+    'backend_module3_title' => 'MySQL и базы данных',
+    'backend_module3_desc' => 'Сложные запросы, индексация, оптимизация',
+    'backend_module4_title' => 'Создание RESTful API',
+    'backend_module4_desc' => 'Дизайн API, аутентификация, API ресурсы',
+    'backend_module5_title' => 'Deployment и DevOps',
+    'backend_module5_desc' => 'Git, CI/CD, настройка сервера',
+
+    // ==================== МОДУЛИ PYTHON ====================
+    'python_module1_title' => 'Основы Python',
+    'python_module1_desc' => 'Синтаксис, переменные, типы данных',
+    'python_module2_title' => 'Функции и модули',
+    'python_module2_desc' => 'Повторное использование кода, модульное программирование',
+    'python_module3_title' => 'ООП',
+    'python_module3_desc' => 'Объектно-ориентированное программирование и классы',
+    'python_module4_title' => 'Анализ данных',
+    'python_module4_desc' => 'Библиотеки Pandas, NumPy',
+    'python_module5_title' => 'API и web',
+    'python_module5_desc' => 'Создание REST API и знакомство с Django',
+
+    // ==================== МОДУЛИ РОБОТОТЕХНИКИ ====================
+    'robotics_module1_title' => 'Основы Arduino',
+    'robotics_module1_desc' => 'Платформа Arduino, программирование, работа с пинами',
+    'robotics_module2_title' => 'Сенсоры',
+    'robotics_module2_desc' => 'Ультразвуковые, инфракрасные, температурные датчики',
+    'robotics_module3_title' => 'Моторы',
+    'robotics_module3_desc' => 'Управление серво, DC, шаговыми моторами',
+    'robotics_module4_title' => 'Сборка роботов',
+    'robotics_module4_desc' => 'Проектирование, сборка и программирование простых роботов',
+    'robotics_module5_title' => 'Bluetooth управление',
+    'robotics_module5_desc' => 'Управление роботами через телефон',
+
+    // ==================== ТЕХНОЛОГИИ РОБОТОТЕХНИКИ ====================
+    'robotics_tech_arduino' => 'Arduino',
+    'robotics_tech_cpp' => 'C++',
+    'robotics_tech_sensors' => 'Сенсоры',
+    'robotics_tech_motors' => 'Моторы',
+    'robotics_tech_electronics' => 'Электроника',
+    'robotics_tech_iot' => 'IoT',
+
+    // ==================== МОДУЛИ ЦИФРОВЫЕ ДЕТИ ====================
+    'digital_kids_module1_title' => 'Компьютерная грамотность',
+    'digital_kids_module1_desc' => 'Основы компьютера, работа с файлами',
+    'digital_kids_module2_title' => 'Scratch программирование',
+    'digital_kids_module2_desc' => 'Блочное программирование, создание игр',
+    'digital_kids_module3_title' => 'Логическое мышление',
+    'digital_kids_module3_desc' => 'Решение задач, алгоритмическое мышление',
+    'digital_kids_module4_title' => 'Креативные проекты',
+    'digital_kids_module4_desc' => 'Создание игр и анимаций',
+    // ==================== ТЕХНОЛОГИИ ЦИФРОВЫЕ ДЕТИ ====================
+    'digital_kids_tech_scratch' => 'Scratch',
+    'digital_kids_tech_block' => 'Блочное программирование',
+    'digital_kids_tech_logic' => 'Логическое мышление',
+    'digital_kids_tech_games' => 'Создание игр',
+    'digital_kids_tech_animation' => 'Анимация',
+    'digital_kids_tech_algorithm' => 'Алгоритм',
+    // ==================== МОДУЛИ СИСТЕМНОЙ ИНЖЕНЕРИИ ====================
+    'system_engineering_module1_title' => 'Основы Linux',
+    'system_engineering_module1_desc' => 'Ubuntu, CentOS, команды терминала',
+    'system_engineering_module2_title' => 'Настройка серверов',
+    'system_engineering_module2_desc' => 'Конфигурация Apache, Nginx, MySQL',
+    'system_engineering_module3_title' => 'Виртуализация',
+    'system_engineering_module3_desc' => 'Docker, VirtualBox, VMware',
+    'system_engineering_module4_title' => 'Мониторинг',
+    'system_engineering_module4_desc' => 'Zabbix, Prometheus, Grafana',
+    'system_engineering_module5_title' => 'Сетевая безопасность',
+    'system_engineering_module5_desc' => 'Firewall, iptables, VPN, SSH',
+    // ==================== ТЕХНОЛОГИИ СИСТЕМНОЙ ИНЖЕНЕРИИ ====================
+    'system_engineering_tech_linux' => 'Linux',
+    'system_engineering_tech_ubuntu' => 'Ubuntu',
+    'system_engineering_tech_centos' => 'CentOS',
+    'system_engineering_tech_docker' => 'Docker',
+    'system_engineering_tech_vmware' => 'VMware',
+    'system_engineering_tech_zabbix' => 'Zabbix',
+
+    // ==================== МОДУЛИ DEVOPS ====================
+    'devops_module1_title' => 'Основы CI/CD',
+    'devops_module1_desc' => 'GitLab CI, GitHub Actions, Jenkins pipeline',
+    'devops_module2_title' => 'Контейнеризация',
+    'devops_module2_desc' => 'Docker, Docker Compose, жизненный цикл контейнеров',
+    'devops_module3_title' => 'Оркестрация',
+    'devops_module3_desc' => 'Kubernetes, Pods, Services, Deployments',
+    'devops_module4_title' => 'Infrastructure as Code',
+    'devops_module4_desc' => 'Terraform, Ansible, cloud formation',
+    'devops_module5_title' => 'Мониторинг',
+    'devops_module5_desc' => 'Prometheus, Grafana, ELK Stack',
+    // ==================== ТЕХНОЛОГИИ DEVOPS ====================
+    'devops_tech_docker' => 'Docker',
+    'devops_tech_kubernetes' => 'Kubernetes',
+    'devops_tech_jenkins' => 'Jenkins',
+    'devops_tech_gitlab' => 'GitLab CI',
+    'devops_tech_aws' => 'AWS',
+    'devops_tech_terraform' => 'Terraform',
+
+    // ==================== МОДУЛИ АНАЛИТИКИ ДАННЫХ ====================
+    'data_analytics_module1_title' => 'Основы SQL',
+    'data_analytics_module1_desc' => 'SELECT, JOIN, GROUP BY, подзапросы',
+    'data_analytics_module2_title' => 'Python для данных',
+    'data_analytics_module2_desc' => 'Основы Python, структуры данных',
+    'data_analytics_module3_title' => 'Pandas & NumPy',
+    'data_analytics_module3_desc' => 'DataFrame, Series, очистка данных',
+    'data_analytics_module4_title' => 'Визуализация данных',
+    'data_analytics_module4_desc' => 'Matplotlib, Seaborn, Tableau, Power BI',
+    'data_analytics_module5_title' => 'Основы статистики',
+    'data_analytics_module5_desc' => 'Среднее, медиана, стандартное отклонение, регрессия',
+    // ==================== ТЕХНОЛОГИИ АНАЛИТИКИ ДАННЫХ ====================
+    'data_analytics_tech_sql' => 'SQL',
+    'data_analytics_tech_python' => 'Python',
+    'data_analytics_tech_pandas' => 'Pandas',
+    'data_analytics_tech_numpy' => 'NumPy',
+    'data_analytics_tech_tableau' => 'Tableau',
+    'data_analytics_tech_powerbi' => 'Power BI',
+
+    // ==================== МОДУЛИ СЕТЕВОГО АДМИНИСТРАТОРА ====================
+    'network_admin_module1_title' => 'Основы сетей',
+    'network_admin_module1_desc' => 'OSI модель, TCP/IP, IP адресация, подсети',
+    'network_admin_module2_title' => 'Настройка Cisco роутеров',
+    'network_admin_module2_desc' => 'Static routing, OSPF, EIGRP',
+    'network_admin_module3_title' => 'Настройка коммутаторов',
+    'network_admin_module3_desc' => 'STP, VLAN, trunk, port security',
+    'network_admin_module4_title' => 'Сетевая безопасность',
+    'network_admin_module4_desc' => 'Firewall, ACL, VPN, AAA',
+    'network_admin_module5_title' => 'Мониторинг и диагностика',
+    'network_admin_module5_desc' => 'Wireshark, SNMP, syslog',
+    // ==================== ТЕХНОЛОГИИ СЕТЕВОГО АДМИНИСТРАТОРА ====================
+    'network_admin_tech_cisco' => 'Cisco',
+    'network_admin_tech_tcpip' => 'TCP/IP',
+    'network_admin_tech_router' => 'Маршрутизатор',
+    'network_admin_tech_switch' => 'Коммутатор',
+    'network_admin_tech_firewall' => 'Firewall',
+    'network_admin_tech_wireshark' => 'Wireshark',
+
+    // ==================== МОДУЛИ БУХГАЛТЕРИИ ====================
+    'accounting_module1_title' => 'Основы бухгалтерии',
+    'accounting_module1_desc' => 'Бухгалтерский учет, счета, проводки',
+    'accounting_module2_title' => '1С Бухгалтерия',
+    'accounting_module2_desc' => 'Работа с программой 1С, документы, отчеты',
+    'accounting_module3_title' => 'Налоговый учет',
+    'accounting_module3_desc' => 'НДС, налог на прибыль, социальный налог',
+    'accounting_module4_title' => 'Финансовая отчетность',
+    'accounting_module4_desc' => 'Баланс, отчет о прибылях и убытках',
+    'accounting_module5_title' => 'Кассовые и банковские операции',
+    'accounting_module5_desc' => 'Кассовая книга, банковские выписки',
+    'accounting_module6_title' => 'Расчет заработной платы',
+    'accounting_module6_desc' => 'Расчет зарплаты, налоги',
+    // ==================== ТЕХНОЛОГИИ БУХГАЛТЕРИИ ====================
+    'accounting_tech_1c' => '1С Бухгалтерия',
+    'accounting_tech_excel' => 'Excel',
+    'accounting_tech_tax' => 'Налоговый учет',
+    'accounting_tech_finance' => 'Финансовая отчетность',
+    'accounting_tech_cash' => 'Кассовые операции',
+    'accounting_tech_bank' => 'Банковские операции',
+
+    //royxatdan otish joyi
+// ==================== ДОПОЛНИТЕЛЬНЫЕ КЛЮЧИ (Поле сообщения удалено) ====================
+    'contact_title' => 'Связаться с Itech Academy',
+    'your_name' => 'Ваше имя',
+    'email' => 'Email адрес',
+    'send' => 'Отправить',
+    'success_message' => 'Ваша заявка успешно принята!',
+    'error_message' => 'Произошла ошибка. Пожалуйста, попробуйте снова.',
+    'please_wait' => 'Пожалуйста, подождите...',
+    'application_received' => '✅ Заявка принята!',
+    'we_will_contact' => 'Наши специалисты свяжутся с вами в ближайшее время.',
+    'contact_phone' => '+998 71 123 45 67',
+    'contact_telegram' => '@itech_support',
+
+    // ==================== ДЛЯ ПРОФИЛЯ ====================
+    'profile_updated' => 'Профиль успешно обновлен',
+    'image_updated' => 'Фото профиля обновлено',
+    'password_updated' => 'Пароль успешно изменен',
+    'passwords_match' => 'Пароли совпадают',
+    'passwords_dont_match' => 'Пароли не совпадают',
+    'error_occurred' => 'Произошла ошибка, пожалуйста, попробуйте еще раз',
+    'ready' => 'Готово!',
+    'success_title' => 'Успешно!',
+    'error_title' => 'Ошибка!',
+    'old_password_incorrect' => 'Старый пароль введен неверно!',
+
+    // ==================== ДЛЯ КАРТОЧЕК КУРСОВ ====================
+    'course_about' => '📖 О курсе',
+    'course_program' => '📚 Учебная программа',
+    'course_for_who' => '👨‍💻 Для кого этот курс?',
+    'course_duration_label' => 'Длительность',
+    'course_schedule' => 'Занятия',
+    'course_schedule_value' => '3 раза в неделю',
+    'course_language' => 'Язык',
+    'course_language_value' => 'На узбекском языке',
+    'certificate' => 'Сертификат',
+    'has' => 'Есть',
+    'support_text' => 'Поддержка ментора 24/7',
+    'back_to_courses' => 'Назад к курсам',
+    'price_per_month' => '/ месяц',
+    'months' => 'мес',
+
+    // ==================== ЗАГРУЗКА И СПИННЕР ====================
+    'loading' => 'Загрузка...',
+    'sending' => 'Отправка...',
+    'application_received' => '✅ Заявка принята!',
+    'we_will_contact' => 'Ваша заявка принята. Скоро свяжемся.',
+    'contact_phone' => '+998 71 123 45 67',
+    'contact_telegram' => '@itech_support',
+    'understand' => 'Понятно',
+
+
+'office_tech_archive' => 'Архивное дело',
+'office_tech_document' => 'Документооборот',
+
+// ==================== ТЕХНОЛОГИИ АЛГОРИТМОВ ====================
+'algorithm_tech_1' => 'Алгоритм',
+'algorithm_tech_2' => 'Big O',
+'algorithm_tech_3' => 'Binary Search',
+'algorithm_tech_4' => 'Quick Sort',
+'algorithm_tech_5' => 'Деревья',
+'algorithm_tech_6' => 'Графы',
+
+// ==================== ОБЩИЕ ====================
+'students_suffix' => 'студентов',
+
 // ==================== МОДУЛИ АЛГОРИТМОВ ====================
 'algorithm_module1_title' => 'Понятие алгоритма',
 'algorithm_module1_desc' => 'Типы алгоритмов, анализ сложности (Big O notation)',
@@ -402,182 +661,38 @@ return [
 'algorithm_module6_title' => 'Деревья',
 'algorithm_module6_desc' => 'Binary tree, Binary search tree, AVL tree',
 
-// ==================== МОДУЛИ ОФИС-МЕНЕДЖМЕНТ ====================
-'office_module1_title' => 'Офисные программы',
-'office_module1_desc' => 'Word, Excel, PowerPoint на профессиональном уровне',
-'office_module2_title' => 'Документооборот',
-'office_module2_desc' => 'Организация и хранение документов',
-'office_module3_title' => 'Работа с клиентами',
-'office_module3_desc' => 'Общение по телефону и электронной почте',
-'office_module4_title' => 'Архивное дело',
-'office_module4_desc' => 'Организация архива и хранение документов',
+// ==================== ФРОНТЕНД КУРС ====================
+'frontend_badge' => 'Frontend Разработка',
+'frontend_title' => 'Frontend Разработчик',
+'frontend_description' => 'HTML, CSS, JavaScript и React.js для создания современных веб-сайтов.',
+'frontend_full_desc' => 'На курсе Frontend вы изучите создание внешнего вида веб-сайтов, работу с HTML5, CSS3, JavaScript и современными фреймворками.',
+'frontend_duration' => '7 месяцев',
+'frontend_price' => '850,000 сум',
+'frontend_old_price' => '950,000 сум',
+'frontend_students' => '180+',
+'frontend_teacher' => 'Абдугаффоров Азимжон, Мирзамахмудов Г\', Аскаров Ш',
+'frontend_teacher_position' => 'Senior Frontend Developer',
+'frontend_for_who' => 'Для желающих начать программировать, совмещать веб-дизайн и разработку.',
+'frontend_enroll_button' => 'Записаться сейчас',
 
-// ==================== МОДУЛИ FRONTEND ====================
+// ==================== ТЕХНОЛОГИИ ФРОНТЕНД ====================
+'frontend_tech_1' => 'HTML5',
+'frontend_tech_2' => 'CSS3',
+'frontend_tech_3' => 'JavaScript',
+'frontend_tech_4' => 'React.js',
+'frontend_tech_5' => 'Tailwind',
+'frontend_tech_6' => 'Bootstrap',
+
+// ==================== МОДУЛИ ФРОНТЕНД ====================
 'frontend_module1_title' => 'HTML5',
-'frontend_module1_desc' => 'Структура веб-страницы, семантические теги',
+'frontend_module1_desc' => 'Структура веб-страницы и семантические теги',
 'frontend_module2_title' => 'CSS3',
-'frontend_module2_desc' => 'Flexbox, Grid, Анимации, Адаптивная верстка',
+'frontend_module2_desc' => 'Flexbox, Grid, Анимации, Адаптивный дизайн',
 'frontend_module3_title' => 'JavaScript',
 'frontend_module3_desc' => 'ES6+, DOM, Async/Await, API запросы',
 'frontend_module4_title' => 'Bootstrap & Tailwind',
 'frontend_module4_desc' => 'Быстрый и красивый дизайн',
 'frontend_module5_title' => 'React.js',
-'frontend_module5_desc' => 'Компоненты, Hooks, Router, State Management',
+'frontend_module5_desc' => 'Компоненты, Хуки, Маршрутизация, Управление состоянием',
 
-// ==================== МОДУЛИ BACKEND ====================
-'backend_module1_title' => 'Основы PHP и ООП',
-'backend_module1_desc' => 'Синтаксис PHP, объектно-ориентированное программирование',
-'backend_module2_title' => 'Laravel Framework',
-'backend_module2_desc' => 'Eloquent ORM, Blade, Middleware, Service Provider',
-'backend_module3_title' => 'MySQL и базы данных',
-'backend_module3_desc' => 'Сложные запросы, индексация, оптимизация',
-'backend_module4_title' => 'Создание RESTful API',
-'backend_module4_desc' => 'Дизайн API, аутентификация, API ресурсы',
-'backend_module5_title' => 'Deployment и DevOps',
-'backend_module5_desc' => 'Git, CI/CD, настройка сервера',
-
-// ==================== МОДУЛИ PYTHON ====================
-'python_module1_title' => 'Основы Python',
-'python_module1_desc' => 'Синтаксис, переменные, типы данных',
-'python_module2_title' => 'Функции и модули',
-'python_module2_desc' => 'Повторное использование кода, модульное программирование',
-'python_module3_title' => 'ООП',
-'python_module3_desc' => 'Объектно-ориентированное программирование и классы',
-'python_module4_title' => 'Анализ данных',
-'python_module4_desc' => 'Библиотеки Pandas, NumPy',
-'python_module5_title' => 'API и web',
-'python_module5_desc' => 'Создание REST API и знакомство с Django',
-
-// ==================== МОДУЛИ РОБОТОТЕХНИКИ ====================
-'robotics_module1_title' => 'Основы Arduino',
-'robotics_module1_desc' => 'Платформа Arduino, программирование, работа с пинами',
-'robotics_module2_title' => 'Сенсоры',
-'robotics_module2_desc' => 'Ультразвуковые, инфракрасные, температурные датчики',
-'robotics_module3_title' => 'Моторы',
-'robotics_module3_desc' => 'Управление серво, DC, шаговыми моторами',
-'robotics_module4_title' => 'Сборка роботов',
-'robotics_module4_desc' => 'Проектирование, сборка и программирование простых роботов',
-'robotics_module5_title' => 'Bluetooth управление',
-'robotics_module5_desc' => 'Управление роботами через телефон',
-
-// ==================== ТЕХНОЛОГИИ РОБОТОТЕХНИКИ ====================
-'robotics_tech_arduino' => 'Arduino',
-'robotics_tech_cpp' => 'C++',
-'robotics_tech_sensors' => 'Сенсоры',
-'robotics_tech_motors' => 'Моторы',
-'robotics_tech_electronics' => 'Электроника',
-'robotics_tech_iot' => 'IoT',
-
-// ==================== МОДУЛИ ЦИФРОВЫЕ ДЕТИ ====================
-'digital_kids_module1_title' => 'Компьютерная грамотность',
-'digital_kids_module1_desc' => 'Основы компьютера, работа с файлами',
-'digital_kids_module2_title' => 'Scratch программирование',
-'digital_kids_module2_desc' => 'Блочное программирование, создание игр',
-'digital_kids_module3_title' => 'Логическое мышление',
-'digital_kids_module3_desc' => 'Решение задач, алгоритмическое мышление',
-'digital_kids_module4_title' => 'Креативные проекты',
-'digital_kids_module4_desc' => 'Создание игр и анимаций',
-// ==================== ТЕХНОЛОГИИ ЦИФРОВЫЕ ДЕТИ ====================
-'digital_kids_tech_scratch' => 'Scratch',
-'digital_kids_tech_block' => 'Блочное программирование',
-'digital_kids_tech_logic' => 'Логическое мышление',
-'digital_kids_tech_games' => 'Создание игр',
-'digital_kids_tech_animation' => 'Анимация',
-'digital_kids_tech_algorithm' => 'Алгоритм',
-// ==================== МОДУЛИ СИСТЕМНОЙ ИНЖЕНЕРИИ ====================
-'system_engineering_module1_title' => 'Основы Linux',
-'system_engineering_module1_desc' => 'Ubuntu, CentOS, команды терминала',
-'system_engineering_module2_title' => 'Настройка серверов',
-'system_engineering_module2_desc' => 'Конфигурация Apache, Nginx, MySQL',
-'system_engineering_module3_title' => 'Виртуализация',
-'system_engineering_module3_desc' => 'Docker, VirtualBox, VMware',
-'system_engineering_module4_title' => 'Мониторинг',
-'system_engineering_module4_desc' => 'Zabbix, Prometheus, Grafana',
-'system_engineering_module5_title' => 'Сетевая безопасность',
-'system_engineering_module5_desc' => 'Firewall, iptables, VPN, SSH',
-// ==================== ТЕХНОЛОГИИ СИСТЕМНОЙ ИНЖЕНЕРИИ ====================
-'system_engineering_tech_linux' => 'Linux',
-'system_engineering_tech_ubuntu' => 'Ubuntu',
-'system_engineering_tech_centos' => 'CentOS',
-'system_engineering_tech_docker' => 'Docker',
-'system_engineering_tech_vmware' => 'VMware',
-'system_engineering_tech_zabbix' => 'Zabbix',
-
-// ==================== МОДУЛИ DEVOPS ====================
-'devops_module1_title' => 'Основы CI/CD',
-'devops_module1_desc' => 'GitLab CI, GitHub Actions, Jenkins pipeline',
-'devops_module2_title' => 'Контейнеризация',
-'devops_module2_desc' => 'Docker, Docker Compose, жизненный цикл контейнеров',
-'devops_module3_title' => 'Оркестрация',
-'devops_module3_desc' => 'Kubernetes, Pods, Services, Deployments',
-'devops_module4_title' => 'Infrastructure as Code',
-'devops_module4_desc' => 'Terraform, Ansible, cloud formation',
-'devops_module5_title' => 'Мониторинг',
-'devops_module5_desc' => 'Prometheus, Grafana, ELK Stack',
-// ==================== ТЕХНОЛОГИИ DEVOPS ====================
-'devops_tech_docker' => 'Docker',
-'devops_tech_kubernetes' => 'Kubernetes',
-'devops_tech_jenkins' => 'Jenkins',
-'devops_tech_gitlab' => 'GitLab CI',
-'devops_tech_aws' => 'AWS',
-'devops_tech_terraform' => 'Terraform',
-
-// ==================== МОДУЛИ АНАЛИТИКИ ДАННЫХ ====================
-'data_analytics_module1_title' => 'Основы SQL',
-'data_analytics_module1_desc' => 'SELECT, JOIN, GROUP BY, подзапросы',
-'data_analytics_module2_title' => 'Python для данных',
-'data_analytics_module2_desc' => 'Основы Python, структуры данных',
-'data_analytics_module3_title' => 'Pandas & NumPy',
-'data_analytics_module3_desc' => 'DataFrame, Series, очистка данных',
-'data_analytics_module4_title' => 'Визуализация данных',
-'data_analytics_module4_desc' => 'Matplotlib, Seaborn, Tableau, Power BI',
-'data_analytics_module5_title' => 'Основы статистики',
-'data_analytics_module5_desc' => 'Среднее, медиана, стандартное отклонение, регрессия',
-// ==================== ТЕХНОЛОГИИ АНАЛИТИКИ ДАННЫХ ====================
-'data_analytics_tech_sql' => 'SQL',
-'data_analytics_tech_python' => 'Python',
-'data_analytics_tech_pandas' => 'Pandas',
-'data_analytics_tech_numpy' => 'NumPy',
-'data_analytics_tech_tableau' => 'Tableau',
-'data_analytics_tech_powerbi' => 'Power BI',
-
-// ==================== МОДУЛИ СЕТЕВОГО АДМИНИСТРАТОРА ====================
-'network_admin_module1_title' => 'Основы сетей',
-'network_admin_module1_desc' => 'OSI модель, TCP/IP, IP адресация, подсети',
-'network_admin_module2_title' => 'Настройка Cisco роутеров',
-'network_admin_module2_desc' => 'Static routing, OSPF, EIGRP',
-'network_admin_module3_title' => 'Настройка коммутаторов',
-'network_admin_module3_desc' => 'STP, VLAN, trunk, port security',
-'network_admin_module4_title' => 'Сетевая безопасность',
-'network_admin_module4_desc' => 'Firewall, ACL, VPN, AAA',
-'network_admin_module5_title' => 'Мониторинг и диагностика',
-'network_admin_module5_desc' => 'Wireshark, SNMP, syslog',
-// ==================== ТЕХНОЛОГИИ СЕТЕВОГО АДМИНИСТРАТОРА ====================
-'network_admin_tech_cisco' => 'Cisco',
-'network_admin_tech_tcpip' => 'TCP/IP',
-'network_admin_tech_router' => 'Маршрутизатор',
-'network_admin_tech_switch' => 'Коммутатор',
-'network_admin_tech_firewall' => 'Firewall',
-'network_admin_tech_wireshark' => 'Wireshark',
-
-// ==================== МОДУЛИ БУХГАЛТЕРИИ ====================
-'accounting_module1_title' => 'Основы бухгалтерии',
-'accounting_module1_desc' => 'Бухгалтерский учет, счета, проводки',
-'accounting_module2_title' => '1С Бухгалтерия',
-'accounting_module2_desc' => 'Работа с программой 1С, документы, отчеты',
-'accounting_module3_title' => 'Налоговый учет',
-'accounting_module3_desc' => 'НДС, налог на прибыль, социальный налог',
-'accounting_module4_title' => 'Финансовая отчетность',
-'accounting_module4_desc' => 'Баланс, отчет о прибылях и убытках',
-'accounting_module5_title' => 'Кассовые и банковские операции',
-'accounting_module5_desc' => 'Кассовая книга, банковские выписки',
-'accounting_module6_title' => 'Расчет заработной платы',
-'accounting_module6_desc' => 'Расчет зарплаты, налоги',
-// ==================== ТЕХНОЛОГИИ БУХГАЛТЕРИИ ====================
-'accounting_tech_1c' => '1С Бухгалтерия',
-'accounting_tech_excel' => 'Excel',
-'accounting_tech_tax' => 'Налоговый учет',
-'accounting_tech_finance' => 'Финансовая отчетность',
-'accounting_tech_cash' => 'Кассовые операции',
-'accounting_tech_bank' => 'Банковские операции',
 ];

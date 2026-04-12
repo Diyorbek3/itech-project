@@ -389,13 +389,25 @@ $(document).ready(function() {
             type: 'POST',
             data: $(this).serialize(),
             success: function(response) {
-                $alert.removeClass('alert-danger').addClass('alert-success')
-                    .html('<i class="fas fa-check-circle"></i> ' + response.message).show();
-                @if(!auth()->check())
-                    $('#contactForm')[0].reset();
-                @else
-                    $('#message').val('');
-                @endif
+                if (response.success) {
+                    $('#feedbackAlert')
+                        .removeClass('alert-danger')
+                        .addClass('alert-success')
+                        .html('<i class="fas fa-check-circle"></i> ' + response.message)
+                        .show();
+                    
+                    @if(!auth()->check())
+                        $('#contactForm')[0].reset();
+                    @else
+                        $('#message').val('');
+                    @endif
+                } else {
+                    $('#feedbackAlert')
+                        .removeClass('alert-success')
+                        .addClass('alert-danger')
+                        .html('<i class="fas fa-exclamation-circle"></i> ' + response.message)
+                        .show();
+                }
             },
             error: function(xhr) {
                 let errorMsg = 'Xatolik yuz berdi.';
@@ -417,11 +429,11 @@ $(document).ready(function() {
             }
         });
     });
+});
 
-    // ========== QUIZ SYSTEM ==========
-    let currentQuestion = 0;
-    let score = 0;
-    let userAnswers = [];
+// Quiz functionality
+let currentQuestion = 0;
+let score = 0;
 
     const quizQuestions = [
         { question: "Veb-dasturlashda eng mashhur dasturlash tili qaysi?", options: ["Python", "Java", "JavaScript", "C++"], correct: 2 },
@@ -684,6 +696,21 @@ $(document).ready(function() {
             </div>
             @endforeach
         </div>
+
+        <!-- Пагинация для команды -->
+        <nav aria-label="Team pagination">
+            <ul class="pagination">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Предыдущая</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Следующая</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </section>
 
@@ -754,10 +781,74 @@ $(document).ready(function() {
             </div>
             <div class="modal-body text-center">
                 <i class="fas fa-envelope-open-text fa-5x text-success mb-3"></i>
-                <h4>Muvaffaqiyatli ro'yxatdan o'tdingiz!</h4>
-                <p id="successMessage">Siz bilan tez orada bog'lanamiz.</p>
+                <h4>Rahmat!</h4>
+                <p id="successMessage">Siz muvaffaqiyatli ro'yxatdan o'tdingiz. Tez orada siz bilan bog'lanamiz.</p>
                 <hr>
-                <p><i class="far fa-calendar-alt text-primary"></i> <span id="reminderDate"></span></p>
+                <div class="event-reminder">
+                    <i class="fas fa-calendar-alt text-primary"></i>
+                    <span id="reminderDate"></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Yopish</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 5. Форма обратной связи -->
+<div id="contact" class="form-1 section">
+    <div class="container">
+        <h2 class="section-title">Fikringizni qoldiring</h2>
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                @if(file_exists(public_path('images/contact.png')))
+                    <img class="img-fluid" src="{{ asset('images/contact.png') }}" alt="alternative">
+                @else
+                    <div class="text-center p-5 bg-light rounded">
+                        <i class="fas fa-comments fa-5x" style="color: #4a90e2;"></i>
+                        <p class="mt-3">Поделитесь своим мнением с нами</p>
+                    </div>
+                @endif
+            </div>
+            <div class="col-lg-6">
+                <div class="text-container">
+                    @if(auth()->check())
+                        <div class="alert alert-info mb-3">
+                            <i class="fas fa-user-check"></i> Вы оставляете отзыв как: <strong>{{ auth()->user()->name }}</strong>
+                            @if(auth()->user()->email)
+                                <br><small>Email: {{ auth()->user()->email }}</small>
+                            @endif
+                        </div>
+                    @endif
+                    
+                    <div id="feedbackAlert" style="display: none;" class="alert"></div>
+                    
+                    <form id="contactForm">
+                        @csrf
+                        <div class="form-group">
+                            <input type="text" name="name" id="name" class="form-control-input" 
+                                   placeholder="Ваше имя" 
+                                   @if(auth()->check()) value="{{ auth()->user()->name }}" readonly @endif
+                                   required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" id="email" class="form-control-input" 
+                                   placeholder="Email"
+                                   @if(auth()->check()) value="{{ auth()->user()->email }}" readonly @endif
+                                   required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" id="message" class="form-control-textarea" 
+                                      placeholder="Ваш отзыв или предложение" required rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" id="submitBtn" class="form-control-submit-button">
+                                Отправить отзыв
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

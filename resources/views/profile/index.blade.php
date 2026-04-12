@@ -41,7 +41,8 @@
                             <div class="col-auto">
                                 <div class="avatar position-relative mt-2 mx-3">
                                     <img id="selectedAvatar"
-                                         src="{{ (isset($data['avatar']) && $data['avatar']) ? Storage::url('avatars/' . $data['avatar']) : asset('storage/avatars/avatar.png') }}"
+                                    
+                                         src="{{ $data['avatar'] ? Storage::url('avatars/' . $data['avatar']) : asset('images/avatar.png') }}"
                                          class="rounded-circle shadow-sm cursor-pointer" 
                                          onclick="openFileInput()"
                                          style="width:80px; height:80px; object-fit: cover;" />
@@ -196,30 +197,41 @@
         });
 
         $('#cropImageBtn').on('click', function() {
-            if (!cropper) return;
-            cropper.getCroppedCanvas({ width: 300, height: 300 }).toBlob((blob) => {
-                let formData = new FormData();
-                formData.append('avatar', blob, 'avatar.jpg');
-                formData.append('name', $('input[name="name"]').val());
-                formData.append('_token', '{{ csrf_token() }}');
-                formData.append('_method', 'PUT');
+    if (!cropper) return;
+    
+    // Qirqilgan rasmni blob ko'rinishida olish
+    cropper.getCroppedCanvas({ width: 400, height: 400 }).toBlob((blob) => {
+        let formData = new FormData();
+        
+        // Controllerdagi $request->file('avatar') shuni kutadi
+        formData.append('avatar', blob, 'avatar.jpg');
+        
+        // Boshqa kerakli ma'lumotlar
+        formData.append('name', $('input[name="name"]').val());
+        formData.append('_token', '{{ csrf_token() }}');
+        formData.append('_method', 'PUT'); // Laravelda PUT so'rovi uchun
 
-                $.ajax({
-                    url: '/profile/update',
-                    type: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(res) {
-                        if(res.success) {
-                            $('#selectedAvatar').attr('src', res.avatar_url + '?t=' + new Date().getTime());
-                            $('#cropperModal').modal('hide');
-                            Swal.fire({ icon: 'success', title: 'Tayyor!', text: 'Rasm yangilandi', timer: 1500 });
-                        }
-                    }
-                });
-            }, 'image/jpeg');
+        $.ajax({
+            url: '/profile/update',
+            type: 'POST', // FormData bilan POST yuboriladi, ichida _method PUT bo'ladi
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(res) {
+                if(res.success) {
+                    // Rasmni darhol yangilash (brauzer keshini yengish uchun ?v= qo'shdik)
+                    $('#selectedAvatar').attr('src', res.avatar_url + '?v=' + new Date().getTime());
+                    $('#cropperModal').modal('hide');
+                    Swal.fire({ icon: 'success', title: 'Tayyor!', text: 'Rasm saqlandi', timer: 1500 });
+                }
+            },
+            error: function(err) {
+                console.error(err.responseText);
+                Swal.fire('Xato!', 'Rasmni saqlab bo\'lmadi', 'error');
+            }
         });
+    }, 'image/jpeg');
+});
 
         // 4. Password Validation
         $('#password, #confirm-password, input[name="old_password"]').on('keyup', function() {
