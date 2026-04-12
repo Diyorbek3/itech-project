@@ -76,7 +76,8 @@ Route::prefix('my-courses')->middleware('auth')->group(function () {
     Route::post('/{courseId}/add-category', [MyCourceController::class, 'addCategory'])->name('my-courses.add-category');
     Route::delete('/delete-category/{categoryId}', [MyCourceController::class, 'deleteCategory'])->name('my-courses.delete-category');
 });
-
+// 10. Feedback (Qayta aloqa)
+Route::post('/feedback-store', [FeedbackController::class, 'store'])->name('feedback.store');
 // 8. Masterclass routelari
 Route::get('/masterclass/{id}/info', [MasterclassController::class, 'getInfo'])->name('masterclass.info');
 Route::post('/masterclass/register', [MasterclassController::class, 'register'])->name('masterclass.register');

@@ -2,6 +2,100 @@
 
 @section('styles')
 <style>
+    /* Section umumiy foni */
+    .history-section {
+        background: #0b0e14; /* Deep Dark foni */
+        padding: 100px 0;
+        color: #ffffff;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Sarlavha dizayni */
+    .section-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 3rem;
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 4rem;
+        background: linear-gradient(90deg, #4a90e2, #9b59b6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+    }
+
+    /* Timeline kartalari - Glassmorphism */
+    .timeline-content {
+        background: rgba(255, 255, 255, 0.03) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 30px !important;
+        border-radius: 24px !important;
+        transition: all 0.4s ease-in-out;
+        position: relative;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    }
+
+    .timeline-content:hover {
+        transform: translateY(-12px);
+        background: rgba(255, 255, 255, 0.06) !important;
+        border-color: rgba(155, 89, 182, 0.5);
+        box-shadow: 0 20px 40px rgba(155, 89, 182, 0.15);
+    }
+
+    /* Yillar dizayni */
+    .timeline-year {
+        font-size: 2.5rem !important;
+        font-weight: 900 !important;
+        color: #ffd700 !important;
+        text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    /* Karta ichidagi matnlar */
+    .timeline-content h4 {
+        color: #4a90e2;
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    .timeline-content p {
+        color: #a0aec0;
+        line-height: 1.7;
+        font-size: 1rem;
+    }
+
+    /* Neon dekoratsiyalar (Orqa fondagi nurli doiralar) */
+    .history-section::before, .history-section::after {
+        content: '';
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        filter: blur(120px);
+        z-index: 0;
+        opacity: 0.15;
+    }
+
+    .history-section::before {
+        background: #4a90e2;
+        top: -50px;
+        left: -50px;
+    }
+
+    .history-section::after {
+        background: #9b59b6;
+        bottom: -50px;
+        right: -50px;
+    }
+
+    .container { position: relative; z-index: 1; }
+</style>
+<style>
     /* Общие стили */
     .section {
         padding: 80px 0;
@@ -485,40 +579,43 @@ function registerMasterclass(masterclassId) {
     <div class="container">
         <h2 class="section-title">Biz haqimizda</h2>
         <div class="timeline">
-            <div class="row">
+            <div class="row g-4">
                 <div class="col-md-6">
                     <div class="timeline-item">
-                        <div class="timeline-year">2015</div>
+                        <span class="timeline-year">2015</span>
                         <div class="timeline-content">
                             <h4>Boshlanish nuqtasi ITech Academy</h4>
-                            <p>ITech Academy kichik jamoa bilan katta maqsad sari ilk qadamini tashladi.</p>
+                            <p>ITech Academy kichik jamoa bilan katta maqsad sari ilk qadamini tashladi. Innovatsion ta'limning poydevori aynan shu yili qo'yilgan.</p>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-6">
                     <div class="timeline-item">
-                        <div class="timeline-year">2017</div>
+                        <span class="timeline-year">2017</span>
                         <div class="timeline-content">
                             <h4>Tez rivojlanish</h4>
-                            <p>Yangi kurslar ochilib, talabalar soni bir necha barobar oshdi.</p>
+                            <p>Yangi kurslar ochilib, talabalar soni bir necha barobar oshdi. Texnologik infratuzilmamizni kengaytirdik va jamoani kuchaytirdik.</p>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-6">
                     <div class="timeline-item">
-                        <div class="timeline-year">2019</div>
+                        <span class="timeline-year">2019</span>
                         <div class="timeline-content">
                             <h4>Ishga yo‘naltirish</h4>
-                            <p>Talabalarni real loyihalar va ish bilan bog‘lash tizimi yo‘lga qo‘yildi.</p>
+                            <p>Talabalarni real loyihalar va ish bilan bog‘lash tizimi yo‘lga qo‘yildi. Bitiruvchilarimiz yirik IT kompaniyalarda o'z o'rnini topa boshladi.</p>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-6">
                     <div class="timeline-item">
-                        <div class="timeline-year">2024</div>
-                        <div class="timeline-content">
+                        <span class="timeline-year">2024</span>
+                        <div class="timeline-content" style="border-color: #ffd700;">
                             <h4>Natija va ishonch</h4>
-                            <p>2000+ bitiruvchi va yuzlab muvaffaqiyatli karyeralar.</p>
+                            <p>2000+ bitiruvchi va yuzlab muvaffaqiyatli karyeralar. Bugungi kunda biz zamonaviy IT markazlar orasida yetakchi o'rindamiz.</p>
                         </div>
                     </div>
                 </div>
