@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MyCourceController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\MasterClassController;
+use App\Http\Controllers\CareerController; // CareerController qo'shildi
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\App;
@@ -61,27 +62,19 @@ Route::prefix('courses')->group(function () {
     Route::get('/network-admin', [CourceController::class, 'networkAdmin'])->name('courses.network_admin');
     Route::get('/accounting', [CourceController::class, 'accounting'])->name('courses.accounting');
     
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-    // Office menejerligi
-=======
->>>>>>> 62c15b6f289b2890287138f4ddff067d178966fe
     Route::get('/ofis-menejerligi', function () {
         return view('courses.office-manager');
     })->name('courses.office-manager');
 });
 
-<<<<<<< HEAD
-// 6. Karyera
+// ---------------------------------------------------------
+// 4. KARYERA (Career)
+// ---------------------------------------------------------
 Route::get('/career', [CareerController::class, 'index'])->name('career.index');
 
-// 7. Mening kurslarim (Faqat tizimga kirganlar uchun)
-=======
 // ---------------------------------------------------------
-// 4. MENING KURSLARIM (Dashboard/LMS)
+// 5. MENING KURSLARIM (Dashboard/LMS)
 // ---------------------------------------------------------
->>>>>>> 5ee9206cb330a71475252f8b663aae9165dc3283
 Route::prefix('my-courses')->middleware('auth')->group(function () {
     Route::get('/', [MyCourceController::class, 'index'])->name('my-courses.index');
     Route::post('/', [MyCourceController::class, 'store'])->name('my-courses.store');
@@ -92,19 +85,8 @@ Route::prefix('my-courses')->middleware('auth')->group(function () {
     Route::delete('/delete-category/{categoryId}', [MyCourceController::class, 'deleteCategory'])->name('my-courses.delete-category');
 });
 
-<<<<<<< HEAD
-// 8. Masterclass routelari
-Route::get('/masterclass/{id}/info', [MasterclassController::class, 'getInfo'])->name('masterclass.info');
-Route::post('/masterclass/register', [MasterclassController::class, 'register'])->name('masterclass.register');
-
-// 9. Aloqa
-Route::post('/contact-send', [ContactController::class, 'sendContact'])->name('contact.send');
-
-// Laravel Auth (Login, Register va h.k.)
-require __DIR__ . '/auth.php';
-=======
 // ---------------------------------------------------------
-// 5. FEEDBACK
+// 6. FEEDBACK
 // ---------------------------------------------------------
 Route::post('/feedback/store', [FeedbackController::class, 'store'])->name('feedback.store');
 Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
@@ -113,31 +95,15 @@ Route::get('/feedback/statistics', [FeedbackController::class, 'statistics'])->n
 Route::get('/user/{userId}/feedbacks', [FeedbackController::class, 'getUserFeedbacks'])->name('feedback.user');
 
 // ---------------------------------------------------------
-// 6. KARYERA VA KONTAKT
-// ---------------------------------------------------------
-// Career - bu oddiy userlar uchun (hamma bloklar bilan)
-Route::get('/career', [MasterClassController::class, 'index'])->name('career.index');
-
-// Admin qismi - Faqat adminlar kirishi uchun
-Route::middleware(['auth'])->group(function () {
-    // Endi /master-class manzili faqat admin sahifasini ochadi
-    Route::get('/master-class', [MasterClassController::class, 'adminIndex'])->name('master_class.admin');
-    
-    Route::get('/master-class/create', [MasterClassController::class, 'create'])->name('master_class.create');
-    Route::post('/master-class/store', [MasterClassController::class, 'store'])->name('master_class.store');
-    // ... qolgan route-lar
-});
-Route::post('/contact-send', [HomeController::class, 'sendToTelegram'])->name('contact.send');
-
-// ---------------------------------------------------------
 // 7. MASTERCLASSLARNI BOSHQARISH
 // ---------------------------------------------------------
 // Umumiy foydalanish uchun
 Route::get('/masterclass/{id}/info', [MasterClassController::class, 'getInfo'])->name('masterclass.info');
 Route::post('/masterclass/register', [MasterClassController::class, 'register'])->name('masterclass.register');
 
-// Faqat admin/auth foydalanuvchilar uchun
+// Admin qismi (Faqat tizimga kirganlar uchun)
 Route::middleware(['auth'])->group(function () {
+    Route::get('/master-class', [MasterClassController::class, 'adminIndex'])->name('master_class.admin');
     Route::get('/master-class/create', [MasterClassController::class, 'create'])->name('master_class.create');
     Route::post('/master-class/store', [MasterClassController::class, 'store'])->name('master_class.store');
     Route::get('/master-class/{id}/edit', [MasterClassController::class, 'edit'])->name('master_class.edit');
@@ -146,7 +112,11 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // ---------------------------------------------------------
-// 8. LARAVEL AUTH
+// 8. ALOQA (Contact)
 // ---------------------------------------------------------
-require __DIR__.'/auth.php';
->>>>>>> 5ee9206cb330a71475252f8b663aae9165dc3283
+Route::post('/contact-send', [HomeController::class, 'sendToTelegram'])->name('contact.send');
+
+// ---------------------------------------------------------
+// 9. LARAVEL AUTH
+// ---------------------------------------------------------
+require __DIR__ . '/auth.php';
