@@ -14,9 +14,21 @@ class CareerController extends Controller
      * Bosh sahifa
      */
     public function index()
-    {
-        return view('career.index');
+{
+    try {
+        // ->get() o'rniga ->paginate(6) ishlatamiz (har sahifada 6 ta master-klass)
+        $masterClasses = DB::table('master_classes')
+            ->orderBy('event_date', 'desc')
+            ->paginate(6); 
+            
+    } catch (\Exception $e) {
+        // Agar xato bo'lsa, bo'sh pagination obyektini qaytaramiz
+        $masterClasses = new \Illuminate\Pagination\LengthAwarePaginator([], 0, 6);
+        Log::warning("Master classes xatolik: " . $e->getMessage());
     }
+
+    return view('career.index', compact('masterClasses'));
+}
 
     /**
      * Fikr-mulohazani saqlash - avval Telegramga, keyin MBga
