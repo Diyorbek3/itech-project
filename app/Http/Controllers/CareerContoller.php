@@ -11,19 +11,31 @@ use Illuminate\Support\Facades\Validator;
 class CareerController extends Controller
 {
     /**
-     * Главная страница
+     * Bosh sahifa
      */
     public function index()
-    {
-        return view('career.index');
+{
+    try {
+        // ->get() o'rniga ->paginate(6) ishlatamiz (har sahifada 6 ta master-klass)
+        $masterClasses = DB::table('master_classes')
+            ->orderBy('event_date', 'desc')
+            ->paginate(6); 
+            
+    } catch (\Exception $e) {
+        // Agar xato bo'lsa, bo'sh pagination obyektini qaytaramiz
+        $masterClasses = new \Illuminate\Pagination\LengthAwarePaginator([], 0, 6);
+        Log::warning("Master classes xatolik: " . $e->getMessage());
     }
 
+    return view('career.index', compact('masterClasses'));
+}
+
     /**
-     * Сохранение отзыва - сначала в Telegram, потом в БД
+     * Fikr-mulohazani saqlash - avval Telegramga, keyin MBga
      */
     public function storeFeedback(Request $request)
     {
-        // 1. Валидация данных
+        // 1. Ma'lumotlarni validatsiya qilish
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
@@ -46,13 +58,13 @@ class CareerController extends Controller
             ], 422);
         }
 
-        // 2. Подготовка данных
+        // 2. Ma'lumotlarni tayyorlash
         $validatedData = $validator->validated();
 
-        // 3. СНАЧАЛА отправляем в Telegram
+        // 3. AVVAL Telegramga yuboramiz
         $telegramResult = $this->sendToTelegram($validatedData);
 
-        // 4. ПОТОМ сохраняем в базу данных
+        // 4. KEYIN bazaga saqlaymiz
         $feedbackId = $this->saveToDatabase($validatedData, $telegramResult, $request);
 
         if (!$feedbackId) {
@@ -62,7 +74,7 @@ class CareerController extends Controller
             ], 500);
         }
 
-        // 5. Возвращаем результат
+        // 5. Natijani qaytarish
         if ($telegramResult['success']) {
             return response()->json([
                 'success' => true,
@@ -82,7 +94,7 @@ class CareerController extends Controller
     }
 
     /**
-     * Отправка сообщения в Telegram
+     * Telegramga xabar yuborish
      */
     private function sendToTelegram($data)
     {
@@ -90,14 +102,10 @@ class CareerController extends Controller
         $chatId = env('TELEGRAM_CHAT_ID');
 
         if (empty($botToken) || empty($chatId)) {
-            Log::error('Telegram credentials not configured', [
-                'bot_token_set' => !empty($botToken),
-                'chat_id_set' => !empty($chatId)
-            ]);
-
+            Log::error('Telegram credentials not configured');
             return [
                 'success' => false,
-                'error' => 'Telegram бот не настроен. Пожалуйста, добавьте TELEGRAM_BOT_TOKEN и TELEGRAM_CHAT_ID в .env файл'
+                'error' => 'Telegram бот не настроен.'
             ];
         }
 
@@ -114,40 +122,21 @@ class CareerController extends Controller
             $result = $response->json();
 
             if ($response->successful() && isset($result['ok']) && $result['ok'] === true) {
-                Log::info('Telegram message sent successfully', [
-                    'chat_id' => $chatId,
-                    'message_id' => $result['result']['message_id'] ?? null
-                ]);
-
                 return [
                     'success' => true,
                     'response' => json_encode($result),
                     'message_id' => $result['result']['message_id'] ?? null
                 ];
             } else {
-                $errorMessage = $result['description'] ?? 'Unknown Telegram API error';
-                Log::error('Telegram API error', [
-                    'error' => $errorMessage,
-                    'response' => $result
-                ]);
-
                 return [
                     'success' => false,
-                    'error' => $errorMessage,
+                    'error' => $result['description'] ?? 'Unknown Telegram API error',
                     'response' => json_encode($result)
                 ];
             }
-
         } catch (\Exception $e) {
-            Log::error('Telegram send exception', [
-                'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
-            ]);
-
-            return [
-                'success' => false,
-                'error' => $e->getMessage()
-            ];
+            Log::error('Telegram send exception: ' . $e->getMessage());
+            return ['success' => false, 'error' => $e->getMessage()];
         }
     }
 
@@ -178,7 +167,7 @@ class CareerController extends Controller
     private function saveToDatabase($data, $telegramResult, $request)
     {
         try {
-            $feedbackId = DB::table('tb_feedbacks')->insertGetId([
+            return DB::table('tb_feedbacks')->insertGetId([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'message' => $data['message'],
@@ -191,20 +180,8 @@ class CareerController extends Controller
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
-
-            Log::info('Feedback saved to database', [
-                'feedback_id' => $feedbackId,
-                'telegram_sent' => $telegramResult['success']
-            ]);
-
-            return $feedbackId;
-
         } catch (\Exception $e) {
-            Log::error('Database save error', [
-                'error' => $e->getMessage(),
-                'data' => $data
-            ]);
-
+            Log::error('Database save error: ' . $e->getMessage());
             return false;
         }
     }
@@ -216,18 +193,9 @@ class CareerController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->paginate(20);
 
-            return response()->json([
-                'success' => true,
-                'data' => $feedbacks
-            ]);
-
+            return response()->json(['success' => true, 'data' => $feedbacks]);
         } catch (\Exception $e) {
-            Log::error('Get feedbacks error', ['error' => $e->getMessage()]);
-
-            return response()->json([
-                'success' => false,
-                'message' => 'Ошибка при получении отзывов'
-            ], 500);
+            return response()->json(['success' => false, 'message' => 'Ошибка при получении отзывов'], 500);
         }
     }
 
@@ -235,26 +203,12 @@ class CareerController extends Controller
     {
         try {
             $feedback = DB::table('tb_feedbacks')->where('id', $id)->first();
-
             if (!$feedback) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Отзыв не найден'
-                ], 404);
+                return response()->json(['success' => false, 'message' => 'Отзыв не найден'], 404);
             }
-
-            return response()->json([
-                'success' => true,
-                'data' => $feedback
-            ]);
-
+            return response()->json(['success' => true, 'data' => $feedback]);
         } catch (\Exception $e) {
-            Log::error('Get feedback error', ['error' => $e->getMessage(), 'id' => $id]);
-
-            return response()->json([
-                'success' => false,
-                'message' => 'Ошибка при получении отзыва'
-            ], 500);
+            return response()->json(['success' => false, 'message' => 'Ошибка'], 500);
         }
     }
 
@@ -262,83 +216,43 @@ class CareerController extends Controller
     {
         try {
             $feedback = DB::table('tb_feedbacks')->where('id', $id)->first();
-
             if (!$feedback) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Отзыв не найден'
-                ], 404);
+                return response()->json(['success' => false, 'message' => 'Отзыв не найден'], 404);
             }
 
-            $data = [
+            $telegramResult = $this->sendToTelegram([
                 'name' => $feedback->name,
                 'email' => $feedback->email,
                 'message' => $feedback->message
-            ];
-
-            $telegramResult = $this->sendToTelegram($data);
-
-            DB::table('tb_feedbacks')
-                ->where('id', $id)
-                ->update([
-                    'telegram_sent' => $telegramResult['success'] ? 1 : 0,
-                    'telegram_response' => $telegramResult['response'] ?? null,
-                    'telegram_error' => $telegramResult['error'] ?? null,
-                    'updated_at' => now()
-                ]);
-
-            if ($telegramResult['success']) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Отзыв успешно отправлен в Telegram'
-                ]);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Ошибка при отправке: ' . ($telegramResult['error'] ?? 'Неизвестная ошибка')
-                ], 500);
-            }
-
-        } catch (\Exception $e) {
-            Log::error('Resend to telegram error', [
-                'error' => $e->getMessage(),
-                'id' => $id
             ]);
 
-            return response()->json([
-                'success' => false,
-                'message' => 'Ошибка: ' . $e->getMessage()
-            ], 500);
+            DB::table('tb_feedbacks')->where('id', $id)->update([
+                'telegram_sent' => $telegramResult['success'] ? 1 : 0,
+                'telegram_response' => $telegramResult['response'] ?? null,
+                'telegram_error' => $telegramResult['error'] ?? null,
+                'updated_at' => now()
+            ]);
+
+            return response()->json(['success' => $telegramResult['success'], 'message' => $telegramResult['success'] ? 'Успешно' : 'Ошибка']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
 
     public function getFeedbackStats()
     {
         try {
-            $total = DB::table('tb_feedbacks')->count();
-            $telegramSent = DB::table('tb_feedbacks')->where('telegram_sent', 1)->count();
-            $telegramFailed = DB::table('tb_feedbacks')->where('telegram_sent', 0)->count();
-            $today = DB::table('tb_feedbacks')->whereDate('created_at', today())->count();
-            $thisWeek = DB::table('tb_feedbacks')->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])->count();
-
             return response()->json([
                 'success' => true,
                 'data' => [
-                    'total' => $total,
-                    'telegram_sent' => $telegramSent,
-                    'telegram_failed' => $telegramFailed,
-                    'today' => $today,
-                    'this_week' => $thisWeek
+                    'total' => DB::table('tb_feedbacks')->count(),
+                    'telegram_sent' => DB::table('tb_feedbacks')->where('telegram_sent', 1)->count(),
+                    'telegram_failed' => DB::table('tb_feedbacks')->where('telegram_sent', 0)->count(),
+                    'today' => DB::table('tb_feedbacks')->whereDate('created_at', today())->count(),
                 ]
             ]);
-
         } catch (\Exception $e) {
-            Log::error('Get stats error', ['error' => $e->getMessage()]);
-
-            return response()->json([
-                'success' => false,
-                'message' => 'Ошибка при получении статистики'
-            ], 500);
+            return response()->json(['success' => false], 500);
         }
     }
 
@@ -346,26 +260,9 @@ class CareerController extends Controller
     {
         try {
             $deleted = DB::table('tb_feedbacks')->where('id', $id)->delete();
-
-            if (!$deleted) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Отзыв не найден'
-                ], 404);
-            }
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Отзыв успешно удален'
-            ]);
-
+            return response()->json(['success' => (bool)$deleted]);
         } catch (\Exception $e) {
-            Log::error('Delete feedback error', ['error' => $e->getMessage(), 'id' => $id]);
-
-            return response()->json([
-                'success' => false,
-                'message' => 'Ошибка при удалении отзыва'
-            ], 500);
+            return response()->json(['success' => false], 500);
         }
     }
 }

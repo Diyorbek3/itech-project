@@ -2,12 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CourceController;
-use App\Http\Controllers\CareerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MyCourceController;
 use App\Http\Controllers\FeedbackController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\MasterclassController;
+use App\Http\Controllers\MasterClassController;
+use App\Http\Controllers\CareerController; // CareerController qo'shildi
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\App;
@@ -33,28 +32,18 @@ Route::get('language/{locale}', function ($locale) {
 })->name('language.switch');
 
 // ---------------------------------------------------------
-// 2. PROFIL VA SHAXSIY MA'LUMOTLAR (Faqat Login qilganlar uchun)
+// 2. PROFIL VA SHAXSIY MA'LUMOTLAR
 // ---------------------------------------------------------
 Route::middleware('auth')->group(function () {
-    // Profil sahifasi
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-    
-    // Profil ma'lumotlarini (ism, email va rasm) yangilash
-    // MUHIM: Controlleringizdagi putUpdate metodiga bog'landi
     Route::put('/profile/update', [ProfileController::class, 'putUpdate'])->name('profile.update');
-    
-    // Parolni yangilash
     Route::put('/profile/update-password', [ProfileController::class, 'putNewPassword'])->name('profile.update-password');
-    
-    // Avatarni o'chirish (agar kerak bo'lsa)
     Route::delete('/profile/avatar', [ProfileController::class, 'deleteAvatar'])->name('profile.avatar.delete');
-    
-    // Profilni butunlay o'chirish
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 // ---------------------------------------------------------
-// 3. KURSLAR BO'LIMI (Prefix orqali guruhlangan)
+// 3. KURSLAR BO'LIMI
 // ---------------------------------------------------------
 Route::prefix('courses')->group(function () {
     Route::get('/python', [CourceController::class, 'python'])->name('courses.python');
@@ -73,24 +62,19 @@ Route::prefix('courses')->group(function () {
     Route::get('/network-admin', [CourceController::class, 'networkAdmin'])->name('courses.network_admin');
     Route::get('/accounting', [CourceController::class, 'accounting'])->name('courses.accounting');
     
-<<<<<<< HEAD
-    // Office menejerligi
-=======
     Route::get('/ofis-menejerligi', function () {
         return view('courses.office-manager');
     })->name('courses.office-manager');
 });
 
-<<<<<<< HEAD
-// 6. Karyera
+// ---------------------------------------------------------
+// 4. KARYERA (Career)
+// ---------------------------------------------------------
 Route::get('/career', [CareerController::class, 'index'])->name('career.index');
 
-// 7. Mening kurslarim (Faqat tizimga kirganlar uchun)
-=======
 // ---------------------------------------------------------
-// 4. MENING KURSLARIM (Dashboard/LMS qismi)
+// 5. MENING KURSLARIM (Dashboard/LMS)
 // ---------------------------------------------------------
->>>>>>> 5ee9206cb330a71475252f8b663aae9165dc3283
 Route::prefix('my-courses')->middleware('auth')->group(function () {
     Route::get('/', [MyCourceController::class, 'index'])->name('my-courses.index');
     Route::post('/', [MyCourceController::class, 'store'])->name('my-courses.store');
@@ -101,19 +85,8 @@ Route::prefix('my-courses')->middleware('auth')->group(function () {
     Route::delete('/delete-category/{categoryId}', [MyCourceController::class, 'deleteCategory'])->name('my-courses.delete-category');
 });
 
-<<<<<<< HEAD
-// 8. Masterclass routelari
-Route::get('/masterclass/{id}/info', [MasterclassController::class, 'getInfo'])->name('masterclass.info');
-Route::post('/masterclass/register', [MasterclassController::class, 'register'])->name('masterclass.register');
-
-// 9. Aloqa
-Route::post('/contact-send', [ContactController::class, 'sendContact'])->name('contact.send');
-
-// Laravel Auth (Login, Register va h.k.)
-require __DIR__ . '/auth.php';
-=======
 // ---------------------------------------------------------
-// 5. FEEDBACK (Mijozlar fikrlari)
+// 6. FEEDBACK
 // ---------------------------------------------------------
 Route::post('/feedback/store', [FeedbackController::class, 'store'])->name('feedback.store');
 Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
@@ -122,19 +95,28 @@ Route::get('/feedback/statistics', [FeedbackController::class, 'statistics'])->n
 Route::get('/user/{userId}/feedbacks', [FeedbackController::class, 'getUserFeedbacks'])->name('feedback.user');
 
 // ---------------------------------------------------------
-// 6. KARYERA VA TELEGRAM KONTAKT
+// 7. MASTERCLASSLARNI BOSHQARISH
 // ---------------------------------------------------------
-Route::get('/career', [CareerController::class, 'index'])->name('career.index');
+// Umumiy foydalanish uchun
+Route::get('/masterclass/{id}/info', [MasterClassController::class, 'getInfo'])->name('masterclass.info');
+Route::post('/masterclass/register', [MasterClassController::class, 'register'])->name('masterclass.register');
+
+// Admin qismi (Faqat tizimga kirganlar uchun)
+Route::middleware(['auth'])->group(function () {
+    Route::get('/master-class', [MasterClassController::class, 'adminIndex'])->name('master_class.admin');
+    Route::get('/master-class/create', [MasterClassController::class, 'create'])->name('master_class.create');
+    Route::post('/master-class/store', [MasterClassController::class, 'store'])->name('master_class.store');
+    Route::get('/master-class/{id}/edit', [MasterClassController::class, 'edit'])->name('master_class.edit');
+    Route::put('/master-class/{id}/update', [MasterClassController::class, 'update'])->name('master_class.update');
+    Route::delete('/master-class/{id}', [MasterClassController::class, 'destroy'])->name('master_class.destroy');
+});
+
+// ---------------------------------------------------------
+// 8. ALOQA (Contact)
+// ---------------------------------------------------------
 Route::post('/contact-send', [HomeController::class, 'sendToTelegram'])->name('contact.send');
 
 // ---------------------------------------------------------
-// 7. MASTERCLASSLAR
+// 9. LARAVEL AUTH
 // ---------------------------------------------------------
-Route::get('/masterclass/{id}/info', [MasterclassController::class, 'getInfo'])->name('masterclass.info');
-Route::post('/masterclass/register', [MasterclassController::class, 'register'])->name('masterclass.register');
-
-// ---------------------------------------------------------
-// 8. LARAVEL AUTH (Login/Register)
-// ---------------------------------------------------------
-require __DIR__.'/auth.php';
->>>>>>> 5ee9206cb330a71475252f8b663aae9165dc3283
+require __DIR__ . '/auth.php';
