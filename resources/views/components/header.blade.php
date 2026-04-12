@@ -168,12 +168,7 @@
                                 <li><a class="dropdown-item" href="/master-class">
                                     <i class="fas fa-graduation-cap me-2"></i> Master-class
                                 </a></li>
-                                <li><a class="dropdown-item" href="/">
-                                    <i class="fas fa-briefcase me-2"></i> {{ __('messages.projects') }}
-                                </a></li>
-                                <li><a class="dropdown-item" href="/">
-                                    <i class="fas fa-chart-line me-2"></i> {{ __('messages.careers') }}
-                                </a></li>
+                         
                                 @endif
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">

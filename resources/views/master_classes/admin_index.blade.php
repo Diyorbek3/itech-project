@@ -41,8 +41,12 @@
                             </span>
                         </td>
                         <td class="pe-4 text-end">
-                            <div class="btn-group shadow-sm rounded-pill overflow-hidden">
-                                <button type="button" onclick="deleteConfirm('{{ $mc->id }}')" class="btn btn-white text-danger border-0 px-3 py-2" title="O'chirish">
+                            <div class="btn-group shadow-sm rounded-pill overflow-hidden border">
+                                <a href="{{ route('master_class.edit', $mc->id) }}" class="btn btn-white text-warning px-3 py-2 border-end" title="Tahrirlash">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+
+                                <button type="button" onclick="deleteConfirm('{{ $mc->id }}')" class="btn btn-white text-danger px-3 py-2" title="O'chirish">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                                 
@@ -75,29 +79,27 @@
     .bg-soft-primary { background-color: #e7f1ff; }
     .fs-7 { font-size: 0.8rem; }
     .transition-all:hover { background-color: #f8fbff; transform: scale(1.005); transition: 0.3s; }
-    .btn-white { background: #fff; border: none; }
-    .btn-white:hover { background: #fff5f5; color: #dc3545; }
+    /* Tugmalar dizayni yaxshilandi */
+    .btn-white { background: #fff; border: none; transition: 0.2s; }
+    .btn-white:hover { background: #f8f9fa; }
+    .btn-white.text-warning:hover { color: #ffc107 !important; }
+    .btn-white.text-danger:hover { color: #dc3545 !important; }
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    // Muvaffaqiyat xabari (Qo'shilganda yoki o'chirilganda)
+    // Muvaffaqiyat xabari
     @if(session('success'))
         Swal.fire({
             icon: 'success',
             title: 'Muvaffaqiyat!',
             text: "{{ session('success') }}",
             timer: 3000,
-            showConfirmButton: false,
-            borderRadius: '15px'
+            showConfirmButton: false
         });
     @endif
 
-    /**
-     * O'chirishni tasdiqlash oynasi
-     * @param {number} id - Master-klass ID raqami
-     */
     function deleteConfirm(id) {
         Swal.fire({
             title: 'Ishonchingiz komilmi?',
@@ -106,15 +108,12 @@
             showCancelButton: true,
             confirmButtonColor: '#d33',
             cancelButtonColor: '#6e7881',
-            confirmButtonText: 'Ha, o\'chirish!', // Tutuq belgisi to'g'irlandi
+            confirmButtonText: 'Ha, o‘chirish!',
             cancelButtonText: 'Bekor qilish'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Formani yuborish
                 const form = document.getElementById('delete-form-' + id);
-                if (form) {
-                    form.submit();
-                }
+                if (form) form.submit();
             }
         });
     }

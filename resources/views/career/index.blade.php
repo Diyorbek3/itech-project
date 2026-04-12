@@ -2,6 +2,68 @@
 
 @section('styles')
 <style>
+    .masterclass-card {
+        border: none;
+        border-radius: 20px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        background: #fff;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .masterclass-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.12) !important;
+    }
+
+    .masterclass-image-wrapper {
+        position: relative;
+        overflow: hidden;
+        height: 220px;
+    }
+
+    .masterclass-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .masterclass-card:hover .masterclass-image {
+        transform: scale(1.1);
+    }
+
+    /* Sana ko'rinishi (Rasm ustida) */
+    .date-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(5px);
+        padding: 8px 15px;
+        border-radius: 12px;
+        font-weight: 700;
+        color: #764ba2;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        z-index: 2;
+    }
+
+    /* Ro'yxatdan o'tish tugmasi (Gradiyent) */
+    .btn-registration {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        border-radius: 12px;
+        padding: 12px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-registration:hover {
+        box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
+        transform: scale(1.02);
+        color: #fff;
+    }
     /* Общие стили */
     .section {
         padding: 80px 0;
@@ -704,51 +766,47 @@ function showMasterclassModal(id) {
 <!-- 4. Мастер классы - RASMLAR BILAN -->
 <section class="masterclass-section section">
     <div class="container">
-        <h2 class="section-title">Master class</h2>
-        <div class="row">
+        <h2 class="section-title text-center mb-5">Master class</h2>
+        <div class="row g-4">
             @forelse($masterClasses as $mc)
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="masterclass-card">
-                        <img src="{{ asset('storage/' . $mc->image) }}" 
-                             alt="{{ $mc->title }}" 
-                             class="masterclass-image"
-                             onerror="this.src='https://via.placeholder.com/400x200?text=ITech+Masterclass'">
+                <div class="col-lg-4 col-md-6">
+                    <div class="masterclass-card h-100 shadow-sm">
+                        <div class="masterclass-image-wrapper">
+                            <div class="date-badge">
+                                <i class="far fa-calendar-alt"></i> {{ $mc->event_date }}
+                            </div>
+                            <img src="{{ asset('storage/' . $mc->image) }}" 
+                                 alt="{{ $mc->title }}" 
+                                 class="masterclass-image"
+                                 onerror="this.src='https://via.placeholder.com/400x200?text=ITech+Masterclass'">
+                        </div>
                         
-                        <h3 class="masterclass-title">{{ $mc->title }}</h3>
-                        <p class="masterclass-date">
-                            <i class="far fa-calendar-alt"></i> {{ $mc->event_date }}
-                        </p>
-                        <p class="masterclass-description">
-                            {{ Str::limit($mc->description, 100) }}
-                        </p>
-                        
-                        <a href="{{ $mc->telegram_link }}" target="_blank" class="btn-masterclass text-center d-block" style="text-decoration: none;">
-    Ro‘yxatdan o‘tish
-</a>
-
-                        @if(auth()->check() && auth()->user()->role_id == 1)
-    <div class="mt-3 pt-3 border-top d-flex justify-content-center gap-2">
-        <a href="{{ route('master_class.edit', $mc->id) }}" class="btn btn-sm btn-outline-warning">Tahrirlash</a>
-        
-        <form id="delete-form-{{ $mc->id }}" action="{{ route('master_class.destroy', $mc->id) }}" method="POST">
-            @csrf 
-            @method('DELETE')
-            <button type="button" onclick="tasdiqlash({{ $mc->id }})" class="btn btn-sm btn-outline-danger">
-                O'chirish
-            </button>
-        </form>
-    </div>
-@endif
+                        <div class="card-body p-4 d-flex flex-column">
+                            <h3 class="masterclass-title h5 fw-bold mb-3" style="color: #333;">{{ $mc->title }}</h3>
+                            <p class="masterclass-description text-muted mb-4" style="font-size: 0.9rem; line-height: 1.6;">
+                                {{ Str::limit($mc->description, 100) }}
+                            </p>
+                            
+                            <div class="mt-auto">
+                                <a href="{{ $mc->telegram_link }}" target="_blank" class="btn btn-registration text-white w-100 mb-2">
+                                    <i class="fab fa-telegram-plane me-2"></i> Telegram orqali yozilish
+                                </a>
+                                <button onclick="showMasterclassModal({{ $mc->id }})" class="btn btn-outline-primary w-100 rounded-3">
+                                    <i class="fas fa-info-circle me-1"></i> Batafsil ma'lumot
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             @empty
-                <div class="col-12 text-center">
-                    <p class="text-muted">Hozircha yangi master-klasslar yo'q.</p>
+                <div class="col-12 text-center py-5">
+                    <img src="https://cdn-icons-png.flaticon.com/512/7486/7486744.png" width="80" class="opacity-50 mb-3">
+                    <p class="text-muted fs-5">Hozircha yangi master-klasslar yo'q.</p>
                 </div>
             @endforelse
         </div>
         
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center mt-5">
             {{ $masterClasses->links() }}
         </div>
     </div>

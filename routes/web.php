@@ -93,7 +93,8 @@ Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.in
 Route::delete('/feedback/{id}', [FeedbackController::class, 'destroy'])->name('feedback.destroy');
 Route::get('/feedback/statistics', [FeedbackController::class, 'statistics'])->name('feedback.statistics');
 Route::get('/user/{userId}/feedbacks', [FeedbackController::class, 'getUserFeedbacks'])->name('feedback.user');
-
+// routes/web.php ichida
+Route::get('/admin/master-class', [MasterClassController::class, 'adminIndex'])->name('master_class.admin_index');
 // ---------------------------------------------------------
 // 7. MASTERCLASSLARNI BOSHQARISH
 // ---------------------------------------------------------

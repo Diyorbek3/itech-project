@@ -8,24 +8,35 @@ use Illuminate\Support\Facades\Storage;
 
 class MasterClassController extends Controller
 {
-    // Hamma ko'radigan sahifa
+    /**
+     * Foydalanuvchilar ko'radigan asosiy sahifa
+     * Bu yerda eng yangi qo'shilganlari birinchi tursin (latest ishlatish o'rinli)
+     */
     public function index() {
         $masterClasses = MasterClass::latest()->paginate(6); 
         return view('career.index', compact('masterClasses'));
     }
 
-    // Qo'shish formasi
+    /**
+     * Qo'shish formasi
+     */
     public function create() {
         return view('master_classes.create');
     }
         
-    // Adminlar uchun boshqaruv sahifasi
+    /**
+     * Adminlar uchun boshqaruv sahibasi
+     * Tahrirlashda joyi o'zgarmasligi uchun orderBy('id', 'desc') qilamiz
+     */
     public function adminIndex() {
-        $masterClasses = MasterClass::latest()->paginate(10);
+        // latest() o'rniga orderBy('id', 'desc') ishlating
+        $masterClasses = MasterClass::orderBy('id', 'desc')->paginate(10);
         return view('master_classes.admin_index', compact('masterClasses'));
     }
 
-    // Saqlash mantiqi (Yangi master-klass qo'shish)
+    /**
+     * Yangi master-klassni saqlash
+     */
     public function store(Request $request) {
         $data = $request->validate([
             'title' => 'required|string|max:255',
@@ -40,17 +51,23 @@ class MasterClassController extends Controller
         }
 
         MasterClass::create($data);
-        return redirect()->route('career.index')->with('success', 'Muvaffaqiyatli qo\'shildi!');
+
+        // Qo'shgandan keyin admin panelga qaytish maqsadga muvofiq
+        return redirect()->route('master_class.admin_index')->with('success', 'Muvaffaqiyatli qo\'shildi!');
     }
 
-    // Tahrirlash sahifasini ochish
+    /**
+     * Tahrirlash sahifasi
+     */
     public function edit($id)
     {
         $mc = MasterClass::findOrFail($id);
         return view('master_classes.edit', compact('mc'));
     }
 
-    // Tahrirlangan ma'lumotni saqlash (UPDATE)
+    /**
+     * Ma'lumotlarni yangilash
+     */
     public function update(Request $request, $id)
     {
         $mc = MasterClass::findOrFail($id);
@@ -63,23 +80,22 @@ class MasterClassController extends Controller
             'telegram_link' => 'nullable|url',
         ]);
 
-        // Agar yangi rasm yuklangan bo'lsa
         if ($request->hasFile('image')) {
-            // Eski rasmni diskdan o'chiramiz
             if ($mc->image) {
                 Storage::disk('public')->delete($mc->image);
             }
-            // Yangi rasmni saqlaymiz va yo'lini $data massiviga yozamiz
             $data['image'] = $request->file('image')->store('master-classes', 'public');
         }
 
-        // Barcha ma'lumotlarni (shu jumladan telegram_link va yangi rasm yo'lini) bitta yangilaymiz
         $mc->update($data);
 
-        return redirect()->route('career.index')->with('success', 'Master-klass muvaffaqiyatli yangilandi!');
+        // Tahrirlashdan keyin admin panelga qaytish (career.index ga emas)
+        return redirect()->route('master_class.admin_index')->with('success', 'Master-klass muvaffaqiyatli yangilandi!');
     }
 
-    // O'chirish
+    /**
+     * O'chirish
+     */
     public function destroy($id) {
         $item = MasterClass::findOrFail($id);
         

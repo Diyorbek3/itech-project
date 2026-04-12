@@ -18,7 +18,7 @@ class CareerController extends Controller
     try {
         // ->get() o'rniga ->paginate(6) ishlatamiz (har sahifada 6 ta master-klass)
         $masterClasses = DB::table('master_classes')
-            ->orderBy('event_date', 'desc')
+            ->orderBy('id', 'desc')
             ->paginate(6); 
             
     } catch (\Exception $e) {
