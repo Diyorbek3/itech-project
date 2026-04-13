@@ -93,6 +93,8 @@
         width: 100%;
         margin-top: 1.5rem;
         transition: all 0.3s ease;
+        color: white !important;
+        cursor: pointer;
     }
     .btn-enroll:hover {
         transform: translateY(-2px);
@@ -178,7 +180,6 @@
         font-weight: 600;
         color: #3b82f6;
     }
-    /* Modal custom style */
     .custom-modal-overlay {
         position: fixed;
         top: 0;
@@ -264,6 +265,7 @@
         color: white;
         transition: 0.2s;
         margin-top: 0.5rem;
+        cursor: pointer;
     }
     .submit-modal-btn:hover {
         background: #1e5a7c;
@@ -283,15 +285,78 @@
     .close-modal-icon:hover {
         color: #1e293b;
     }
-    .success-toast-msg {
-        background: #dcfce7;
-        border-radius: 2rem;
-        padding: 0.7rem;
-        margin-top: 1rem;
+    .admin-toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1100;
+        min-width: 280px;
+        max-width: 360px;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        border-left: 5px solid #22c55e;
+        padding: 1rem 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        transform: translateX(120%);
+        transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        backdrop-filter: blur(8px);
+        background: rgba(255,255,255,0.98);
+    }
+    .admin-toast.show {
+        transform: translateX(0);
+    }
+    .admin-toast-icon {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.6rem;
+        flex-shrink: 0;
+        box-shadow: 0 4px 10px rgba(34,197,94,0.3);
+    }
+    .admin-toast-content {
+        flex: 1;
+    }
+    .admin-toast-title {
+        font-weight: 800;
+        font-size: 0.9rem;
         color: #15803d;
-        font-weight: 500;
-        font-size: 0.85rem;
-        display: none;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .admin-toast-note {
+        font-size: 0.8rem;
+        color: #eab308;
+        margin-top: 6px;
+        background: #fef9e3;
+        padding: 6px 10px;
+        border-radius: 12px;
+        display: inline-block;
+        font-weight: 600;
+    }
+    @keyframes toastPulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    .admin-toast.show .admin-toast-icon {
+        animation: toastPulse 0.5s ease;
+    }
+    @media (max-width: 576px) {
+        .admin-toast {
+            left: 20px;
+            right: 20px;
+            min-width: auto;
+        }
     }
     @media (max-width: 991px) {
         .course-title { font-size: 1.8rem; }
@@ -310,21 +375,21 @@
     <div class="course-hero">
         <div class="row align-items-center">
             <div class="col-lg-8">
-                <span class="course-badge"><i class="fas fa-server me-2"></i> Backend Development</span>
-                <h1 class="course-title">Backend Dasturchi</h1>
-                <p class="course-description">PHP, Laravel va MySQL bilan server tomon dasturlashni o'rganing. API, ma'lumotlar bazasi va autentifikatsiya kabi muhim mavzularni amaliy loyihalar bilan mustahkamlang.</p>
+                <span class="course-badge"><i class="fas fa-server me-2"></i> {{ __('messages.backend_badge') }}</span>
+                <h1 class="course-title">{{ __('messages.backend_title') }}</h1>
+                <p class="course-description">{{ __('messages.backend_description') }}</p>
                 <div class="d-flex gap-3 flex-wrap">
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-clock text-primary"></i><span>5 oy</span></div>
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>200+ talaba</span></div>
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-certificate text-primary"></i><span>Sertifikat beriladi</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-clock text-primary"></i><span>{{ __('messages.backend_duration') }}</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>{{ __('messages.backend_students') }} {{ __('messages.students_suffix') }}</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-certificate text-primary"></i><span>{{ __('messages.certificate') }}</span></div>
                 </div>
                 <div class="tech-stack">
-                    <span class="tech-badge">PHP</span>
-                    <span class="tech-badge">Laravel</span>
-                    <span class="tech-badge">MySQL</span>
-                    <span class="tech-badge">REST API</span>
-                    <span class="tech-badge">Git</span>
-                    <span class="tech-badge">Postman</span>
+                    <span class="tech-badge">{{ __('messages.backend_tech_1') }}</span>
+                    <span class="tech-badge">{{ __('messages.backend_tech_2') }}</span>
+                    <span class="tech-badge">{{ __('messages.backend_tech_3') }}</span>
+                    <span class="tech-badge">{{ __('messages.backend_tech_4') }}</span>
+                    <span class="tech-badge">{{ __('messages.backend_tech_5') }}</span>
+                    <span class="tech-badge">{{ __('messages.backend_tech_6') }}</span>
                 </div>
             </div>
             <div class="col-lg-4 text-center d-none d-lg-block">
@@ -332,219 +397,172 @@
             </div>
         </div>
     </div>
+
     <div class="row g-4">
         <div class="col-lg-8">
             <div class="info-card">
-                <h3 class="fw-bold mb-3">📖 Kurs haqida</h3>
-                <p class="text-secondary">Backend dasturchi kursida siz PHP dasturlash tilini, Laravel frameworkini, MySQL ma'lumotlar bazasini va REST API yaratishni o'rganasiz. Kurs davomida real loyihalar ustida ishlaysiz va bitiruv portfoliyo tayyorlaysiz.</p>
+                <h3 class="fw-bold mb-3">📖 {{ __('messages.course_about') }}</h3>
+                <p class="text-secondary">{{ __('messages.backend_full_desc') }}</p>
             </div>
+
             <div class="info-card">
-                <h3 class="fw-bold mb-3">📚 O'quv dasturi</h3>
+                <h3 class="fw-bold mb-3">📚 {{ __('messages.course_program') }}</h3>
                 <div class="row g-2">
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">PHP asoslari va OOP</div><div class="skill-desc">PHP sintaksisi, obyektga yo'naltirilgan dasturlash, namespace, traitlar</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Laravel Framework</div><div class="skill-desc">Eloquent ORM, Blade, Middleware, Service Provider, Facades</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">MySQL va ma'lumotlar bazasi</div><div class="skill-desc">Murakkab so'rovlar, indekslash, optimizatsiya, normalizatsiya</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">RESTful API yaratish</div><div class="skill-desc">API dizayn, autentifikatsiya (Sanctum/Passport), API resurslari</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Deployment va DevOps</div><div class="skill-desc">Git, CI/CD, server sozlamalari (Forge, Envoyer)</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">{{ __('messages.backend_module1_title') }}</div><div class="skill-desc">{{ __('messages.backend_module1_desc') }}</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">{{ __('messages.backend_module2_title') }}</div><div class="skill-desc">{{ __('messages.backend_module2_desc') }}</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">{{ __('messages.backend_module3_title') }}</div><div class="skill-desc">{{ __('messages.backend_module3_desc') }}</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">{{ __('messages.backend_module4_title') }}</div><div class="skill-desc">{{ __('messages.backend_module4_desc') }}</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">{{ __('messages.backend_module5_title') }}</div><div class="skill-desc">{{ __('messages.backend_module5_desc') }}</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">{{ __('messages.backend_module6_title') }}</div><div class="skill-desc">{{ __('messages.backend_module6_desc') }}</div></div></div></div>
                 </div>
             </div>
+
             <div class="info-card">
-                <h3 class="fw-bold mb-3">👨‍💻 Kimlar uchun?</h3>
-                <p class="text-secondary">Frontend dasturchilar, yangi boshlovchilar, o'z bilimini mustahkamoqchi bo'lgan dasturchilar va backend sohasiga kirishni xohlovchilar. Mantiqiy fikrlashni yaxshi ko'radiganlar uchun.</p>
+                <h3 class="fw-bold mb-3">👨‍💻 {{ __('messages.course_for_who') }}</h3>
+                <p class="text-secondary">{{ __('messages.backend_for_who') }}</p>
             </div>
+
             <div class="teacher-card">
                 <div class="teacher-avatar"><i class="fas fa-chalkboard-user"></i></div>
                 <div>
-                    <div class="teacher-name">Ergashev Sardor, Madiyarov Bilol</div>
-                    <div class="teacher-position">Senior Backend Developer</div>
+                    <div class="teacher-name">{{ __('messages.backend_teacher') }}</div>
+                    <div class="teacher-position">{{ __('messages.backend_teacher_position') }}</div>
                 </div>
             </div>
         </div>
+
         <div class="col-lg-4">
             <div class="price-card">
                 <div class="text-center mb-3">
-                    <span class="price-old">750,000 so'm</span>
-                    <div class="price-new">600,000 so'm</div>
-                    <span class="price-period">/ oy</span>
+                    <span class="price-old">{{ __('messages.backend_old_price') }}</span>
+                    <div class="price-new">{{ __('messages.backend_price') }}</div>
+                    <span class="price-period">{{ __('messages.per_month') }}</span>
                 </div>
                 <hr>
                 <div class="mb-3">
-                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-clock me-2 text-primary"></i> Davomiyligi</span><span class="fw-bold">5 oy</span></div>
-                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-calendar me-2 text-primary"></i> Darslar</span><span class="fw-bold">Haftada 3 kun</span></div>
-                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-language me-2 text-primary"></i> Til</span><span class="fw-bold">O'zbek tilida</span></div>
-                    <div class="d-flex justify-content-between"><span><i class="fas fa-certificate me-2 text-primary"></i> Sertifikat</span><span class="fw-bold">✓ Bor</span></div>
+                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-clock me-2 text-primary"></i> {{ __('messages.course_duration_label') }}</span><span class="fw-bold">{{ __('messages.backend_duration') }}</span></div>
+                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-calendar me-2 text-primary"></i> {{ __('messages.course_schedule') }}</span><span class="fw-bold">{{ __('messages.course_schedule_value') }}</span></div>
+                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-language me-2 text-primary"></i> {{ __('messages.course_language') }}</span><span class="fw-bold">{{ __('messages.course_language_value') }}</span></div>
+                    <div class="d-flex justify-content-between"><span><i class="fas fa-certificate me-2 text-primary"></i> {{ __('messages.certificate') }}</span><span class="fw-bold">✓ {{ __('messages.has') }}</span></div>
                 </div>
                 <hr>
                 <button id="openModalBtn" class="btn btn-enroll text-white">
-                    <i class="fas fa-bolt me-2"></i> Hoziroq yozilish
+                    <i class="fas fa-bolt me-2"></i> {{ __('messages.backend_enroll_button') }}
                 </button>
                 <div class="text-center mt-3">
-                    <small class="text-muted"><i class="fas fa-headset me-1"></i> 24/7 mentor yordami</small>
+                    <small class="text-muted"><i class="fas fa-headset me-1"></i> {{ __('messages.support_text') }}</small>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Custom Modal -->
+<!-- Modal -->
 <div id="customModal" class="custom-modal-overlay">
     <div class="modal-form-container">
         <button class="close-modal-icon" id="closeModalBtn"><i class="fas fa-times"></i></button>
-        <h3><i class="fas fa-pen-alt me-2" style="color:#1e4a76;"></i> Ro'yxatdan o'tish</h3>
-        <p>Backend Dasturchi kursiga ariza qoldiring</p>
-        
+        <h3><i class="fas fa-pen-alt me-2" style="color:#1e4a76;"></i> {{ __('messages.modal_enroll_title') }}</h3>
+        <p>{{ __('messages.backend_title') }} {{ __('messages.modal_enroll_subtitle') }}</p>
         <form id="applicationForm">
+            @csrf
             <div class="form-group-custom">
-                <label><i class="fas fa-user me-1"></i> Ism va Sharif</label>
-                <input type="text" id="fullName" placeholder="Masalan: Jahongir Alimov" required>
+                <label><i class="fas fa-user me-1"></i> {{ __('messages.form_name_label') }}</label>
+                <input type="text" id="fullName" placeholder="{{ __('messages.form_name_placeholder') }}" required>
             </div>
             <div class="form-group-custom">
-                <label><i class="fas fa-phone-alt me-1"></i> Telefon raqam</label>
-                <input type="tel" id="phone" placeholder="+998 90 123 45 67" required>
+                <label><i class="fas fa-phone-alt me-1"></i> {{ __('messages.form_phone_label') }}</label>
+                <input type="tel" id="phone" placeholder="{{ __('messages.form_phone_placeholder') }}" required>
             </div>
-            <button type="submit" class="submit-modal-btn"><i class="fas fa-paper-plane me-2"></i> Yuborish va ariza qoldirish</button>
-            <div id="successMsg" class="success-toast-msg">
-                ✅ Ariza muvaffaqiyatli qabul qilindi! Tez orada bog'lanamiz.
-            </div>
+            <button type="submit" class="submit-modal-btn"><i class="fas fa-paper-plane me-2"></i> {{ __('messages.form_submit_button') }}</button>
         </form>
         <hr>
-        <div style="font-size: 12px; color: #6c757d; text-align: center;">Sizning ma'lumotlaringiz maxfiy saqlanadi</div>
+        <div style="font-size: 12px; color: #6c757d; text-align: center;">{{ __('messages.form_privacy_note') }}</div>
     </div>
 </div>
+
+<!-- Toast notification -->
+<div id="adminToast" class="admin-toast">
+    <div class="admin-toast-icon">
+        <i class="fas fa-check-circle"></i>
+    </div>
+    <div class="admin-toast-content">
+        <div class="admin-toast-title">
+            <i class="fas fa-bell" style="font-size: 12px;"></i> ✅ {{ __('messages.toast_success_title') }}
+        </div>
+        <div class="admin-toast-note">
+            <i class="fas fa-clock me-1"></i> {{ __('messages.toast_note') }}
+        </div>
+    </div>
+</div>
+
+<!-- Footer ajralishi uchun bo'sh joy -->
+<div style="height: 120px; clear: both; display: block; width: 100%;"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     (function() {
-        // PHP orqali autorizatsiya holatini tekshirish
         const isLoggedIn = @json(auth()->check());
-        
         const modal = document.getElementById('customModal');
         const openBtn = document.getElementById('openModalBtn');
         const closeBtn = document.getElementById('closeModalBtn');
         const form = document.getElementById('applicationForm');
         const fullnameField = document.getElementById('fullName');
         const phoneField = document.getElementById('phone');
-        
-        // Kurs nomini avtomatik olish (class="course-title" dan)
-        const courseName = document.querySelector('.course-title')?.innerText || "Backend Dasturchi";
-        
-        // Admin toast elementi (agar mavjud bo'lmasa, muammo yo'q)
         const adminToast = document.getElementById('adminToast');
 
         function openModal() {
             if (modal) {
                 modal.classList.add('active');
-                fullnameField.value = '';
-                phoneField.value = '';
+                if (fullnameField) fullnameField.value = '';
+                if (phoneField) phoneField.value = '';
             }
         }
-
         function closeModal() {
-            if (modal) {
-                modal.classList.remove('active');
-            }
+            if (modal) modal.classList.remove('active');
         }
-        
-        // Autorizatsiyani tekshirib, modalni ochish
         function checkAuthAndOpenModal() {
             if (isLoggedIn) {
                 openModal();
             } else {
                 Swal.fire({
                     icon: 'warning',
-                    title: 'Autorizatsiya talab qilinadi',
-                    text: 'Iltimos, avval tizimga kiring yoki ro\'yxatdan o\'ting!',
-                    confirmButtonText: 'Tushundim',
-                    confirmButtonColor: '#3b82f6',
-                    backdrop: true
+                    title: '{{ __("messages.auth_required_title") }}',
+                    text: '{{ __("messages.auth_required_text") }}',
+                    confirmButtonText: '{{ __("messages.auth_confirm_button") }}',
+                    confirmButtonColor: '#3b82f6'
                 });
             }
         }
-        
-        // Notification chiqarish
         function showAdminNotification() {
             if (adminToast) {
                 adminToast.classList.add('show');
-                setTimeout(() => {
-                    adminToast.classList.remove('show');
-                }, 5000);
-            } else {
-                // Agar adminToast elementi bo'lmasa, oddiy alert
-                alert("Arizangiz qabul qilindi! Tez orada bog'lanamiz.");
+                setTimeout(() => adminToast.classList.remove('show'), 5000);
             }
         }
-
-        // Modalni ochish tugmasi - AUTORIZATSIYA TEKSHIRUVI BILAN
-        if (openBtn) {
-            openBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                checkAuthAndOpenModal();  // 🔐 MUHIM: autorizatsiya tekshiruvi
-            });
-        }
-
-        // Modalni yopish
-        if (closeBtn) {
-            closeBtn.addEventListener('click', closeModal);
-        }
-
-        // Overlay bosganda yopish
-        if (modal) {
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) closeModal();
-            });
-        }
-
-        // Formani yuborish
+        if (openBtn) openBtn.addEventListener('click', (e) => { e.preventDefault(); checkAuthAndOpenModal(); });
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+        if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
         if (form) {
-            form.addEventListener('submit', function(event) {
+            form.addEventListener('submit', (event) => {
                 event.preventDefault();
-
-                const fullname = fullnameField.value.trim();
-                const phone = phoneField.value.trim();
-
+                const fullname = fullnameField ? fullnameField.value.trim() : '';
+                const phone = phoneField ? phoneField.value.trim() : '';
                 if (!fullname) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Xatolik',
-                        text: 'Iltimos, Ism va Sharifni kiriting!',
-                        confirmButtonColor: '#3b82f6'
-                    });
-                    fullnameField.focus();
+                    Swal.fire({ icon: 'error', title: '{{ __("messages.error_title") }}', text: '{{ __("messages.error_name_required") }}', confirmButtonColor: '#3b82f6' });
+                    if (fullnameField) fullnameField.focus();
                     return;
                 }
                 if (!phone) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Xatolik',
-                        text: 'Telefon raqamni kiriting!',
-                        confirmButtonColor: '#3b82f6'
-                    });
-                    phoneField.focus();
+                    Swal.fire({ icon: 'error', title: '{{ __("messages.error_title") }}', text: '{{ __("messages.error_phone_required") }}', confirmButtonColor: '#3b82f6' });
+                    if (phoneField) phoneField.focus();
                     return;
                 }
-
-                // Telegram botga yuborish
                 const token = "8586485983:AAF-7NhRKL72j3zXWUdznuHFv3rHCh1SIVc";
                 const chatId = "-1003836558266";
-                const text = `🆕 YANGI ARIZA!\n\n📚 Kurs: ${courseName}\n👤 Ism: ${fullname}\n📞 Telefon: ${phone}\n⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}\n\n📌 Holat: Tez orada ko'rib chiqiladi`;
-                
+                const text = `🆕 YANGI ARIZA!\n\n📚 Kurs: {{ __('messages.backend_title') }}\n👤 Ism: ${fullname}\n📞 Telefon: ${phone}\n⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}\n\n📌 Holat: {{ __("messages.toast_note") }}`;
                 const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
-                
-                fetch(url)
-                .then(function() {
-                    closeModal();
-                    fullnameField.value = '';
-                    phoneField.value = '';
-                    showAdminNotification();
-                })
-                .catch(function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Xatolik',
-                        text: 'Xatolik yuz berdi! Iltimos, qayta urinib ko\'ring.',
-                        confirmButtonColor: '#3b82f6'
-                    });
-                });
+                fetch(url).then(() => { closeModal(); if (fullnameField) fullnameField.value = ''; if (phoneField) phoneField.value = ''; showAdminNotification(); })
+                .catch(() => { Swal.fire({ icon: 'error', title: '{{ __("messages.error_title") }}', text: '{{ __("messages.error_general") }}', confirmButtonColor: '#3b82f6' }); });
             });
         }
     })();

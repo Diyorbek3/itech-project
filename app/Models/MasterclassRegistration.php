@@ -1,10 +1,11 @@
 <?php
-
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-
-class MasterclassRegistration extends Model
-{
-    //
-}
+Schema::create('masterclass_registrations', function (Blueprint $table) {
+    $table->id();
+    $table->unsignedBigInteger('masterclass_id');
+    $table->string('name');
+    $table->string('phone');
+    $table->string('email')->nullable();
+    $table->timestamps();
+    
+    $table->foreign('masterclass_id')->references('id')->on('master_classes')->onDelete('cascade');
+});

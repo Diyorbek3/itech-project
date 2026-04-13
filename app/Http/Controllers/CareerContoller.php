@@ -1,37 +1,38 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CareerController extends Controller
 {
     /**
-     * Bosh sahifa
+     * Bosh sahifa (index method)
      */
     public function index()
-{
-    try {
-        // ->get() o'rniga ->paginate(6) ishlatamiz (har sahifada 6 ta master-klass)
-        $masterClasses = DB::table('master_classes')
-            ->orderBy('id', 'desc')
-            ->paginate(6); 
-            
-    } catch (\Exception $e) {
-        // Agar xato bo'lsa, bo'sh pagination obyektini qaytaramiz
-        $masterClasses = new \Illuminate\Pagination\LengthAwarePaginator([], 0, 6);
-        Log::warning("Master classes xatolik: " . $e->getMessage());
+    {
+        try {
+            // Masterclass'larni pagination bilan olish
+            $masterClasses = DB::table('master_classes')
+                ->orderBy('id', 'desc')
+                ->paginate(6);
+                
+        } catch (\Exception $e) {
+            // Agar xato bo'lsa, bo'sh pagination obyektini qaytaramiz
+            $masterClasses = new LengthAwarePaginator([], 0, 6);
+            Log::warning("Master classes xatolik: " . $e->getMessage());
+        }
+
+        return view('career.index', compact('masterClasses'));
     }
 
-    return view('career.index', compact('masterClasses'));
-}
-
     /**
-     * Fikr-mulohazani saqlash - avval Telegramga, keyin MBga
+     * Fikr-mulohazani saqlash - Telegramga yuborish
      */
     public function storeFeedback(Request $request)
     {
@@ -41,19 +42,19 @@ class CareerController extends Controller
             'email' => 'required|email|max:255',
             'message' => 'required|string|min:5|max:5000'
         ], [
-            'name.required' => 'Пожалуйста, укажите ваше имя',
-            'name.max' => 'Имя не должно превышать 255 символов',
-            'email.required' => 'Пожалуйста, укажите email',
-            'email.email' => 'Введите корректный email адрес',
-            'message.required' => 'Пожалуйста, введите текст отзыва',
-            'message.min' => 'Отзыв должен содержать минимум 5 символов',
-            'message.max' => 'Отзыв не должен превышать 5000 символов'
+            'name.required' => 'Iltimos, ismingizni kiriting',
+            'name.max' => 'Ism 255 ta belgidan oshmasligi kerak',
+            'email.required' => 'Iltimos, email manzilingizni kiriting',
+            'email.email' => 'To\'g\'ri email manzil kiriting',
+            'message.required' => 'Iltimos, xabar matnini kiriting',
+            'message.min' => 'Xabar kamida 5 ta belgidan iborat bo\'lishi kerak',
+            'message.max' => 'Xabar 5000 ta belgidan oshmasligi kerak'
         ]);
 
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'message' => 'Ошибка валидации',
+                'message' => 'Validatsiya xatoligi',
                 'errors' => $validator->errors()
             ], 422);
         }
@@ -61,16 +62,16 @@ class CareerController extends Controller
         // 2. Ma'lumotlarni tayyorlash
         $validatedData = $validator->validated();
 
-        // 3. AVVAL Telegramga yuboramiz
-        $telegramResult = $this->sendToTelegram($validatedData);
+        // 3. Telegramga yuboramiz
+        $telegramResult = $this->sendToTelegram($validatedData, 'feedback');
 
-        // 4. KEYIN bazaga saqlaymiz
+        // 4. Bazaga saqlaymiz
         $feedbackId = $this->saveToDatabase($validatedData, $telegramResult, $request);
 
         if (!$feedbackId) {
             return response()->json([
                 'success' => false,
-                'message' => 'Ошибка при сохранении отзыва в базу данных'
+                'message' => 'Fikrni saqlashda xatolik yuz berdi'
             ], 500);
         }
 
@@ -78,17 +79,14 @@ class CareerController extends Controller
         if ($telegramResult['success']) {
             return response()->json([
                 'success' => true,
-                'message' => 'Спасибо за ваш отзыв! Он успешно отправлен в Telegram и сохранен в базе данных.',
-                'feedback_id' => $feedbackId,
-                'telegram_sent' => true
+                'message' => 'Fikringiz uchun rahmat! Xabaringiz Telegramga yuborildi.',
+                'feedback_id' => $feedbackId
             ]);
         } else {
             return response()->json([
                 'success' => true,
-                'message' => 'Спасибо за отзыв! Он сохранен в базе данных, но не был отправлен в Telegram (ошибка: ' . ($telegramResult['error'] ?? 'неизвестная ошибка') . ')',
-                'feedback_id' => $feedbackId,
-                'telegram_sent' => false,
-                'telegram_error' => $telegramResult['error']
+                'message' => 'Fikringiz uchun rahmat! Xabaringiz saqlandi.',
+                'feedback_id' => $feedbackId
             ]);
         }
     }
@@ -96,8 +94,9 @@ class CareerController extends Controller
     /**
      * Telegramga xabar yuborish
      */
-    private function sendToTelegram($data)
+    private function sendToTelegram($data, $type = 'feedback')
     {
+        // Yangi bot token va chat ID
         $botToken = env('TELEGRAM_BOT_TOKEN');
         $chatId = env('TELEGRAM_CHAT_ID');
 
@@ -105,11 +104,16 @@ class CareerController extends Controller
             Log::error('Telegram credentials not configured');
             return [
                 'success' => false,
-                'error' => 'Telegram бот не настроен.'
+                'error' => 'Telegram bot sozlanmagan.'
             ];
         }
 
-        $message = $this->formatTelegramMessage($data);
+        // Xabar turiga qarab formatlash
+        if ($type == 'feedback') {
+            $message = $this->formatFeedbackMessage($data);
+        } else {
+            $message = $this->formatMasterclassMessage($data);
+        }
 
         try {
             $response = Http::timeout(10)->post("https://api.telegram.org/bot{$botToken}/sendMessage", [
@@ -122,16 +126,16 @@ class CareerController extends Controller
             $result = $response->json();
 
             if ($response->successful() && isset($result['ok']) && $result['ok'] === true) {
+                Log::info('Telegram message sent successfully');
                 return [
                     'success' => true,
-                    'response' => json_encode($result),
                     'message_id' => $result['result']['message_id'] ?? null
                 ];
             } else {
+                Log::error('Telegram API error: ' . json_encode($result));
                 return [
                     'success' => false,
-                    'error' => $result['description'] ?? 'Unknown Telegram API error',
-                    'response' => json_encode($result)
+                    'error' => $result['description'] ?? 'Telegram API xatoligi'
                 ];
             }
         } catch (\Exception $e) {
@@ -140,41 +144,85 @@ class CareerController extends Controller
         }
     }
 
-    private function formatTelegramMessage($data)
+    /**
+     * Feedback xabarini formatlash
+     */
+    private function formatFeedbackMessage($data)
     {
-        $userType = auth()->check() ? '👤 <b>Авторизованный пользователь</b>' : '👥 <b>Гость</b>';
+        $userType = auth()->check() ? '👤 <b>Avtorizatsiya qilingan foydalanuvchi</b>' : '👥 <b>Mehmon</b>';
         $userId = auth()->check() ? ' (ID: ' . auth()->id() . ')' : '';
 
-        $message = "🔔 <b>НОВЫЙ ОТЗЫВ НА САЙТЕ</b> 🔔\n\n";
+        $message = "🔔 <b>SAYTDAN YANGI FIKR-MULOHAZA</b> 🔔\n\n";
         $message .= "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-        $message .= "📋 <b>ИНФОРМАЦИЯ ОБ ОТПРАВИТЕЛЕ</b>\n";
+        $message .= "📋 <b>JO'NATUVCHI MA'LUMOTLARI</b>\n";
         $message .= "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
         $message .= "{$userType}{$userId}\n";
-        $message .= "📛 <b>Имя:</b> " . htmlspecialchars($data['name']) . "\n";
+        $message .= "📛 <b>Ism:</b> " . htmlspecialchars($data['name']) . "\n";
         $message .= "📧 <b>Email:</b> " . htmlspecialchars($data['email']) . "\n";
-        $message .= "⏰ <b>Время:</b> " . date('d.m.Y H:i:s') . "\n\n";
+        $message .= "⏰ <b>Vaqt:</b> " . date('d.m.Y H:i:s') . "\n\n";
         $message .= "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-        $message .= "💬 <b>ТЕКСТ СООБЩЕНИЯ</b>\n";
+        $message .= "💬 <b>XABAR MATNI</b>\n";
         $message .= "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
         $message .= htmlspecialchars($data['message']) . "\n";
         $message .= "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n";
-        $message .= "📊 <b>Статус:</b> 🟢 Новый\n";
-        $message .= "🌐 <b>Источник:</b> Сайт ITech Academy\n";
+        $message .= "📊 <b>Holat:</b> 🟢 Yangi\n";
+        $message .= "🌐 <b>Manba:</b> ITech Academy sayti\n";
 
         return $message;
     }
 
+    /**
+     * Masterclass xabarini formatlash
+     */
+    private function formatMasterclassMessage($data)
+    {
+        $userStatus = auth()->check() ? '✅ Avtorizatsiya qilingan' : '👤 Mehmon';
+        $userId = auth()->check() ? ' (ID: ' . auth()->id() . ')' : '';
+
+        $message = "🎓 <b>MASTERCLASSGA YANGI ARIZA</b> 🎓\n\n";
+        $message .= "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+        $message .= "📚 <b>MASTERCLASS MA'LUMOTLARI</b>\n";
+        $message .= "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+        $message .= "📖 <b>Nomi:</b> " . htmlspecialchars($data['masterclass_title']) . "\n";
+        $message .= "📅 <b>Sana:</b> " . ($data['masterclass_date'] ?? 'Ko\'rsatilmagan') . "\n";
+        $message .= "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+        $message .= "👤 <b>ISHTIROKCHI MA'LUMOTLARI</b>\n";
+        $message .= "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+        $message .= "Holat: {$userStatus}{$userId}\n";
+        $message .= "📛 <b>Ism:</b> " . htmlspecialchars($data['name']) . "\n";
+        $message .= "📞 <b>Telefon:</b> " . htmlspecialchars($data['phone']) . "\n";
+        $message .= "⏰ <b>Ariza vaqti:</b> " . date('d.m.Y H:i:s') . "\n";
+        $message .= "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n";
+        $message .= "📊 <b>Holat:</b> 🟢 Yangi\n";
+        $message .= "🌐 <b>Manba:</b> ITech Academy sayti\n";
+
+        return $message;
+    }
+
+    /**
+     * Bazaga saqlash
+     */
     private function saveToDatabase($data, $telegramResult, $request)
     {
         try {
-            return DB::table('tb_feedbacks')->insertGetId([
+            $tableName = 'tb_feedbacks';
+            
+            if (!Schema::hasTable($tableName)) {
+                $tableName = 'feedbacks';
+            }
+            
+            if (!Schema::hasTable($tableName)) {
+                Log::warning("Table {$tableName} does not exist");
+                return true;
+            }
+            
+            return DB::table($tableName)->insertGetId([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'message' => $data['message'],
                 'user_id' => auth()->check() ? auth()->id() : null,
                 'telegram_sent' => $telegramResult['success'] ? 1 : 0,
-                'telegram_response' => $telegramResult['response'] ?? null,
-                'telegram_error' => $telegramResult['error'] ?? null,
+                'telegram_response' => $telegramResult['success'] ? 'Sent' : ($telegramResult['error'] ?? null),
                 'ip_address' => $request->ip(),
                 'user_agent' => $request->userAgent(),
                 'created_at' => now(),
@@ -186,83 +234,100 @@ class CareerController extends Controller
         }
     }
 
-    public function getAllFeedbacks()
+    /**
+     * Masterclass haqida ma'lumot olish (AJAX uchun)
+     */
+    public function getMasterclass($id)
     {
         try {
-            $feedbacks = DB::table('tb_feedbacks')
-                ->orderBy('created_at', 'desc')
-                ->paginate(20);
-
-            return response()->json(['success' => true, 'data' => $feedbacks]);
-        } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => 'Ошибка при получении отзывов'], 500);
-        }
-    }
-
-    public function getFeedback($id)
-    {
-        try {
-            $feedback = DB::table('tb_feedbacks')->where('id', $id)->first();
-            if (!$feedback) {
-                return response()->json(['success' => false, 'message' => 'Отзыв не найден'], 404);
+            $masterclass = DB::table('master_classes')->where('id', $id)->first();
+            
+            if (!$masterclass) {
+                return response()->json(['error' => 'Masterclass topilmadi'], 404);
             }
-            return response()->json(['success' => true, 'data' => $feedback]);
-        } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => 'Ошибка'], 500);
-        }
-    }
-
-    public function resendToTelegram($id)
-    {
-        try {
-            $feedback = DB::table('tb_feedbacks')->where('id', $id)->first();
-            if (!$feedback) {
-                return response()->json(['success' => false, 'message' => 'Отзыв не найден'], 404);
+            
+            // Rasm URL'ini to'liq qilib qaytarish
+            if ($masterclass->image && !str_starts_with($masterclass->image, 'http')) {
+                $masterclass->image_url = asset('storage/' . $masterclass->image);
+            } else {
+                $masterclass->image_url = $masterclass->image ?? null;
             }
-
-            $telegramResult = $this->sendToTelegram([
-                'name' => $feedback->name,
-                'email' => $feedback->email,
-                'message' => $feedback->message
-            ]);
-
-            DB::table('tb_feedbacks')->where('id', $id)->update([
-                'telegram_sent' => $telegramResult['success'] ? 1 : 0,
-                'telegram_response' => $telegramResult['response'] ?? null,
-                'telegram_error' => $telegramResult['error'] ?? null,
-                'updated_at' => now()
-            ]);
-
-            return response()->json(['success' => $telegramResult['success'], 'message' => $telegramResult['success'] ? 'Успешно' : 'Ошибка']);
+            
+            return response()->json($masterclass);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+            Log::error('Get masterclass error: ' . $e->getMessage());
+            return response()->json(['error' => 'Xatolik yuz berdi'], 500);
         }
     }
 
-    public function getFeedbackStats()
+    /**
+     * Masterclassga ro'yxatdan o'tish (Telegramga yuborish)
+     */
+    public function registerForMasterclass(Request $request)
     {
+        // 1. Validatsiya
+        $validator = Validator::make($request->all(), [
+            'masterclass_id' => 'required|integer',
+            'name' => 'required|string|min:2|max:255',
+            'phone' => 'required|string|min:9|max:20'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Ma\'lumotlarni to\'g\'ri kiriting',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        // 2. Masterclass ma'lumotlarini olish
+        $masterclass = DB::table('master_classes')->where('id', $request->masterclass_id)->first();
+        
+        if (!$masterclass) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Masterclass topilmadi'
+            ], 404);
+        }
+        
+        // 3. Telegramga yuborish uchun ma'lumot tayyorlash
+        $telegramData = [
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'masterclass_title' => $masterclass->title,
+            'masterclass_date' => $masterclass->event_date ?? $masterclass->date ?? 'Ko\'rsatilmagan'
+        ];
+        
+        // 4. Telegramga yuborish
+        $telegramResult = $this->sendToTelegram($telegramData, 'masterclass');
+        
+        // 5. Bazaga saqlash (agar jadval mavjud bo'lsa)
         try {
+            if (Schema::hasTable('masterclass_registrations')) {
+                DB::table('masterclass_registrations')->insert([
+                    'masterclass_id' => $request->masterclass_id,
+                    'user_id' => auth()->check() ? auth()->id() : null,
+                    'name' => $request->name,
+                    'phone' => $request->phone,
+                    'telegram_sent' => $telegramResult['success'] ? 1 : 0,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            }
+        } catch (\Exception $e) {
+            Log::error('Masterclass registration save error: ' . $e->getMessage());
+        }
+        
+        if ($telegramResult['success']) {
             return response()->json([
                 'success' => true,
-                'data' => [
-                    'total' => DB::table('tb_feedbacks')->count(),
-                    'telegram_sent' => DB::table('tb_feedbacks')->where('telegram_sent', 1)->count(),
-                    'telegram_failed' => DB::table('tb_feedbacks')->where('telegram_sent', 0)->count(),
-                    'today' => DB::table('tb_feedbacks')->whereDate('created_at', today())->count(),
-                ]
+                'message' => 'Siz muvaffaqiyatli ro\'yxatdan o\'tdingiz! Tez orada siz bilan bog\'lanamiz.'
             ]);
-        } catch (\Exception $e) {
-            return response()->json(['success' => false], 500);
-        }
-    }
-
-    public function deleteFeedback($id)
-    {
-        try {
-            $deleted = DB::table('tb_feedbacks')->where('id', $id)->delete();
-            return response()->json(['success' => (bool)$deleted]);
-        } catch (\Exception $e) {
-            return response()->json(['success' => false], 500);
+        } else {
+            return response()->json([
+                'success' => true,
+                'message' => 'Arizangiz qabul qilindi.'
+            ]);
         }
     }
 }

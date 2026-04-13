@@ -1,173 +1,179 @@
 @extends('layouts.app')
 
 @section('styles')
-<style>
-/* Modern Card Styles */
-.modern-card {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    border-radius: 20px;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    position: relative;
-}
+    <style>
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
 
-.modern-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-    transform: scaleX(0);
-    transition: transform 0.4s ease;
-}
+        .feedback-rotator:hover {
+            transform: scale(1.02);
+            box-shadow: 0 30px 50px rgba(0,0,0,0.3);
+        }
+        /* Modern Card Styles */
+        .modern-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
 
-.modern-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
+        .modern-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
 
-.modern-card:hover::before {
-    transform: scaleX(1);
-}
+        .modern-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
 
-.card-img-wrapper {
-    position: relative;
-    overflow: hidden;
-    height: 240px;
-}
+        .modern-card:hover::before {
+            transform: scaleX(1);
+        }
 
-.card-img-top {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-}
+        .card-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 240px;
+        }
 
-.modern-card:hover .card-img-top {
-    transform: scale(1.1);
-}
+        .card-img-top {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
 
-.card-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
+        .modern-card:hover .card-img-top {
+            transform: scale(1.1);
+        }
 
-.modern-card:hover .card-overlay {
-    opacity: 1;
-}
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
 
-.overlay-link {
-    color: white;
-    text-decoration: none;
-    padding: 12px 24px;
-    border: 2px solid white;
-    border-radius: 50px;
-    transition: all 0.3s ease;
-    font-weight: 500;
-}
+        .modern-card:hover .card-overlay {
+            opacity: 1;
+        }
 
-.overlay-link:hover {
-    background: white;
-    color: #333;
-    transform: scale(1.05);
-}
+        .overlay-link {
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border: 2px solid white;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
 
-.card-body {
-    padding: 1.5rem;
-}
+        .overlay-link:hover {
+            background: white;
+            color: #333;
+            transform: scale(1.05);
+        }
 
-.project-icon {
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.5rem;
-}
+        .card-body {
+            padding: 1.5rem;
+        }
 
-.card-title {
-    font-size: 1.35rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-    color: #2d3748;
-}
+        .project-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
 
-.card-text {
-    color: #718096;
-    line-height: 1.6;
-    margin-bottom: 1.25rem;
-}
+        .card-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #2d3748;
+        }
 
-.btn-link {
-    color: #667eea;
-    text-decoration: none;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s ease;
-}
+        .card-text {
+            color: #718096;
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+        }
 
-.btn-link i {
-    transition: transform 0.3s ease;
-}
+        .btn-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
 
-.btn-link:hover {
-    color: #764ba2;
-    gap: 12px;
-}
+        .btn-link i {
+            transition: transform 0.3s ease;
+        }
 
-.btn-link:hover i {
-    transform: translateX(5px);
-}
+        .btn-link:hover {
+            color: #764ba2;
+            gap: 12px;
+        }
 
-.gradient-text {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
+        .btn-link:hover i {
+            transform: translateX(5px);
+        }
 
-.divider {
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-    border-radius: 3px;
-}
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .card-img-wrapper {
-        height: 200px;
-    }
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 3px;
+        }
+
+        @media (max-width: 768px) {
+            .card-img-wrapper {
+                height: 200px;
+            }
+            .card-body {
+                padding: 1.25rem;
+            }
+            .card-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    .card-body {
-        padding: 1.25rem;
-    }
-    
-    .card-title {
-        font-size: 1.2rem;
-    }
-}
-</style>
-
-<!-- Make sure to include Font Awesome if not already included -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .custom-shape {
             border-top-left-radius: 120px;
@@ -231,7 +237,6 @@
             justify-content: center;
         }
 
-        /* Projects bo'limini siqish */
         .cards-2 {
             padding-top: 1.5rem !important;
             padding-bottom: 1rem !important;
@@ -293,7 +298,6 @@
             font-weight: 600 !important;
         }
 
-        /* Yon tomondan siqish - kartalar orasidagi gorizontal masofa minimal */
         .cards-2 .col-md-6,
         .cards-2 .col-lg-4 {
             margin-bottom: 2rem !important;
@@ -303,17 +307,14 @@
             flex: 0 0 33.333% !important;
         }
 
-        /* Responsive */
         @media (max-width: 991px) {
             .cards-2 .col-md-6 {
                 max-width: 50% !important;
                 flex: 0 0 50% !important;
             }
-
             .cards-2 .card-title {
                 font-size: 1.3rem !important;
             }
-
             .cards-2 .card-text {
                 font-size: 1rem !important;
             }
@@ -324,16 +325,13 @@
                 max-width: 100% !important;
                 flex: 0 0 100% !important;
             }
-
             .cards-2 .container {
                 padding-left: 0.5rem !important;
                 padding-right: 0.5rem !important;
             }
-
             .cards-2 .card-title {
                 font-size: 1.2rem !important;
             }
-
             .cards-2 .card-text {
                 font-size: 0.95rem !important;
             }
@@ -352,10 +350,6 @@
             font-weight: 600;
             color: #1e293b;
         }
-
-        /* Projects bo'limi */
-        /* Projects bo'limi */
-
 
         @media (max-width: 1200px) {
             .cards-1 .card-grid {
@@ -452,7 +446,6 @@
                 flex-direction: column;
                 align-items: stretch;
             }
-
             .auth-btn {
                 margin: 4px 0;
                 width: 100%;
@@ -542,12 +535,10 @@
             cursor: pointer;
         }
 
-        /* Loading animatsiyasi 1 sekund */
         .spinner-border-sm {
             animation-duration: 1s;
         }
 
-        /* Tugmaga silliq o'tish effekti */
         .form-control-submit-button {
             transition: all 0.3s ease;
             display: inline-flex;
@@ -562,7 +553,6 @@
             cursor: not-allowed;
         }
 
-        /* Alert xabarlar uchun */
         .alert {
             padding: 12px 15px;
             border-radius: 5px;
@@ -581,7 +571,6 @@
             border: 1px solid #f5c6cb;
         }
 
-        /* Application Modal (ariza popup) */
         .application-modal-overlay {
             position: fixed;
             top: 0;
@@ -682,23 +671,16 @@
             transform: scale(0.98);
         }
 
-        /* Contact bo'limidagi rasm uchun chiroyli style */
         #contact .image-container img {
             width: 100%;
             max-width: 520px;
-            /* o'lchamni biroz kattalashtirdim */
             height: auto;
             border-radius: 30px;
-            /* yumshoqroq va chiroyli */
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
             transition: all 0.4s ease;
             object-fit: cover;
         }
 
-        /* Hover effekti qo'shdim */
-
-
-        /* Qo'shimcha premium ko'rinish uchun */
         #contact .image-container {
             position: relative;
         }
@@ -715,7 +697,6 @@
             z-index: 1;
         }
 
-        /* Neumorphism Cards */
         .project-card-neo {
             background: #e0e5ec;
             border-radius: 40px;
@@ -774,112 +755,348 @@
             box-shadow: inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff;
             gap: 12px;
         }
+
+        .registration-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1070;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .registration-modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .registration-modal {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            max-width: 450px;
+            width: 90%;
+            border-radius: 32px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .registration-modal-overlay.active .registration-modal {
+            transform: scale(1);
+        }
+
+        .registration-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.2rem auto;
+        }
+
+        .registration-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .registration-modal h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 0.75rem;
+        }
+
+        .registration-modal p {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .registration-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-register-redirect {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border: none;
+            padding: 12px 28px;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-register-redirect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+            color: white;
+        }
+
+        .btn-register-close {
+            background: transparent;
+            border: 1px solid #cbd5e1;
+            padding: 12px 28px;
+            border-radius: 50px;
+            color: #64748b;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-register-close:hover {
+            background: #f1f5f9;
+            border-color: #94a3b8;
+        }
     </style>
 @endsection
 
 @section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // ========== REGISTRATION MODAL ==========
+    function showRegistrationModal() {
+        let modal = document.getElementById('registrationModal');
+        if (modal) {
+            modal.classList.add('active');
+            if (window.regModalTimeout) clearTimeout(window.regModalTimeout);
+            window.regModalTimeout = setTimeout(function () {
+                closeRegistrationModal();
+            }, 5000);
+        }
+    }
 
-    <script>
-        $(document).ready(function () {
-            $("#contactForm").submit(function (e) {
-                e.preventDefault();
+    function closeRegistrationModal() {
+        const modal = document.getElementById('registrationModal');
+        if (modal) {
+            modal.classList.remove('active');
+            if (window.regModalTimeout) {
+                clearTimeout(window.regModalTimeout);
+                window.regModalTimeout = null;
+            }
+        }
+    }
 
-                const submitBtn = document.getElementById('submitBtn');
-                const btnText = document.getElementById('btnText');
-                const btnSpinner = document.getElementById('btnSpinner');
+    // ========== APPLICATION SUCCESS MODAL ==========
+    function showApplicationSuccessModal() {
+        let modal = document.getElementById('applicationSuccessModal');
+        if (modal) {
+            updateModalLanguage();
+            modal.classList.add('active');
+            if (window.modalTimeout) clearTimeout(window.modalTimeout);
+            window.modalTimeout = setTimeout(function () {
+                closeApplicationModal();
+            }, 5000);
+        }
+    }
 
-                // Loading holatiga o'tkazish
-                submitBtn.disabled = true;
-                btnText.style.display = 'none';
-                btnSpinner.style.display = 'inline-block';
+    function updateModalLanguage() {
+        const modalTitle = document.getElementById('modalTitle');
+        const modalCourse = document.getElementById('modalCourse');
+        const modalMessage = document.getElementById('modalMessage');
+        const modalPhone = document.getElementById('modalPhone');
+        const modalTelegram = document.getElementById('modalTelegram');
+        const modalBtnText = document.getElementById('modalBtnText');
 
-                var form = $(this);
+        if (modalTitle) modalTitle.textContent = '{{ __("messages.application_received") }}';
+        if (modalCourse) modalCourse.textContent = '{{ __("messages.courses") }}';
+        if (modalMessage) modalMessage.textContent = '{{ __("messages.we_will_contact") }}';
+        if (modalPhone) modalPhone.textContent = '{{ __("messages.contact_phone") }}';
+        if (modalTelegram) modalTelegram.textContent = '{{ __("messages.contact_telegram") }}';
+        if (modalBtnText) modalBtnText.textContent = '{{ __("messages.understand") }}';
+    }
 
-                $.ajax({
-                    url: '/contact-send',
-                    type: "POST",
-                    data: form.serialize(),
-                    success: function (result) {
-                        // Modal popup chiqarish
-                        showApplicationSuccessModal();
-                        form[0].reset();
-                    },
-                    error: function (data) {
-                        let message = "Xatolik yuz berdi!";
-                        if (data.responseJSON && data.responseJSON.message) {
-                            message = data.responseJSON.message;
-                        }
-                        Swal.fire({
-                            icon: 'error',
-                            toast: true,
-                            position: 'top-end',
-                            title: message,
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                            background: '#fdd3d6',
-                            color: '#000000'
-                        });
-                    },
-                    complete: function () {
-                        // Tugmani qayta tiklash
-                        submitBtn.disabled = false;
-                        btnText.style.display = 'inline';
-                        btnSpinner.style.display = 'none';
+    function closeApplicationModal() {
+        const modal = document.getElementById('applicationSuccessModal');
+        if (modal) {
+            modal.classList.remove('active');
+            if (window.modalTimeout) {
+                clearTimeout(window.modalTimeout);
+                window.modalTimeout = null;
+            }
+        }
+    }
+
+    // ========== TELEFON MASK ==========
+    const phoneField = document.getElementById('phone');
+    if (phoneField) {
+        phoneField.addEventListener('input', function (e) {
+            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})/);
+            if (x) {
+                let result = '';
+                if (x[1]) result = '+' + x[1];
+                if (x[2]) result += ' (' + x[2];
+                if (x[3]) result += ') ' + x[3];
+                if (x[4]) result += '-' + x[4];
+                if (x[5]) result += '-' + x[5];
+                e.target.value = result;
+            }
+        });
+
+        phoneField.addEventListener('focus', function (e) {
+            if (e.target.value === '') {
+                e.target.value = '+998 ';
+            }
+        });
+
+        phoneField.addEventListener('blur', function (e) {
+            if (e.target.value === '+998 ' || e.target.value === '+998' || e.target.value === '+998 () ') {
+                e.target.value = '';
+            }
+        });
+    }
+
+    // ========== ESCAPE TUGMASI ==========
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            closeRegistrationModal();
+            closeApplicationModal();
+        }
+    });
+
+    // ========== FEEDBACK ROTATOR (BARABAN) ==========
+    let rotatorInterval = null;
+
+    function loadFeedbacksForRotator() {
+        console.log('Loading feedbacks...');
+        $.ajax({
+            url: '/feedbacks',
+            type: 'GET',
+            dataType: 'json',
+            success: function(feedbacks) {
+                console.log('Feedbacks received:', feedbacks.length);
+                if(!feedbacks || feedbacks.length === 0) {
+                    $('#rotatingFeedbackContent').html(`
+                        <i class="fas fa-comment-dots fa-2x mb-2"></i>
+                        <p>Hozircha fikr yo‘q.<br>Birinchi bo‘lib fikr qoldiring!</p>
+                    `);
+                    return;
+                }
+                startRotator(feedbacks);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', status, error);
+                $('#rotatingFeedbackContent').html('<i class="fas fa-exclamation-triangle"></i> Xatolik yuz berdi');
+            }
+        });
+    }
+
+    function startRotator(feedbacks) {
+        if(rotatorInterval) clearInterval(rotatorInterval);
+        
+        let index = 0;
+        
+        function rotate() {
+            if(!feedbacks[index]) return;
+            
+            const fb = feedbacks[index];
+            let message = fb.message || '';
+            if(message.length > 120) message = message.substring(0, 117) + '...';
+            
+            $('#rotatingFeedbackContent').html(`
+                <div style="animation: fadeInScale 0.4s ease;">
+                    <i class="fas fa-quote-left fa-2x mb-3 opacity-50"></i>
+                    <p style="font-size: 1rem; font-style: italic; margin-bottom: 15px;">“${escapeHtml(message)}”</p>
+                    <div style="font-weight: bold; font-size: 1rem;">— ${escapeHtml(fb.name)}</div>
+                    <i class="fas fa-quote-right fa-2x mt-2 opacity-50"></i>
+                </div>
+            `);
+            
+            index = (index + 1) % feedbacks.length;
+        }
+        
+        rotate();
+        rotatorInterval = setInterval(rotate, 5000);
+    }
+
+    function escapeHtml(str) {
+        if(!str) return '';
+        return String(str).replace(/[&<>]/g, function(m) {
+            if(m === '&') return '&amp;';
+            if(m === '<') return '&lt;';
+            if(m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    // ========== FORM SUBMIT ==========
+    $(document).ready(function() {
+        loadFeedbacksForRotator();
+
+        $("#contactForm").submit(function(e) {
+            e.preventDefault();
+
+            const isLoggedIn = @json(auth()->check());
+
+            if (!isLoggedIn) {
+                showRegistrationModal();
+                return;
+            }
+
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnSpinner = document.getElementById('btnSpinner');
+
+            submitBtn.disabled = true;
+            btnText.style.display = 'none';
+            btnSpinner.style.display = 'inline-block';
+
+            var form = $(this);
+
+            $.ajax({
+                url: '/contact-send',
+                type: "POST",
+                data: form.serialize(),
+                success: function(result) {
+                    showApplicationSuccessModal();
+                    form[0].reset();
+                    loadFeedbacksForRotator(); // Barabanni yangilash
+                },
+                error: function(data) {
+                    let message = "Xatolik yuz berdi!";
+                    if (data.responseJSON && data.responseJSON.message) {
+                        message = data.responseJSON.message;
                     }
-                });
+                    Swal.fire({
+                        icon: 'error',
+                        toast: true,
+                        position: 'top-end',
+                        title: message,
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        background: '#fdd3d6',
+                        color: '#000000'
+                    });
+                },
+                complete: function() {
+                    submitBtn.disabled = false;
+                    btnText.style.display = 'inline';
+                    btnSpinner.style.display = 'none';
+                }
             });
         });
-
-        // Application Success Modal funksiyasi
-        function showApplicationSuccessModal() {
-            let modal = document.getElementById('applicationSuccessModal');
-            if (modal) {
-                updateModalLanguage();
-                modal.classList.add('active');
-
-                // 5 sekunddan keyin avtomatik yopilish
-                if (window.modalTimeout) clearTimeout(window.modalTimeout);
-                window.modalTimeout = setTimeout(function () {
-                    closeApplicationModal();
-                }, 5000);
-            }
-        }
-
-        function updateModalLanguage() {
-            const modalTitle = document.getElementById('modalTitle');
-            const modalCourse = document.getElementById('modalCourse');
-            const modalMessage = document.getElementById('modalMessage');
-            const modalPhone = document.getElementById('modalPhone');
-            const modalTelegram = document.getElementById('modalTelegram');
-            const modalBtnText = document.getElementById('modalBtnText');
-
-            if (modalTitle) modalTitle.textContent = '{{ __("messages.application_received") }}';
-            if (modalCourse) modalCourse.textContent = '{{ __("messages.courses") }}';
-            if (modalMessage) modalMessage.textContent = '{{ __("messages.we_will_contact") }}';
-            if (modalPhone) modalPhone.textContent = '{{ __("messages.contact_phone") }}';
-            if (modalTelegram) modalTelegram.textContent = '{{ __("messages.contact_telegram") }}';
-            if (modalBtnText) modalBtnText.textContent = '{{ __("messages.understand") }}';
-        }
-
-        function closeApplicationModal() {
-            const modal = document.getElementById('applicationSuccessModal');
-            if (modal) {
-                modal.classList.remove('active');
-                if (window.modalTimeout) {
-                    clearTimeout(window.modalTimeout);
-                    window.modalTimeout = null;
-                }
-            }
-        }
-
-        // Escape tugmasi bilan yopish
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') {
-                closeApplicationModal();
-            }
-        });
-    </script>
+    });
+</script>
 @endsection
 
 @section('content')
@@ -913,23 +1130,19 @@
                 <div class="col-lg-12">
                     <div class="counter-container">
                         <div class="counter-cell">
-                            <div data-purecounter-start="0" data-purecounter-end="1200" data-purecounter-duration="3"
-                                class="purecounter">0</div>
+                            <div data-purecounter-start="0" data-purecounter-end="1200" data-purecounter-duration="3" class="purecounter">0</div>
                             <div class="counter-info">{{ __('messages.graduates') }}</div>
                         </div>
                         <div class="counter-cell">
-                            <div data-purecounter-start="0" data-purecounter-end="45" data-purecounter-duration="2"
-                                class="purecounter">0</div>
+                            <div data-purecounter-start="0" data-purecounter-end="45" data-purecounter-duration="2" class="purecounter">0</div>
                             <div class="counter-info">{{ __('messages.active_courses') }}</div>
                         </div>
                         <div class="counter-cell">
-                            <div data-purecounter-start="0" data-purecounter-end="320" data-purecounter-duration="3"
-                                class="purecounter">0</div>
+                            <div data-purecounter-start="0" data-purecounter-end="320" data-purecounter-duration="3" class="purecounter">0</div>
                             <div class="counter-info">{{ __('messages.employed_students') }}</div>
                         </div>
                         <div class="counter-cell">
-                            <div data-purecounter-start="0" data-purecounter-end="5" data-purecounter-duration="2"
-                                class="purecounter">0</div>
+                            <div data-purecounter-start="0" data-purecounter-end="5" data-purecounter-duration="2" class="purecounter">0</div>
                             <div class="counter-info">{{ __('messages.years_experience') }}</div>
                         </div>
                     </div>
@@ -984,7 +1197,7 @@
         </div>
     </div>
 
-    <!-- Services / Courses - 12 TA KURS -->
+    <!-- Services / Courses -->
     <div id="services" class="cards-1 bg-gray">
         <div class="container">
             <div class="row align-items-start">
@@ -1008,62 +1221,46 @@
                 </div>
                 <div class="col-lg-7">
                     <div class="card-grid">
-                        <!-- 1. Ofis menejerligi -->
                         <a href="/courses/office" class="card-link">
                             <div class="card-item">
                                 <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/3200/3200650.png"
-                                        alt="Ofis menejerligi">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/3200/3200650.png" alt="Ofis menejerligi">
                                 </div>
                                 <h5 class="card-title">Ofis menejerligi</h5>
                             </div>
                         </a>
-
-                        <!-- 2. Algoritm asoslari -->
                         <a href="/courses/algorithm" class="card-link">
                             <div class="card-item">
                                 <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/11068/11068779.png"
-                                        alt="Algoritm asoslari">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/11068/11068779.png" alt="Algoritm asoslari">
                                 </div>
                                 <h5 class="card-title">Algoritm asoslari</h5>
                             </div>
                         </a>
-
-                        <!-- 3. Frontend -->
                         <a href="{{ route('courses.frontend') }}" class="card-link">
                             <div class="card-item">
                                 <div class="icon-box">
-                                    <img src="https://us.123rf.com/450wm/dxinerz/dxinerz1601/dxinerz160103363/51258851-code-seo-web-symbol-vektor-bild-kann-auch-f%C3%BCr-seo-und-entwicklungsdienste-verwendet-werden.jpg?ver=6"
-                                        alt="Frontend">
+                                    <img src="https://us.123rf.com/450wm/dxinerz/dxinerz1601/dxinerz160103363/51258851-code-seo-web-symbol-vektor-bild-kann-auch-f%C3%BCr-seo-und-entwicklungsdienste-verwendet-werden.jpg?ver=6" alt="Frontend">
                                 </div>
                                 <h5 class="card-title">Frontend</h5>
                             </div>
                         </a>
-
-                        <!-- 4. Backend -->
                         <a href="{{ route('courses.backend') }}" class="card-link">
                             <div class="card-item">
                                 <div class="icon-box">
-                                    <img src="https://www.shutterstock.com/image-vector/backend-developer-icon-mixed-vector-600nw-2655399835.jpg"
-                                        alt="Backend">
+                                    <img src="https://www.shutterstock.com/image-vector/backend-developer-icon-mixed-vector-600nw-2655399835.jpg" alt="Backend">
                                 </div>
                                 <h5 class="card-title">Backend</h5>
                             </div>
                         </a>
-
-                        <!-- 5. Python -->
                         <a href="{{ route('courses.python') }}" class="card-link">
                             <div class="card-item">
                                 <div class="icon-box">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1280px-Python-logo-notext.svg.png"
-                                        alt="Python">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1280px-Python-logo-notext.svg.png" alt="Python">
                                 </div>
                                 <h5 class="card-title">Python</h5>
                             </div>
                         </a>
-
-                        <!-- 6. Robototexnika -->
                         <a href="/courses/robotics" class="card-link">
                             <div class="card-item">
                                 <div class="icon-box">
@@ -1072,41 +1269,30 @@
                                 <h5 class="card-title">Robototexnika</h5>
                             </div>
                         </a>
-
-                        <!-- 7. Raqamli bolalar (YANGI - bola + laptop raqamli o'qish) -->
                         <a href="/courses/digital-kids" class="card-link">
                             <div class="card-item">
                                 <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/3688/3688127.png"
-                                        alt="Raqamli bolalar">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/3688/3688127.png" alt="Raqamli bolalar">
                                 </div>
                                 <h5 class="card-title">Raqamli bolalar</h5>
                             </div>
                         </a>
-
-                        <!-- 8. Tizim muhandisligi -->
                         <a href="/courses/system-engineering" class="card-link">
                             <div class="card-item">
                                 <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png"
-                                        alt="Tizim muhandisligi">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="Tizim muhandisligi">
                                 </div>
                                 <h5 class="card-title">Tizim muhandisligi</h5>
                             </div>
                         </a>
-
-                        <!-- 9. DevOps asoslari -->
                         <a href="/courses/devops" class="card-link">
                             <div class="card-item">
                                 <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/5115/5115293.png"
-                                        alt="DevOps asoslari">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/5115/5115293.png" alt="DevOps asoslari">
                                 </div>
                                 <h5 class="card-title">DevOps asoslari</h5>
                             </div>
                         </a>
-
-                        <!-- 10. Data analitika -->
                         <a href="/courses/data-analytics" class="card-link">
                             <div class="card-item">
                                 <div class="icon-box">
@@ -1115,19 +1301,14 @@
                                 <h5 class="card-title">Data analitika</h5>
                             </div>
                         </a>
-
-                        <!-- 11. Tarmoq administratorligi -->
                         <a href="/courses/network-admin" class="card-link">
                             <div class="card-item">
                                 <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/14357/14357432.png"
-                                        alt="Tarmoq administratorligi">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/14357/14357432.png" alt="Tarmoq administratorligi">
                                 </div>
                                 <h5 class="card-title">Tarmoq administratorligi</h5>
                             </div>
                         </a>
-
-                        <!-- 12. Buxgalteriya -->
                         <a href="/courses/accounting" class="card-link">
                             <div class="card-item">
                                 <div class="icon-box">
@@ -1175,192 +1356,130 @@
         </div>
     </div>
 
-<div id="projects" class="cards-2 py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center mb-5">
-                <h2 class="display-5 fw-bold mb-3 gradient-text">{{ __('messages.projects_title') }}</h2>
-                <div class="divider mx-auto"></div>
-                <p class="text-muted fs-5">Инновационные решения для современного бизнеса</p>
-            </div>
-        </div>
-
-        <div class="row g-4 justify-content-center">
-
-            <!-- Project 1 - Iqro -->
-            <div class="col-md-6 col-lg-4">
-                <div class="modern-card h-100">
-                    <div class="card-img-wrapper">
-                        <img class="card-img-top" src="{{ asset('images/iqro.png') }}" alt="Iqro">
-                        <div class="card-overlay">
-                            <a href="https://iqroagency.uz/uz" class="overlay-link" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> Посмотреть проект
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="project-icon mb-3">
-                            <i class="fas fa-rocket"></i>
-                        </div>
-                        <h5 class="card-title"> @lang('messages.project1_title') </h5>
-                        <p class="card-text"> @lang('messages.project1_desc') </p>
-                       
-                    </div>
+    <!-- Projects -->
+    <div id="projects" class="cards-2 py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5">
+                    <h2 class="display-5 fw-bold mb-3 gradient-text">{{ __('messages.projects_title') }}</h2>
+                    <div class="divider mx-auto"></div>
+                    <p class="text-muted fs-5">Инновационные решения для современного бизнеса</p>
                 </div>
             </div>
-
-            <!-- Project 2 - Delever -->
-            <div class="col-md-6 col-lg-4">
-                <div class="modern-card h-100">
-                    <div class="card-img-wrapper">
-                        <img class="card-img-top" src="{{ asset('images/delever.png') }}" alt="Delever">
-                        <div class="card-overlay">
-                            <a href="https://www.delever.uz/" class="overlay-link" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> Посмотреть проект
-                            </a>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="modern-card h-100">
+                        <div class="card-img-wrapper">
+                            <img class="card-img-top" src="{{ asset('images/iqro.png') }}" alt="Iqro">
+                            <div class="card-overlay">
+                                <a href="https://iqroagency.uz/uz" class="overlay-link" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Посмотреть проект
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="project-icon mb-3">
-                            <i class="fas fa-chart-line"></i>
+                        <div class="card-body">
+                            <div class="project-icon mb-3"><i class="fas fa-rocket"></i></div>
+                            <h5 class="card-title">@lang('messages.project1_title')</h5>
+                            <p class="card-text">@lang('messages.project1_desc')</p>
                         </div>
-                        <h5 class="card-title"> @lang('messages.project2_title') </h5>
-                        <p class="card-text"> @lang('messages.project2_desc') </p>
-                       
                     </div>
                 </div>
-            </div>
-
-            <!-- Project 3 - Kidi -->
-            <div class="col-md-6 col-lg-4">
-                <div class="modern-card h-100">
-                    <div class="card-img-wrapper">
-                        <img class="card-img-top" src="{{ asset('images/kidi.png') }}" alt="Kidi">
-                        <div class="card-overlay">
-                            <a href="https://kidi.uz/" class="overlay-link" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> Посмотреть проект
-                            </a>
+                <div class="col-md-6 col-lg-4">
+                    <div class="modern-card h-100">
+                        <div class="card-img-wrapper">
+                            <img class="card-img-top" src="{{ asset('images/delever.png') }}" alt="Delever">
+                            <div class="card-overlay">
+                                <a href="https://www.delever.uz/" class="overlay-link" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Посмотреть проект
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="project-icon mb-3">
-                            <i class="fas fa-child"></i>
+                        <div class="card-body">
+                            <div class="project-icon mb-3"><i class="fas fa-chart-line"></i></div>
+                            <h5 class="card-title">@lang('messages.project2_title')</h5>
+                            <p class="card-text">@lang('messages.project2_desc')</p>
                         </div>
-                        <h5 class="card-title"> @lang('messages.project3_title') </h5>
-                        <p class="card-text"> @lang('messages.project3_desc') </p>
-                       
                     </div>
                 </div>
-            </div>
-
-            <!-- Project 4 - Growz -->
-            <div class="col-md-6 col-lg-4">
-                <div class="modern-card h-100">
-                    <div class="card-img-wrapper">
-                        <img class="card-img-top" src="{{ asset('images/growz.png') }}" alt="Growz">
-                        <div class="card-overlay">
-                            <a href="https://admin.growz.io/login" class="overlay-link" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> Посмотреть проект
-                            </a>
+                <div class="col-md-6 col-lg-4">
+                    <div class="modern-card h-100">
+                        <div class="card-img-wrapper">
+                            <img class="card-img-top" src="{{ asset('images/kidi.png') }}" alt="Kidi">
+                            <div class="card-overlay">
+                                <a href="https://kidi.uz/" class="overlay-link" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Посмотреть проект
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="project-icon mb-3">
-                            <i class="fas fa-seedling"></i>
+                        <div class="card-body">
+                            <div class="project-icon mb-3"><i class="fas fa-child"></i></div>
+                            <h5 class="card-title">@lang('messages.project3_title')</h5>
+                            <p class="card-text">@lang('messages.project3_desc')</p>
                         </div>
-                        <h5 class="card-title"> @lang('messages.project4_title') </h5>
-                        <p class="card-text"> @lang('messages.project4_desc') </p>
-                       
                     </div>
                 </div>
-            </div>
-
-            <!-- Project 5 - Wasteless -->
-            <div class="col-md-6 col-lg-4">
-                <div class="modern-card h-100">
-                    <div class="card-img-wrapper">
-                        <img class="card-img-top" src="{{ asset('images/wasteles.png') }}" alt="Wasteless">
-                        <div class="card-overlay">
-                            <a href="https://admin.wasteless.uz/login" class="overlay-link" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> Посмотреть проект
-                            </a>
+                <div class="col-md-6 col-lg-4">
+                    <div class="modern-card h-100">
+                        <div class="card-img-wrapper">
+                            <img class="card-img-top" src="{{ asset('images/growz.png') }}" alt="Growz">
+                            <div class="card-overlay">
+                                <a href="https://admin.growz.io/login" class="overlay-link" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Посмотреть проект
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="project-icon mb-3">
-                            <i class="fas fa-recycle"></i>
+                        <div class="card-body">
+                            <div class="project-icon mb-3"><i class="fas fa-seedling"></i></div>
+                            <h5 class="card-title">@lang('messages.project4_title')</h5>
+                            <p class="card-text">@lang('messages.project4_desc')</p>
                         </div>
-                        <h5 class="card-title"> @lang('messages.project5_title') </h5>
-                        <p class="card-text"> @lang('messages.project5_desc') </p>
-                        
                     </div>
                 </div>
-            </div>
-
-            <!-- Project 6 - Urecruit -->
-            <div class="col-md-6 col-lg-4">
-                <div class="modern-card h-100">
-                    <div class="card-img-wrapper">
-                        <img class="card-img-top" src="{{ asset('images/urecruit.png') }}" alt="Urecruit">
-                        <div class="card-overlay">
-                            <a href="https://test.admin.urecruit.udevs.io/auth/login" class="overlay-link" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> Посмотреть проект
-                            </a>
+                <div class="col-md-6 col-lg-4">
+                    <div class="modern-card h-100">
+                        <div class="card-img-wrapper">
+                            <img class="card-img-top" src="{{ asset('images/wasteles.png') }}" alt="Wasteless">
+                            <div class="card-overlay">
+                                <a href="https://admin.wasteless.uz/login" class="overlay-link" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Посмотреть проект
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="project-icon mb-3">
-                            <i class="fas fa-users"></i>
+                        <div class="card-body">
+                            <div class="project-icon mb-3"><i class="fas fa-recycle"></i></div>
+                            <h5 class="card-title">@lang('messages.project5_title')</h5>
+                            <p class="card-text">@lang('messages.project5_desc')</p>
                         </div>
-                        <h5 class="card-title"> @lang('messages.project6_title') </h5>
-                        <p class="card-text"> @lang('messages.project6_desc') </p>
-                       
                     </div>
                 </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-    <!-- Testimonials -->
-   <div class="slider-1 bg-gray">
-    <img class="quotes-decoration" src="{{ asset('images/quotes.svg') }}" alt="alternative">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="slider-container">
-                    <div class="swiper-container card-slider">
-                        <div class="swiper-wrapper">
-                            @forelse($feedbacks as $feedback)
-                                <div class="swiper-slide">
-                                    <img class="testimonial-image"
-                                        src="{{ $feedback->avatar ? Storage::url('avatars/' . $feedback->avatar) : asset('images/avatar.png') }}"
-
-                                        alt="{{ $feedback->name }}">
-                                    <p class="testimonial-text">“{{ Str::limit($feedback->message, 200) }}”</p>
-                                    <div class="testimonial-author">{{ $feedback->name }}</div>
-                                </div>
-                            @empty
-                                <!-- Если нет отзывов, показываем заглушку -->
-                                <div class="swiper-slide">
-                                    <img class="testimonial-image"
-                                        src="{{ asset('images/testimonial-1.jpg') }}" 
-                                        alt="Нет отзывов">
-                                    <p class="testimonial-text">“Пока нет отзывов. Будьте первым, кто оставит отзыв!”</p>
-                                    <div class="testimonial-author">ITech Academy</div>
-                                </div>
-                            @endforelse
+                <div class="col-md-6 col-lg-4">
+                    <div class="modern-card h-100">
+                        <div class="card-img-wrapper">
+                            <img class="card-img-top" src="{{ asset('images/urecruit.png') }}" alt="Urecruit">
+                            <div class="card-overlay">
+                                <a href="https://test.admin.urecruit.udevs.io/auth/login" class="overlay-link" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Посмотреть проект
+                                </a>
+                            </div>
                         </div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
+                        <div class="card-body">
+                            <div class="project-icon mb-3"><i class="fas fa-users"></i></div>
+                            <h5 class="card-title">@lang('messages.project6_title')</h5>
+                            <p class="card-text">@lang('messages.project6_desc')</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-    <!-- Contact -->
+    <!-- Baraban -->
+    <div class="feedback-rotator" style="background: linear-gradient(135deg, #ff69b4, #ff1493); border-radius: 50%; width: 320px; height: 320px; margin: 0 auto; display: flex; align-items: center; justify-content: center; text-align: center; padding: 30px; color: white; box-shadow: 0 20px 40px rgba(0,0,0,0.2); transition: all 0.3s ease;">
+        <div id="rotatingFeedbackContent" style="font-size: 1.1rem; line-height: 1.5;">
+            <i class="fas fa-spinner fa-spin"></i> Yuklanmoqda...
+        </div>
+    </div>
+
     <!-- Contact -->
     <div id="contact" class="form-1">
         <img class="decoration-star" src="{{ asset('images/decoration-star.svg') }}" alt="alternative">
@@ -1377,19 +1496,28 @@
                         <h2>{{ __('messages.contact_title') }}</h2>
                         <form id="contactForm">
                             @csrf
-                            <div class="form-group"><input type="text" value="{{ auth()->user()->name ?? '' }}" name="name" class="form-control-input"
-                                    placeholder="{{ __('messages.your_name') }}" required></div>
-                            <div class="form-group"><input type="email" value="{{ auth()->user()->name ?? '' }}" name="email" class="form-control-input"
-                                    placeholder="{{ __('messages.email') }}" required></div>
-                            <div class="form-group"><textarea name="message" class="form-control-textarea"
-                                    placeholder="{{ __('messages.message') }}" required></textarea></div>
-                            @if(session('success'))
-                                <div
-                                    style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-                                    {{ session('success') }}
-                            </div>@endif
-                            <div class="form-group"><button type="submit"
-                                    class="form-control-submit-button">{{ __('messages.send') }}</button></div>
+                            <div class="form-group">
+                                <input type="text" name="name" class="form-control-input"
+                                    placeholder="{{ __('messages.your_name') }}"
+                                    value="{{ old('name', auth()->check() ? auth()->user()->name : '') }}" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" class="form-control-input"
+                                    placeholder="{{ __('messages.email') }}"
+                                    value="{{ old('email', auth()->check() ? auth()->user()->email : '') }}" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" name="phone" id="phone" class="form-control-input" placeholder=""
+                                    value="+(998) ">
+                            </div>
+                            <div id="alertMessage"></div>
+                            <div class="form-group">
+                                <button type="submit" id="submitBtn" class="form-control-submit-button">
+                                    <span id="btnText">{{ __('messages.send') }}</span>
+                                    <span id="btnSpinner" class="spinner-border spinner-border-sm" style="display: none;"
+                                        role="status" aria-hidden="true"></span>
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -1397,32 +1525,33 @@
         </div>
     </div>
 
-    <!-- Application Success Modal (ariza uchun popup) -->
-    <!-- Application Success Modal (ariza uchun popup) -->
+    <!-- Modals -->
+    <div id="registrationModal" class="registration-modal-overlay">
+        <div class="registration-modal">
+            <div class="registration-icon"><i class="fas fa-user-plus"></i></div>
+            <h3><i class="fas fa-sign-in-alt me-2"></i>Registratsiya talab qilinadi!</h3>
+            <p>Ariza qoldirish uchun avval tizimda ro'yxatdan o'tishingiz kerak!</p>
+            <div class="registration-buttons">
+                <a href="{{ route('register') }}" class="btn-register-redirect"><i class="fas fa-user-plus me-2"></i> Ro'yxatdan o'tish</a>
+                <a href="{{ route('login') }}" class="btn-register-redirect" style="background: linear-gradient(135deg, #10b981, #059669);"><i class="fas fa-sign-in-alt me-2"></i> Kirish</a>
+                <button class="btn-register-close" onclick="closeRegistrationModal()"><i class="fas fa-times me-2"></i> Yopish</button>
+            </div>
+            <hr style="margin: 1.5rem 0 1rem;">
+            <div style="font-size: 12px; color: #6c757d; text-align: center;">Ro'yxatdan o'ting va barcha imkoniyatlardan foydalaning</div>
+        </div>
+    </div>
+
     <div id="applicationSuccessModal" class="application-modal-overlay">
         <div class="application-modal-container">
-            <div class="application-success-icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <h3><i class="fas fa-graduation-cap me-2"></i><span
-                    id="modalTitle">{{ __('messages.application_received') }}</span></h3>
-            <div class="course-name-badge">
-                <i class="fas fa-book-open me-1"></i> <span id="modalCourse">{{ __('messages.courses') }}</span>
-            </div>
+            <div class="application-success-icon"><i class="fas fa-check-circle"></i></div>
+            <h3><i class="fas fa-graduation-cap me-2"></i><span id="modalTitle">{{ __('messages.application_received') }}</span></h3>
+            <div class="course-name-badge"><i class="fas fa-book-open me-1"></i> <span id="modalCourse">{{ __('messages.courses') }}</span></div>
             <p style="margin-top: 15px;" id="modalMessage">{{ __('messages.we_will_contact') }}</p>
             <div style="background: #f0f9ff; border-radius: 12px; padding: 10px; margin: 15px 0;">
-                <small style="color: #1e4a76;">
-                    <i class="fas fa-phone-alt me-1"></i> <span id="modalPhone">{{ __('messages.contact_phone') }}</span>
-                </small>
-                <br>
-                <small style="color: #1e4a76;">
-                    <i class="fab fa-telegram me-1"></i> <span
-                        id="modalTelegram">{{ __('messages.contact_telegram') }}</span>
-                </small>
+                <small style="color: #1e4a76;"><i class="fas fa-phone-alt me-1"></i> <span id="modalPhone">{{ __('messages.contact_phone') }}</span></small><br>
+                <small style="color: #1e4a76;"><i class="fab fa-telegram me-1"></i> <span id="modalTelegram">{{ __('messages.contact_telegram') }}</span></small>
             </div>
-            <button class="application-close-btn" onclick="closeApplicationModal()">
-                <i class="fas fa-check me-2"></i> <span id="modalBtnText">{{ __('messages.understand') }}</span>
-            </button>
+            <button class="application-close-btn" onclick="closeApplicationModal()"><i class="fas fa-check me-2"></i> <span id="modalBtnText">{{ __('messages.understand') }}</span></button>
         </div>
     </div>
 @endsection

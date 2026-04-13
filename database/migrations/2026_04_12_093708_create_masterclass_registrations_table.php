@@ -1,0 +1,26 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        Schema::create('masterclass_registrations', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('masterclass_id')->constrained('master_classes')->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
+            $table->string('name');
+            $table->string('phone');
+            $table->boolean('telegram_sent')->default(false);
+            $table->timestamps();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('masterclass_registrations');
+    }
+};

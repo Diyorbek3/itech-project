@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Agar jadval bazada mavjud bo'lmasa, uni yaratadi
-        if (!Schema::hasTable('feedbacks')) {
-            Schema::create('feedbacks', function (Blueprint $table) {
-                $table->id();
-                $table->string('name');
-                $table->string('email');
-                $table->text('message');
-                $table->timestamps();
-            });
-        }
+        Schema::create('feedbacks', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email');
+            $table->text('message');
+            $table->timestamps();
+        });
     }
 
     /**
