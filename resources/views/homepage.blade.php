@@ -867,6 +867,19 @@
             background: #f1f5f9;
             border-color: #94a3b8;
         }
+
+        /* About Section Styles */
+        .about-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 4rem 0;
+        }
+        .about-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #334155;
+            max-width: 900px;
+            margin: 0 auto;
+        }
     </style>
 @endsection
 
@@ -1069,7 +1082,7 @@
                 success: function(result) {
                     showApplicationSuccessModal();
                     form[0].reset();
-                    loadFeedbacksForRotator(); // Barabanni yangilash
+                    loadFeedbacksForRotator();
                 },
                 error: function(data) {
                     let message = "Xatolik yuz berdi!";
@@ -1151,13 +1164,20 @@
         </div>
     </div>
 
-    <!-- Introduction -->
-    <div id="introduction" class="basic-1 bg-gray">
+    <!-- About Section (iTech haqida) -->
+    <div class="about-section">
         <div class="container">
             <div class="row">
-                <div class="col-xl-9">
-                    <h2>{{ __('messages.intro_title') }}</h2>
-                    <p>{{ __('messages.intro_description') }}</p>
+                <div class="col-lg-12 text-center">
+                    <h2 class="display-5 fw-bold mb-4 gradient-text">iTech haqida</h2>
+                    <div class="divider mx-auto mb-4"></div>
+                    <p class="about-text">
+                        iTech o‘quv markazi dasturlash va IT sohasida amaliy bilim berishga ixtisoslashgan. 
+                        O‘quv dasturlarimiz real loyiha tajribasiga asoslangan bo‘lib, talabalarni ish bozoriga 
+                        tayyor mutaxassis sifatida shakllantirishga qaratilgan. Har bir kurs zamonaviy texnologiyalar, 
+                        mentorlik yordami va amaliy topshiriqlar bilan olib boriladi. Maqsadimiz — kuchli, 
+                        mustaqil va talabgir dasturchilarni yetishtirish.
+                    </p>
                 </div>
             </div>
         </div>
@@ -1221,102 +1241,20 @@
                 </div>
                 <div class="col-lg-7">
                     <div class="card-grid">
-                        <a href="/courses/office" class="card-link">
+                        @foreach($courses as $course)
+                        <a href="{{ route('courses.show', $course->id) }}" class="card-link">
                             <div class="card-item">
                                 <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/3200/3200650.png" alt="Ofis menejerligi">
+                                    @if($course->image)
+                                        <img src="{{ asset('storage/courses/' . $course->image) }}" alt="{{ $course->title }}">
+                                    @else
+                                        <i class="fas fa-graduation-cap fa-3x text-primary"></i>
+                                    @endif
                                 </div>
-                                <h5 class="card-title">Ofis menejerligi</h5>
+                                <h5 class="card-title">{{ $course->title }}</h5>
                             </div>
                         </a>
-                        <a href="/courses/algorithm" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/11068/11068779.png" alt="Algoritm asoslari">
-                                </div>
-                                <h5 class="card-title">Algoritm asoslari</h5>
-                            </div>
-                        </a>
-                        <a href="{{ route('courses.frontend') }}" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://us.123rf.com/450wm/dxinerz/dxinerz1601/dxinerz160103363/51258851-code-seo-web-symbol-vektor-bild-kann-auch-f%C3%BCr-seo-und-entwicklungsdienste-verwendet-werden.jpg?ver=6" alt="Frontend">
-                                </div>
-                                <h5 class="card-title">Frontend</h5>
-                            </div>
-                        </a>
-                        <a href="{{ route('courses.backend') }}" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://www.shutterstock.com/image-vector/backend-developer-icon-mixed-vector-600nw-2655399835.jpg" alt="Backend">
-                                </div>
-                                <h5 class="card-title">Backend</h5>
-                            </div>
-                        </a>
-                        <a href="{{ route('courses.python') }}" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1280px-Python-logo-notext.svg.png" alt="Python">
-                                </div>
-                                <h5 class="card-title">Python</h5>
-                            </div>
-                        </a>
-                        <a href="/courses/robotics" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/4727/4727488.png" alt="Robototexnika">
-                                </div>
-                                <h5 class="card-title">Robototexnika</h5>
-                            </div>
-                        </a>
-                        <a href="/courses/digital-kids" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/3688/3688127.png" alt="Raqamli bolalar">
-                                </div>
-                                <h5 class="card-title">Raqamli bolalar</h5>
-                            </div>
-                        </a>
-                        <a href="/courses/system-engineering" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="Tizim muhandisligi">
-                                </div>
-                                <h5 class="card-title">Tizim muhandisligi</h5>
-                            </div>
-                        </a>
-                        <a href="/courses/devops" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/5115/5115293.png" alt="DevOps asoslari">
-                                </div>
-                                <h5 class="card-title">DevOps asoslari</h5>
-                            </div>
-                        </a>
-                        <a href="/courses/data-analytics" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055685.png" alt="Data analitika">
-                                </div>
-                                <h5 class="card-title">Data analitika</h5>
-                            </div>
-                        </a>
-                        <a href="/courses/network-admin" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/14357/14357432.png" alt="Tarmoq administratorligi">
-                                </div>
-                                <h5 class="card-title">Tarmoq administratorligi</h5>
-                            </div>
-                        </a>
-                        <a href="/courses/accounting" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/9703/9703558.png" alt="Buxgalteriya">
-                                </div>
-                                <h5 class="card-title">Buxgalteriya</h5>
-                            </div>
-                        </a>
+                        @endforeach
                     </div>
                 </div>
             </div>

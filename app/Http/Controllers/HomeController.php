@@ -7,16 +7,23 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
+use App\Models\Course;  // <--- QO'SHISH KERAK!
 
 class HomeController extends Controller
 {
     public function index()
-    {
-        // Получаем отзывы для отображения на главной странице
-        $feedbacks = $this->getFeedbacksForHomepage();
-        
-        return view('homepage', compact('feedbacks'));
+{
+    // KURSLARNI OLISH
+    try {
+        $courses = Course::all();
+    } catch (\Exception $e) {
+        $courses = collect([]); // Bo'sh collection
     }
+    
+    $feedbacks = $this->getFeedbacksForHomepage();
+    
+    return view('homepage', compact('feedbacks', 'courses'));
+}
 
     /**
      * Получение отзывов для главной страницы
@@ -46,11 +53,9 @@ class HomeController extends Controller
             // Форматируем данные для отображения
             $formattedFeedbacks = [];
             foreach ($feedbacks as $feedback) {
-                // Исправляем проблему с датой
                 $date = '';
                 if ($feedback->created_at) {
                     try {
-                        // Если created_at уже строка, преобразуем в Carbon
                         if (is_string($feedback->created_at)) {
                             $date = Carbon::parse($feedback->created_at)->format('d.m.Y');
                         } else {
@@ -63,8 +68,6 @@ class HomeController extends Controller
                     $date = date('d.m.Y');
                 }
                 
-                // Если пользователь авторизован, берем его имя
-                // Если нет, используем данные из формы обратной связи
                 $name = $feedback->user_name ?? $feedback->feedback_name;
                 
                 $formattedFeedbacks[] = (object)[
@@ -76,7 +79,6 @@ class HomeController extends Controller
                 ];
             }
             
-            // Если отзывов меньше 3, добавляем демо-отзывы для заполнения слайдера
             if (count($formattedFeedbacks) < 3) {
                 $formattedFeedbacks = array_merge($formattedFeedbacks, $this->getDemoFeedbacks());
             }
@@ -89,7 +91,6 @@ class HomeController extends Controller
         }
     }
     
- 
     private function getDemoFeedbacks()
     {
         return [
@@ -148,7 +149,6 @@ class HomeController extends Controller
             
             $formattedFeedbacks = [];
             foreach ($feedbacks as $feedback) {
-                // Исправляем проблему с датой в API
                 $date = '';
                 if ($feedback->created_at) {
                     try {
@@ -216,5 +216,10 @@ class HomeController extends Controller
         ]);
 
         return response()->json(['message' => __('messages.success')], 200);
+    }
+    
+    private function getDefaultAvatar($email)
+    {
+        return 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($email))) . '?d=mp';
     }
 }
