@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CourceController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MyCourceController;
@@ -67,7 +67,7 @@ Route::prefix('courses')->group(function () {
         return view('courses.office-manager');
     })->name('courses.office-manager');
 });
-
+Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
 // ---------------------------------------------------------
 // 4. FEEDBACK (FIKRLAR) - TO'G'RI
 // ---------------------------------------------------------
@@ -99,7 +99,14 @@ Route::prefix('my-courses')->middleware('auth')->group(function () {
     Route::post('/{courseId}/add-category', [MyCourceController::class, 'addCategory'])->name('my-courses.add-category');
     Route::delete('/delete-category/{categoryId}', [MyCourceController::class, 'deleteCategory'])->name('my-courses.delete-category');
 });
+Route::resource('courses', CourseController::class);
+Route::get('/courses/table', [CourseController::class, 'tableRows'])->name('courses.table');
 
+use App\Http\Controllers\DashboardController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
 // ---------------------------------------------------------
 // 7. MASTERCLASSLARNI BOSHQARISH (Admin)
 // ---------------------------------------------------------
@@ -121,8 +128,12 @@ Route::middleware(['auth'])->group(function () {
 // 8. ALOQA (Contact) - ITech Academy uchun
 // ---------------------------------------------------------
 Route::post('/contact-send', [ContactController::class, 'sendContact'])->name('contact.send');
-
+Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
 // ---------------------------------------------------------
 // 9. LARAVEL AUTH
 // ---------------------------------------------------------
 require __DIR__ . '/auth.php';
+// ---------------------------------------------------------
+// 10. TELEGRAM GA XABAR YUBORISH (HomeController)
+// ---------------------------------------------------------
+Route::post('/send-message', [HomeController::class, 'sendToTelegram'])->name('send.message');

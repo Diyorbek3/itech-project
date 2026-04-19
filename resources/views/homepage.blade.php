@@ -3,14 +3,22 @@
 @section('styles')
     <style>
         @keyframes fadeInScale {
-            0% { opacity: 0; transform: scale(0.9); }
-            100% { opacity: 1; transform: scale(1); }
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .feedback-rotator:hover {
             transform: scale(1.02);
-            box-shadow: 0 30px 50px rgba(0,0,0,0.3);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.3);
         }
+
         /* Modern Card Styles */
         .modern-card {
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
@@ -163,9 +171,11 @@
             .card-img-wrapper {
                 height: 200px;
             }
+
             .card-body {
                 padding: 1.25rem;
             }
+
             .card-title {
                 font-size: 1.2rem;
             }
@@ -173,7 +183,7 @@
     </style>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
         .custom-shape {
             border-top-left-radius: 120px;
@@ -312,9 +322,11 @@
                 max-width: 50% !important;
                 flex: 0 0 50% !important;
             }
+
             .cards-2 .card-title {
                 font-size: 1.3rem !important;
             }
+
             .cards-2 .card-text {
                 font-size: 1rem !important;
             }
@@ -325,13 +337,16 @@
                 max-width: 100% !important;
                 flex: 0 0 100% !important;
             }
+
             .cards-2 .container {
                 padding-left: 0.5rem !important;
                 padding-right: 0.5rem !important;
             }
+
             .cards-2 .card-title {
                 font-size: 1.2rem !important;
             }
+
             .cards-2 .card-text {
                 font-size: 0.95rem !important;
             }
@@ -446,6 +461,7 @@
                 flex-direction: column;
                 align-items: stretch;
             }
+
             .auth-btn {
                 margin: 4px 0;
                 width: 100%;
@@ -867,236 +883,250 @@
             background: #f1f5f9;
             border-color: #94a3b8;
         }
+
+        /* About Section Styles */
+        .about-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 4rem 0;
+        }
+
+        .about-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #334155;
+            max-width: 900px;
+            margin: 0 auto;
+        }
     </style>
 @endsection
 
 @section('scripts')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    // ========== REGISTRATION MODAL ==========
-    function showRegistrationModal() {
-        let modal = document.getElementById('registrationModal');
-        if (modal) {
-            modal.classList.add('active');
-            if (window.regModalTimeout) clearTimeout(window.regModalTimeout);
-            window.regModalTimeout = setTimeout(function () {
-                closeRegistrationModal();
-            }, 5000);
-        }
-    }
-
-    function closeRegistrationModal() {
-        const modal = document.getElementById('registrationModal');
-        if (modal) {
-            modal.classList.remove('active');
-            if (window.regModalTimeout) {
-                clearTimeout(window.regModalTimeout);
-                window.regModalTimeout = null;
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // ========== REGISTRATION MODAL ==========
+        function showRegistrationModal() {
+            let modal = document.getElementById('registrationModal');
+            if (modal) {
+                modal.classList.add('active');
+                if (window.regModalTimeout) clearTimeout(window.regModalTimeout);
+                window.regModalTimeout = setTimeout(function () {
+                    closeRegistrationModal();
+                }, 5000);
             }
         }
-    }
 
-    // ========== APPLICATION SUCCESS MODAL ==========
-    function showApplicationSuccessModal() {
-        let modal = document.getElementById('applicationSuccessModal');
-        if (modal) {
-            updateModalLanguage();
-            modal.classList.add('active');
-            if (window.modalTimeout) clearTimeout(window.modalTimeout);
-            window.modalTimeout = setTimeout(function () {
-                closeApplicationModal();
-            }, 5000);
-        }
-    }
-
-    function updateModalLanguage() {
-        const modalTitle = document.getElementById('modalTitle');
-        const modalCourse = document.getElementById('modalCourse');
-        const modalMessage = document.getElementById('modalMessage');
-        const modalPhone = document.getElementById('modalPhone');
-        const modalTelegram = document.getElementById('modalTelegram');
-        const modalBtnText = document.getElementById('modalBtnText');
-
-        if (modalTitle) modalTitle.textContent = '{{ __("messages.application_received") }}';
-        if (modalCourse) modalCourse.textContent = '{{ __("messages.courses") }}';
-        if (modalMessage) modalMessage.textContent = '{{ __("messages.we_will_contact") }}';
-        if (modalPhone) modalPhone.textContent = '{{ __("messages.contact_phone") }}';
-        if (modalTelegram) modalTelegram.textContent = '{{ __("messages.contact_telegram") }}';
-        if (modalBtnText) modalBtnText.textContent = '{{ __("messages.understand") }}';
-    }
-
-    function closeApplicationModal() {
-        const modal = document.getElementById('applicationSuccessModal');
-        if (modal) {
-            modal.classList.remove('active');
-            if (window.modalTimeout) {
-                clearTimeout(window.modalTimeout);
-                window.modalTimeout = null;
-            }
-        }
-    }
-
-    // ========== TELEFON MASK ==========
-    const phoneField = document.getElementById('phone');
-    if (phoneField) {
-        phoneField.addEventListener('input', function (e) {
-            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})/);
-            if (x) {
-                let result = '';
-                if (x[1]) result = '+' + x[1];
-                if (x[2]) result += ' (' + x[2];
-                if (x[3]) result += ') ' + x[3];
-                if (x[4]) result += '-' + x[4];
-                if (x[5]) result += '-' + x[5];
-                e.target.value = result;
-            }
-        });
-
-        phoneField.addEventListener('focus', function (e) {
-            if (e.target.value === '') {
-                e.target.value = '+998 ';
-            }
-        });
-
-        phoneField.addEventListener('blur', function (e) {
-            if (e.target.value === '+998 ' || e.target.value === '+998' || e.target.value === '+998 () ') {
-                e.target.value = '';
-            }
-        });
-    }
-
-    // ========== ESCAPE TUGMASI ==========
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') {
-            closeRegistrationModal();
-            closeApplicationModal();
-        }
-    });
-
-    // ========== FEEDBACK ROTATOR (BARABAN) ==========
-    let rotatorInterval = null;
-
-    function loadFeedbacksForRotator() {
-        console.log('Loading feedbacks...');
-        $.ajax({
-            url: '/feedbacks',
-            type: 'GET',
-            dataType: 'json',
-            success: function(feedbacks) {
-                console.log('Feedbacks received:', feedbacks.length);
-                if(!feedbacks || feedbacks.length === 0) {
-                    $('#rotatingFeedbackContent').html(`
-                        <i class="fas fa-comment-dots fa-2x mb-2"></i>
-                        <p>Hozircha fikr yo‘q.<br>Birinchi bo‘lib fikr qoldiring!</p>
-                    `);
-                    return;
+        function closeRegistrationModal() {
+            const modal = document.getElementById('registrationModal');
+            if (modal) {
+                modal.classList.remove('active');
+                if (window.regModalTimeout) {
+                    clearTimeout(window.regModalTimeout);
+                    window.regModalTimeout = null;
                 }
-                startRotator(feedbacks);
-            },
-            error: function(xhr, status, error) {
-                console.error('Error:', status, error);
-                $('#rotatingFeedbackContent').html('<i class="fas fa-exclamation-triangle"></i> Xatolik yuz berdi');
             }
-        });
-    }
-
-    function startRotator(feedbacks) {
-        if(rotatorInterval) clearInterval(rotatorInterval);
-        
-        let index = 0;
-        
-        function rotate() {
-            if(!feedbacks[index]) return;
-            
-            const fb = feedbacks[index];
-            let message = fb.message || '';
-            if(message.length > 120) message = message.substring(0, 117) + '...';
-            
-            $('#rotatingFeedbackContent').html(`
-                <div style="animation: fadeInScale 0.4s ease;">
-                    <i class="fas fa-quote-left fa-2x mb-3 opacity-50"></i>
-                    <p style="font-size: 1rem; font-style: italic; margin-bottom: 15px;">“${escapeHtml(message)}”</p>
-                    <div style="font-weight: bold; font-size: 1rem;">— ${escapeHtml(fb.name)}</div>
-                    <i class="fas fa-quote-right fa-2x mt-2 opacity-50"></i>
-                </div>
-            `);
-            
-            index = (index + 1) % feedbacks.length;
         }
-        
-        rotate();
-        rotatorInterval = setInterval(rotate, 5000);
-    }
 
-    function escapeHtml(str) {
-        if(!str) return '';
-        return String(str).replace(/[&<>]/g, function(m) {
-            if(m === '&') return '&amp;';
-            if(m === '<') return '&lt;';
-            if(m === '>') return '&gt;';
-            return m;
-        });
-    }
-
-    // ========== FORM SUBMIT ==========
-    $(document).ready(function() {
-        loadFeedbacksForRotator();
-
-        $("#contactForm").submit(function(e) {
-            e.preventDefault();
-
-            const isLoggedIn = @json(auth()->check());
-
-            if (!isLoggedIn) {
-                showRegistrationModal();
-                return;
+        // ========== APPLICATION SUCCESS MODAL ==========
+        function showApplicationSuccessModal() {
+            let modal = document.getElementById('applicationSuccessModal');
+            if (modal) {
+                updateModalLanguage();
+                modal.classList.add('active');
+                if (window.modalTimeout) clearTimeout(window.modalTimeout);
+                window.modalTimeout = setTimeout(function () {
+                    closeApplicationModal();
+                }, 5000);
             }
+        }
 
-            const submitBtn = document.getElementById('submitBtn');
-            const btnText = document.getElementById('btnText');
-            const btnSpinner = document.getElementById('btnSpinner');
+        function updateModalLanguage() {
+            const modalTitle = document.getElementById('modalTitle');
+            const modalCourse = document.getElementById('modalCourse');
+            const modalMessage = document.getElementById('modalMessage');
+            const modalPhone = document.getElementById('modalPhone');
+            const modalTelegram = document.getElementById('modalTelegram');
+            const modalBtnText = document.getElementById('modalBtnText');
 
-            submitBtn.disabled = true;
-            btnText.style.display = 'none';
-            btnSpinner.style.display = 'inline-block';
+            if (modalTitle) modalTitle.textContent = '{{ __("messages.application_received") }}';
+            if (modalCourse) modalCourse.textContent = '{{ __("messages.courses") }}';
+            if (modalMessage) modalMessage.textContent = '{{ __("messages.we_will_contact") }}';
+            if (modalPhone) modalPhone.textContent = '{{ __("messages.contact_phone") }}';
+            if (modalTelegram) modalTelegram.textContent = '{{ __("messages.contact_telegram") }}';
+            if (modalBtnText) modalBtnText.textContent = '{{ __("messages.understand") }}';
+        }
 
-            var form = $(this);
+        function closeApplicationModal() {
+            const modal = document.getElementById('applicationSuccessModal');
+            if (modal) {
+                modal.classList.remove('active');
+                if (window.modalTimeout) {
+                    clearTimeout(window.modalTimeout);
+                    window.modalTimeout = null;
+                }
+            }
+        }
 
-            $.ajax({
-                url: '/contact-send',
-                type: "POST",
-                data: form.serialize(),
-                success: function(result) {
-                    showApplicationSuccessModal();
-                    form[0].reset();
-                    loadFeedbacksForRotator(); // Barabanni yangilash
-                },
-                error: function(data) {
-                    let message = "Xatolik yuz berdi!";
-                    if (data.responseJSON && data.responseJSON.message) {
-                        message = data.responseJSON.message;
-                    }
-                    Swal.fire({
-                        icon: 'error',
-                        toast: true,
-                        position: 'top-end',
-                        title: message,
-                        showConfirmButton: false,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        background: '#fdd3d6',
-                        color: '#000000'
-                    });
-                },
-                complete: function() {
-                    submitBtn.disabled = false;
-                    btnText.style.display = 'inline';
-                    btnSpinner.style.display = 'none';
+        // ========== TELEFON MASK ==========
+        const phoneField = document.getElementById('phone');
+        if (phoneField) {
+            phoneField.addEventListener('input', function (e) {
+                let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})/);
+                if (x) {
+                    let result = '';
+                    if (x[1]) result = '+' + x[1];
+                    if (x[2]) result += ' (' + x[2];
+                    if (x[3]) result += ') ' + x[3];
+                    if (x[4]) result += '-' + x[4];
+                    if (x[5]) result += '-' + x[5];
+                    e.target.value = result;
                 }
             });
+
+            phoneField.addEventListener('focus', function (e) {
+                if (e.target.value === '') {
+                    e.target.value = '+998 ';
+                }
+            });
+
+            phoneField.addEventListener('blur', function (e) {
+                if (e.target.value === '+998 ' || e.target.value === '+998' || e.target.value === '+998 () ') {
+                    e.target.value = '';
+                }
+            });
+        }
+
+        // ========== ESCAPE TUGMASI ==========
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeRegistrationModal();
+                closeApplicationModal();
+            }
         });
-    });
-</script>
+
+        // ========== FEEDBACK ROTATOR (BARABAN) ==========
+        let rotatorInterval = null;
+
+        function loadFeedbacksForRotator() {
+            console.log('Loading feedbacks...');
+            $.ajax({
+                url: '/feedbacks',
+                type: 'GET',
+                dataType: 'json',
+                success: function (feedbacks) {
+                    console.log('Feedbacks received:', feedbacks.length);
+                    if (!feedbacks || feedbacks.length === 0) {
+                        $('#rotatingFeedbackContent').html(`
+                                                                                        <i class="fas fa-comment-dots fa-2x mb-2"></i>
+                                                                                        <p>Hozircha fikr yo‘q.<br>Birinchi bo‘lib fikr qoldiring!</p>
+                                                                                    `);
+                        return;
+                    }
+                    startRotator(feedbacks);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', status, error);
+                    $('#rotatingFeedbackContent').html('<i class="fas fa-exclamation-triangle"></i> Xatolik yuz berdi');
+                }
+            });
+        }
+
+        function startRotator(feedbacks) {
+            if (rotatorInterval) clearInterval(rotatorInterval);
+
+            let index = 0;
+
+            function rotate() {
+                if (!feedbacks[index]) return;
+
+                const fb = feedbacks[index];
+                let message = fb.message || '';
+                if (message.length > 120) message = message.substring(0, 117) + '...';
+
+                $('#rotatingFeedbackContent').html(`
+                                                                                <div style="animation: fadeInScale 0.4s ease;">
+                                                                                    <i class="fas fa-quote-left fa-2x mb-3 opacity-50"></i>
+                                                                                    <p style="font-size: 1rem; font-style: italic; margin-bottom: 15px;">“${escapeHtml(message)}”</p>
+                                                                                    <div style="font-weight: bold; font-size: 1rem;">— ${escapeHtml(fb.name)}</div>
+                                                                                    <i class="fas fa-quote-right fa-2x mt-2 opacity-50"></i>
+                                                                                </div>
+                                                                            `);
+
+                index = (index + 1) % feedbacks.length;
+            }
+
+            rotate();
+            rotatorInterval = setInterval(rotate, 5000);
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str).replace(/[&<>]/g, function (m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+
+        // ========== FORM SUBMIT ==========
+        $(document).ready(function () {
+            loadFeedbacksForRotator();
+
+            $("#contactForm").submit(function (e) {
+                e.preventDefault();
+
+                const isLoggedIn = @json(auth()->check());
+
+                if (!isLoggedIn) {
+                    showRegistrationModal();
+                    return;
+                }
+
+                const submitBtn = document.getElementById('submitBtn');
+                const btnText = document.getElementById('btnText');
+                const btnSpinner = document.getElementById('btnSpinner');
+
+                submitBtn.disabled = true;
+                btnText.style.display = 'none';
+                btnSpinner.style.display = 'inline-block';
+
+                var form = $(this);
+
+                $.ajax({
+                    url: '/contact-send',
+                    type: "POST",
+                    data: form.serialize(),
+                    success: function (result) {
+                        showApplicationSuccessModal();
+                        form[0].reset();
+                        loadFeedbacksForRotator();
+                    },
+                    error: function (data) {
+                        let message = "Xatolik yuz berdi!";
+                        if (data.responseJSON && data.responseJSON.message) {
+                            message = data.responseJSON.message;
+                        }
+                        Swal.fire({
+                            icon: 'error',
+                            toast: true,
+                            position: 'top-end',
+                            title: message,
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            background: '#fdd3d6',
+                            color: '#000000'
+                        });
+                    },
+                    complete: function () {
+                        submitBtn.disabled = false;
+                        btnText.style.display = 'inline';
+                        btnSpinner.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
 
 @section('content')
@@ -1130,19 +1160,23 @@
                 <div class="col-lg-12">
                     <div class="counter-container">
                         <div class="counter-cell">
-                            <div data-purecounter-start="0" data-purecounter-end="1200" data-purecounter-duration="3" class="purecounter">0</div>
+                            <div data-purecounter-start="0" data-purecounter-end="1200" data-purecounter-duration="3"
+                                class="purecounter">0</div>
                             <div class="counter-info">{{ __('messages.graduates') }}</div>
                         </div>
                         <div class="counter-cell">
-                            <div data-purecounter-start="0" data-purecounter-end="45" data-purecounter-duration="2" class="purecounter">0</div>
+                            <div data-purecounter-start="0" data-purecounter-end="45" data-purecounter-duration="2"
+                                class="purecounter">0</div>
                             <div class="counter-info">{{ __('messages.active_courses') }}</div>
                         </div>
                         <div class="counter-cell">
-                            <div data-purecounter-start="0" data-purecounter-end="320" data-purecounter-duration="3" class="purecounter">0</div>
+                            <div data-purecounter-start="0" data-purecounter-end="320" data-purecounter-duration="3"
+                                class="purecounter">0</div>
                             <div class="counter-info">{{ __('messages.employed_students') }}</div>
                         </div>
                         <div class="counter-cell">
-                            <div data-purecounter-start="0" data-purecounter-end="5" data-purecounter-duration="2" class="purecounter">0</div>
+                            <div data-purecounter-start="0" data-purecounter-end="5" data-purecounter-duration="2"
+                                class="purecounter">0</div>
                             <div class="counter-info">{{ __('messages.years_experience') }}</div>
                         </div>
                     </div>
@@ -1151,13 +1185,20 @@
         </div>
     </div>
 
-    <!-- Introduction -->
-    <div id="introduction" class="basic-1 bg-gray">
+    <!-- About Section (iTech haqida) -->
+    <div class="about-section">
         <div class="container">
             <div class="row">
-                <div class="col-xl-9">
-                    <h2>{{ __('messages.intro_title') }}</h2>
-                    <p>{{ __('messages.intro_description') }}</p>
+                <div class="col-lg-12 text-center">
+                    <h2 class="display-5 fw-bold mb-4 gradient-text">iTech haqida</h2>
+                    <div class="divider mx-auto mb-4"></div>
+                    <p class="about-text">
+                        iTech o‘quv markazi dasturlash va IT sohasida amaliy bilim berishga ixtisoslashgan.
+                        O‘quv dasturlarimiz real loyiha tajribasiga asoslangan bo‘lib, talabalarni ish bozoriga
+                        tayyor mutaxassis sifatida shakllantirishga qaratilgan. Har bir kurs zamonaviy texnologiyalar,
+                        mentorlik yordami va amaliy topshiriqlar bilan olib boriladi. Maqsadimiz — kuchli,
+                        mustaqil va talabgir dasturchilarni yetishtirish.
+                    </p>
                 </div>
             </div>
         </div>
@@ -1221,102 +1262,20 @@
                 </div>
                 <div class="col-lg-7">
                     <div class="card-grid">
-                        <a href="/courses/office" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/3200/3200650.png" alt="Ofis menejerligi">
+                        @foreach($courses as $course)
+                            <a href="{{ route('courses.show', $course->id) }}" class="card-link">
+                                <div class="card-item">
+                                    <div class="icon-box">
+                                        @if($course->image)
+                                            <img src="{{ asset('storage/courses/' . $course->image) }}" alt="{{ $course->title }}">
+                                        @else
+                                            <i class="fas fa-graduation-cap fa-3x text-primary"></i>
+                                        @endif
+                                    </div>
+                                    <h5 class="card-title">{{ $course->title }}</h5>
                                 </div>
-                                <h5 class="card-title">Ofis menejerligi</h5>
-                            </div>
-                        </a>
-                        <a href="/courses/algorithm" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/11068/11068779.png" alt="Algoritm asoslari">
-                                </div>
-                                <h5 class="card-title">Algoritm asoslari</h5>
-                            </div>
-                        </a>
-                        <a href="{{ route('courses.frontend') }}" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://us.123rf.com/450wm/dxinerz/dxinerz1601/dxinerz160103363/51258851-code-seo-web-symbol-vektor-bild-kann-auch-f%C3%BCr-seo-und-entwicklungsdienste-verwendet-werden.jpg?ver=6" alt="Frontend">
-                                </div>
-                                <h5 class="card-title">Frontend</h5>
-                            </div>
-                        </a>
-                        <a href="{{ route('courses.backend') }}" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://www.shutterstock.com/image-vector/backend-developer-icon-mixed-vector-600nw-2655399835.jpg" alt="Backend">
-                                </div>
-                                <h5 class="card-title">Backend</h5>
-                            </div>
-                        </a>
-                        <a href="{{ route('courses.python') }}" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1280px-Python-logo-notext.svg.png" alt="Python">
-                                </div>
-                                <h5 class="card-title">Python</h5>
-                            </div>
-                        </a>
-                        <a href="/courses/robotics" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/4727/4727488.png" alt="Robototexnika">
-                                </div>
-                                <h5 class="card-title">Robototexnika</h5>
-                            </div>
-                        </a>
-                        <a href="/courses/digital-kids" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/3688/3688127.png" alt="Raqamli bolalar">
-                                </div>
-                                <h5 class="card-title">Raqamli bolalar</h5>
-                            </div>
-                        </a>
-                        <a href="/courses/system-engineering" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="Tizim muhandisligi">
-                                </div>
-                                <h5 class="card-title">Tizim muhandisligi</h5>
-                            </div>
-                        </a>
-                        <a href="/courses/devops" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/5115/5115293.png" alt="DevOps asoslari">
-                                </div>
-                                <h5 class="card-title">DevOps asoslari</h5>
-                            </div>
-                        </a>
-                        <a href="/courses/data-analytics" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055685.png" alt="Data analitika">
-                                </div>
-                                <h5 class="card-title">Data analitika</h5>
-                            </div>
-                        </a>
-                        <a href="/courses/network-admin" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/14357/14357432.png" alt="Tarmoq administratorligi">
-                                </div>
-                                <h5 class="card-title">Tarmoq administratorligi</h5>
-                            </div>
-                        </a>
-                        <a href="/courses/accounting" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/9703/9703558.png" alt="Buxgalteriya">
-                                </div>
-                                <h5 class="card-title">Buxgalteriya</h5>
-                            </div>
-                        </a>
+                            </a>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -1457,7 +1416,8 @@
                         <div class="card-img-wrapper">
                             <img class="card-img-top" src="{{ asset('images/urecruit.png') }}" alt="Urecruit">
                             <div class="card-overlay">
-                                <a href="https://test.admin.urecruit.udevs.io/auth/login" class="overlay-link" target="_blank">
+                                <a href="https://test.admin.urecruit.udevs.io/auth/login" class="overlay-link"
+                                    target="_blank">
                                     <i class="fas fa-external-link-alt"></i> Посмотреть проект
                                 </a>
                             </div>
@@ -1472,14 +1432,48 @@
             </div>
         </div>
     </div>
+    <!-- Testimonials -->
+    <div class="slider-1 bg-gray">
+        <img class="quotes-decoration" src="{{ asset('images/quotes.svg') }}" alt="alternative">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="slider-container">
+                        <div class="swiper-container card-slider">
+                            <div class="swiper-wrapper">
 
-    <!-- Baraban -->
-    <div class="feedback-rotator" style="background: linear-gradient(135deg, #ff69b4, #ff1493); border-radius: 50%; width: 320px; height: 320px; margin: 0 auto; display: flex; align-items: center; justify-content: center; text-align: center; padding: 30px; color: white; box-shadow: 0 20px 40px rgba(0,0,0,0.2); transition: all 0.3s ease;">
-        <div id="rotatingFeedbackContent" style="font-size: 1.1rem; line-height: 1.5;">
-            <i class="fas fa-spinner fa-spin"></i> Yuklanmoqda...
+                                @foreach($feedbacks as $feedback)
+                                    <div class="swiper-slide">
+
+                                        <img class="testimonial-image"
+                                            src="{{ $feedback->avatar ?? asset('images/testimonial-1.jpg') }}" alt="user">
+
+                                        <p class="testimonial-text">
+                                            “{{ $feedback->message }}”
+                                        </p>
+
+                                        <div class="testimonial-author">
+                                            {{ $feedback->name }}
+                                        </div>
+
+                                        <div class="testimonial-position">
+                                            {{ $feedback->date }}
+                                        </div>
+
+                                    </div>
+                                @endforeach
+
+                            </div>
+
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
+    
     <!-- Contact -->
     <div id="contact" class="form-1">
         <img class="decoration-star" src="{{ asset('images/decoration-star.svg') }}" alt="alternative">
@@ -1524,6 +1518,8 @@
             </div>
         </div>
     </div>
+    <!-- Feedback Carousel (Kartochka shaklida) -->
+
 
     <!-- Modals -->
     <div id="registrationModal" class="registration-modal-overlay">
@@ -1532,26 +1528,36 @@
             <h3><i class="fas fa-sign-in-alt me-2"></i>Registratsiya talab qilinadi!</h3>
             <p>Ariza qoldirish uchun avval tizimda ro'yxatdan o'tishingiz kerak!</p>
             <div class="registration-buttons">
-                <a href="{{ route('register') }}" class="btn-register-redirect"><i class="fas fa-user-plus me-2"></i> Ro'yxatdan o'tish</a>
-                <a href="{{ route('login') }}" class="btn-register-redirect" style="background: linear-gradient(135deg, #10b981, #059669);"><i class="fas fa-sign-in-alt me-2"></i> Kirish</a>
-                <button class="btn-register-close" onclick="closeRegistrationModal()"><i class="fas fa-times me-2"></i> Yopish</button>
+                <a href="{{ route('register') }}" class="btn-register-redirect"><i class="fas fa-user-plus me-2"></i>
+                    Ro'yxatdan o'tish</a>
+                <a href="{{ route('login') }}" class="btn-register-redirect"
+                    style="background: linear-gradient(135deg, #10b981, #059669);"><i class="fas fa-sign-in-alt me-2"></i>
+                    Kirish</a>
+                <button class="btn-register-close" onclick="closeRegistrationModal()"><i class="fas fa-times me-2"></i>
+                    Yopish</button>
             </div>
             <hr style="margin: 1.5rem 0 1rem;">
-            <div style="font-size: 12px; color: #6c757d; text-align: center;">Ro'yxatdan o'ting va barcha imkoniyatlardan foydalaning</div>
+            <div style="font-size: 12px; color: #6c757d; text-align: center;">Ro'yxatdan o'ting va barcha imkoniyatlardan
+                foydalaning</div>
         </div>
     </div>
 
     <div id="applicationSuccessModal" class="application-modal-overlay">
         <div class="application-modal-container">
             <div class="application-success-icon"><i class="fas fa-check-circle"></i></div>
-            <h3><i class="fas fa-graduation-cap me-2"></i><span id="modalTitle">{{ __('messages.application_received') }}</span></h3>
-            <div class="course-name-badge"><i class="fas fa-book-open me-1"></i> <span id="modalCourse">{{ __('messages.courses') }}</span></div>
+            <h3><i class="fas fa-graduation-cap me-2"></i><span
+                    id="modalTitle">{{ __('messages.application_received') }}</span></h3>
+            <div class="course-name-badge"><i class="fas fa-book-open me-1"></i> <span
+                    id="modalCourse">{{ __('messages.courses') }}</span></div>
             <p style="margin-top: 15px;" id="modalMessage">{{ __('messages.we_will_contact') }}</p>
             <div style="background: #f0f9ff; border-radius: 12px; padding: 10px; margin: 15px 0;">
-                <small style="color: #1e4a76;"><i class="fas fa-phone-alt me-1"></i> <span id="modalPhone">{{ __('messages.contact_phone') }}</span></small><br>
-                <small style="color: #1e4a76;"><i class="fab fa-telegram me-1"></i> <span id="modalTelegram">{{ __('messages.contact_telegram') }}</span></small>
+                <small style="color: #1e4a76;"><i class="fas fa-phone-alt me-1"></i> <span
+                        id="modalPhone">{{ __('messages.contact_phone') }}</span></small><br>
+                <small style="color: #1e4a76;"><i class="fab fa-telegram me-1"></i> <span
+                        id="modalTelegram">{{ __('messages.contact_telegram') }}</span></small>
             </div>
-            <button class="application-close-btn" onclick="closeApplicationModal()"><i class="fas fa-check me-2"></i> <span id="modalBtnText">{{ __('messages.understand') }}</span></button>
+            <button class="application-close-btn" onclick="closeApplicationModal()"><i class="fas fa-check me-2"></i> <span
+                    id="modalBtnText">{{ __('messages.understand') }}</span></button>
         </div>
     </div>
 @endsection
