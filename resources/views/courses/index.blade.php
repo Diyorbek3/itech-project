@@ -38,11 +38,11 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h2 class="fw-bold mb-1">📚 Kurslar Boshqaruvi</h2>
-            <p class="text-muted">Tizimdagi barcha kurslarni shu yerdan nazorat qiling.</p>
+            <h2 class="fw-bold mb-1">📚 {{ __('messages.course_management') }}</h2>
+            <p class="text-muted">{{ __('messages.course_management_desc') }}</p>
         </div>
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#courseModal" onclick="openCreateModal()">
-            <i class="fas fa-plus me-2"></i>Yangi kurs qo'shish
+            <i class="fas fa-plus me-2"></i>{{ __('messages.add_new_course') }}
         </button>
     </div>
 
@@ -52,12 +52,12 @@
                 <table class="table table-hover mb-0">
                     <thead class="table-light">
                         <tr>
-                            <th style="width: 80px">Rasm</th>
-                            <th>Sarlavha</th>
-                            <th>Narxi</th>
-                            <th>Davomiyligi</th>
-                            <th>Sertifikat</th>
-                            <th style="width: 120px">Amallar</th>
+                            <th style="width: 80px">{{ __('messages.image') }}</th>
+                            <th>{{ __('messages.title') }}</th>
+                            <th>{{ __('messages.price') }}</th>
+                            <th>{{ __('messages.duration') }}</th>
+                            <th>{{ __('messages.certificate') }}</th>
+                            <th style="width: 120px">{{ __('messages.actions') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,21 +73,21 @@
                                 @endif
                             </td>
                             <td class="fw-semibold">{{ $course->title }}</td>
-                            <td>{{ number_format($course->price) }} so'm</td>
+                            <td>{{ number_format($course->price) }} {{ __('messages.price_per_month') }}</td>
                             <td>{{ $course->duration ?? '—' }}</td>
                             <td>
                                 @if($course->has_certificate)
-                                    <span class="badge bg-success">Bor</span>
+                                    <span class="badge bg-success">{{ __('messages.has') }}</span>
                                 @else
-                                    <span class="badge bg-secondary">Yo'q</span>
+                                    <span class="badge bg-secondary">{{ __('messages.no') }}</span>
                                 @endif
                             </td>
                             <td>
                                 <div class="action-btns">
-                                    <button class="btn btn-sm btn-outline-warning" onclick="openEditModal({{ $course->id }})" title="Tahrirlash">
+                                    <button class="btn btn-sm btn-outline-warning" onclick="openEditModal({{ $course->id }})" title="{{ __('messages.edit_course') }}">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <button class="btn btn-sm btn-outline-danger" onclick="deleteCourse({{ $course->id }})" title="O'chirish">
+                                    <button class="btn btn-sm btn-outline-danger" onclick="deleteCourse({{ $course->id }})" title="{{ __('messages.delete_course') }}">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
@@ -97,9 +97,9 @@
                         <tr>
                             <td colspan="6" class="text-center py-5">
                                 <i class="fas fa-book-open fa-3x text-muted mb-3 d-block"></i>
-                                <h5 class="text-muted">Hozircha kurslar mavjud emas</h5>
+                                <h5 class="text-muted">{{ __('messages.no_courses_yet') }}</h5>
                                 <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#courseModal" onclick="openCreateModal()">
-                                    <i class="fas fa-plus me-2"></i>Birinchi kursni qo'shing
+                                    <i class="fas fa-plus me-2"></i>{{ __('messages.add_first_course') }}
                                 </button>
                             </td>
                         </tr>
@@ -116,7 +116,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="modalTitle">Yangi kurs qo'shish</h5>
+                <h5 class="modal-title" id="modalTitle">{{ __('messages.add_new_course') }}</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -127,12 +127,12 @@
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label class="form-label fw-bold">Kurs nomi <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Masalan: Python dasturlash">
+                            <label class="form-label fw-bold">{{ __('messages.course_name') }} <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="title" name="title">
                             <div class="invalid-feedback" id="title_error"></div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label class="form-label fw-bold">Rasm</label>
+                            <label class="form-label fw-bold">{{ __('messages.image') }}</label>
                             <input type="file" class="form-control" id="image" name="image" accept="image/*">
                             <div class="invalid-feedback" id="image_error"></div>
                             <div id="currentImage" class="mt-2" style="display: none;">
@@ -143,94 +143,94 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label fw-bold">Qisqacha tavsif</label>
-                        <input type="text" class="form-control" id="short_description" name="short_description" placeholder="Kurs haqida qisqacha">
+                        <label class="form-label fw-bold">{{ __('messages.short_description') }}</label>
+                        <input type="text" class="form-control" id="short_description" name="short_description">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label fw-bold">To'liq tavsif</label>
-                        <textarea class="form-control" id="full_description" name="full_description" rows="3" placeholder="Kurs haqida batafsil ma'lumot..."></textarea>
+                        <label class="form-label fw-bold">{{ __('messages.full_description') }}</label>
+                        <textarea class="form-control" id="full_description" name="full_description" rows="3"></textarea>
                     </div>
 
                     <div class="row">
                         <div class="col-md-4 mb-3">
-                            <label class="form-label fw-bold">Davomiyligi</label>
-                            <input type="text" class="form-control" id="duration" name="duration" placeholder="3 oy">
+                            <label class="form-label fw-bold">{{ __('messages.duration') }}</label>
+                            <input type="text" class="form-control" id="duration" name="duration">
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label class="form-label fw-bold">Talabalar soni</label>
-                            <input type="number" class="form-control" id="student_count" name="student_count" placeholder="100">
+                            <label class="form-label fw-bold">{{ __('messages.student_count') }}</label>
+                            <input type="number" class="form-control" id="student_count" name="student_count">
                             <div class="invalid-feedback" id="student_count_error"></div>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label class="form-label fw-bold">Sertifikat</label>
+                            <label class="form-label fw-bold">{{ __('messages.certificate') }}</label>
                             <select class="form-select" id="has_certificate" name="has_certificate">
-                                <option value="1">Bor</option>
-                                <option value="0">Yo'q</option>
+                                <option value="1">{{ __('messages.has') }}</option>
+                                <option value="0">{{ __('messages.no') }}</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-4 mb-3">
-                            <label class="form-label fw-bold">Narxi (so'm)</label>
-                            <input type="number" class="form-control" id="price" name="price" placeholder="850000">
+                            <label class="form-label fw-bold">{{ __('messages.price') }}</label>
+                            <input type="number" class="form-control" id="price" name="price">
                             <div class="invalid-feedback" id="price_error"></div>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label class="form-label fw-bold">Darslar chastotasi</label>
-                            <input type="text" class="form-control" id="schedule" name="schedule" placeholder="Haftada 3 kun">
+                            <label class="form-label fw-bold">{{ __('messages.schedule') }}</label>
+                            <input type="text" class="form-control" id="schedule" name="schedule">
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label class="form-label fw-bold">Tili</label>
-                            <input type="text" class="form-control" id="language" name="language" placeholder="O'zbek tilida">
+                            <label class="form-label fw-bold">{{ __('messages.language') }}</label>
+                            <input type="text" class="form-control" id="language" name="language">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label class="form-label fw-bold">O'qituvchilar</label>
-                            <input type="text" class="form-control" id="teachers" name="teachers" placeholder="Ism Familya">
+                            <label class="form-label fw-bold">{{ __('messages.teachers') }}</label>
+                            <input type="text" class="form-control" id="teachers" name="teachers">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label class="form-label fw-bold">24/7 Mentor yordami</label>
+                            <label class="form-label fw-bold">{{ __('messages.support_text') }}</label>
                             <select class="form-select" id="has_mentor_support" name="has_mentor_support">
-                                <option value="1">Bor</option>
-                                <option value="0">Yo'q</option>
+                                <option value="1">{{ __('messages.has') }}</option>
+                                <option value="0">{{ __('messages.no') }}</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label fw-bold">O'quv dasturi</label>
-                        <textarea class="form-control" id="curriculum" name="curriculum" rows="4" placeholder="Kurs dasturini yozing..."></textarea>
+                        <label class="form-label fw-bold">{{ __('messages.curriculum') }}</label>
+                        <textarea class="form-control" id="curriculum" name="curriculum" rows="4"></textarea>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label fw-bold">Kimlar uchun?</label>
-                        <textarea class="form-control" id="target_audience" name="target_audience" rows="2" placeholder="Bu kurs kimlar uchun?"></textarea>
+                        <label class="form-label fw-bold">{{ __('messages.target_audience') }}</label>
+                        <textarea class="form-control" id="target_audience" name="target_audience" rows="2"></textarea>
                     </div>
 
                     <hr>
-                    <h6 class="fw-bold mb-3">Havolalar (ixtiyoriy)</h6>
+                    <h6 class="fw-bold mb-3">{{ __('messages.links_optional') }}</h6>
                     <div class="row">
                         <div class="col-md-6 mb-2">
-                            <label>Word havolasi</label>
+                            <label>{{ __('messages.word_link') }}</label>
                             <input type="url" class="form-control" id="word_link" name="word_link" placeholder="https://...">
                             <div class="invalid-feedback" id="word_link_error"></div>
                         </div>
                         <div class="col-md-6 mb-2">
-                            <label>Excel havolasi</label>
+                            <label>{{ __('messages.excel_link') }}</label>
                             <input type="url" class="form-control" id="excel_link" name="excel_link" placeholder="https://...">
                             <div class="invalid-feedback" id="excel_link_error"></div>
                         </div>
                         <div class="col-md-6 mb-2">
-                            <label>PowerPoint havolasi</label>
+                            <label>{{ __('messages.powerpoint_link') }}</label>
                             <input type="url" class="form-control" id="powerpoint_link" name="powerpoint_link" placeholder="https://...">
                             <div class="invalid-feedback" id="powerpoint_link_error"></div>
                         </div>
                         <div class="col-md-6 mb-2">
-                            <label>Arxiv havolasi</label>
+                            <label>{{ __('messages.archive_link') }}</label>
                             <input type="url" class="form-control" id="archive_link" name="archive_link" placeholder="https://...">
                             <div class="invalid-feedback" id="archive_link_error"></div>
                         </div>
@@ -238,8 +238,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
-                <button type="button" class="btn btn-primary" onclick="saveCourse()">Saqlash</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('messages.cancel') }}</button>
+                <button type="button" class="btn btn-primary" onclick="saveCourse()">{{ __('messages.save') }}</button>
             </div>
         </div>
     </div>
@@ -250,6 +250,23 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     let currentCourseId = null;
+
+    // Translations for JS
+    const trans = {
+        edit_course: "{{ __('messages.edit_course') }}",
+        add_new_course: "{{ __('messages.add_new_course') }}",
+        success_title: "{{ __('messages.success_title') }}",
+        error_title: "{{ __('messages.error_title') }}",
+        validation_error: "{{ __('messages.validation_error') }}",
+        delete_confirm_title: "{{ __('messages.delete_course') }}",
+        delete_confirm_text: "{{ __('messages.delete_confirm_text_course') }}",
+        delete_confirm_button: "{{ __('messages.delete_course') }}",
+        cancel_button: "{{ __('messages.cancel') }}",
+        course_added: "{{ __('messages.course_added_success') }}",
+        course_updated: "{{ __('messages.course_updated_success') }}",
+        course_deleted: "{{ __('messages.course_deleted_success') }}",
+        error_occurred: "{{ __('messages.error_occurred') }}"
+    };
 
     function clearErrors() {
         document.querySelectorAll('.is-invalid').forEach(el => {
@@ -275,7 +292,7 @@
 
     function openCreateModal() {
         clearErrors();
-        document.getElementById('modalTitle').innerText = 'Yangi kurs qo\'shish';
+        document.getElementById('modalTitle').innerText = trans.add_new_course;
         document.getElementById('courseForm').reset();
         document.getElementById('course_id').value = '';
         document.getElementById('_method').value = 'POST';
@@ -289,7 +306,7 @@
         $.get('/courses/' + id + '/edit', function(data) {
             if (data.success) {
                 const course = data.course;
-                document.getElementById('modalTitle').innerText = 'Kursni tahrirlash';
+                document.getElementById('modalTitle').innerText = trans.edit_course;
                 document.getElementById('course_id').value = course.id;
                 document.getElementById('_method').value = 'PUT';
                 document.getElementById('title').value = course.title || '';
@@ -320,19 +337,13 @@
                 currentCourseId = course.id;
                 $('#courseModal').modal('show');
             } else {
-                Swal.fire('Xatolik', 'Kurs topilmadi', 'error');
+                Swal.fire(trans.error_title, trans.error_occurred, 'error');
             }
         });
     }
 
     function saveCourse() {
         clearErrors();
-
-        let title = document.getElementById('title').value.trim();
-        if (!title) {
-            Swal.fire('Xatolik', 'Kurs nomini kiriting!', 'warning');
-            return;
-        }
 
         let formData = new FormData(document.getElementById('courseForm'));
         let url = '/courses';
@@ -356,10 +367,10 @@
                 if (response.success) {
                     $('#courseModal').modal('hide');
                     
-                    let message = isEdit ? '✅ Kurs muvaffaqiyatli yangilandi!' : '✅ Kurs muvaffaqiyatli qo\'shildi!';
+                    let message = isEdit ? trans.course_updated : trans.course_added;
                     Swal.fire({
                         icon: 'success',
-                        title: 'Muvaffaqiyatli!',
+                        title: trans.success_title,
                         text: message,
                         timer: 2000,
                         showConfirmButton: false
@@ -369,7 +380,7 @@
                         location.reload();
                     }, 2000);
                 } else {
-                    Swal.fire('Xatolik', response.message || 'Xatolik yuz berdi', 'error');
+                    Swal.fire(trans.error_title, response.message || trans.error_occurred, 'error');
                 }
             },
             error: function(xhr) {
@@ -378,10 +389,10 @@
                     if (errors) {
                         showErrors(errors);
                         let firstError = Object.values(errors)[0][0];
-                        Swal.fire('Validatsiya xatosi', firstError, 'error');
+                        Swal.fire(trans.validation_error, firstError, 'error');
                     }
                 } else {
-                    Swal.fire('Xatolik', 'Saqlashda xatolik yuz berdi', 'error');
+                    Swal.fire(trans.error_title, trans.error_occurred, 'error');
                 }
             }
         });
@@ -389,14 +400,14 @@
 
     function deleteCourse(id) {
         Swal.fire({
-            title: 'O\'chirish',
-            text: 'Haqiqatan ham ushbu kursni o\'chirmoqchimisiz?',
+            title: trans.delete_confirm_title,
+            text: trans.delete_confirm_text,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#dc2626',
             cancelButtonColor: '#64748b',
-            confirmButtonText: 'Ha, o\'chirish!',
-            cancelButtonText: 'Bekor qilish'
+            confirmButtonText: trans.delete_confirm_button,
+            cancelButtonText: trans.cancel_button
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
@@ -409,8 +420,8 @@
                         if (response.success) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'O\'chirildi!',
-                                text: '✅ Kurs muvaffaqiyatli o\'chirildi!',
+                                title: trans.success_title,
+                                text: trans.course_deleted,
                                 timer: 2000,
                                 showConfirmButton: false
                             });
@@ -418,11 +429,11 @@
                                 location.reload();
                             }, 2000);
                         } else {
-                            Swal.fire('Xatolik', response.message || 'Xatolik yuz berdi', 'error');
+                            Swal.fire(trans.error_title, response.message || trans.error_occurred, 'error');
                         }
                     },
                     error: function() {
-                        Swal.fire('Xatolik', 'O\'chirishda xatolik yuz berdi', 'error');
+                        Swal.fire(trans.error_title, trans.error_occurred, 'error');
                     }
                 });
             }

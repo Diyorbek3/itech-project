@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Feedback extends Model
 {
-    protected $table = 'feedback';  // ← QO'SHING (jadval nomi aniq)
+    protected $table = 'feedbacks';
     
     protected $fillable = ['name', 'email', 'message'];
 }

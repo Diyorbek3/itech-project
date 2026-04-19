@@ -1169,14 +1169,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="display-5 fw-bold mb-4 gradient-text">iTech haqida</h2>
+                    <h2 class="display-5 fw-bold mb-4 gradient-text">{{ __('messages.about_itech') }}</h2>
                     <div class="divider mx-auto mb-4"></div>
                     <p class="about-text">
-                        iTech o‘quv markazi dasturlash va IT sohasida amaliy bilim berishga ixtisoslashgan. 
-                        O‘quv dasturlarimiz real loyiha tajribasiga asoslangan bo‘lib, talabalarni ish bozoriga 
-                        tayyor mutaxassis sifatida shakllantirishga qaratilgan. Har bir kurs zamonaviy texnologiyalar, 
-                        mentorlik yordami va amaliy topshiriqlar bilan olib boriladi. Maqsadimiz — kuchli, 
-                        mustaqil va talabgir dasturchilarni yetishtirish.
+                        {{ __('messages.intro_description') }}
                     </p>
                 </div>
             </div>
@@ -1301,7 +1297,7 @@
                 <div class="col-lg-12 text-center mb-5">
                     <h2 class="display-5 fw-bold mb-3 gradient-text">{{ __('messages.projects_title') }}</h2>
                     <div class="divider mx-auto"></div>
-                    <p class="text-muted fs-5">Инновационные решения для современного бизнеса</p>
+                    <p class="text-muted fs-5">{{ __('messages.intro_title') }}</p>
                 </div>
             </div>
             <div class="row g-4 justify-content-center">
@@ -1311,7 +1307,7 @@
                             <img class="card-img-top" src="{{ asset('images/iqro.png') }}" alt="Iqro">
                             <div class="card-overlay">
                                 <a href="https://iqroagency.uz/uz" class="overlay-link" target="_blank">
-                                    <i class="fas fa-external-link-alt"></i> Посмотреть проект
+                                    <i class="fas fa-external-link-alt"></i> {{ __('messages.view_project') }}
                                 </a>
                             </div>
                         </div>
@@ -1328,7 +1324,7 @@
                             <img class="card-img-top" src="{{ asset('images/delever.png') }}" alt="Delever">
                             <div class="card-overlay">
                                 <a href="https://www.delever.uz/" class="overlay-link" target="_blank">
-                                    <i class="fas fa-external-link-alt"></i> Посмотреть проект
+                                    <i class="fas fa-external-link-alt"></i> {{ __('messages.view_project') }}
                                 </a>
                             </div>
                         </div>
@@ -1345,7 +1341,7 @@
                             <img class="card-img-top" src="{{ asset('images/kidi.png') }}" alt="Kidi">
                             <div class="card-overlay">
                                 <a href="https://kidi.uz/" class="overlay-link" target="_blank">
-                                    <i class="fas fa-external-link-alt"></i> Посмотреть проект
+                                    <i class="fas fa-external-link-alt"></i> {{ __('messages.view_project') }}
                                 </a>
                             </div>
                         </div>
@@ -1362,7 +1358,7 @@
                             <img class="card-img-top" src="{{ asset('images/growz.png') }}" alt="Growz">
                             <div class="card-overlay">
                                 <a href="https://admin.growz.io/login" class="overlay-link" target="_blank">
-                                    <i class="fas fa-external-link-alt"></i> Посмотреть проект
+                                    <i class="fas fa-external-link-alt"></i> {{ __('messages.view_project') }}
                                 </a>
                             </div>
                         </div>
@@ -1379,7 +1375,7 @@
                             <img class="card-img-top" src="{{ asset('images/wasteles.png') }}" alt="Wasteless">
                             <div class="card-overlay">
                                 <a href="https://admin.wasteless.uz/login" class="overlay-link" target="_blank">
-                                    <i class="fas fa-external-link-alt"></i> Посмотреть проект
+                                    <i class="fas fa-external-link-alt"></i> {{ __('messages.view_project') }}
                                 </a>
                             </div>
                         </div>
@@ -1396,7 +1392,7 @@
                             <img class="card-img-top" src="{{ asset('images/urecruit.png') }}" alt="Urecruit">
                             <div class="card-overlay">
                                 <a href="https://test.admin.urecruit.udevs.io/auth/login" class="overlay-link" target="_blank">
-                                    <i class="fas fa-external-link-alt"></i> Посмотреть проект
+                                    <i class="fas fa-external-link-alt"></i> {{ __('messages.view_project') }}
                                 </a>
                             </div>
                         </div>
@@ -1414,7 +1410,7 @@
     <!-- Baraban -->
     <div class="feedback-rotator" style="background: linear-gradient(135deg, #ff69b4, #ff1493); border-radius: 50%; width: 320px; height: 320px; margin: 0 auto; display: flex; align-items: center; justify-content: center; text-align: center; padding: 30px; color: white; box-shadow: 0 20px 40px rgba(0,0,0,0.2); transition: all 0.3s ease;">
         <div id="rotatingFeedbackContent" style="font-size: 1.1rem; line-height: 1.5;">
-            <i class="fas fa-spinner fa-spin"></i> Yuklanmoqda...
+            <i class="fas fa-spinner fa-spin"></i> {{ __('messages.loading') }}
         </div>
     </div>
 
@@ -1467,15 +1463,15 @@
     <div id="registrationModal" class="registration-modal-overlay">
         <div class="registration-modal">
             <div class="registration-icon"><i class="fas fa-user-plus"></i></div>
-            <h3><i class="fas fa-sign-in-alt me-2"></i>Registratsiya talab qilinadi!</h3>
-            <p>Ariza qoldirish uchun avval tizimda ro'yxatdan o'tishingiz kerak!</p>
+            <h3><i class="fas fa-sign-in-alt me-2"></i>{{ __('messages.registration_required') }}</h3>
+            <p>{{ __('messages.registration_required_desc') }}</p>
             <div class="registration-buttons">
-                <a href="{{ route('register') }}" class="btn-register-redirect"><i class="fas fa-user-plus me-2"></i> Ro'yxatdan o'tish</a>
-                <a href="{{ route('login') }}" class="btn-register-redirect" style="background: linear-gradient(135deg, #10b981, #059669);"><i class="fas fa-sign-in-alt me-2"></i> Kirish</a>
-                <button class="btn-register-close" onclick="closeRegistrationModal()"><i class="fas fa-times me-2"></i> Yopish</button>
+                <a href="{{ route('register') }}" class="btn-register-redirect"><i class="fas fa-user-plus me-2"></i> {{ __('messages.sign_up') }}</a>
+                <a href="{{ route('login') }}" class="btn-register-redirect" style="background: linear-gradient(135deg, #10b981, #059669);"><i class="fas fa-sign-in-alt me-2"></i> {{ __('messages.login') }}</a>
+                <button class="btn-register-close" onclick="closeRegistrationModal()"><i class="fas fa-times me-2"></i> {{ __('messages.close') }}</button>
             </div>
             <hr style="margin: 1.5rem 0 1rem;">
-            <div style="font-size: 12px; color: #6c757d; text-align: center;">Ro'yxatdan o'ting va barcha imkoniyatlardan foydalaning</div>
+            <div style="font-size: 12px; color: #6c757d; text-align: center;">{{ __('messages.registration_benefit') }}</div>
         </div>
     </div>
 

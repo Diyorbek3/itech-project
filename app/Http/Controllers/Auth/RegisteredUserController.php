@@ -39,7 +39,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'avatar' => 'avatar.png', // MANA SHU YERDA DEFAULT RASM BERILDI
+            'avatar' => 'avatar.png', // DB not null bo'lgani uchun 'avatar.png' qaytarildi
         ]);
 
         // 3. Registratsiya hodisasini ishga tushirish

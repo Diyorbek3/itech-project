@@ -191,23 +191,30 @@
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value;
         
+        const trans = {
+            email_required: "{{ __('messages.email_required') }}",
+            email_invalid: "{{ __('messages.email_invalid') }}",
+            password_required: "{{ __('messages.password_required') }}",
+            password_min: "{{ __('messages.password_min') }}",
+            error_title: "{{ __('messages.error_title') }}",
+            login_error_title: "{{ __('messages.error_title') }}"
+        };
+
         if (email === '') {
-            errors.push('Email manzilini kiriting');
-        } else if (!email.includes('@')) {
-            errors.push('Email manzilida "@" belgisi bo\'lishi kerak');
-        } else if (!email.includes('.')) {
-            errors.push('Email manzilida "." belgisi bo\'lishi kerak');
+            errors.push(trans.email_required);
+        } else if (!email.includes('@') || !email.includes('.')) {
+            errors.push(trans.email_invalid);
         }
         
         if (password === '') {
-            errors.push('Parolni kiriting');
+            errors.push(trans.password_required);
         } else if (password.length < 8) {
-            errors.push('Parol kamida 8 ta belgidan iborat bo\'lishi kerak');
+            errors.push(trans.password_min);
         }
         
         if (errors.length > 0) {
             Swal.fire({
-                title: 'Xatolik!',
+                title: trans.error_title,
                 html: errors.map(err => `• ${err}`).join('<br>'),
                 icon: 'error',
                 toast: true,

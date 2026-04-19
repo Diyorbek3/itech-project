@@ -157,7 +157,7 @@
                                          src="{{ Auth::user()->avatar ? Storage::url('avatars/' . Auth::user()->avatar) : asset('images/avatar.png') }}"
                                      class="rounded-circle me-2" 
                                      style="width: 30px; height: 30px; object-fit: cover;"
-                                     onerror="this.onerror=null; this.src='{{ asset('storage/avatars/avatar.png') }}';">
+                                     onerror="this.onerror=null; this.src='{{ asset('images/avatar.png') }}';">
                                 <span id="headerUserName">{{ Auth::user()->name }}</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -166,14 +166,14 @@
                                 </a></li>
                                 @if (auth()->user()->role_id == 1)
                                 <li><a class="dropdown-item" href="/master-class">
-                                    <i class="fas fa-chalkboard-user me-2"></i> Master-class
+                                    <i class="fas fa-chalkboard-user me-2"></i> {{ __('messages.master_class') }}
                                 </a></li>
                                 <!-- KURSLAR MENYUSI QO'SHILDI -->
                                 <li><a class="dropdown-item" href="{{ route('courses.index') }}">
-                                    <i class="fas fa-book-open me-2"></i> Kurslar
+                                    <i class="fas fa-book-open me-2"></i> {{ __('messages.courses') }}
                                 </a></li>
                                 <li><a class="dropdown-item" href="{{ route('dashboard') }}">
-                                    <i class="fas fa-chart-line me-2"></i> Dashboard
+                                    <i class="fas fa-chart-line me-2"></i> {{ __('messages.dashboard') }}
                                 </a></li>
                                 @endif
                                 <li>

@@ -166,13 +166,13 @@
             </div>
 
             <button type="submit" class="btn-register-style">
-                Ro'yxatdan o'tish
+                {{ __('messages.sign_up') }}
             </button>
         </form>
     </div>
 
     <div class="login-callout">
-        {{ __('messages.already_have_account') }} <a href="{{ route('login') }}">← {{ __('messages.log_in') }}</a>
+        {{ __('messages.already_have_account') }} <a href="{{ route('login') }}">→ {{ __('messages.log_in') }}</a>
     </div>
 </div>
 
@@ -202,35 +202,42 @@
         const password = document.getElementById('password').value;
         const passwordConfirm = document.getElementById('password_confirmation').value;
         
+        const trans = {
+            name_required: "{{ __('messages.name_required') }}",
+            name_min: "{{ __('messages.name_min') }}",
+            email_required: "{{ __('messages.email_required') }}",
+            email_invalid: "{{ __('messages.email_invalid') }}",
+            password_required: "{{ __('messages.password_required') }}",
+            password_min: "{{ __('messages.password_min') }}",
+            password_mismatch: "{{ __('messages.password_mismatch') }}",
+            error_title: "{{ __('messages.error_title') }}"
+        };
+
         if (name === '') {
-            errors.push('To\'liq ismingizni kiriting');
+            errors.push(trans.name_required);
         } else if (name.length < 3) {
-            errors.push('Ism kamida 3 ta belgidan iborat bo\'lishi kerak');
+            errors.push(trans.name_min);
         }
         
         if (email === '') {
-            errors.push('Email manzilini kiriting');
-        } else if (!email.includes('@')) {
-            errors.push('Email manzilida "@" belgisi bo\'lishi kerak');
-        } else if (!email.includes('.')) {
-            errors.push('Email manzilida "." belgisi bo\'lishi kerak');
+            errors.push(trans.email_required);
+        } else if (!email.includes('@') || !email.includes('.')) {
+            errors.push(trans.email_invalid);
         }
-        // Gmail cheklovi O'CHIRILDI - endi istalgan email manzili mumkin
         
-        // PAROL TEKSHIRUVI - faqat uzunligi
         if (password === '') {
-            errors.push('Parolni kiriting');
+            errors.push(trans.password_required);
         } else if (password.length < 8) {
-            errors.push('Parol kamida 8 ta belgidan iborat bo\'lishi kerak');
+            errors.push(trans.password_min);
         }
         
         if (password !== passwordConfirm) {
-            errors.push('Parol va parolni tasdiqlash mos kelmadi');
+            errors.push(trans.password_mismatch);
         }
         
         if (errors.length > 0) {
             Swal.fire({
-                title: 'Xatolik!',
+                title: trans.error_title,
                 html: errors.map(err => `• ${err}`).join('<br>'),
                 icon: 'error',
                 toast: true,
