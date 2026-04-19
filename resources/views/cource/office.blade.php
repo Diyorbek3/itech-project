@@ -93,6 +93,8 @@
         width: 100%;
         margin-top: 1.5rem;
         transition: all 0.3s ease;
+        color: white !important;
+        cursor: pointer;
     }
     .btn-enroll:hover {
         transform: translateY(-2px);
@@ -178,7 +180,6 @@
         font-weight: 600;
         color: #3b82f6;
     }
-    /* Modal custom style */
     .custom-modal-overlay {
         position: fixed;
         top: 0;
@@ -264,6 +265,7 @@
         color: white;
         transition: 0.2s;
         margin-top: 0.5rem;
+        cursor: pointer;
     }
     .submit-modal-btn:hover {
         background: #1e5a7c;
@@ -283,7 +285,6 @@
     .close-modal-icon:hover {
         color: #1e293b;
     }
-    /* Toast notification */
     .admin-toast {
         position: fixed;
         top: 20px;
@@ -357,124 +358,20 @@
             min-width: auto;
         }
     }
+    @media (max-width: 991px) {
+        .course-title { font-size: 1.8rem; }
+        .price-card { position: relative; margin-top: 2rem; }
+    }
+    @media (max-width: 768px) {
+        .course-hero { padding: 1.5rem; }
+        .course-title { font-size: 1.5rem; }
+        .modal-form-container { padding: 1.5rem; }
+    }
 </style>
 @endsection
 
-@section('scripts')
-<script>
-    (function() {
-        const isLoggedIn = @json(auth()->check());
-        const modal = document.getElementById('customModal');
-        const openBtn = document.getElementById('openModalBtn');
-        const closeBtn = document.getElementById('closeModalBtn');
-        const form = document.getElementById('applicationForm');
-        const fullnameField = document.getElementById('fullName');
-        const phoneField = document.getElementById('phone');
-        const adminToast = document.getElementById('adminToast');
-
-        function openModal() {
-            if (modal) {
-                modal.classList.add('active');
-                fullnameField.value = '';
-                phoneField.value = '';
-            }
-        }
-
-        function closeModal() {
-            if (modal) modal.classList.remove('active');
-        }
-
-        function checkAuthAndOpenModal() {
-            if (isLoggedIn) {
-                openModal();
-            } else {
-                Swal.fire({
-                    icon: 'warning',
-                    title: '{{ __("messages.auth_required_title") }}',
-                    text: '{{ __("messages.auth_required_text") }}',
-                    confirmButtonText: '{{ __("messages.auth_confirm_button") }}',
-                    confirmButtonColor: '#3b82f6',
-                    backdrop: true
-                });
-            }
-        }
-
-        function showAdminNotification() {
-            if (adminToast) {
-                adminToast.classList.add('show');
-                setTimeout(() => adminToast.classList.remove('show'), 5000);
-            }
-        }
-
-        if (openBtn) {
-            openBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                checkAuthAndOpenModal();
-            });
-        }
-        if (closeBtn) {
-            closeBtn.addEventListener('click', closeModal);
-        }
-        if (modal) {
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) closeModal();
-            });
-        }
-        if (form) {
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
-                const fullname = fullnameField.value.trim();
-                const phone = phoneField.value.trim();
-
-                if (!fullname) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: '{{ __("messages.error_title") }}',
-                        text: '{{ __("messages.error_name_required") }}',
-                        confirmButtonColor: '#3b82f6'
-                    });
-                    fullnameField.focus();
-                    return;
-                }
-                if (!phone) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: '{{ __("messages.error_title") }}',
-                        text: '{{ __("messages.error_phone_required") }}',
-                        confirmButtonColor: '#3b82f6'
-                    });
-                    phoneField.focus();
-                    return;
-                }
-
-                const token = "8586485983:AAF-7NhRKL72j3zXWUdznuHFv3rHCh1SIVc";
-                const chatId = "-1003836558266";
-                const text = `🆕 YANGI ARIZA!\n\n📚 Kurs: {{ __("messages.office_title") }}\n👤 Ism: ${fullname}\n📞 Telefon: ${phone}\n⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}\n\n📌 Holat: {{ __("messages.toast_note") }}`;
-                const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
-
-                fetch(url)
-                    .then(() => {
-                        closeModal();
-                        fullnameField.value = '';
-                        phoneField.value = '';
-                        showAdminNotification();
-                    })
-                    .catch(() => {
-                        Swal.fire({
-                            icon: 'error',
-                            title: '{{ __("messages.error_title") }}',
-                            text: '{{ __("messages.error_general") }}',
-                            confirmButtonColor: '#3b82f6'
-                        });
-                    });
-            });
-        }
-    })();
-</script>
-@endsection
-
 @section('content')
-<div class="container-fluid">
+<div class="container py-4 py-md-5">
     <div class="course-hero">
         <div class="row align-items-center">
             <div class="col-lg-8">
@@ -483,7 +380,7 @@
                 <p class="course-description">{{ __('messages.office_description') }}</p>
                 <div class="d-flex gap-3 flex-wrap">
                     <div class="d-flex align-items-center gap-2"><i class="fas fa-clock text-primary"></i><span>{{ __('messages.office_duration') }}</span></div>
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>{{ __('messages.office_students') }} </span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>{{ __('messages.office_students') }} {{ __('messages.students_suffix') }}</span></div>
                     <div class="d-flex align-items-center gap-2"><i class="fas fa-certificate text-primary"></i><span>{{ __('messages.certificate') }}</span></div>
                 </div>
                 <div class="tech-stack">
@@ -499,14 +396,16 @@
             </div>
         </div>
     </div>
+
     <div class="row g-4">
         <div class="col-lg-8">
             <div class="info-card">
-                <h3 class="fw-bold mb-3">{{ __('messages.course_about') }}</h3>
+                <h3 class="fw-bold mb-3">📖 {{ __('messages.course_about') }}</h3>
                 <p class="text-secondary">{{ __('messages.office_full_desc') }}</p>
             </div>
+
             <div class="info-card">
-                <h3 class="fw-bold mb-3">{{ __('messages.course_program') }}</h3>
+                <h3 class="fw-bold mb-3">📚 {{ __('messages.course_program') }}</h3>
                 <div class="row g-2">
                     <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">{{ __('messages.office_module1_title') }}</div><div class="skill-desc">{{ __('messages.office_module1_desc') }}</div></div></div></div>
                     <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">{{ __('messages.office_module2_title') }}</div><div class="skill-desc">{{ __('messages.office_module2_desc') }}</div></div></div></div>
@@ -514,10 +413,12 @@
                     <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">{{ __('messages.office_module4_title') }}</div><div class="skill-desc">{{ __('messages.office_module4_desc') }}</div></div></div></div>
                 </div>
             </div>
+
             <div class="info-card">
-                <h3 class="fw-bold mb-3">{{ __('messages.course_for_who') }}</h3>
+                <h3 class="fw-bold mb-3">👨‍💻 {{ __('messages.course_for_who') }}</h3>
                 <p class="text-secondary">{{ __('messages.office_for_who') }}</p>
             </div>
+
             <div class="teacher-card">
                 <div class="teacher-avatar"><i class="fas fa-chalkboard-user"></i></div>
                 <div>
@@ -526,12 +427,13 @@
                 </div>
             </div>
         </div>
+
         <div class="col-lg-4">
             <div class="price-card">
                 <div class="text-center mb-3">
                     <span class="price-old">{{ __('messages.office_old_price') }}</span>
                     <div class="price-new">{{ __('messages.office_price') }}</div>
-                    <span class="price-period">{{ __('messages.price_per_month') }}</span>
+                    <span class="price-period">{{ __('messages.per_month') }}</span>
                 </div>
                 <hr>
                 <div class="mb-3">
@@ -557,8 +459,9 @@
     <div class="modal-form-container">
         <button class="close-modal-icon" id="closeModalBtn"><i class="fas fa-times"></i></button>
         <h3><i class="fas fa-pen-alt me-2" style="color:#1e4a76;"></i> {{ __('messages.modal_enroll_title') }}</h3>
-        <p>{{ __('messages.modal_enroll_subtitle') }}</p>
+        <p>{{ __('messages.office_title') }} {{ __('messages.modal_enroll_subtitle') }}</p>
         <form id="applicationForm">
+            @csrf
             <div class="form-group-custom">
                 <label><i class="fas fa-user me-1"></i> {{ __('messages.form_name_label') }}</label>
                 <input type="text" id="fullName" placeholder="{{ __('messages.form_name_placeholder') }}" required>
@@ -581,11 +484,84 @@
     </div>
     <div class="admin-toast-content">
         <div class="admin-toast-title">
-            <i class="fas fa-bell" style="font-size: 12px;"></i> {{ __('messages.toast_success_title') }}
+            <i class="fas fa-bell" style="font-size: 12px;"></i> ✅ {{ __('messages.toast_success_title') }}
         </div>
         <div class="admin-toast-note">
             <i class="fas fa-clock me-1"></i> {{ __('messages.toast_note') }}
         </div>
     </div>
 </div>
+
+<!-- Footer ajralishi uchun bo'sh joy -->
+<div style="height: 120px; clear: both; display: block; width: 100%;"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    (function() {
+        const isLoggedIn = @json(auth()->check());
+        const modal = document.getElementById('customModal');
+        const openBtn = document.getElementById('openModalBtn');
+        const closeBtn = document.getElementById('closeModalBtn');
+        const form = document.getElementById('applicationForm');
+        const fullnameField = document.getElementById('fullName');
+        const phoneField = document.getElementById('phone');
+        const adminToast = document.getElementById('adminToast');
+
+        function openModal() {
+            if (modal) {
+                modal.classList.add('active');
+                if (fullnameField) fullnameField.value = '';
+                if (phoneField) phoneField.value = '';
+            }
+        }
+        function closeModal() {
+            if (modal) modal.classList.remove('active');
+        }
+        function checkAuthAndOpenModal() {
+            if (isLoggedIn) {
+                openModal();
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '{{ __("messages.auth_required_title") }}',
+                    text: '{{ __("messages.auth_required_text") }}',
+                    confirmButtonText: '{{ __("messages.auth_confirm_button") }}',
+                    confirmButtonColor: '#3b82f6'
+                });
+            }
+        }
+        function showAdminNotification() {
+            if (adminToast) {
+                adminToast.classList.add('show');
+                setTimeout(() => adminToast.classList.remove('show'), 5000);
+            }
+        }
+        if (openBtn) openBtn.addEventListener('click', (e) => { e.preventDefault(); checkAuthAndOpenModal(); });
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+        if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+        if (form) {
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const fullname = fullnameField ? fullnameField.value.trim() : '';
+                const phone = phoneField ? phoneField.value.trim() : '';
+                if (!fullname) {
+                    Swal.fire({ icon: 'error', title: '{{ __("messages.error_title") }}', text: '{{ __("messages.error_name_required") }}', confirmButtonColor: '#3b82f6' });
+                    if (fullnameField) fullnameField.focus();
+                    return;
+                }
+                if (!phone) {
+                    Swal.fire({ icon: 'error', title: '{{ __("messages.error_title") }}', text: '{{ __("messages.error_phone_required") }}', confirmButtonColor: '#3b82f6' });
+                    if (phoneField) phoneField.focus();
+                    return;
+                }
+                const token = "8586485983:AAF-7NhRKL72j3zXWUdznuHFv3rHCh1SIVc";
+                const chatId = "-1003836558266";
+                const text = `🆕 YANGI ARIZA!\n\n📚 Kurs: {{ __('messages.office_title') }}\n👤 Ism: ${fullname}\n📞 Telefon: ${phone}\n⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}\n\n📌 Holat: {{ __("messages.toast_note") }}`;
+                const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
+                fetch(url).then(() => { closeModal(); if (fullnameField) fullnameField.value = ''; if (phoneField) phoneField.value = ''; showAdminNotification(); })
+                .catch(() => { Swal.fire({ icon: 'error', title: '{{ __("messages.error_title") }}', text: '{{ __("messages.error_general") }}', confirmButtonColor: '#3b82f6' }); });
+            });
+        }
+    })();
+</script>
 @endsection

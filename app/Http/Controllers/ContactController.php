@@ -2,43 +2,76 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class ContactController extends Controller
 {
     public function sendContact(Request $request)
     {
-        try {
-            // Ma'lumotlarni tekshirish
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|email|max:255'
-            ]);
-            
-            // Log faylga yozish (tekshirish uchun)
-            \Log::info('Contact form submitted:', [
-                'name' => $request->name,
-                'email' => $request->email,
-                'time' => now()
-            ]);
-            
-            // Agar Telegramga yubormoqchi bo'lsangiz:
-            // $token = "8586485983:AAF-7NhRKL72j3zXWUdznuHFv3rHCh1SIVc";
-            // $chatId = "-1003836558266";
-            // $text = "🆕 YANGI ARIZA!\n\n👤 Ism: " . $request->name . "\n📧 Email: " . $request->email;
-            // $url = "https://api.telegram.org/bot{$token}/sendMessage?chat_id={$chatId}&text=" . urlencode($text);
-            // file_get_contents($url);
-            
-            return response()->json([
-                'success' => true,
-                'message' => 'Arizangiz muvaffaqiyatli yuborildi!'
-            ]);
-            
-        } catch (\Exception $e) {
+        // Validatsiya
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:20'
+        ], [
+            'name.required' => 'Ism kiritish majburiy',
+            'email.required' => 'Email kiritish majburiy',
+            'email.email' => 'To\'g\'ri email kiriting',
+            'phone.required' => 'Telefon kiritish majburiy'
+        ]);
+
+        if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'message' => 'Xatolik yuz berdi: ' . $e->getMessage()
-            ], 500);
+                'message' => $validator->errors()->first()
+            ], 422);
         }
+
+        // DATABASE GA SAQLASH
+        try {
+            Contact::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+            ]);
+
+            Log::info('Kontakt saqlandi:', [
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone
+            ]);
+
+        } catch (\Exception $e) {
+            Log::error('Kontakt saqlashda xatolik: ' . $e->getMessage());
+        }
+
+        // Telegramga yuborish
+        $token = env('TELEGRAM_BOT_TOKEN', '8586485983:AAF-7NhRKL72j3zXWUdznuHFv3rHCh1SIVc');
+        $chatId = env('TELEGRAM_CHAT_ID', '-1003836558266');
+        
+        $text = "🆕 YANGI ARIZA!\n\n";
+        $text .= "👤 Ism: " . $request->name . "\n";
+        $text .= "📧 Email: " . $request->email . "\n";
+        $text .= "📞 Telefon: " . $request->phone . "\n";
+        $text .= "⏰ Vaqt: " . now()->format('d.m.Y H:i');
+
+        try {
+            Http::post("https://api.telegram.org/bot{$token}/sendMessage", [
+                'chat_id' => $chatId,
+                'parse_mode' => 'HTML',
+                'text' => $text
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Telegramga yuborishda xatolik: ' . $e->getMessage());
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Arizangiz qabul qilindi!'
+        ]);
     }
 }

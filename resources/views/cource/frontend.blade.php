@@ -93,6 +93,8 @@
         width: 100%;
         margin-top: 1.5rem;
         transition: all 0.3s ease;
+        color: white !important;
+        cursor: pointer;
     }
     .btn-enroll:hover {
         transform: translateY(-2px);
@@ -178,7 +180,6 @@
         font-weight: 600;
         color: #3b82f6;
     }
-    /* Modal custom style */
     .custom-modal-overlay {
         position: fixed;
         top: 0;
@@ -264,6 +265,7 @@
         color: white;
         transition: 0.2s;
         margin-top: 0.5rem;
+        cursor: pointer;
     }
     .submit-modal-btn:hover {
         background: #1e5a7c;
@@ -395,66 +397,30 @@
             </div>
         </div>
     </div>
+
     <div class="row g-4">
         <div class="col-lg-8">
             <div class="info-card">
-                <h3 class="fw-bold mb-3">{{ __('messages.course_about') }}</h3>
+                <h3 class="fw-bold mb-3">📖 {{ __('messages.course_about') }}</h3>
                 <p class="text-secondary">{{ __('messages.frontend_full_desc') }}</p>
             </div>
+
             <div class="info-card">
-                <h3 class="fw-bold mb-3">{{ __('messages.course_program') }}</h3>
+                <h3 class="fw-bold mb-3">📚 {{ __('messages.course_program') }}</h3>
                 <div class="row g-2">
-                    <div class="col-md-6">
-                        <div class="skill-item">
-                            <div class="skill-check"><i class="fas fa-check"></i></div>
-                            <div>
-                                <div class="skill-title">{{ __('messages.frontend_module1_title') }}</div>
-                                <div class="skill-desc">{{ __('messages.frontend_module1_desc') }}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="skill-item">
-                            <div class="skill-check"><i class="fas fa-check"></i></div>
-                            <div>
-                                <div class="skill-title">{{ __('messages.frontend_module2_title') }}</div>
-                                <div class="skill-desc">{{ __('messages.frontend_module2_desc') }}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="skill-item">
-                            <div class="skill-check"><i class="fas fa-check"></i></div>
-                            <div>
-                                <div class="skill-title">{{ __('messages.frontend_module3_title') }}</div>
-                                <div class="skill-desc">{{ __('messages.frontend_module3_desc') }}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="skill-item">
-                            <div class="skill-check"><i class="fas fa-check"></i></div>
-                            <div>
-                                <div class="skill-title">{{ __('messages.frontend_module4_title') }}</div>
-                                <div class="skill-desc">{{ __('messages.frontend_module4_desc') }}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="skill-item">
-                            <div class="skill-check"><i class="fas fa-check"></i></div>
-                            <div>
-                                <div class="skill-title">{{ __('messages.frontend_module5_title') }}</div>
-                                <div class="skill-desc">{{ __('messages.frontend_module5_desc') }}</div>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">{{ __('messages.frontend_module1_title') }}</div><div class="skill-desc">{{ __('messages.frontend_module1_desc') }}</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">{{ __('messages.frontend_module2_title') }}</div><div class="skill-desc">{{ __('messages.frontend_module2_desc') }}</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">{{ __('messages.frontend_module3_title') }}</div><div class="skill-desc">{{ __('messages.frontend_module3_desc') }}</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">{{ __('messages.frontend_module4_title') }}</div><div class="skill-desc">{{ __('messages.frontend_module4_desc') }}</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">{{ __('messages.frontend_module5_title') }}</div><div class="skill-desc">{{ __('messages.frontend_module5_desc') }}</div></div></div></div>
                 </div>
             </div>
+
             <div class="info-card">
-                <h3 class="fw-bold mb-3">{{ __('messages.course_for_who') }}</h3>
+                <h3 class="fw-bold mb-3">👨‍💻 {{ __('messages.course_for_who') }}</h3>
                 <p class="text-secondary">{{ __('messages.frontend_for_who') }}</p>
             </div>
+
             <div class="teacher-card">
                 <div class="teacher-avatar"><i class="fas fa-chalkboard-user"></i></div>
                 <div>
@@ -463,12 +429,13 @@
                 </div>
             </div>
         </div>
+
         <div class="col-lg-4">
             <div class="price-card">
                 <div class="text-center mb-3">
                     <span class="price-old">{{ __('messages.frontend_old_price') }}</span>
                     <div class="price-new">{{ __('messages.frontend_price') }}</div>
-                    <span class="price-period">{{ __('messages.price_per_month') }}</span>
+                    <span class="price-period">{{ __('messages.per_month') }}</span>
                 </div>
                 <hr>
                 <div class="mb-3">
@@ -478,7 +445,7 @@
                     <div class="d-flex justify-content-between"><span><i class="fas fa-certificate me-2 text-primary"></i> {{ __('messages.certificate') }}</span><span class="fw-bold">✓ {{ __('messages.has') }}</span></div>
                 </div>
                 <hr>
-                <button id="openModalBtn" class="btn-enroll text-white">
+                <button id="openModalBtn" class="btn btn-enroll text-white">
                     <i class="fas fa-bolt me-2"></i> {{ __('messages.frontend_enroll_button') }}
                 </button>
                 <div class="text-center mt-3">
@@ -496,6 +463,7 @@
         <h3><i class="fas fa-pen-alt me-2" style="color:#1e4a76;"></i> {{ __('messages.modal_enroll_title') }}</h3>
         <p>{{ __('messages.frontend_title') }} {{ __('messages.modal_enroll_subtitle') }}</p>
         <form id="applicationForm">
+            @csrf
             <div class="form-group-custom">
                 <label><i class="fas fa-user me-1"></i> {{ __('messages.form_name_label') }}</label>
                 <input type="text" id="fullName" placeholder="{{ __('messages.form_name_placeholder') }}" required>
@@ -511,7 +479,7 @@
     </div>
 </div>
 
-<!-- Toast -->
+<!-- Toast notification -->
 <div id="adminToast" class="admin-toast">
     <div class="admin-toast-icon">
         <i class="fas fa-check-circle"></i>
@@ -525,6 +493,9 @@
         </div>
     </div>
 </div>
+
+<!-- Footer ajralishi uchun bo'sh joy -->
+<div style="height: 120px; clear: both; display: block; width: 100%;"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
@@ -541,8 +512,8 @@
         function openModal() {
             if (modal) {
                 modal.classList.add('active');
-                fullnameField.value = '';
-                phoneField.value = '';
+                if (fullnameField) fullnameField.value = '';
+                if (phoneField) phoneField.value = '';
             }
         }
         function closeModal() {
@@ -573,25 +544,24 @@
         if (form) {
             form.addEventListener('submit', (event) => {
                 event.preventDefault();
-                const fullname = fullnameField.value.trim();
-                const phone = phoneField.value.trim();
+                const fullname = fullnameField ? fullnameField.value.trim() : '';
+                const phone = phoneField ? phoneField.value.trim() : '';
                 if (!fullname) {
                     Swal.fire({ icon: 'error', title: '{{ __("messages.error_title") }}', text: '{{ __("messages.error_name_required") }}', confirmButtonColor: '#3b82f6' });
-                    fullnameField.focus();
+                    if (fullnameField) fullnameField.focus();
                     return;
                 }
                 if (!phone) {
                     Swal.fire({ icon: 'error', title: '{{ __("messages.error_title") }}', text: '{{ __("messages.error_phone_required") }}', confirmButtonColor: '#3b82f6' });
-                    phoneField.focus();
+                    if (phoneField) phoneField.focus();
                     return;
                 }
                 const token = "8586485983:AAF-7NhRKL72j3zXWUdznuHFv3rHCh1SIVc";
                 const chatId = "-1003836558266";
-                const text = `🆕 YANGI ARIZA!\n\n📚 Kurs: {{ __('messages.frontend_title') }}\n👤 Ism: ${fullname}\n📞 Telefon: ${phone}\n⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}\n\n📌 Holat: {{ __('messages.toast_note') }}`;
+                const text = `🆕 YANGI ARIZA!\n\n📚 Kurs: {{ __('messages.frontend_title') }}\n👤 Ism: ${fullname}\n📞 Telefon: ${phone}\n⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}\n\n📌 Holat: {{ __("messages.toast_note") }}`;
                 const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
-                fetch(url)
-                    .then(() => { closeModal(); fullnameField.value = ''; phoneField.value = ''; showAdminNotification(); })
-                    .catch(() => { Swal.fire({ icon: 'error', title: '{{ __("messages.error_title") }}', text: '{{ __("messages.error_general") }}', confirmButtonColor: '#3b82f6' }); });
+                fetch(url).then(() => { closeModal(); if (fullnameField) fullnameField.value = ''; if (phoneField) phoneField.value = ''; showAdminNotification(); })
+                .catch(() => { Swal.fire({ icon: 'error', title: '{{ __("messages.error_title") }}', text: '{{ __("messages.error_general") }}', confirmButtonColor: '#3b82f6' }); });
             });
         }
     })();

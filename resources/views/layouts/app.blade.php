@@ -35,11 +35,10 @@
 
     @include('components.header')
 
-    <main>
-        <div class="container">
-            @yield('content')
-        </div>
-    </main>
+    <main> <div class="container">
+        @yield('content')
+    </div>
+</main>
 
     @include('components.footer')
 

@@ -2,7 +2,6 @@
 
 @section('styles')
 <style>
-    /* Asosiy dizayn elementlari */
     .course-hero {
         background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         border-radius: 30px;
@@ -94,6 +93,8 @@
         width: 100%;
         margin-top: 1.5rem;
         transition: all 0.3s ease;
+        color: white !important;
+        cursor: pointer;
     }
     .btn-enroll:hover {
         transform: translateY(-2px);
@@ -179,8 +180,6 @@
         font-weight: 600;
         color: #3b82f6;
     }
-
-    /* Modal custom style */
     .custom-modal-overlay {
         position: fixed;
         top: 0;
@@ -266,6 +265,7 @@
         color: white;
         transition: 0.2s;
         margin-top: 0.5rem;
+        cursor: pointer;
     }
     .submit-modal-btn:hover {
         background: #1e5a7c;
@@ -285,8 +285,6 @@
     .close-modal-icon:hover {
         color: #1e293b;
     }
-
-    /* ========= O'NG TARAF TEPASIDAGI NOTIFICATION ========= */
     .admin-toast {
         position: fixed;
         top: 20px;
@@ -353,7 +351,13 @@
     .admin-toast.show .admin-toast-icon {
         animation: toastPulse 0.5s ease;
     }
-
+    @media (max-width: 576px) {
+        .admin-toast {
+            left: 20px;
+            right: 20px;
+            min-width: auto;
+        }
+    }
     @media (max-width: 991px) {
         .course-title { font-size: 1.8rem; }
         .price-card { position: relative; margin-top: 2rem; }
@@ -362,136 +366,22 @@
         .course-hero { padding: 1.5rem; }
         .course-title { font-size: 1.5rem; }
         .modal-form-container { padding: 1.5rem; }
-        .admin-toast { left: 20px; right: 20px; min-width: auto; }
     }
 </style>
 @endsection
 
-@section('scripts')
-<script>
-    (function() {
-        // 1. Autorizatsiya holatini tekshirish
-        const isLoggedIn = @json(auth()->check());
-        
-        const modal = document.getElementById('customModal');
-        const openBtn = document.getElementById('openModalBtn');
-        const closeBtn = document.getElementById('closeModalBtn');
-        const form = document.getElementById('applicationForm');
-        const fullnameField = document.getElementById('fullName');
-        const phoneField = document.getElementById('phone');
-        const adminToast = document.getElementById('adminToast');
-
-        function openModal() {
-            if (modal) {
-                modal.classList.add('active');
-                fullnameField.value = '';
-                phoneField.value = '';
-            }
-        }
-
-        function closeModal() {
-            if (modal) {
-                modal.classList.remove('active');
-            }
-        }
-        
-        // 2. Autorizatsiya tekshiruvi va SweetAlert
-        function checkAuthAndOpenModal() {
-            if (isLoggedIn) {
-                openModal();
-            } else {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Autorizatsiya talab qilinadi',
-                    text: 'Iltimos, ariza qoldirish uchun avval tizimga kiring!',
-                    confirmButtonText: 'Tushundim',
-                    confirmButtonColor: '#3b82f6',
-                    backdrop: true
-                });
-            }
-        }
-        
-        function showAdminNotification() {
-            if (adminToast) {
-                adminToast.classList.add('show');
-                setTimeout(() => {
-                    adminToast.classList.remove('show');
-                }, 5000);
-            }
-        }
-
-        if (openBtn) {
-            openBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                checkAuthAndOpenModal();
-            });
-        }
-
-        if (closeBtn) {
-            closeBtn.addEventListener('click', closeModal);
-        }
-
-        if (modal) {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) closeModal();
-            });
-        }
-
-        if (form) {
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
-
-                const fullname = fullnameField.value.trim();
-                const phone = phoneField.value.trim();
-
-                if (!fullname || !phone) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Xatolik',
-                        text: 'Barcha maydonlarni to\'ldiring!',
-                        confirmButtonColor: '#3b82f6'
-                    });
-                    return;
-                }
-
-                // Telegram botga yuborish
-                const token = "8586485983:AAF-7NhRKL72j3zXWUdznuHFv3rHCh1SIVc";
-                const chatId = "-1003836558266";
-                const text = `🆕 YANGI ARIZA!\n\n📚 Kurs: Python va Data Science\n👤 Ism: ${fullname}\n📞 Telefon: ${phone}\n⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}\n\n📌 Holat: Tez orada ko'rib chiqiladi`;
-                
-                const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
-                
-                fetch(url)
-                .then(() => {
-                    closeModal();
-                    showAdminNotification();
-                })
-                .catch(() => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Xatolik',
-                        text: 'Xabar yuborishda xatolik yuz berdi.',
-                        confirmButtonColor: '#3b82f6'
-                    });
-                });
-            });
-        }
-    })();
-</script>
-@endsection
-
 @section('content')
-<div class="container-fluid">
+<div class="container py-4 py-md-5">
     <div class="course-hero">
         <div class="row align-items-center">
             <div class="col-lg-8">
-                <span class="course-badge"><i class="fab fa-python me-2"></i> Python dasturlash</span>
-                <h1 class="course-title">Python va Data Science</h1>
-                <p class="course-description">Python asoslari, kutubxonalar, ma'lumotlar tahlili, API va Django. Amaliy loyihalar bilan mustahkam Python dasturchisi bo'ling.</p>
+                <span class="course-badge"><i class="fab fa-python me-2"></i> {{ __('messages.python_badge') }}</span>
+                <h1 class="course-title">{{ __('messages.python_title') }}</h1>
+                <p class="course-description">{{ __('messages.python_description') }}</p>
                 <div class="d-flex gap-3 flex-wrap">
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-clock text-primary"></i><span>5 oy</span></div>
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>200+ talaba</span></div>
-                    <div class="d-flex align-items-center gap-2"><i class="fas fa-certificate text-primary"></i><span>Sertifikat beriladi</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-clock text-primary"></i><span>{{ __('messages.python_duration') }}</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-users text-primary"></i><span>{{ __('messages.python_students') }} {{ __('messages.students_suffix') }}</span></div>
+                    <div class="d-flex align-items-center gap-2"><i class="fas fa-certificate text-primary"></i><span>{{ __('messages.certificate') }}</span></div>
                 </div>
                 <div class="tech-stack">
                     <span class="tech-badge">Python</span>
@@ -511,23 +401,31 @@
     <div class="row g-4">
         <div class="col-lg-8">
             <div class="info-card">
-                <h3 class="fw-bold mb-3">📖 Kurs haqida</h3>
-                <p class="text-secondary">Python va Data Science kursida siz Python dasturlash tilini noldan boshlab, ma'lumotlar tahlili, vizualizatsiya va backend dasturlashni o'rganasiz. Kurs yakunida siz professional Python dasturchisi bo'lishingiz mumkin.</p>
+                <h3 class="fw-bold mb-3">📖 {{ __('messages.course_about') }}</h3>
+                <p class="text-secondary">{{ __('messages.python_full_desc') }}</p>
             </div>
+
             <div class="info-card">
-                <h3 class="fw-bold mb-3">📚 O'quv dasturi</h3>
+                <h3 class="fw-bold mb-3">📚 {{ __('messages.course_program') }}</h3>
                 <div class="row g-2">
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Python asoslari</div><div class="skill-desc">Sintaksis, o'zgaruvchilar, sikllar</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">OOP</div><div class="skill-desc">Klasslar, obyektlar, meros</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Data Science</div><div class="skill-desc">Pandas, NumPy, Matplotlib</div></div></div></div>
-                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">Django & API</div><div class="skill-desc">Backend va REST API yaratish</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">{{ __('messages.python_module1_title') }}</div><div class="skill-desc">{{ __('messages.python_module1_desc') }}</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">{{ __('messages.python_module2_title') }}</div><div class="skill-desc">{{ __('messages.python_module2_desc') }}</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">{{ __('messages.python_module3_title') }}</div><div class="skill-desc">{{ __('messages.python_module3_desc') }}</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">{{ __('messages.python_module4_title') }}</div><div class="skill-desc">{{ __('messages.python_module4_desc') }}</div></div></div></div>
+                    <div class="col-md-6"><div class="skill-item"><div class="skill-check"><i class="fas fa-check"></i></div><div><div class="skill-title">{{ __('messages.python_module5_title') }}</div><div class="skill-desc">{{ __('messages.python_module5_desc') }}</div></div></div></div>
                 </div>
             </div>
+
+            <div class="info-card">
+                <h3 class="fw-bold mb-3">👨‍💻 {{ __('messages.course_for_who') }}</h3>
+                <p class="text-secondary">{{ __('messages.python_for_who') }}</p>
+            </div>
+
             <div class="teacher-card">
                 <div class="teacher-avatar"><i class="fas fa-chalkboard-user"></i></div>
                 <div>
-                    <div class="teacher-name">Senior Python Developer</div>
-                    <div class="teacher-position">Python va Data Science eksperti</div>
+                    <div class="teacher-name">{{ __('messages.python_teacher') }}</div>
+                    <div class="teacher-position">{{ __('messages.python_teacher_position') }}</div>
                 </div>
             </div>
         </div>
@@ -535,53 +433,137 @@
         <div class="col-lg-4">
             <div class="price-card">
                 <div class="text-center mb-3">
-                    <span class="price-old">1,600,000 so'm</span>
-                    <div class="price-new">1,400,000 so'm</div>
-                    <span class="price-period">/ oy</span>
+                    <span class="price-old">{{ __('messages.python_old_price') }}</span>
+                    <div class="price-new">{{ __('messages.python_price') }}</div>
+                    <span class="price-period">{{ __('messages.per_month') }}</span>
                 </div>
                 <hr>
                 <div class="mb-3">
-                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-clock me-2 text-primary"></i> Davomiyligi</span><span class="fw-bold">5 oy</span></div>
-                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-calendar me-2 text-primary"></i> Darslar</span><span class="fw-bold">Haftada 3 kun</span></div>
-                    <div class="d-flex justify-content-between"><span><i class="fas fa-certificate me-2 text-primary"></i> Sertifikat</span><span class="fw-bold">✓ Bor</span></div>
+                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-clock me-2 text-primary"></i> {{ __('messages.course_duration_label') }}</span><span class="fw-bold">{{ __('messages.python_duration') }}</span></div>
+                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-calendar me-2 text-primary"></i> {{ __('messages.course_schedule') }}</span><span class="fw-bold">{{ __('messages.course_schedule_value') }}</span></div>
+                    <div class="d-flex justify-content-between mb-2"><span><i class="fas fa-language me-2 text-primary"></i> {{ __('messages.course_language') }}</span><span class="fw-bold">{{ __('messages.course_language_value') }}</span></div>
+                    <div class="d-flex justify-content-between"><span><i class="fas fa-certificate me-2 text-primary"></i> {{ __('messages.certificate') }}</span><span class="fw-bold">✓ {{ __('messages.has') }}</span></div>
                 </div>
                 <hr>
                 <button id="openModalBtn" class="btn btn-enroll text-white">
-                    <i class="fas fa-bolt me-2"></i> Hoziroq qo'shilish
+                    <i class="fas fa-bolt me-2"></i> {{ __('messages.python_enroll_button') }}
                 </button>
+                <div class="text-center mt-3">
+                    <small class="text-muted"><i class="fas fa-headset me-1"></i> {{ __('messages.support_text') }}</small>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Custom Modal - Ro'yxatdan o'tish oynasi -->
+<!-- Modal -->
 <div id="customModal" class="custom-modal-overlay">
     <div class="modal-form-container">
         <button class="close-modal-icon" id="closeModalBtn"><i class="fas fa-times"></i></button>
-        <h3><i class="fas fa-pen-alt me-2" style="color:#1e4a76;"></i> Ro'yxatdan o'tish</h3>
-        <p>Ofis menejerligi kursiga ariza qoldiring</p>
-        
+        <h3><i class="fas fa-pen-alt me-2" style="color:#1e4a76;"></i> {{ __('messages.modal_enroll_title') }}</h3>
+        <p>{{ __('messages.python_title') }} {{ __('messages.modal_enroll_subtitle') }}</p>
         <form id="applicationForm">
+            @csrf
             <div class="form-group-custom">
-                <label><i class="fas fa-user me-1"></i> Ism va Sharif</label>
-                <input type="text" id="fullName" placeholder="Masalan: Jahongir Alimov" required>
+                <label><i class="fas fa-user me-1"></i> {{ __('messages.form_name_label') }}</label>
+                <input type="text" id="fullName" placeholder="{{ __('messages.form_name_placeholder') }}" required>
             </div>
             <div class="form-group-custom">
-                <label><i class="fas fa-phone-alt me-1"></i> Telefon raqam</label>
-                <input type="tel" id="phone" placeholder="+998 90 123 45 67" required>
+                <label><i class="fas fa-phone-alt me-1"></i> {{ __('messages.form_phone_label') }}</label>
+                <input type="tel" id="phone" placeholder="{{ __('messages.form_phone_placeholder') }}" required>
             </div>
-            <button type="submit" class="submit-modal-btn"><i class="fas fa-paper-plane me-2"></i> Yuborish va ariza qoldirish</button>
+            <button type="submit" class="submit-modal-btn"><i class="fas fa-paper-plane me-2"></i> {{ __('messages.form_submit_button') }}</button>
         </form>
         <hr>
-        <div style="font-size: 12px; color: #6c757d; text-align: center;">Sizning ma'lumotlaringiz maxfiy saqlanadi</div>
+        <div style="font-size: 12px; color: #6c757d; text-align: center;">{{ __('messages.form_privacy_note') }}</div>
     </div>
 </div>
 
+<!-- Toast notification -->
 <div id="adminToast" class="admin-toast">
-    <div class="admin-toast-icon"><i class="fas fa-check-circle"></i></div>
+    <div class="admin-toast-icon">
+        <i class="fas fa-check-circle"></i>
+    </div>
     <div class="admin-toast-content">
-        <div class="admin-toast-title">✅ Ariza qabul qilindi</div>
-        <div class="admin-toast-note"><i class="fas fa-clock me-1"></i> Tez orada ko'rib chiqiladi</div>
+        <div class="admin-toast-title">
+            <i class="fas fa-bell" style="font-size: 12px;"></i> ✅ {{ __('messages.toast_success_title') }}
+        </div>
+        <div class="admin-toast-note">
+            <i class="fas fa-clock me-1"></i> {{ __('messages.toast_note') }}
+        </div>
     </div>
 </div>
+
+<!-- Footer ajralishi uchun bo'sh joy -->
+<div style="height: 120px; clear: both; display: block; width: 100%;"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    (function() {
+        const isLoggedIn = @json(auth()->check());
+        const modal = document.getElementById('customModal');
+        const openBtn = document.getElementById('openModalBtn');
+        const closeBtn = document.getElementById('closeModalBtn');
+        const form = document.getElementById('applicationForm');
+        const fullnameField = document.getElementById('fullName');
+        const phoneField = document.getElementById('phone');
+        const adminToast = document.getElementById('adminToast');
+
+        function openModal() {
+            if (modal) {
+                modal.classList.add('active');
+                if (fullnameField) fullnameField.value = '';
+                if (phoneField) phoneField.value = '';
+            }
+        }
+        function closeModal() {
+            if (modal) modal.classList.remove('active');
+        }
+        function checkAuthAndOpenModal() {
+            if (isLoggedIn) {
+                openModal();
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '{{ __("messages.auth_required_title") }}',
+                    text: '{{ __("messages.auth_required_text") }}',
+                    confirmButtonText: '{{ __("messages.auth_confirm_button") }}',
+                    confirmButtonColor: '#3b82f6'
+                });
+            }
+        }
+        function showAdminNotification() {
+            if (adminToast) {
+                adminToast.classList.add('show');
+                setTimeout(() => adminToast.classList.remove('show'), 5000);
+            }
+        }
+        if (openBtn) openBtn.addEventListener('click', (e) => { e.preventDefault(); checkAuthAndOpenModal(); });
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+        if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+        if (form) {
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const fullname = fullnameField ? fullnameField.value.trim() : '';
+                const phone = phoneField ? phoneField.value.trim() : '';
+                if (!fullname) {
+                    Swal.fire({ icon: 'error', title: '{{ __("messages.error_title") }}', text: '{{ __("messages.error_name_required") }}', confirmButtonColor: '#3b82f6' });
+                    if (fullnameField) fullnameField.focus();
+                    return;
+                }
+                if (!phone) {
+                    Swal.fire({ icon: 'error', title: '{{ __("messages.error_title") }}', text: '{{ __("messages.error_phone_required") }}', confirmButtonColor: '#3b82f6' });
+                    if (phoneField) phoneField.focus();
+                    return;
+                }
+                const token = "8586485983:AAF-7NhRKL72j3zXWUdznuHFv3rHCh1SIVc";
+                const chatId = "-1003836558266";
+                const text = `🆕 YANGI ARIZA!\n\n📚 Kurs: {{ __('messages.python_title') }}\n👤 Ism: ${fullname}\n📞 Telefon: ${phone}\n⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}\n\n📌 Holat: {{ __("messages.toast_note") }}`;
+                const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
+                fetch(url).then(() => { closeModal(); if (fullnameField) fullnameField.value = ''; if (phoneField) phoneField.value = ''; showAdminNotification(); })
+                .catch(() => { Swal.fire({ icon: 'error', title: '{{ __("messages.error_title") }}', text: '{{ __("messages.error_general") }}', confirmButtonColor: '#3b82f6' }); });
+            });
+        }
+    })();
+</script>
 @endsection

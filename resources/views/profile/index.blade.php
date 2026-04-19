@@ -41,7 +41,6 @@
                             <div class="col-auto">
                                 <div class="avatar position-relative mt-2 mx-3">
                                     <img id="selectedAvatar"
-                                    
                                          src="{{ $data['avatar'] ? Storage::url('avatars/' . $data['avatar']) : asset('images/avatar.png') }}"
                                          class="rounded-circle shadow-sm cursor-pointer" 
                                          onclick="openFileInput()"
@@ -106,7 +105,6 @@
                             </div>
                         </div>
                         <div class="px-3">
-                            {{-- Tugma rangi btn-dangerdan btn-primaryga o'zgartirildi --}}
                             <button type="button" id="save_pass" class="btn btn-primary px-4" disabled>{{ __("messages.save_changes") }}</button>
                         </div>
                     </form>
@@ -145,6 +143,18 @@
     function openFileInput() { $('#customFile2').click(); }
 
     $(document).ready(function() {
+        const trans = {
+            success_title: "{{ __('messages.success_title') }}",
+            error_title: "{{ __('messages.error_title') }}",
+            profile_updated: "{{ __('messages.profile_updated') }}",
+            image_updated: "{{ __('messages.image_updated') }}",
+            password_updated: "{{ __('messages.password_updated') }}",
+            ready: "{{ __('messages.ready') }}",
+            passwords_match: "{{ __('messages.passwords_match') }}",
+            passwords_dont_match: "{{ __('messages.passwords_dont_match') }}",
+            error_occurred: "{{ __('messages.error_occurred') }}"
+        };
+
         // 1. Password Visibility
         $(document).on('click', '.toggle-password', function() {
             const input = $(this).siblings('input');
@@ -165,7 +175,7 @@
                 headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                 success: function(res) {
                     if(res.success) {
-                        Swal.fire({ icon: 'success', title: 'Muvaffaqiyat!', text: 'Profil yangilandi', timer: 1500 });
+                        Swal.fire({ icon: 'success', title: trans.success_title, text: trans.profile_updated, timer: 1500 });
                         setTimeout(() => location.reload(), 1500);
                     }
                 }
@@ -197,41 +207,33 @@
         });
 
         $('#cropImageBtn').on('click', function() {
-    if (!cropper) return;
-    
-    // Qirqilgan rasmni blob ko'rinishida olish
-    cropper.getCroppedCanvas({ width: 400, height: 400 }).toBlob((blob) => {
-        let formData = new FormData();
-        
-        // Controllerdagi $request->file('avatar') shuni kutadi
-        formData.append('avatar', blob, 'avatar.jpg');
-        
-        // Boshqa kerakli ma'lumotlar
-        formData.append('name', $('input[name="name"]').val());
-        formData.append('_token', '{{ csrf_token() }}');
-        formData.append('_method', 'PUT'); // Laravelda PUT so'rovi uchun
+            if (!cropper) return;
+            cropper.getCroppedCanvas({ width: 400, height: 400 }).toBlob((blob) => {
+                let formData = new FormData();
+                formData.append('avatar', blob, 'avatar.jpg');
+                formData.append('name', $('input[name="name"]').val());
+                formData.append('_token', '{{ csrf_token() }}');
+                formData.append('_method', 'PUT');
 
-        $.ajax({
-            url: '/profile/update',
-            type: 'POST', // FormData bilan POST yuboriladi, ichida _method PUT bo'ladi
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(res) {
-                if(res.success) {
-                    // Rasmni darhol yangilash (brauzer keshini yengish uchun ?v= qo'shdik)
-                    $('#selectedAvatar').attr('src', res.avatar_url + '?v=' + new Date().getTime());
-                    $('#cropperModal').modal('hide');
-                    Swal.fire({ icon: 'success', title: 'Tayyor!', text: 'Rasm saqlandi', timer: 1500 });
-                }
-            },
-            error: function(err) {
-                console.error(err.responseText);
-                Swal.fire('Xato!', 'Rasmni saqlab bo\'lmadi', 'error');
-            }
+                $.ajax({
+                    url: '/profile/update',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(res) {
+                        if(res.success) {
+                            $('#selectedAvatar').attr('src', res.avatar_url + '?v=' + new Date().getTime());
+                            $('#cropperModal').modal('hide');
+                            Swal.fire({ icon: 'success', title: trans.ready, text: trans.image_updated, timer: 1500 });
+                        }
+                    },
+                    error: function(err) {
+                        Swal.fire(trans.error_title, trans.error_occurred, 'error');
+                    }
+                });
+            }, 'image/jpeg');
         });
-    }, 'image/jpeg');
-});
 
         // 4. Password Validation
         $('#password, #confirm-password, input[name="old_password"]').on('keyup', function() {
@@ -241,8 +243,8 @@
 
             if (conf.length > 0) {
                 $('#password-match').html(pass === conf ? 
-                    '<small class="text-success">Parollar mos keldi</small>' : 
-                    '<small class="text-danger">Parollar mos emas</small>');
+                    `<small class="text-success">${trans.passwords_match}</small>` : 
+                    `<small class="text-danger">${trans.passwords_dont_match}</small>`);
             }
 
             $('#save_pass').prop('disabled', !(pass === conf && pass.length >= 8 && old.length > 0));
@@ -259,10 +261,12 @@
             };
             $.post('/profile/update-password', data, function(res) {
                 if(res.success) {
-                    Swal.fire('Muvaffaqiyat!', 'Parol yangilandi', 'success');
+                    Swal.fire(trans.success_title, trans.password_updated, 'success');
                     $('#passwordForm')[0].reset();
                     $('#save_pass').prop('disabled', true);
                     $('#password-match').html('');
+                } else {
+                    Swal.fire(trans.error_title, res.message || trans.error_occurred, 'error');
                 }
             });
         });
