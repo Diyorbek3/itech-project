@@ -12,7 +12,8 @@ return [
     'careers' => 'Careers',
     'master_class' => 'Master-class',
     'dashboard' => 'Dashboard',
-
+  'empty_title' => 'No reviews yet',
+    'empty_subtitle' => 'Be the first to share your feedback 🙂',
     // ==================== HEADER ====================
     'header_title' => 'Preparing Future Programmers',
     'header_description' => 'iTech training center trains strong specialists in modern IT fields. Through practical lessons, real projects and experienced mentors, you can go from zero to professional developer.',

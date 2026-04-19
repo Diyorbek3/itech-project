@@ -18,6 +18,7 @@ class FeedbackController extends Controller
                 'message' => 'required|string|min:2',
             ]);
 
+            $validated['created_by'] = auth()->user()->id;
             $feedback = Feedback::create($validated);
 
             // Telegramga yuborish

@@ -35,7 +35,7 @@
 
     @include('components.header')
 
-    <main class="pt-5 mt-5"> <div class="container">
+    <main> <div class="container">
         @yield('content')
     </div>
 </main>

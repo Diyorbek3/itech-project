@@ -12,7 +12,8 @@ return [
     'careers' => 'Karyeralar',
     'master_class' => 'Master-klass',
     'dashboard' => 'Dashboard',
-
+    'empty_title' => 'Hozircha fikrlar yo‘q',
+    'empty_subtitle' => 'Birinchi bo‘lib fikr qoldiring 🙂',
     // ==================== HEADER ====================
     'header_title' => 'Kelajak dasturchilarini tayyorlaymiz',
     'header_description' => 'iTech o‘quv markazi zamonaviy IT yo‘nalishlarda kuchli mutaxassislarni tayyorlaydi. Amaliy darslar, real loyihalar va tajribali mentorlar yordamida siz noldan boshlab professional dasturchi darajasiga chiqishingiz mumkin.',

@@ -1407,12 +1407,65 @@
         </div>
     </div>
 
-    <!-- Baraban -->
-    <div class="feedback-rotator" style="background: linear-gradient(135deg, #ff69b4, #ff1493); border-radius: 50%; width: 320px; height: 320px; margin: 0 auto; display: flex; align-items: center; justify-content: center; text-align: center; padding: 30px; color: white; box-shadow: 0 20px 40px rgba(0,0,0,0.2); transition: all 0.3s ease;">
-        <div id="rotatingFeedbackContent" style="font-size: 1.1rem; line-height: 1.5;">
-            <i class="fas fa-spinner fa-spin"></i> {{ __('messages.loading') }}
+  <div class="slider-1 bg-gray">
+    <img class="quotes-decoration" src="{{ asset('images/quotes.svg') }}" alt="alternative">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="slider-container">
+                    <div class="swiper-container card-slider">
+                        <div class="swiper-wrapper">
+                            @forelse($feedbacks ?? [] as $feedback)
+                                <div class="swiper-slide">
+                                    <img class="testimonial-image"
+                                         src="{{ $feedback->avatar ? Storage::url('avatars/' . $feedback->avatar) : asset('images/avatar.png') }}"
+                                         alt="user">
+
+                                    <p class="testimonial-text">
+                                        “{{ $feedback->message }}”
+                                    </p>
+
+                                    <div class="testimonial-author">
+                                        {{ $feedback->name }}
+                                    </div>
+
+                                    <div class="testimonial-position">
+                                        {{ $feedback->date }}
+                                    </div>
+                                </div>
+
+                            @empty
+                                {{-- EMPTY STATE --}}
+                                <div class="swiper-slide d-flex justify-content-center align-items-center">
+                                    <div style="text-align: center; padding: 40px;">
+                                        
+                                        <img src="{{ asset('images/empty-feedback.jpg') }}" 
+                                             alt="no feedback" 
+                                             style="width: 200px; opacity: 0.6; margin-bottom: 15px;">
+
+                                      <p style="font-size: 18px; color: #777; margin-bottom: 10px;">
+                                            {{ __('messages.empty_title') }}
+                                        </p>
+
+                                        <small style="color: #aaa;">
+                                            {{ __('messages.empty_subtitle') }}
+                                        </small>
+
+                                    </div>
+                                </div>
+                            @endforelse
+
+                        </div>
+
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
     <!-- Contact -->
     <div id="contact" class="form-1">
@@ -1460,32 +1513,44 @@
     </div>
 
     <!-- Modals -->
+     <!-- Modals -->
     <div id="registrationModal" class="registration-modal-overlay">
         <div class="registration-modal">
             <div class="registration-icon"><i class="fas fa-user-plus"></i></div>
-            <h3><i class="fas fa-sign-in-alt me-2"></i>{{ __('messages.registration_required') }}</h3>
-            <p>{{ __('messages.registration_required_desc') }}</p>
+            <h3><i class="fas fa-sign-in-alt me-2"></i>Registratsiya talab qilinadi!</h3>
+            <p>Ariza qoldirish uchun avval tizimda ro'yxatdan o'tishingiz kerak!</p>
             <div class="registration-buttons">
-                <a href="{{ route('register') }}" class="btn-register-redirect"><i class="fas fa-user-plus me-2"></i> {{ __('messages.sign_up') }}</a>
-                <a href="{{ route('login') }}" class="btn-register-redirect" style="background: linear-gradient(135deg, #10b981, #059669);"><i class="fas fa-sign-in-alt me-2"></i> {{ __('messages.login') }}</a>
-                <button class="btn-register-close" onclick="closeRegistrationModal()"><i class="fas fa-times me-2"></i> {{ __('messages.close') }}</button>
+                <a href="{{ route('register') }}" class="btn-register-redirect"><i class="fas fa-user-plus me-2"></i>
+                    Ro'yxatdan o'tish</a>
+                <a href="{{ route('login') }}" class="btn-register-redirect"
+                    style="background: linear-gradient(135deg, #10b981, #059669);"><i class="fas fa-sign-in-alt me-2"></i>
+                    Kirish</a>
+                <button class="btn-register-close" onclick="closeRegistrationModal()"><i class="fas fa-times me-2"></i>
+                    Yopish</button>
             </div>
             <hr style="margin: 1.5rem 0 1rem;">
-            <div style="font-size: 12px; color: #6c757d; text-align: center;">{{ __('messages.registration_benefit') }}</div>
+            <div style="font-size: 12px; color: #6c757d; text-align: center;">Ro'yxatdan o'ting va barcha imkoniyatlardan
+                foydalaning</div>
         </div>
     </div>
 
     <div id="applicationSuccessModal" class="application-modal-overlay">
         <div class="application-modal-container">
             <div class="application-success-icon"><i class="fas fa-check-circle"></i></div>
-            <h3><i class="fas fa-graduation-cap me-2"></i><span id="modalTitle">{{ __('messages.application_received') }}</span></h3>
-            <div class="course-name-badge"><i class="fas fa-book-open me-1"></i> <span id="modalCourse">{{ __('messages.courses') }}</span></div>
+            <h3><i class="fas fa-graduation-cap me-2"></i><span
+                    id="modalTitle">{{ __('messages.application_received') }}</span></h3>
+            <div class="course-name-badge"><i class="fas fa-book-open me-1"></i> <span
+                    id="modalCourse">{{ __('messages.courses') }}</span></div>
             <p style="margin-top: 15px;" id="modalMessage">{{ __('messages.we_will_contact') }}</p>
             <div style="background: #f0f9ff; border-radius: 12px; padding: 10px; margin: 15px 0;">
-                <small style="color: #1e4a76;"><i class="fas fa-phone-alt me-1"></i> <span id="modalPhone">{{ __('messages.contact_phone') }}</span></small><br>
-                <small style="color: #1e4a76;"><i class="fab fa-telegram me-1"></i> <span id="modalTelegram">{{ __('messages.contact_telegram') }}</span></small>
+                <small style="color: #1e4a76;"><i class="fas fa-phone-alt me-1"></i> <span
+                        id="modalPhone">{{ __('messages.contact_phone') }}</span></small><br>
+                <small style="color: #1e4a76;"><i class="fab fa-telegram me-1"></i> <span
+                        id="modalTelegram">{{ __('messages.contact_telegram') }}</span></small>
             </div>
-            <button class="application-close-btn" onclick="closeApplicationModal()"><i class="fas fa-check me-2"></i> <span id="modalBtnText">{{ __('messages.understand') }}</span></button>
+            <button class="application-close-btn" onclick="closeApplicationModal()"><i class="fas fa-check me-2"></i> <span
+                    id="modalBtnText">{{ __('messages.understand') }}</span></button>
         </div>
     </div>
+
 @endsection

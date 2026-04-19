@@ -414,7 +414,26 @@
             const $alert = $('#feedbackAlert');
             
             $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Yuborilmoqda...');
-            
+
+            @if(!auth()->check())
+            // Agar foydalanuvchi avtorizatsiya qilmagan bo'lsa - Swal window ochish
+            Swal.fire({
+                icon: 'warning',
+                title: 'Avtorizatsiya kerak!',
+                text: 'Masterclassga yozilish uchun tizimga kiring yoki ro\'yxatdan o\'ting.',
+                confirmButtonText: 'Kirish',
+                showCancelButton: true,
+                cancelButtonText: 'Bekor qilish',
+                confirmButtonColor: '#2575fc',
+                cancelButtonColor: '#6c757d'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '{{ route("login") }}';
+                }
+            });
+            return;
+            @endif
+
             $.ajax({
                 url: '{{ route("feedback.store") }}',
                 type: 'POST',
