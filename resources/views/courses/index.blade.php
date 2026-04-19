@@ -31,6 +31,50 @@
         margin-top: 5px;
         display: block;
     }
+    
+    /* Yangi qo'shish div uchun stil */
+    .add-course-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 16px;
+        padding: 20px 30px;
+        margin-bottom: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 25px -5px rgba(102, 126, 234, 0.3);
+    }
+    .add-course-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 20px 35px -8px rgba(102, 126, 234, 0.4);
+    }
+    .add-course-card .add-icon {
+        width: 60px;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        color: white;
+        margin-right: 20px;
+        backdrop-filter: blur(5px);
+    }
+    .add-course-card .add-text h3 {
+        color: white;
+        font-weight: 700;
+        margin: 0;
+        font-size: 22px;
+    }
+    .add-course-card .add-text p {
+        color: rgba(255, 255, 255, 0.85);
+        margin: 5px 0 0;
+        font-size: 14px;
+    }
+    .add-course-card .plus-icon {
+        font-size: 32px;
+        color: white;
+        opacity: 0.8;
+    }
 </style>
 @endsection
 
@@ -41,10 +85,28 @@
             <h2 class="fw-bold mb-1">📚 {{ __('messages.course_management') }}</h2>
             <p class="text-muted">{{ __('messages.course_management_desc') }}</p>
         </div>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#courseModal" onclick="openCreateModal()">
-            <i class="fas fa-plus me-2"></i>{{ __('messages.add_new_course') }}
-        </button>
+        <!-- Eski tugma o'rniga YANGI DIV -->
+        <!-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#courseModal" onclick="openCreateModal()"> -->
+        <!--     <i class="fas fa-plus me-2"></i>{{ __('messages.add_new_course') }} -->
+        <!-- </button> -->
     </div>
+
+    <!-- ========== YANGI QO'SHISH DIVI - RASMDAGIDEK ========== -->
+    <div class="add-course-card d-flex align-items-center justify-content-between" data-bs-toggle="modal" data-bs-target="#courseModal" onclick="openCreateModal()">
+        <div class="d-flex align-items-center">
+            <div class="add-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="add-text">
+                <h3><i class="fas fa-plus-circle me-2"></i>{{ __('messages.add_new_course') }}</h3>
+                <p>Yangi kurs qo'shing, talabalar soni va boshqa ma'lumotlarni kiriting</p>
+            </div>
+        </div>
+        <div class="plus-icon">
+            <i class="fas fa-arrow-right"></i>
+        </div>
+    </div>
+    <!-- ========== YANGI QO'SHISH DIVI TUGADI ========== -->
 
     <div class="card shadow-sm">
         <div class="card-body p-0">
@@ -98,9 +160,10 @@
                             <td colspan="6" class="text-center py-5">
                                 <i class="fas fa-book-open fa-3x text-muted mb-3 d-block"></i>
                                 <h5 class="text-muted">{{ __('messages.no_courses_yet') }}</h5>
-                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#courseModal" onclick="openCreateModal()">
-                                    <i class="fas fa-plus me-2"></i>{{ __('messages.add_first_course') }}
-                                </button>
+                                <div class="add-course-card-small mt-3 d-inline-flex" data-bs-toggle="modal" data-bs-target="#courseModal" onclick="openCreateModal()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; padding: 12px 24px; cursor: pointer;">
+                                    <i class="fas fa-plus me-2 text-white"></i>
+                                    <span class="text-white">{{ __('messages.add_first_course') }}</span>
+                                </div>
                             </td>
                         </tr>
                         @endforelse
@@ -111,7 +174,7 @@
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal (o'zgarishsiz qoladi) -->
 <div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
@@ -251,7 +314,6 @@
 <script>
     let currentCourseId = null;
 
-    // Translations for JS
     const trans = {
         edit_course: "{{ __('messages.edit_course') }}",
         add_new_course: "{{ __('messages.add_new_course') }}",
@@ -298,7 +360,6 @@
         document.getElementById('_method').value = 'POST';
         document.getElementById('currentImage').style.display = 'none';
         currentCourseId = null;
-        $('#courseModal').modal('show');
     }
 
     function openEditModal(id) {
@@ -366,7 +427,6 @@
             success: function(response) {
                 if (response.success) {
                     $('#courseModal').modal('hide');
-                    
                     let message = isEdit ? trans.course_updated : trans.course_added;
                     Swal.fire({
                         icon: 'success',
@@ -375,7 +435,6 @@
                         timer: 2000,
                         showConfirmButton: false
                     });
-                    
                     setTimeout(function() {
                         location.reload();
                     }, 2000);
