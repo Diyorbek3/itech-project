@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
 <style>
     #myTabContent input { border-color: rgb(117, 188, 230) !important; }
-    .tabs { padding-top: 100px; padding-bottom: 20px; }
+    .tabs { padding-top: 160px; padding-bottom: 20px; }
     #cropperModal .modal-body { 
         max-height: 75vh; 
         display: flex; 
@@ -33,7 +33,7 @@
 
         <div class="tab-content mt-3" id="myTabContent">
             <div class="tab-pane fade show active" id="personal-info" role="tabpanel">
-                <div class="card card-body mx-3 mx-md-4 mt-n6">
+                <div class="card card-body mx-3 mx-md-4 mt-4">
                     <form id="profileForm" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
