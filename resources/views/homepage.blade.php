@@ -917,6 +917,28 @@
             border: 1px solid #f5c6cb;
             font-weight: 500;
         }
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .feature-box {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* Hover effekti */
+        .feature-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background: #f5f7ff;
+        }
     </style>
 @endsection
 
@@ -1407,9 +1429,21 @@
     <div class="basic-4 bg-gray">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <h4>{{ __('messages.invitation_text') }}</h4>
-                    <a class="btn-solid-lg" href="#contact">{{ __('messages.learn_more') }}</a>
+               <div class="col-lg-12">
+                    <h4>{{ __('messages.invitation_title') }}</h4>
+                    <div>{{ __('messages.invitation_desc1') }}</div>
+                    <div>{{ __('messages.invitation_desc2') }}</div>
+                    <div>{{ __('messages.invitation_desc3') }}</div>
+                    <div>{{ __('messages.invitation_desc4') }}</div>
+
+                    <div class="features">
+                        <div class="feature-box">👨‍🏫 {{ __('messages.feature1') }}</div>
+                        <div class="feature-box">💻 {{ __('messages.feature2') }}</div>
+                        <div class="feature-box">🚀 {{ __('messages.feature3') }}</div>
+                    </div>
+
+                    <a class="btn-solid-lg" href="#contact">{{ __('messages.start_button') }}</a>
+
                 </div>
             </div>
         </div>

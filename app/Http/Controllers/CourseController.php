@@ -81,7 +81,7 @@ class CourseController extends Controller
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-                $image->storeAs('public/courses', $imageName);
+                $image->storeAs('courses', $imageName, 'public');
                 $data['image'] = $imageName;
             }
 
@@ -159,12 +159,12 @@ class CourseController extends Controller
             // Rasm yuklash
             if ($request->hasFile('image')) {
                 // Eski rasmni o'chirish
-                if ($course->image && Storage::exists('public/courses/' . $course->image)) {
-                    Storage::delete('public/courses/' . $course->image);
+                if ($course->image && Storage::disk('public')->exists('courses/' . $course->image)) {
+                    Storage::disk('public')->delete('courses/' . $course->image);
                 }
                 $image = $request->file('image');
                 $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-                $image->storeAs('public/courses', $imageName);
+                $image->storeAs('courses', $imageName, 'public');
                 $data['image'] = $imageName;
             }
 
@@ -191,8 +191,8 @@ class CourseController extends Controller
             $course = Course::findOrFail($id);
             
             // Rasmni o'chirish
-            if ($course->image && Storage::exists('public/courses/' . $course->image)) {
-                Storage::delete('public/courses/' . $course->image);
+            if ($course->image && Storage::disk('public')->exists('courses/' . $course->image)) {
+                Storage::disk('public')->delete('courses/' . $course->image);
             }
             
             $course->delete();
