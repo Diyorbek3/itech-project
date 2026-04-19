@@ -918,7 +918,7 @@
             if (window.modalTimeout) clearTimeout(window.modalTimeout);
             window.modalTimeout = setTimeout(function () {
                 closeApplicationModal();
-            }, 5000);
+            }, 15000);
         }
     }
 
@@ -1539,14 +1539,13 @@
             <div class="application-success-icon"><i class="fas fa-check-circle"></i></div>
             <h3><i class="fas fa-graduation-cap me-2"></i><span
                     id="modalTitle">{{ __('messages.application_received') }}</span></h3>
-            <div class="course-name-badge"><i class="fas fa-book-open me-1"></i> <span
-                    id="modalCourse">{{ __('messages.courses') }}</span></div>
+            
             <p style="margin-top: 15px;" id="modalMessage">{{ __('messages.we_will_contact') }}</p>
             <div style="background: #f0f9ff; border-radius: 12px; padding: 10px; margin: 15px 0;">
                 <small style="color: #1e4a76;"><i class="fas fa-phone-alt me-1"></i> <span
                         id="modalPhone">{{ __('messages.contact_phone') }}</span></small><br>
-                <small style="color: #1e4a76;"><i class="fab fa-telegram me-1"></i> <span
-                        id="modalTelegram">{{ __('messages.contact_telegram') }}</span></small>
+                <small style="color: #1e4a76;"><i class="fab fa-telegram me-1"></i> <a href="https://t.me/iTech_manager"
+                        id="modalTelegram">{{ __('messages.contact_telegram') }}</a></small>
             </div>
             <button class="application-close-btn" onclick="closeApplicationModal()"><i class="fas fa-check me-2"></i> <span
                     id="modalBtnText">{{ __('messages.understand') }}</span></button>

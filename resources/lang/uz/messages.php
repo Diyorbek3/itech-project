@@ -99,14 +99,9 @@ return [
     'email' => 'Email',
     'message' => 'Xabar',
     'send' => 'Yuborish',
-    'sending' => 'Yuborilmoqda...',
     'success_message' => 'Xabaringiz muvaffaqiyatli yuborildi!',
     'error_message' => 'Xatolik yuz berdi. Iltimos, qaytadan urinib ko\'ring.',
     'please_wait' => 'Iltimos, kuting...',
-    'loading' => 'Yuklanmoqda...',
-    'application_received' => '✅ Ariza qabul qilindi!',
-    'we_will_contact' => 'Tez orada mutaxassislarimiz siz bilan bog\'lanishadi.',
-    'understand' => 'Tushunarli',
 
     // ==================== FOOTER ====================
     'about_website' => 'Sayt haqida',
@@ -152,8 +147,6 @@ return [
     'close' => 'Yopish',
     'registration_benefit' => 'Ro\'yxatdan o\'ting va barcha imkoniyatlardan foydalaning',
     'view_project' => 'Loyihani ko\'rish',
-    'contact_phone' => 'Bog\'lanish uchun telefon',
-    'contact_telegram' => 'Telegram orqali bog\'lanish',
 
     // ==================== PROFILE ====================
     'profile' => 'Profil',
@@ -225,5 +218,12 @@ return [
     'name' => 'Ism',
     'time' => 'Vaqt',
     'new_request' => 'Yangi ariza keldi!',
+    // ==================== LOADING VA SPINNER ====================
     'loading' => 'Yuklanmoqda...',
+    'sending' => 'Yuborilmoqda...',
+    'application_received' => 'Ariza qabul qilindi!',
+    'we_will_contact' => 'Sizning arizangiz qabul qilindi. Tez orada boglanamiz.',
+    'contact_phone' => '+998 95 007 70 50',
+    'contact_telegram' => 'https://t.me/iTech_manager',
+    'understand' => 'Tushundim',
 ];

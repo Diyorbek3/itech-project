@@ -99,14 +99,9 @@ return [
     'email' => 'Email',
     'message' => 'Message',
     'send' => 'Send',
-    'sending' => 'Sending...',
     'success_message' => 'Your message has been sent successfully!',
     'error_message' => 'An error occurred. Please try again.',
     'please_wait' => 'Please wait...',
-    'loading' => 'Loading...',
-    'application_received' => '✅ Application received!',
-    'we_will_contact' => 'Our specialists will contact you soon.',
-    'understand' => 'Got it',
 
     // ==================== FOOTER ====================
     'about_website' => 'About Website',
@@ -152,8 +147,6 @@ return [
     'close' => 'Close',
     'registration_benefit' => 'Register and use all features',
     'view_project' => 'View Project',
-    'contact_phone' => 'Contact Phone',
-    'contact_telegram' => 'Contact via Telegram',
 
     // ==================== PROFILE ====================
     'profile' => 'Profile',
@@ -226,4 +219,10 @@ return [
     'time' => 'Time',
     'new_request' => 'New request received!',
     'loading' => 'Loading...',
+    'sending' => 'Sending...',
+    'application_received' => 'Application received!',
+    'we_will_contact' => 'Your application has been received. We will contact you soon.',
+    'contact_phone' => '+998 95 007 70 50',
+    'contact_telegram' => 'https://t.me/iTech_manager',
+    'understand' => 'Got it',
 ];
