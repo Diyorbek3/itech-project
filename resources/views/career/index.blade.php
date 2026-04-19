@@ -399,168 +399,199 @@
     
     .page-link {
         color: #4a90e2;
+        }
+    /* Validatsiya uchun CSS */
+    .is-valid {
+        border-color: #28a745 !important;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 20px;
+        padding-right: 35px !important;
+    }
+
+    .is-invalid {
+        border-color: #dc3545 !important;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 20px;
+        padding-right: 35px !important;
+    }
+
+    /* Modal ichidagi forma inputlari */
+    .modal-body .form-control {
+      border-radius: 10px;
+      padding: 12px 15px;
+      border: 1px solid #e0e0e0;
+      transition: all 0.3s ease;
+    }
+
+    .modal-body .form-control:focus {
+     border-color: var(--primary);
+     box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+    }
+
+/* Alert xabarlari */
+    .alert {
+        border-radius: 12px;
+        padding: 12px 20px;
+        margin-bottom: 20px;
+    }
+
+    .alert-danger {
+        background: linear-gradient(135deg, #fdd3d6, #f8d7da);
+        color: #721c24;
+        border: none;
+    }
+
+    .alert-success {
+        background: linear-gradient(135deg, #d1e7dd, #d4edda);
+        color: #0f5132;
+        border: none;
     }
 </style>
 @endsection
 
 @section('scripts')
 <script>
-    $(document).ready(function() {
-        // ========== 1. FEEDBACK FORM SUBMISSION (AJAX) ==========
-        $('#contactForm').on('submit', function(e) {
-            e.preventDefault();
+$(document).ready(function() {
+    // ========== 1. FEEDBACK FORM VALIDATION & SUBMISSION ==========
+    $('#contactForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        // Validatsiya
+        let isValid = true;
+        let errors = [];
+        
+        const name = $('#name').val().trim();
+        if (!name) {
+            isValid = false;
+            errors.push('❌ Iltimos, ismingizni kiriting!');
+            $('#name').addClass('is-invalid');
+        } else if (name.length < 2) {
+            isValid = false;
+            errors.push('❌ Ism 2 harfdan kam bo\'lmasligi kerak!');
+            $('#name').addClass('is-invalid');
+        } else {
+            $('#name').removeClass('is-invalid').addClass('is-valid');
+        }
+        
+        const email = $('#email').val().trim();
+        const emailPattern = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/;
+        if (!email) {
+            isValid = false;
+            errors.push('❌ Iltimos, email manzilingizni kiriting!');
+            $('#email').addClass('is-invalid');
+        } else if (!emailPattern.test(email)) {
+            isValid = false;
+            errors.push('❌ Noto\'g\'ri email format! Masalan: example@gmail.com');
+            $('#email').addClass('is-invalid');
+        } else {
+            $('#email').removeClass('is-invalid').addClass('is-valid');
+        }
+        
+        const message = $('#message').val().trim();
+        if (!message) {
+            isValid = false;
+            errors.push('❌ Iltimos, fikringizni yozing!');
+            $('#message').addClass('is-invalid');
+        } else if (message.length < 5) {
+            isValid = false;
+            errors.push('❌ Fikringiz 5 harfdan kam bo\'lmasligi kerak!');
+            $('#message').addClass('is-invalid');
+        } else {
+            $('#message').removeClass('is-invalid').addClass('is-valid');
+        }
+        
+        // Xatoliklar bo'lsa
+        if (!isValid) {
+            $('#feedbackAlert').removeClass('alert-success').addClass('alert-danger')
+                .html('<i class="fas fa-exclamation-triangle me-2"></i> ' + errors.join('<br>')).show();
+            setTimeout(() => $('#feedbackAlert').fadeOut(), 4000);
             
-            const $btn = $('#submitBtn');
-            const $alert = $('#feedbackAlert');
-            
-            $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Yuborilmoqda...');
-
-            @if(!auth()->check())
-            // Agar foydalanuvchi avtorizatsiya qilmagan bo'lsa - Swal window ochish
-            Swal.fire({
-                icon: 'warning',
-                title: 'Avtorizatsiya kerak!',
-                text: 'Masterclassga yozilish uchun tizimga kiring yoki ro\'yxatdan o\'ting.',
-                confirmButtonText: 'Kirish',
-                showCancelButton: true,
-                cancelButtonText: 'Bekor qilish',
-                confirmButtonColor: '#2575fc',
-                cancelButtonColor: '#6c757d'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '{{ route("login") }}';
-                }
-            });
+            // 3 sekunddan keyin invalid classlarni olib tashlash
+            setTimeout(() => {
+                $('.is-invalid').removeClass('is-invalid');
+                $('.is-valid').removeClass('is-valid');
+            }, 3000);
             return;
-            @endif
-
-            $.ajax({
-                url: '{{ route("feedback.store") }}',
-                type: 'POST',
-                data: $(this).serialize(),
-                success: function(response) {
-                    $alert.removeClass('alert-danger').addClass('alert-success')
-                        .html('<i class="fas fa-check-circle"></i> ' + response.message).show();
-                    @if(!auth()->check())
-                        $('#contactForm')[0].reset();
-                    @else
-                        $('#message').val('');
-                    @endif
-                },
-                error: function(xhr) {
-                    let errorMsg = 'Xatolik yuz berdi.';
-                    if (xhr.status === 422 && xhr.responseJSON.errors) {
-                        errorMsg = '<ul class="mb-0">';
-                        $.each(xhr.responseJSON.errors, function(k, v) {
-                            errorMsg += '<li>' + v[0] + '</li>';
-                        });
-                        errorMsg += '</ul>';
-                    }
-                    $alert.removeClass('alert-success').addClass('alert-danger').html(errorMsg).show();
-                },
-                complete: function() {
-                    $btn.prop('disabled', false).html('<i class="fas fa-paper-plane"></i> Fikr qoldirish');
-                    setTimeout(() => $alert.fadeOut(), 5000);
-                }
-            });
-        });
-
-        // ========== 2. QUIZ SYSTEM LOGIC ==========
-        let currentQuestion = 0;
-        let score = 0;
-        let userAnswers = [];
-
-        const quizQuestions = [
-            { question: "Veb-dasturlashda eng mashhur dasturlash tili qaysi?", options: ["Python", "Java", "JavaScript", "C++"], correct: 2 },
-            { question: "HTML so'zining ma'nosi nima?", options: ["Hyper Text Markup Language", "High Tech Modern Language", "Hyper Transfer Markup Language", "Home Tool Markup Language"], correct: 0 },
-            { question: "Python uchun eng mashhur framework?", options: ["React", "Angular", "Django", "Vue.js"], correct: 2 }
-        ];
-
-        // Testni boshlash
-        window.startQuiz = function() {
-            currentQuestion = 0;
-            score = 0;
-            userAnswers = [];
-            $('#quizStart').fadeOut(400, function() {
-                $('#quizContent').fadeIn();
-                renderQuestion();
-            });
-        };
-
-        // Savolni render qilish
-        function renderQuestion() {
-            if (currentQuestion < quizQuestions.length) {
-                const q = quizQuestions[currentQuestion];
-                let html = `<div class="quiz-question">${currentQuestion + 1}. ${q.question}</div>`;
-                
-                q.options.forEach((opt, idx) => {
-                    const isChecked = userAnswers[currentQuestion] == idx;
-                    html += `
-                        <div class="quiz-option ${isChecked ? 'selected' : ''}" data-value="${idx}">
-                            <input type="radio" name="quizOption" value="${idx}" id="opt${idx}" ${isChecked ? 'checked' : ''}>
-                            <label for="opt${idx}" style="cursor:pointer; width:90%;">${opt}</label>
-                        </div>
-                    `;
-                });
-
-                html += `<button class="btn btn-primary mt-4 px-5" onclick="nextQuestion()">Keyingi savol <i class="fas fa-arrow-right"></i></button>`;
-                $('#quizQuestions').html(html);
-                
-                // Variant tanlash hodisasi
-                $('.quiz-option').off('click').on('click', function() {
-                    $(this).find('input').prop('checked', true);
-                    $('.quiz-option').removeClass('selected');
-                    $(this).addClass('selected');
-                    userAnswers[currentQuestion] = parseInt($(this).data('value'));
-                });
-            } else {
-                showResults();
-            }
         }
+        
+        const $btn = $('#submitBtn');
+        const originalText = $btn.html();
+        
+        $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Yuborilmoqda...');
 
-        // Keyingi savolga o'tish
-        window.nextQuestion = function() {
-            if (userAnswers[currentQuestion] === undefined) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Javob tanlanmagan',
-                    text: 'Iltimos, javob variantini tanlang!',
-                    confirmButtonColor: '#2575fc'
-                });
-                return;
-            }
-            if (userAnswers[currentQuestion] === quizQuestions[currentQuestion].correct) score++;
-            currentQuestion++;
-            renderQuestion();
-        };
-
-        // Natijani ko'rsatish
-        function showResults() {
-            const percent = (score / quizQuestions.length) * 100;
-            let message = percent >= 80 ? "Ajoyib! Siz haqiqiy IT mutaxassissiz! 🎉" : 
-                          (percent >= 60 ? "Yaxshi natija! O'rganishni davom eting! 👍" : 
-                          "Yaxshi, ammo o'sish uchun joy bor. 💪");
-            
-            $('#quizQuestions').html(`
-                <div class="text-center py-4">
-                    <i class="fas fa-chart-line fa-4x text-primary mb-3"></i>
-                    <h3>Natijangiz: ${score} / ${quizQuestions.length}</h3>
-                    <p class="lead">${message}</p>
-                    <button class="btn btn-success btn-lg mt-3" onclick="startQuiz()">
-                        <i class="fas fa-redo-alt"></i> Qayta ishlash
-                    </button>
-                </div>
-            `);
-        }
-
-    }); // $(document).ready END
-
-    // ========== 3. MASTERCLASS REGISTRATION MODAL LOGIC (YANGILANGAN) ==========
-    // Bu funksiya "Мастер классга ёзилиш" tugmasi bosilganda ishlaydi
-    window.openMasterclassModal = function(masterclassId) {
-        // Avtorizatsiyani tekshirish
         @if(!auth()->check())
-            // Agar foydalanuvchi avtorizatsiya qilmagan bo'lsa - Swal window ochish
+        Swal.fire({
+            icon: 'warning',
+            title: 'Avtorizatsiya kerak!',
+            text: 'Fikr qoldirish uchun tizimga kiring yoki ro\'yxatdan o\'ting.',
+            confirmButtonText: 'Kirish',
+            showCancelButton: true,
+            cancelButtonText: 'Bekor qilish',
+            confirmButtonColor: '#2575fc',
+            cancelButtonColor: '#6c757d'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '{{ route("login") }}';
+            }
+        });
+        $btn.prop('disabled', false).html(originalText);
+        return;
+        @endif
+
+        $.ajax({
+            url: '{{ route("feedback.store") }}',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(response) {
+                $('#feedbackAlert').removeClass('alert-danger').addClass('alert-success')
+                    .html('<i class="fas fa-check-circle me-2"></i> ' + response.message).show();
+                $('#contactForm')[0].reset();
+                $('.is-valid').removeClass('is-valid');
+                
+                // SweetAlert bilan muvaffaqiyatli xabar
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Rahmat!',
+                    text: 'Fikringiz qabul qilindi.',
+                    timer: 2000,
+                    showConfirmButton: false,
+                    position: 'top-end',
+                    toast: true
+                });
+            },
+            error: function(xhr) {
+                let errorMsg = 'Xatolik yuz berdi.';
+                if (xhr.status === 422 && xhr.responseJSON.errors) {
+                    errorMsg = '<ul class="mb-0">';
+                    $.each(xhr.responseJSON.errors, function(k, v) {
+                        errorMsg += '<li>' + v[0] + '</li>';
+                    });
+                    errorMsg += '</ul>';
+                } else if (xhr.responseJSON && xhr.responseJSON.message) {
+                    errorMsg = xhr.responseJSON.message;
+                }
+                $('#feedbackAlert').removeClass('alert-success').addClass('alert-danger').html(errorMsg).show();
+            },
+            complete: function() {
+                $btn.prop('disabled', false).html(originalText);
+                setTimeout(() => $('#feedbackAlert').fadeOut(), 5000);
+            }
+        });
+    });
+    
+    // Input maydonlarida yozishni boshlaganda validatsiya classlarini yangilash
+    $('#name, #email, #message').on('input', function() {
+        $(this).removeClass('is-invalid is-valid');
+        $('#feedbackAlert').fadeOut();
+    });
+
+    // ========== 2. MASTERCLASS REGISTRATION VALIDATION ==========
+    window.openMasterclassModal = function(masterclassId) {
+        @if(!auth()->check())
             Swal.fire({
                 icon: 'warning',
                 title: 'Avtorizatsiya kerak!',
@@ -578,18 +609,12 @@
             return;
         @endif
 
-        // Agar avtorizatsiya qilingan bo'lsa - modal oynani ochish
         $('#register_masterclass_id').val(masterclassId);
+        $('#register_name').val('{{ auth()->check() ? auth()->user()->name : '' }}');
+        $('#register_phone').val('');
+        $('#register_name').removeClass('is-invalid is-valid');
+        $('#register_phone').removeClass('is-invalid is-valid');
         
-        // Avtorizatsiya qilingan foydalanuvchi ma'lumotlarini olish
-        @auth
-            // Ismni users jadvalidan olish va tahrirlash mumkin
-            $('#register_name').val('{{ auth()->user()->name }}');
-            // Telefon raqamni foydalanuvchi o'zi kiritadi (boshqa joydan olinmaydi)
-            $('#register_phone').val('');
-        @endauth
-        
-        // Masterclass ma'lumotlarini yuklash
         $('#masterclassDetailInfo').html('<div class="text-center py-4"><div class="spinner-border text-primary"></div><p class="mt-2">Ma\'lumot yuklanmoqda...</p></div>');
         
         $.ajax({
@@ -600,16 +625,17 @@
                     <div class="row align-items-center">
                         <div class="col-md-5">
                             <img src="${data.image ? '/storage/' + data.image : '/images/default-masterclass.jpg'}" 
-                                 class="masterclass-detail-img" 
+                                 class="masterclass-detail-img w-100 rounded" 
                                  alt="${data.title}"
+                                 style="height: 150px; object-fit: cover;"
                                  onerror="this.src='https://via.placeholder.com/400x250?text=Masterclass'">
                         </div>
                         <div class="col-md-7">
-                            <h4 class="masterclass-detail-title">${data.title}</h4>
-                            <p class="masterclass-detail-date">
-                                <i class="far fa-calendar-alt text-primary"></i> ${data.event_date || data.date || 'Sana aniqlanmagan'}
+                            <h4 class="masterclass-detail-title fs-5 fw-bold">${escapeHtml(data.title)}</h4>
+                            <p class="masterclass-detail-date text-muted small">
+                                <i class="far fa-calendar-alt text-primary me-1"></i> ${data.event_date || data.date || 'Sana aniqlanmagan'}
                             </p>
-                            <p class="text-muted">${data.description || 'Batafsil ma\'lumot tez kunda.'}</p>
+                            <p class="text-muted small">${escapeHtml(data.description || 'Batafsil ma\'lumot tez kunda.')}</p>
                         </div>
                     </div>
                 `);
@@ -619,81 +645,268 @@
             }
         });
         
-        // Modalni ochish
         $('#masterclassRegisterModal').modal('show');
     };
 
-    // Masterclassga ro'yxatdan o'tish formasi (AJAX)
-    $(document).ready(function() {
-        $('#masterclassRegFormSubmit').on('click', function(e) {
-            e.preventDefault();
-            
-            const masterclassId = $('#register_masterclass_id').val();
-            const name = $('#register_name').val().trim();
-            const phone = $('#register_phone').val().trim();
-            const $btn = $(this);
-            
-            // Validatsiya
-            if (name.length < 2) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Xatolik',
-                    text: 'Iltimos, ismingizni to\'g\'ri kiriting.',
-                    confirmButtonColor: '#2575fc'
-                });
-                return;
+    // Masterclassga ro'yxatdan o'tish formasi validatsiyasi
+    $('#masterclassRegFormSubmit').on('click', function(e) {
+        e.preventDefault();
+        
+        let isValid = true;
+        let errors = [];
+        
+        const masterclassId = $('#register_masterclass_id').val();
+        const name = $('#register_name').val().trim();
+        const phone = $('#register_phone').val().trim();
+        const $btn = $(this);
+        
+        // Masterclass ID tekshiruvi
+        if (!masterclassId) {
+            isValid = false;
+            errors.push('❌ Masterclass ma\'lumoti topilmadi!');
+        }
+        
+        // Ism validatsiyasi
+        if (!name) {
+            isValid = false;
+            errors.push('❌ Iltimos, ismingizni kiriting!');
+            $('#register_name').addClass('is-invalid');
+        } else if (name.length < 2) {
+            isValid = false;
+            errors.push('❌ Ism 2 harfdan kam bo\'lmasligi kerak!');
+            $('#register_name').addClass('is-invalid');
+        } else if (name.length > 50) {
+            isValid = false;
+            errors.push('❌ Ism 50 harfdan oshmasligi kerak!');
+            $('#register_name').addClass('is-invalid');
+        } else {
+            $('#register_name').removeClass('is-invalid').addClass('is-valid');
+        }
+        
+        // Telefon validatsiyasi (O'zbekiston formatida)
+        const phonePattern = /^\+998\s?\(?\d{2}\)?\s?\d{3}[-\s]?\d{2}[-\s]?\d{2}$/;
+        const simplePhonePattern = /^\+998\d{9}$/;
+        const cleanedPhone = phone.replace(/\s/g, '').replace(/[()-]/g, '');
+        
+        if (!phone) {
+            isValid = false;
+            errors.push('❌ Iltimos, telefon raqamingizni kiriting!');
+            $('#register_phone').addClass('is-invalid');
+        } else if (!phonePattern.test(phone) && !simplePhonePattern.test(cleanedPhone)) {
+            isValid = false;
+            errors.push('❌ Noto\'g\'ri telefon format! Masalan: +998 90 123 45 67 yoki +998901234567');
+            $('#register_phone').addClass('is-invalid');
+        } else if (cleanedPhone.replace('+998', '').length !== 9) {
+            isValid = false;
+            errors.push('❌ Telefon raqam 9 raqamdan iborat bo\'lishi kerak!');
+            $('#register_phone').addClass('is-invalid');
+        } else {
+            $('#register_phone').removeClass('is-invalid').addClass('is-valid');
+            // Telefonni formatlash
+            let formatted = formatPhoneNumber(cleanedPhone);
+            if (formatted !== phone) {
+                $('#register_phone').val(formatted);
             }
-            
-            if (phone.length < 9) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Xatolik',
-                    text: 'Iltimos, telefon raqamingizni to\'g\'ri kiriting.',
-                    confirmButtonColor: '#2575fc'
-                });
-                return;
-            }
-            
-            $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Yuborilmoqda...');
-            
-            $.ajax({
-                url: '{{ route("masterclass.register") }}',
-                type: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    masterclass_id: masterclassId,
-                    name: name,
-                    phone: phone
-                },
-                success: function(response) {
-                    $('#masterclassRegisterModal').modal('hide');
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Ariza qabul qilindi!',
-                        text: response.message || 'Siz muvaffaqiyatli ro\'yxatdan o\'tdingiz.',
-                        confirmButtonText: 'OK',
-                        confirmButtonColor: '#28a745'
-                    });
-                    $('#masterclassRegForm')[0].reset();
-                },
-                error: function(xhr) {
-                    let errorMsg = 'Tizimda xatolik yuz berdi.';
-                    if (xhr.responseJSON && xhr.responseJSON.message) {
-                        errorMsg = xhr.responseJSON.message;
-                    }
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Xatolik',
-                        text: errorMsg,
-                        confirmButtonColor: '#dc3545'
-                    });
-                },
-                complete: function() {
-                    $btn.prop('disabled', false).html('Yuborish');
-                }
+        }
+        
+        // Xatoliklar bo'lsa
+        if (!isValid) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Validatsiya xatosi!',
+                html: errors.join('<br>'),
+                confirmButtonColor: '#dc3545'
             });
+            
+            setTimeout(() => {
+                $('.is-invalid').removeClass('is-invalid');
+                $('.is-valid').removeClass('is-valid');
+            }, 3000);
+            return;
+        }
+        
+        $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Yuborilmoqda...');
+        
+        $.ajax({
+            url: '{{ route("masterclass.register") }}',
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                masterclass_id: masterclassId,
+                name: name,
+                phone: cleanedPhone
+            },
+            success: function(response) {
+                $('#masterclassRegisterModal').modal('hide');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Ariza qabul qilindi! 🎉',
+                    text: response.message || 'Siz muvaffaqiyatli ro\'yxatdan o\'tdingiz. Tez orada siz bilan bog\'lanamiz.',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#28a745'
+                });
+                $('#masterclassRegForm')[0].reset();
+                $('.is-valid').removeClass('is-valid');
+            },
+            error: function(xhr) {
+                let errorMsg = 'Tizimda xatolik yuz berdi.';
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    errorMsg = xhr.responseJSON.message;
+                } else if (xhr.status === 422 && xhr.responseJSON && xhr.responseJSON.errors) {
+                    errorMsg = Object.values(xhr.responseJSON.errors).flat().join('<br>');
+                }
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Xatolik!',
+                    html: errorMsg,
+                    confirmButtonColor: '#dc3545'
+                });
+            },
+            complete: function() {
+                $btn.prop('disabled', false).html('<i class="fas fa-paper-plane me-2"></i> Yuborish');
+            }
         });
     });
+    
+    // Telefon formatlash funksiyasi
+    function formatPhoneNumber(phone) {
+        let cleaned = phone.replace(/\D/g, '');
+        if (cleaned.startsWith('998')) {
+            cleaned = '+' + cleaned;
+        } else if (cleaned.startsWith('+998')) {
+            cleaned = cleaned;
+        } else if (cleaned.length === 9) {
+            cleaned = '+998' + cleaned;
+        }
+        
+        if (cleaned.length === 13) {
+            return `${cleaned.slice(0, 4)} ${cleaned.slice(4, 6)} ${cleaned.slice(6, 9)} ${cleaned.slice(9, 11)} ${cleaned.slice(11, 13)}`;
+        }
+        return phone;
+    }
+    
+    // Telefon inputida real-time formatlash
+    $('#register_phone').on('input', function() {
+        let val = $(this).val().replace(/\D/g, '');
+        if (val.length > 12) val = val.slice(0, 12);
+        
+        if (val.length === 0) {
+            $(this).val('');
+        } else if (val.length <= 3) {
+            $(this).val('+' + val);
+        } else if (val.length <= 5) {
+            $(this).val('+' + val.slice(0, 3) + ' ' + val.slice(3));
+        } else if (val.length <= 8) {
+            $(this).val('+' + val.slice(0, 3) + ' ' + val.slice(3, 5) + ' ' + val.slice(5));
+        } else if (val.length <= 10) {
+            $(this).val('+' + val.slice(0, 3) + ' ' + val.slice(3, 5) + ' ' + val.slice(5, 8) + ' ' + val.slice(8));
+        } else {
+            $(this).val('+' + val.slice(0, 3) + ' ' + val.slice(3, 5) + ' ' + val.slice(5, 8) + ' ' + val.slice(8, 10) + ' ' + val.slice(10, 12));
+        }
+        
+        $(this).removeClass('is-invalid is-valid');
+    });
+    
+    // Escape HTML funksiyasi
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str).replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+    
+    // Modal yopilganda validatsiya classlarini tozalash
+    $('#masterclassRegisterModal').on('hidden.bs.modal', function() {
+        $('#register_name, #register_phone').removeClass('is-invalid is-valid');
+        $('#masterclassRegForm')[0].reset();
+    });
+    
+    // Quiz funksiyalari
+    let currentQuestion = 0;
+    let score = 0;
+    let userAnswers = [];
+
+    const quizQuestions = [
+        { question: "Veb-dasturlashda eng mashhur dasturlash tili qaysi?", options: ["Python", "Java", "JavaScript", "C++"], correct: 2 },
+        { question: "HTML so'zining ma'nosi nima?", options: ["Hyper Text Markup Language", "High Tech Modern Language", "Hyper Transfer Markup Language", "Home Tool Markup Language"], correct: 0 },
+        { question: "Python uchun eng mashhur framework?", options: ["React", "Angular", "Django", "Vue.js"], correct: 2 }
+    ];
+
+    window.startQuiz = function() {
+        currentQuestion = 0;
+        score = 0;
+        userAnswers = [];
+        $('#quizStart').fadeOut(400, function() {
+            $('#quizContent').fadeIn();
+            renderQuestion();
+        });
+    };
+
+    function renderQuestion() {
+        if (currentQuestion < quizQuestions.length) {
+            const q = quizQuestions[currentQuestion];
+            let html = `<div class="quiz-question">${currentQuestion + 1}. ${q.question}</div>`;
+            
+            q.options.forEach((opt, idx) => {
+                const isChecked = userAnswers[currentQuestion] == idx;
+                html += `
+                    <div class="quiz-option ${isChecked ? 'selected' : ''}" data-value="${idx}">
+                        <input type="radio" name="quizOption" value="${idx}" id="opt${idx}" ${isChecked ? 'checked' : ''}>
+                        <label for="opt${idx}" style="cursor:pointer; width:90%;">${escapeHtml(opt)}</label>
+                    </div>
+                `;
+            });
+
+            html += `<button class="btn btn-primary mt-4 px-5" onclick="nextQuestion()">Keyingi savol <i class="fas fa-arrow-right"></i></button>`;
+            $('#quizQuestions').html(html);
+            
+            $('.quiz-option').off('click').on('click', function() {
+                $(this).find('input').prop('checked', true);
+                $('.quiz-option').removeClass('selected');
+                $(this).addClass('selected');
+                userAnswers[currentQuestion] = parseInt($(this).data('value'));
+            });
+        } else {
+            showResults();
+        }
+    }
+
+    window.nextQuestion = function() {
+        if (userAnswers[currentQuestion] === undefined) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Javob tanlanmagan',
+                text: 'Iltimos, javob variantini tanlang!',
+                confirmButtonColor: '#2575fc'
+            });
+            return;
+        }
+        if (userAnswers[currentQuestion] === quizQuestions[currentQuestion].correct) score++;
+        currentQuestion++;
+        renderQuestion();
+    };
+
+    function showResults() {
+        const percent = (score / quizQuestions.length) * 100;
+        let message = percent >= 80 ? "Ajoyib! Siz haqiqiy IT mutaxassissiz! 🎉" : 
+                      (percent >= 60 ? "Yaxshi natija! O'rganishni davom eting! 👍" : 
+                      "Yaxshi, ammo o'sish uchun joy bor. 💪");
+        
+        $('#quizQuestions').html(`
+            <div class="text-center py-4">
+                <i class="fas fa-chart-line fa-4x text-primary mb-3"></i>
+                <h3>Natijangiz: ${score} / ${quizQuestions.length}</h3>
+                <p class="lead">${message}</p>
+                <button class="btn btn-success btn-lg mt-3" onclick="startQuiz()">
+                    <i class="fas fa-redo-alt"></i> Qayta ishlash
+                </button>
+            </div>
+        `);
+    }
+});
 </script>
 @endsection
 
