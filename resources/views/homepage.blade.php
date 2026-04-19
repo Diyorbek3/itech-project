@@ -3,14 +3,22 @@
 @section('styles')
     <style>
         @keyframes fadeInScale {
-            0% { opacity: 0; transform: scale(0.9); }
-            100% { opacity: 1; transform: scale(1); }
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .feedback-rotator:hover {
             transform: scale(1.02);
-            box-shadow: 0 30px 50px rgba(0,0,0,0.3);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.3);
         }
+
         /* Modern Card Styles */
         .modern-card {
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
@@ -163,9 +171,11 @@
             .card-img-wrapper {
                 height: 200px;
             }
+
             .card-body {
                 padding: 1.25rem;
             }
+
             .card-title {
                 font-size: 1.2rem;
             }
@@ -173,7 +183,7 @@
     </style>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
         .custom-shape {
             border-top-left-radius: 120px;
@@ -312,9 +322,11 @@
                 max-width: 50% !important;
                 flex: 0 0 50% !important;
             }
+
             .cards-2 .card-title {
                 font-size: 1.3rem !important;
             }
+
             .cards-2 .card-text {
                 font-size: 1rem !important;
             }
@@ -325,13 +337,16 @@
                 max-width: 100% !important;
                 flex: 0 0 100% !important;
             }
+
             .cards-2 .container {
                 padding-left: 0.5rem !important;
                 padding-right: 0.5rem !important;
             }
+
             .cards-2 .card-title {
                 font-size: 1.2rem !important;
             }
+
             .cards-2 .card-text {
                 font-size: 0.95rem !important;
             }
@@ -446,6 +461,7 @@
                 flex-direction: column;
                 align-items: stretch;
             }
+
             .auth-btn {
                 margin: 4px 0;
                 width: 100%;
@@ -873,6 +889,7 @@
             background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
             padding: 4rem 0;
         }
+
         .about-text {
             font-size: 1.05rem;
             line-height: 1.8;
@@ -880,236 +897,340 @@
             max-width: 900px;
             margin: 0 auto;
         }
+
+        .error-border {
+            border: 2px solid #dc3545 !important;
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+            transition: all 0.3s ease;
+        }
+
+        .alert {
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            animation: fadeInScale 0.3s ease;
+        }
+
+        .alert-danger {
+            background: linear-gradient(135deg, #fdd3d6, #f8d7da);
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            font-weight: 500;
+        }
     </style>
 @endsection
 
 @section('scripts')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    // ========== REGISTRATION MODAL ==========
-    function showRegistrationModal() {
-        let modal = document.getElementById('registrationModal');
-        if (modal) {
-            modal.classList.add('active');
-            if (window.regModalTimeout) clearTimeout(window.regModalTimeout);
-            window.regModalTimeout = setTimeout(function () {
-                closeRegistrationModal();
-            }, 5000);
-        }
-    }
-
-    function closeRegistrationModal() {
-        const modal = document.getElementById('registrationModal');
-        if (modal) {
-            modal.classList.remove('active');
-            if (window.regModalTimeout) {
-                clearTimeout(window.regModalTimeout);
-                window.regModalTimeout = null;
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // ========== REGISTRATION MODAL ==========
+        function showRegistrationModal() {
+            let modal = document.getElementById('registrationModal');
+            if (modal) {
+                modal.classList.add('active');
+                if (window.regModalTimeout) clearTimeout(window.regModalTimeout);
+                window.regModalTimeout = setTimeout(function () {
+                    closeRegistrationModal();
+                }, 5000);
             }
         }
-    }
 
-    // ========== APPLICATION SUCCESS MODAL ==========
-    function showApplicationSuccessModal() {
-        let modal = document.getElementById('applicationSuccessModal');
-        if (modal) {
-            updateModalLanguage();
-            modal.classList.add('active');
-            if (window.modalTimeout) clearTimeout(window.modalTimeout);
-            window.modalTimeout = setTimeout(function () {
-                closeApplicationModal();
-            }, 15000);
-        }
-    }
-
-    function updateModalLanguage() {
-        const modalTitle = document.getElementById('modalTitle');
-        const modalCourse = document.getElementById('modalCourse');
-        const modalMessage = document.getElementById('modalMessage');
-        const modalPhone = document.getElementById('modalPhone');
-        const modalTelegram = document.getElementById('modalTelegram');
-        const modalBtnText = document.getElementById('modalBtnText');
-
-        if (modalTitle) modalTitle.textContent = '{{ __("messages.application_received") }}';
-        if (modalCourse) modalCourse.textContent = '{{ __("messages.courses") }}';
-        if (modalMessage) modalMessage.textContent = '{{ __("messages.we_will_contact") }}';
-        if (modalPhone) modalPhone.textContent = '{{ __("messages.contact_phone") }}';
-        if (modalTelegram) modalTelegram.textContent = '{{ __("messages.contact_telegram") }}';
-        if (modalBtnText) modalBtnText.textContent = '{{ __("messages.understand") }}';
-    }
-
-    function closeApplicationModal() {
-        const modal = document.getElementById('applicationSuccessModal');
-        if (modal) {
-            modal.classList.remove('active');
-            if (window.modalTimeout) {
-                clearTimeout(window.modalTimeout);
-                window.modalTimeout = null;
-            }
-        }
-    }
-
-    // ========== TELEFON MASK ==========
-    const phoneField = document.getElementById('phone');
-    if (phoneField) {
-        phoneField.addEventListener('input', function (e) {
-            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})/);
-            if (x) {
-                let result = '';
-                if (x[1]) result = '+' + x[1];
-                if (x[2]) result += ' (' + x[2];
-                if (x[3]) result += ') ' + x[3];
-                if (x[4]) result += '-' + x[4];
-                if (x[5]) result += '-' + x[5];
-                e.target.value = result;
-            }
-        });
-
-        phoneField.addEventListener('focus', function (e) {
-            if (e.target.value === '') {
-                e.target.value = '+998 ';
-            }
-        });
-
-        phoneField.addEventListener('blur', function (e) {
-            if (e.target.value === '+998 ' || e.target.value === '+998' || e.target.value === '+998 () ') {
-                e.target.value = '';
-            }
-        });
-    }
-
-    // ========== ESCAPE TUGMASI ==========
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') {
-            closeRegistrationModal();
-            closeApplicationModal();
-        }
-    });
-
-    // ========== FEEDBACK ROTATOR (BARABAN) ==========
-    let rotatorInterval = null;
-
-    function loadFeedbacksForRotator() {
-        console.log('Loading feedbacks...');
-        $.ajax({
-            url: '/feedbacks',
-            type: 'GET',
-            dataType: 'json',
-            success: function(feedbacks) {
-                console.log('Feedbacks received:', feedbacks.length);
-                if(!feedbacks || feedbacks.length === 0) {
-                    $('#rotatingFeedbackContent').html(`
-                        <i class="fas fa-comment-dots fa-2x mb-2"></i>
-                        <p>Hozircha fikr yo‘q.<br>Birinchi bo‘lib fikr qoldiring!</p>
-                    `);
-                    return;
+        function closeRegistrationModal() {
+            const modal = document.getElementById('registrationModal');
+            if (modal) {
+                modal.classList.remove('active');
+                if (window.regModalTimeout) {
+                    clearTimeout(window.regModalTimeout);
+                    window.regModalTimeout = null;
                 }
-                startRotator(feedbacks);
-            },
-            error: function(xhr, status, error) {
-                console.error('Error:', status, error);
-                $('#rotatingFeedbackContent').html('<i class="fas fa-exclamation-triangle"></i> Xatolik yuz berdi');
             }
-        });
-    }
-
-    function startRotator(feedbacks) {
-        if(rotatorInterval) clearInterval(rotatorInterval);
-        
-        let index = 0;
-        
-        function rotate() {
-            if(!feedbacks[index]) return;
-            
-            const fb = feedbacks[index];
-            let message = fb.message || '';
-            if(message.length > 120) message = message.substring(0, 117) + '...';
-            
-            $('#rotatingFeedbackContent').html(`
-                <div style="animation: fadeInScale 0.4s ease;">
-                    <i class="fas fa-quote-left fa-2x mb-3 opacity-50"></i>
-                    <p style="font-size: 1rem; font-style: italic; margin-bottom: 15px;">“${escapeHtml(message)}”</p>
-                    <div style="font-weight: bold; font-size: 1rem;">— ${escapeHtml(fb.name)}</div>
-                    <i class="fas fa-quote-right fa-2x mt-2 opacity-50"></i>
-                </div>
-            `);
-            
-            index = (index + 1) % feedbacks.length;
         }
-        
-        rotate();
-        rotatorInterval = setInterval(rotate, 5000);
-    }
 
-    function escapeHtml(str) {
-        if(!str) return '';
-        return String(str).replace(/[&<>]/g, function(m) {
-            if(m === '&') return '&amp;';
-            if(m === '<') return '&lt;';
-            if(m === '>') return '&gt;';
-            return m;
-        });
-    }
-
-    // ========== FORM SUBMIT ==========
-    $(document).ready(function() {
-        loadFeedbacksForRotator();
-
-        $("#contactForm").submit(function(e) {
-            e.preventDefault();
-
-            const isLoggedIn = @json(auth()->check());
-
-            if (!isLoggedIn) {
-                showRegistrationModal();
-                return;
+        // ========== APPLICATION SUCCESS MODAL ==========
+        function showApplicationSuccessModal() {
+            let modal = document.getElementById('applicationSuccessModal');
+            if (modal) {
+                updateModalLanguage();
+                modal.classList.add('active');
+                if (window.modalTimeout) clearTimeout(window.modalTimeout);
+                window.modalTimeout = setTimeout(function () {
+                    closeApplicationModal();
+                }, 15000);
             }
+        }
 
-            const submitBtn = document.getElementById('submitBtn');
-            const btnText = document.getElementById('btnText');
-            const btnSpinner = document.getElementById('btnSpinner');
+        function updateModalLanguage() {
+            const modalTitle = document.getElementById('modalTitle');
+            const modalCourse = document.getElementById('modalCourse');
+            const modalMessage = document.getElementById('modalMessage');
+            const modalPhone = document.getElementById('modalPhone');
+            const modalTelegram = document.getElementById('modalTelegram');
+            const modalBtnText = document.getElementById('modalBtnText');
 
-            submitBtn.disabled = true;
-            btnText.style.display = 'none';
-            btnSpinner.style.display = 'inline-block';
+            if (modalTitle) modalTitle.textContent = '{{ __("messages.application_received") }}';
+            if (modalCourse) modalCourse.textContent = '{{ __("messages.courses") }}';
+            if (modalMessage) modalMessage.textContent = '{{ __("messages.we_will_contact") }}';
+            if (modalPhone) modalPhone.textContent = '{{ __("messages.contact_phone") }}';
+            if (modalTelegram) modalTelegram.textContent = '{{ __("messages.contact_telegram") }}';
+            if (modalBtnText) modalBtnText.textContent = '{{ __("messages.understand") }}';
+        }
 
-            var form = $(this);
+        function closeApplicationModal() {
+            const modal = document.getElementById('applicationSuccessModal');
+            if (modal) {
+                modal.classList.remove('active');
+                if (window.modalTimeout) {
+                    clearTimeout(window.modalTimeout);
+                    window.modalTimeout = null;
+                }
+            }
+        }
 
-            $.ajax({
-                url: '/contact-send',
-                type: "POST",
-                data: form.serialize(),
-                success: function(result) {
-                    showApplicationSuccessModal();
-                    form[0].reset();
-                    loadFeedbacksForRotator();
-                },
-                error: function(data) {
-                    let message = "Xatolik yuz berdi!";
-                    if (data.responseJSON && data.responseJSON.message) {
-                        message = data.responseJSON.message;
-                    }
-                    Swal.fire({
-                        icon: 'error',
-                        toast: true,
-                        position: 'top-end',
-                        title: message,
-                        showConfirmButton: false,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        background: '#fdd3d6',
-                        color: '#000000'
-                    });
-                },
-                complete: function() {
-                    submitBtn.disabled = false;
-                    btnText.style.display = 'inline';
-                    btnSpinner.style.display = 'none';
+        // ========== TELEFON MASK ==========
+        const phoneField = document.getElementById('phone');
+        if (phoneField) {
+            phoneField.addEventListener('input', function (e) {
+                let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})/);
+                if (x) {
+                    let result = '';
+                    if (x[1]) result = '+' + x[1];
+                    if (x[2]) result += ' (' + x[2];
+                    if (x[3]) result += ') ' + x[3];
+                    if (x[4]) result += '-' + x[4];
+                    if (x[5]) result += '-' + x[5];
+                    e.target.value = result;
                 }
             });
+
+            phoneField.addEventListener('focus', function (e) {
+                if (e.target.value === '') {
+                    e.target.value = '+998 ';
+                }
+            });
+
+            phoneField.addEventListener('blur', function (e) {
+                if (e.target.value === '+998 ' || e.target.value === '+998' || e.target.value === '+998 () ') {
+                    e.target.value = '';
+                }
+            });
+        }
+
+        // ========== ESCAPE TUGMASI ==========
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeRegistrationModal();
+                closeApplicationModal();
+            }
         });
-    });
-</script>
+
+        // ========== FEEDBACK ROTATOR (BARABAN) ==========
+        let rotatorInterval = null;
+
+        function loadFeedbacksForRotator() {
+            console.log('Loading feedbacks...');
+            $.ajax({
+                url: '/feedbacks',
+                type: 'GET',
+                dataType: 'json',
+                success: function (feedbacks) {
+                    console.log('Feedbacks received:', feedbacks.length);
+                    if (!feedbacks || feedbacks.length === 0) {
+                        $('#rotatingFeedbackContent').html(`
+                                    <i class="fas fa-comment-dots fa-2x mb-2"></i>
+                                    <p>Hozircha fikr yo‘q.<br>Birinchi bo‘lib fikr qoldiring!</p>
+                                `);
+                        return;
+                    }
+                    startRotator(feedbacks);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', status, error);
+                    $('#rotatingFeedbackContent').html('<i class="fas fa-exclamation-triangle"></i> Xatolik yuz berdi');
+                }
+            });
+        }
+
+        function startRotator(feedbacks) {
+            if (rotatorInterval) clearInterval(rotatorInterval);
+
+            let index = 0;
+
+            function rotate() {
+                if (!feedbacks[index]) return;
+
+                const fb = feedbacks[index];
+                let message = fb.message || '';
+                if (message.length > 120) message = message.substring(0, 117) + '...';
+
+                $('#rotatingFeedbackContent').html(`
+                            <div style="animation: fadeInScale 0.4s ease;">
+                                <i class="fas fa-quote-left fa-2x mb-3 opacity-50"></i>
+                                <p style="font-size: 1rem; font-style: italic; margin-bottom: 15px;">“${escapeHtml(message)}”</p>
+                                <div style="font-weight: bold; font-size: 1rem;">— ${escapeHtml(fb.name)}</div>
+                                <i class="fas fa-quote-right fa-2x mt-2 opacity-50"></i>
+                            </div>
+                        `);
+
+                index = (index + 1) % feedbacks.length;
+            }
+
+            rotate();
+            rotatorInterval = setInterval(rotate, 5000);
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str).replace(/[&<>]/g, function (m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+
+        
+        // ========== FORM SUBMIT ==========
+        $(document).ready(function () {
+            loadFeedbacksForRotator();
+
+            $("#contactForm").on('submit', function (e) {
+                e.preventDefault();
+
+                console.log('Form submission attempted'); // Debug uchun
+
+                // ========== VALIDATSIYA ==========
+                let errors = [];
+
+                // 1. Ismni tekshirish
+                let name = $('input[name="name"]').val().trim();
+                if (!name) {
+                    errors.push('❌ Iltimos, ismingizni kiriting!');
+                    $('input[name="name"]').addClass('error-border');
+                } else if (name.length < 2) {
+                    errors.push('❌ Ism 2 harfdan kam bo\'lmasligi kerak!');
+                    $('input[name="name"]').addClass('error-border');
+                } else {
+                    $('input[name="name"]').removeClass('error-border');
+                }
+
+                // 2. Emailni tekshirish
+                let email = $('input[name="email"]').val().trim();
+                let emailPattern = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/;
+                if (!email) {
+                    errors.push('❌ Iltimos, email manzilingizni kiriting!');
+                    $('input[name="email"]').addClass('error-border');
+                } else if (!emailPattern.test(email)) {
+                    errors.push('❌ Noto\'g\'ri email format! Masalan: example@gmail.com');
+                    $('input[name="email"]').addClass('error-border');
+                } else {
+                    $('input[name="email"]').removeClass('error-border');
+                }
+
+                // 3. Telefonni tekshirish
+                let phone = $('input[name="phone"]').val().trim();
+                let phonePattern = /^\+998\s\(\d{2}\)\s\d{3}-\d{2}-\d{2}$/;
+
+                if (!phone || phone === '+998 ' || phone === '+998' || phone === '+(998) ') {
+                    errors.push('❌ Iltimos, telefon raqamingizni to\'liq kiriting!');
+                    $('input[name="phone"]').addClass('error-border');
+                } else if (!phonePattern.test(phone)) {
+                    errors.push('❌ Noto\'g\'ri telefon format! Masalan: +998 (90) 123-45-67');
+                    $('input[name="phone"]').addClass('error-border');
+                } else {
+                    $('input[name="phone"]').removeClass('error-border');
+                }
+
+                // ========== XATOLIKLAR BO'LSA ==========
+                if (errors.length > 0) {
+                    // Xatoliklarni birlashtirish
+                    let errorHtml = '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
+                    errorHtml += '<i class="fas fa-exclamation-triangle me-2"></i>';
+                    errorHtml += '<strong>Iltimos quyidagi xatoliklarni to\'g\'rilang:</strong><br>';
+                    errorHtml += errors.join('<br>');
+                    errorHtml += '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                    errorHtml += '</div>';
+
+                    $('#alertMessage').html(errorHtml);
+
+                    // 4 sekunddan keyin xabarni o'chirish
+                    setTimeout(function () {
+                        $('#alertMessage .alert').fadeOut('slow', function () {
+                            $(this).remove();
+                        });
+                    }, 4000);
+
+                    console.log('Validation failed:', errors);
+                    return false; // STOP! Formani yuborma
+                }
+
+                console.log('Validation passed!');
+
+                // ========== VALIDATSIYA O'TDİ ==========
+                const isLoggedIn = @json(auth()->check());
+
+                if (!isLoggedIn) {
+                    console.log('User not logged in, showing registration modal');
+                    showRegistrationModal();
+                    return false;
+                }
+
+                // Formani yuborish
+                const submitBtn = document.getElementById('submitBtn');
+                const btnText = document.getElementById('btnText');
+                const btnSpinner = document.getElementById('btnSpinner');
+
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    if (btnText) btnText.style.display = 'none';
+                    if (btnSpinner) btnSpinner.style.display = 'inline-block';
+                }
+
+                $.ajax({
+                    url: '/contact-send',
+                    type: "POST",
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        console.log('Form submitted successfully');
+                        showApplicationSuccessModal();
+                        $("#contactForm")[0].reset();
+                        $('input[name="phone"]').val('+998 ');
+                        loadFeedbacksForRotator();
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('AJAX error:', error);
+                        let message = "Xatolik yuz berdi!";
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            message = xhr.responseJSON.message;
+                        }
+                        Swal.fire({
+                            icon: 'error',
+                            toast: true,
+                            position: 'top-end',
+                            title: message,
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true
+                        });
+                    },
+                    complete: function () {
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            if (btnText) btnText.style.display = 'inline';
+                            if (btnSpinner) btnSpinner.style.display = 'none';
+                        }
+                    }
+                });
+
+                return false;
+            });
+
+            // Input maydonlarida yozishni boshlaganda error class'ini olib tashlash
+            $('input[name="name"], input[name="email"], input[name="phone"]').on('input', function () {
+                $(this).removeClass('error-border');
+                $('#alertMessage').empty();
+            });
+        });
+    </script>
 @endsection
 
 @section('content')
@@ -1143,19 +1264,23 @@
                 <div class="col-lg-12">
                     <div class="counter-container">
                         <div class="counter-cell">
-                            <div data-purecounter-start="0" data-purecounter-end="1200" data-purecounter-duration="3" class="purecounter">0</div>
+                            <div data-purecounter-start="0" data-purecounter-end="1200" data-purecounter-duration="3"
+                                class="purecounter">0</div>
                             <div class="counter-info">{{ __('messages.graduates') }}</div>
                         </div>
                         <div class="counter-cell">
-                            <div data-purecounter-start="0" data-purecounter-end="45" data-purecounter-duration="2" class="purecounter">0</div>
+                            <div data-purecounter-start="0" data-purecounter-end="45" data-purecounter-duration="2"
+                                class="purecounter">0</div>
                             <div class="counter-info">{{ __('messages.active_courses') }}</div>
                         </div>
                         <div class="counter-cell">
-                            <div data-purecounter-start="0" data-purecounter-end="320" data-purecounter-duration="3" class="purecounter">0</div>
+                            <div data-purecounter-start="0" data-purecounter-end="320" data-purecounter-duration="3"
+                                class="purecounter">0</div>
                             <div class="counter-info">{{ __('messages.employed_students') }}</div>
                         </div>
                         <div class="counter-cell">
-                            <div data-purecounter-start="0" data-purecounter-end="5" data-purecounter-duration="2" class="purecounter">0</div>
+                            <div data-purecounter-start="0" data-purecounter-end="5" data-purecounter-duration="2"
+                                class="purecounter">0</div>
                             <div class="counter-info">{{ __('messages.years_experience') }}</div>
                         </div>
                     </div>
@@ -1238,18 +1363,18 @@
                 <div class="col-lg-7">
                     <div class="card-grid">
                         @foreach($courses as $course)
-                        <a href="{{ route('courses.show', $course->id) }}" class="card-link">
-                            <div class="card-item">
-                                <div class="icon-box">
-                                    @if($course->image)
-                                        <img src="{{ asset('storage/courses/' . $course->image) }}" alt="{{ $course->title }}">
-                                    @else
-                                        <i class="fas fa-graduation-cap fa-3x text-primary"></i>
-                                    @endif
+                            <a href="{{ route('courses.show', $course->id) }}" class="card-link">
+                                <div class="card-item">
+                                    <div class="icon-box">
+                                        @if($course->image)
+                                            <img src="{{ asset('storage/courses/' . $course->image) }}" alt="{{ $course->title }}">
+                                        @else
+                                            <i class="fas fa-graduation-cap fa-3x text-primary"></i>
+                                        @endif
+                                    </div>
+                                    <h5 class="card-title">{{ $course->title }}</h5>
                                 </div>
-                                <h5 class="card-title">{{ $course->title }}</h5>
-                            </div>
-                        </a>
+                            </a>
                         @endforeach
                     </div>
                 </div>
@@ -1391,7 +1516,8 @@
                         <div class="card-img-wrapper">
                             <img class="card-img-top" src="{{ asset('images/urecruit.png') }}" alt="Urecruit">
                             <div class="card-overlay">
-                                <a href="https://test.admin.urecruit.udevs.io/auth/login" class="overlay-link" target="_blank">
+                                <a href="https://test.admin.urecruit.udevs.io/auth/login" class="overlay-link"
+                                    target="_blank">
                                     <i class="fas fa-external-link-alt"></i> {{ __('messages.view_project') }}
                                 </a>
                             </div>
@@ -1407,65 +1533,64 @@
         </div>
     </div>
 
-  <div class="slider-1 bg-gray">
-    <img class="quotes-decoration" src="{{ asset('images/quotes.svg') }}" alt="alternative">
+    <div class="slider-1 bg-gray">
+        <img class="quotes-decoration" src="{{ asset('images/quotes.svg') }}" alt="alternative">
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="slider-container">
-                    <div class="swiper-container card-slider">
-                        <div class="swiper-wrapper">
-                            @forelse($feedbacks ?? [] as $feedback)
-                                <div class="swiper-slide">
-                                    <img class="testimonial-image"
-                                         src="{{ $feedback->avatar ? Storage::url('avatars/' . $feedback->avatar) : asset('images/avatar.png') }}"
-                                         alt="user">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="slider-container">
+                        <div class="swiper-container card-slider">
+                            <div class="swiper-wrapper">
+                                @forelse($feedbacks ?? [] as $feedback)
+                                    <div class="swiper-slide">
+                                        <img class="testimonial-image"
+                                            src="{{ $feedback->avatar ? Storage::url('avatars/' . $feedback->avatar) : asset('images/avatar.png') }}"
+                                            alt="user">
 
-                                    <p class="testimonial-text">
-                                        “{{ $feedback->message }}”
-                                    </p>
-
-                                    <div class="testimonial-author">
-                                        {{ $feedback->name }}
-                                    </div>
-
-                                    <div class="testimonial-position">
-                                        {{ $feedback->date }}
-                                    </div>
-                                </div>
-
-                            @empty
-                                {{-- EMPTY STATE --}}
-                                <div class="swiper-slide d-flex justify-content-center align-items-center">
-                                    <div style="text-align: center; padding: 40px;">
-                                        
-                                        <img src="{{ asset('images/empty-feedback.jpg') }}" 
-                                             alt="no feedback" 
-                                             style="width: 200px; opacity: 0.6; margin-bottom: 15px;">
-
-                                      <p style="font-size: 18px; color: #777; margin-bottom: 10px;">
-                                            {{ __('messages.empty_title') }}
+                                        <p class="testimonial-text">
+                                            “{{ $feedback->message }}”
                                         </p>
 
-                                        <small style="color: #aaa;">
-                                            {{ __('messages.empty_subtitle') }}
-                                        </small>
+                                        <div class="testimonial-author">
+                                            {{ $feedback->name }}
+                                        </div>
 
+                                        <div class="testimonial-position">
+                                            {{ $feedback->date }}
+                                        </div>
                                     </div>
-                                </div>
-                            @endforelse
 
+                                @empty
+                                    {{-- EMPTY STATE --}}
+                                    <div class="swiper-slide d-flex justify-content-center align-items-center">
+                                        <div style="text-align: center; padding: 40px;">
+
+                                            <img src="{{ asset('images/empty-feedback.jpg') }}" alt="no feedback"
+                                                style="width: 200px; opacity: 0.6; margin-bottom: 15px;">
+
+                                            <p style="font-size: 18px; color: #777; margin-bottom: 10px;">
+                                                {{ __('messages.empty_title') }}
+                                            </p>
+
+                                            <small style="color: #aaa;">
+                                                {{ __('messages.empty_subtitle') }}
+                                            </small>
+
+                                        </div>
+                                    </div>
+                                @endforelse
+
+                            </div>
+
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
                         </div>
-
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
     <!-- Contact -->
     <div id="contact" class="form-1">
@@ -1513,7 +1638,7 @@
     </div>
 
     <!-- Modals -->
-     <!-- Modals -->
+    <!-- Modals -->
     <div id="registrationModal" class="registration-modal-overlay">
         <div class="registration-modal">
             <div class="registration-icon"><i class="fas fa-user-plus"></i></div>
@@ -1539,7 +1664,7 @@
             <div class="application-success-icon"><i class="fas fa-check-circle"></i></div>
             <h3><i class="fas fa-graduation-cap me-2"></i><span
                     id="modalTitle">{{ __('messages.application_received') }}</span></h3>
-            
+
             <p style="margin-top: 15px;" id="modalMessage">{{ __('messages.we_will_contact') }}</p>
             <div style="background: #f0f9ff; border-radius: 12px; padding: 10px; margin: 15px 0;">
                 <small style="color: #1e4a76;"><i class="fas fa-phone-alt me-1"></i> <span
