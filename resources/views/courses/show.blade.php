@@ -10,7 +10,7 @@
             <div class="shape shape-3"></div>
         </div>
         <div class="container position-relative">
-            <div class="row align-items-center py-5">
+            <div class="row align-items-center py-5" style="">
                 <div class="col-lg-7 text-white">
                     <div class="hero-badge mb-3">
                         <span class="badge-glow">{{ app()->getLocale() == 'uz' ? '🚀 Eng ko\'p sotilgan kurs' : (app()->getLocale() == 'ru' ? '🚀 Бестселлер' : '🚀 Bestseller') }}</span>
@@ -52,7 +52,7 @@
                             <img src="{{ $imageData }}" alt="{{ $course->title }}" class="hero-image">
                         </div>
                     @else
-                        <div class="hero-icon-box">
+                        <div clasds="hero-icon-box">
                             <i class="fas fa-graduation-cap"></i>
                         </div>
                     @endif
