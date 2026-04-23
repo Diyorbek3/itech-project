@@ -49,24 +49,29 @@ class ContactController extends Controller
             Log::error('Kontakt saqlashda xatolik: ' . $e->getMessage());
         }
 
-        // Telegramga yuborish
-        $token = env('TELEGRAM_BOT_TOKEN', '8586485983:AAF-7NhRKL72j3zXWUdznuHFv3rHCh1SIVc');
-        $chatId = env('TELEGRAM_CHAT_ID', '-1003836558266');
+        // ========== TO'G'RILANGAN QISM ==========
+        $token = env('TELEGRAM_BOT_TOKEN');
+        $chatId = env('TELEGRAM_CHAT_ID_CONTACT');  // TO'G'RILANDI!
         
-        $text = "🆕 YANGI ARIZA!\n\n";
-        $text .= "👤 Ism: " . $request->name . "\n";
-        $text .= "📧 Email: " . $request->email . "\n";
-        $text .= "📞 Telefon: " . $request->phone . "\n";
-        $text .= "⏰ Vaqt: " . now()->format('d.m.Y H:i');
+        if ($token && $chatId) {
+            $text = "🆕 YANGI ARIZA!\n\n";
+            $text .= "👤 Ism: " . $request->name . "\n";
+            $text .= "📧 Email: " . $request->email . "\n";
+            $text .= "📞 Telefon: " . $request->phone . "\n";
+            $text .= "⏰ Vaqt: " . now()->format('d.m.Y H:i');
 
-        try {
-            Http::post("https://api.telegram.org/bot{$token}/sendMessage", [
-                'chat_id' => $chatId,
-                'parse_mode' => 'HTML',
-                'text' => $text
-            ]);
-        } catch (\Exception $e) {
-            Log::error('Telegramga yuborishda xatolik: ' . $e->getMessage());
+            try {
+                Http::post("https://api.telegram.org/bot{$token}/sendMessage", [
+                    'chat_id' => $chatId,
+                    'parse_mode' => 'HTML',
+                    'text' => $text
+                ]);
+                Log::info('Telegramga yuborildi (Kontakt kanali)');
+            } catch (\Exception $e) {
+                Log::error('Telegramga yuborishda xatolik: ' . $e->getMessage());
+            }
+        } else {
+            Log::warning('Telegram sozlamalari topilmadi (Kontakt)');
         }
 
         return response()->json([

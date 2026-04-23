@@ -47,29 +47,31 @@ Route::middleware('auth')->group(function () {
 // 3. KURSLAR BO'LIMI
 // ---------------------------------------------------------
 Route::prefix('courses')->group(function () {
-    Route::get('/python', [CourceController::class, 'python'])->name('courses.python');
-    Route::get('/frontend', [CourceController::class, 'frontend'])->name('courses.frontend');
-    Route::get('/backend', [CourceController::class, 'backend'])->name('courses.backend');
-    Route::get('/cybersecurity', [CourceController::class, 'cybersecurity'])->name('courses.cybersecurity');
-    Route::get('/computer-literacy', [CourceController::class, 'computerLiteracy'])->name('courses.computer_literacy');
-    Route::get('/ai-developer', [CourceController::class, 'aiDeveloper'])->name('courses.ai_developer');
-    Route::get('/algorithm', [CourceController::class, 'algorithm'])->name('courses.algorithm');
-    Route::get('/office', [CourceController::class, 'office'])->name('courses.office');
-    Route::get('/robotics', [CourceController::class, 'robotics'])->name('courses.robotics');
-    Route::get('/digital-kids', [CourceController::class, 'digitalKids'])->name('courses.digital_kids');
-    Route::get('/system-engineering', [CourceController::class, 'systemEngineering'])->name('courses.system_engineering');
-    Route::get('/devops', [CourceController::class, 'devops'])->name('courses.devops');
-    Route::get('/data-analytics', [CourceController::class, 'dataAnalytics'])->name('courses.data_analytics');
-    Route::get('/network-admin', [CourceController::class, 'networkAdmin'])->name('courses.network_admin');
-    Route::get('/accounting', [CourceController::class, 'accounting'])->name('courses.accounting');
+    Route::get('/python', [CourseController::class, 'python'])->name('courses.python');
+    Route::get('/frontend', [CourseController::class, 'frontend'])->name('courses.frontend');
+    Route::get('/backend', [CourseController::class, 'backend'])->name('courses.backend');
+    Route::get('/cybersecurity', [CourseController::class, 'cybersecurity'])->name('courses.cybersecurity');
+    Route::get('/computer-literacy', [CourseController::class, 'computerLiteracy'])->name('courses.computer_literacy');
+    Route::get('/ai-developer', [CourseController::class, 'aiDeveloper'])->name('courses.ai_developer');
+    Route::get('/algorithm', [CourseController::class, 'algorithm'])->name('courses.algorithm');
+    Route::get('/office', [CourseController::class, 'office'])->name('courses.office');
+    Route::get('/robotics', [CourseController::class, 'robotics'])->name('courses.robotics');
+    Route::get('/digital-kids', [CourseController::class, 'digitalKids'])->name('courses.digital_kids');
+    Route::get('/system-engineering', [CourseController::class, 'systemEngineering'])->name('courses.system_engineering');
+    Route::get('/devops', [CourseController::class, 'devops'])->name('courses.devops');
+    Route::get('/data-analytics', [CourseController::class, 'dataAnalytics'])->name('courses.data_analytics');
+    Route::get('/network-admin', [CourseController::class, 'networkAdmin'])->name('courses.network_admin');
+    Route::get('/accounting', [CourseController::class, 'accounting'])->name('courses.accounting');
     
     Route::get('/ofis-menejerligi', function () {
         return view('courses.office-manager');
     })->name('courses.office-manager');
 });
+
 Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+
 // ---------------------------------------------------------
-// 4. FEEDBACK (FIKRLAR) - TO'G'RI
+// 4. FEEDBACK (FIKRLAR)
 // ---------------------------------------------------------
 Route::post('/feedback/store', [FeedbackController::class, 'store'])->name('feedback.store');
 Route::get('/feedbacks', [FeedbackController::class, 'index']);
@@ -99,6 +101,7 @@ Route::prefix('my-courses')->middleware('auth')->group(function () {
     Route::post('/{courseId}/add-category', [MyCourceController::class, 'addCategory'])->name('my-courses.add-category');
     Route::delete('/delete-category/{categoryId}', [MyCourceController::class, 'deleteCategory'])->name('my-courses.delete-category');
 });
+
 Route::resource('courses', CourseController::class);
 Route::get('/courses/table', [CourseController::class, 'tableRows'])->name('courses.table');
 
@@ -107,6 +110,7 @@ use App\Http\Controllers\DashboardController;
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
+
 // ---------------------------------------------------------
 // 7. MASTERCLASSLARNI BOSHQARISH (Admin)
 // ---------------------------------------------------------
@@ -119,7 +123,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/master-class/{id}/update', [MasterClassController::class, 'update'])->name('master_class.update');
     Route::delete('/master-class/{id}', [MasterClassController::class, 'destroy'])->name('master_class.destroy');
     
-    // Masterclass info va register (admin uchun ham)
     Route::get('/masterclass/{id}/info', [MasterClassController::class, 'getInfo'])->name('masterclass.info');
     Route::post('/masterclass/register', [MasterClassController::class, 'register'])->name('masterclass.register');
 });
@@ -129,7 +132,22 @@ Route::middleware(['auth'])->group(function () {
 // ---------------------------------------------------------
 Route::post('/contact-send', [ContactController::class, 'sendContact'])->name('contact.send');
 Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+
+// ========== KURSGA YOZILISH ROUTE (TELEGRAM BILAN) ==========
+Route::post('/course-enroll', [CourseController::class, 'enrollSubmit'])->name('course.enroll');
+
 // ---------------------------------------------------------
 // 9. LARAVEL AUTH
 // ---------------------------------------------------------
 require __DIR__ . '/auth.php';
+
+// Dashboard route
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    
+    Route::patch('/admin/masterclass-register/{id}/status', [DashboardController::class, 'updateStatus'])
+        ->name('admin.masterclass.updateStatus');
+    
+    Route::get('/admin/masterclass-register/{id}', [DashboardController::class, 'showRegistration'])
+        ->name('admin.masterclass.show');
+});

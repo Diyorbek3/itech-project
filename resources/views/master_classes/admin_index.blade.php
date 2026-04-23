@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container py-5 mt-5" style="min-height: 80vh;">
-    <div class="d-flex justify-content-between align-items-center mb-5 p-4 rounded-4 shadow-sm bg-white border-start border-primary border-5">
+    <div style="padding-top: 60px;"> <div class="d-flex justify-content-between align-items-center mb-5 p-4 rounded-4 shadow-sm bg-white border-start border-primary border-5">
         <div>
             <h2 class="fw-bold mb-0 text-dark">🎓 Master-klass Boshqaruvi</h2>
             <p class="text-muted mb-0">Tizimdagi barcha master-klasslarni shu yerdan nazorat qiling.</p>
@@ -10,7 +10,9 @@
         <a href="{{ route('master_class.create') }}" class="btn btn-primary btn-lg rounded-pill px-4 shadow">
             <i class="fas fa-plus-circle me-2"></i> Yangi qo'shish
         </a>
+        </div>
     </div>
+           
 
     <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
         <div class="card-body p-0">

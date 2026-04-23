@@ -225,4 +225,14 @@ return [
     'contact_phone' => '+998 95 007 70 50',
     'contact_telegram' => 'https://t.me/iTech_manager',
     'understand' => 'Got it',
+// ==================== HOME PAGE ====================
+  'invitation_title' => 'Join Our Learning Journey',
+    'invitation_desc1' => 'We will provide you with modern knowledge and practical skills.',
+    'invitation_desc2' => 'You’ll work on real projects with experienced mentors.',
+    'invitation_desc3' => 'We’ll help you build a successful career.',
+    'invitation_desc4' => 'Get ready for great job opportunities.',
+    'feature1' => 'Experienced mentors',
+    'feature2' => 'Practical lessons',
+    'feature3' => 'Job placement support',
+    'start_button' => 'Get Started',
 ];
