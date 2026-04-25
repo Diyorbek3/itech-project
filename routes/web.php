@@ -151,3 +151,23 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/masterclass-register/{id}', [DashboardController::class, 'showRegistration'])
         ->name('admin.masterclass.show');
 });
+
+Route::get('/get-topic-ids', function () {
+    $token = '8675722709:AAEnyw1mPklG4czgs70Ei6bK3x2oX21Iq8E';
+    $chatId = '-1003954939150';
+    
+    $response = Http::get("https://api.telegram.org/bot{$token}/getUpdates");
+    
+    $topics = [];
+    if (isset($response['result'])) {
+        foreach ($response['result'] as $update) {
+            if (isset($update['message']['message_thread_id']) && isset($update['message']['chat']['id']) && $update['message']['chat']['id'] == $chatId) {
+                $threadId = $update['message']['message_thread_id'];
+                $text = $update['message']['text'] ?? '';
+                $topics[$text] = $threadId;
+            }
+        }
+    }
+    
+    return response()->json(['topics' => $topics]);
+}); 
