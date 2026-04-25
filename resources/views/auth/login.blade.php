@@ -237,7 +237,7 @@
             serverErrors.push('{{ $error }}');
         @endforeach
         Swal.fire({
-            title: 'Kirishda xatolik!',
+            title: "{{ __('messages.error_title') }}",
             html: serverErrors.map(err => `• ${err}`).join('<br>'),
             icon: 'error',
             toast: true,

@@ -275,13 +275,13 @@
         }
 
         if (securityQuestion === '') {
-            errors.push('Xavfsizlik savolini tanlang');
+            errors.push("{{ __('messages.select_question') }}");
         } else if (securityQuestion === 'custom' && customQuestion === '') {
-            errors.push('Maxsus savolingizni kiriting');
+            errors.push("{{ __('messages.custom_question_label') }}");
         }
 
         if (securityAnswer === '') {
-            errors.push('Xavfsizlik savoliga javob kiriting');
+            errors.push("{{ __('messages.security_answer_placeholder') }}");
         }
         
         if (errors.length > 0) {
@@ -309,7 +309,7 @@
             serverErrors.push('{{ $error }}');
         @endforeach
         Swal.fire({
-            title: 'Xatolik!',
+            title: "{{ __('messages.error_title') }}",
             html: serverErrors.map(err => `• ${err}`).join('<br>'),
             icon: 'error',
             toast: true,

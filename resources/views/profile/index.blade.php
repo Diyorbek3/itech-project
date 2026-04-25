@@ -60,7 +60,7 @@
                                 <h5 class="mb-1">{{ $data['name'] ?? '' }}</h5>
                                 @if($data['avatar'])
                                     <button type="button" class="btn btn-sm btn-outline-danger mt-2" id="deleteAvatarBtn">
-                                        <i class="fas fa-trash-alt me-1"></i> Rasm o'chirish
+                                        <i class="fas fa-trash-alt me-1"></i> {{ __('messages.delete_avatar') }}
                                     </button>
                                 @endif
                             </div>
@@ -320,14 +320,14 @@
         // 6. Delete Avatar
         $('#deleteAvatarBtn').on('click', function() {
             Swal.fire({
-                title: 'Ishonchingiz komilmi?',
-                text: "Profil rasmi o'chiriladi!",
+                title: "{{ __('messages.delete_confirm_title') }}",
+                text: "{{ __('messages.delete_confirm_text') }}",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
-                confirmButtonText: "Ha, o'chirilsin!",
-                cancelButtonText: 'Bekor qilish'
+                confirmButtonText: "{{ __('messages.delete_confirm_text') }}",
+                cancelButtonText: "{{ __('messages.cancel') }}"
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
@@ -336,7 +336,7 @@
                         data: { _token: '{{ csrf_token() }}' },
                         success: function(res) {
                             if(res.success) {
-                                Swal.fire('O\'chirildi!', res.message, 'success');
+                                Swal.fire("{{ __('messages.ready') }}", res.message, 'success');
                                 $('#selectedAvatar').attr('src', res.default_url);
                                 $('#deleteAvatarBtn').fadeOut();
                                 // Barcha header avatarlarini yangilash
@@ -365,16 +365,16 @@
             };
 
             if (!data.security_question || !data.security_answer) {
-                Swal.fire('Xato!', 'Iltimos, savol va javobni kiriting', 'error');
+                Swal.fire("{{ __('messages.error_title') }}", "{{ __('messages.fill_fields_error') }}", 'error');
                 return;
             }
 
             $.post('/profile/update-security', data, function(res) {
                 if(res.success) {
-                    Swal.fire('Muvaffaqiyat!', 'Xavfsizlik savoli saqlandi', 'success');
+                    Swal.fire("{{ __('messages.success_title') }}", "{{ __('messages.security_saved_success') }}", 'success');
                     $('input[name="security_answer"]').val('');
                 } else {
-                    Swal.fire('Xato!', res.message || 'Xatolik yuz berdi', 'error');
+                    Swal.fire("{{ __('messages.error_title') }}", res.message || "{{ __('messages.error_occurred') }}", 'error');
                 }
             });
         });

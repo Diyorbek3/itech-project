@@ -8,7 +8,6 @@
 
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 
-<<<<<<< HEAD
     <style>
         body {
             background-color: #0d1117;
@@ -70,14 +69,6 @@
     </style>
 </head>
 <body>
-=======
-        <!-- Email Address -->
-         <x-input-label for="email" :value="__('Email')" />
-          <div>
-             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
->>>>>>> f978af5904bb506f3455a3470054c4da091df84a
 
 <div class="reset-container">
     <a href="/">

@@ -126,8 +126,8 @@
                     if (!data.security_question || !data.security_answer) {
                         Swal.fire({
                             icon: 'error',
-                            title: 'Xato!',
-                            text: 'Iltimos, savol va javobni to\'liq kiriting.',
+                            title: "{{ __('messages.error_title') }}",
+                            text: "{{ __('messages.fill_fields_error') }}",
                             background: '#161b22',
                             color: '#fff'
                         });
@@ -142,8 +142,8 @@
                             if(res.success) {
                                 Swal.fire({
                                     icon: 'success',
-                                    title: 'Muvaffaqiyat!',
-                                    text: 'Xavfsizlik savoli saqlandi.',
+                                    title: "{{ __('messages.success_title') }}",
+                                    text: "{{ __('messages.security_saved_success') }}",
                                     background: '#161b22',
                                     color: '#fff',
                                     timer: 2000
