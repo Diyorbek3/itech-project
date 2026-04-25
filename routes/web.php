@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AvatarController;
+
+Route::get('/storage/avatars/{filename}', [AvatarController::class, 'show']);
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\HomeController;
@@ -39,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::put('/profile/update', [ProfileController::class, 'putUpdate'])->name('profile.update');
     Route::put('/profile/update-password', [ProfileController::class, 'putNewPassword'])->name('profile.update-password');
+    Route::put('/profile/update-security', [ProfileController::class, 'putUpdateSecurity'])->name('profile.update-security');
     Route::delete('/profile/avatar', [ProfileController::class, 'deleteAvatar'])->name('profile.avatar.delete');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });

@@ -20,6 +20,7 @@ class ProfileController extends Controller
             'email'  => $user->email, 
             'name'   => $user->name,
             'avatar' => $user->avatar,
+            'security_question' => $user->security_question,
         ];
      
         return view('profile.index', compact('data'));
@@ -109,6 +110,27 @@ class ProfileController extends Controller
         return response()->json([
             'success' => true, 
             'message' => 'Parol muvaffaqiyatli o\'zgartirildi'
+        ]);
+    }
+
+    /**
+     * Xavfsizlik savolini yangilash
+     */
+    public function putUpdateSecurity(Request $request)
+    {
+        $request->validate([
+            'security_question' => 'required|string|max:255',
+            'security_answer'   => 'required|string|max:255',
+        ]);
+
+        $user = Auth::user();
+        $user->security_question = $request->security_question;
+        $user->security_answer = Hash::make($request->security_answer);
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Xavfsizlik savoli muvaffaqiyatli saqlandi'
         ]);
     }
 

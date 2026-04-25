@@ -8,7 +8,6 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
@@ -16,47 +15,96 @@ use Illuminate\View\View;
 class NewPasswordController extends Controller
 {
     /**
+     * Display the security question view.
+     */
+    public function showSecurityQuestion(Request $request): View|RedirectResponse
+    {
+        $email = session('reset_email');
+
+        if (!$email) {
+            return redirect()->route('password.request');
+        }
+
+        $user = User::where('email', $email)->first();
+
+        if (!$user || !$user->security_question) {
+            return redirect()->route('password.request');
+        }
+
+        return view('auth.security-question', [
+            'question' => $user->security_question,
+            'email' => $email
+        ]);
+    }
+
+    /**
+     * Verify the security question answer.
+     */
+    public function verifySecurityQuestion(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'answer' => ['required', 'string'],
+        ]);
+
+        $email = session('reset_email');
+        if (!$email) {
+            return redirect()->route('password.request');
+        }
+
+        $user = User::where('email', $email)->first();
+
+        if (!$user || !Hash::check($request->answer, $user->security_answer)) {
+            return back()->withErrors(['answer' => __('messages.invalid_security_answer')]);
+        }
+
+        // Answer is correct
+        session(['security_verified' => true]);
+
+        return redirect()->route('password.reset');
+    }
+
+    /**
      * Display the password reset view.
      */
-    public function create(Request $request): View
+    public function create(Request $request): View|RedirectResponse
     {
-        return view('auth.reset-password', ['request' => $request]);
+        if (!session('security_verified')) {
+            return redirect()->route('password.request');
+        }
+
+        return view('auth.reset-password', ['email' => session('reset_email')]);
     }
 
     /**
      * Handle an incoming new password request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
     {
+        if (!session('security_verified')) {
+            return redirect()->route('password.request');
+        }
+
         $request->validate([
-            'token' => ['required'],
-            'email' => ['required', 'email'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        // Here we will attempt to reset the user's password. If it is successful we
-        // will update the password on an actual user model and persist it to the
-        // database. Otherwise we will parse the error and return the response.
-        $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
-            function (User $user) use ($request) {
-                $user->forceFill([
-                    'password' => Hash::make($request->password),
-                    'remember_token' => Str::random(60),
-                ])->save();
+        $email = session('reset_email');
+        $user = User::where('email', $email)->first();
 
-                event(new PasswordReset($user));
-            }
-        );
+        if (!$user) {
+            return redirect()->route('password.request');
+        }
 
-        // If the password was successfully reset, we will redirect the user back to
-        // the application's home authenticated view. If there is an error we can
-        // redirect them back to where they came from with their error message.
-        return $status == Password::PASSWORD_RESET
-                    ? redirect()->route('login')->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                        ->withErrors(['email' => __($status)]);
+        $user->forceFill([
+            'password' => Hash::make($request->password),
+            'remember_token' => Str::random(60),
+        ])->save();
+
+        event(new PasswordReset($user));
+
+        // Clear session
+        session()->forget(['reset_email', 'security_verified']);
+
+        return redirect()->route('login')->with('status', __('messages.password_reset_success'));
     }
 }

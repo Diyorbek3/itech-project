@@ -1,39 +1,108 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
-        @csrf
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+    <title>{{ __('messages.reset_password_title') }} | ITech Academy</title>
 
-        <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Email Address -->
-         <x-input-label for="email" :value="__('Email')" />
-          <div>
-             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+        .reset-container {
+            width: 100%;
+            max-width: 340px;
+        }
+        .brand-logo {
+            display: block;
+            margin: 0 auto 25px;
+            width: 60px;
+            border-radius: 50%;
+        }
+        .reset-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 20px;
+        }
+        .form-label {
+            font-size: 14px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .form-control {
+            background-color: #0d1117 !important;
+            border: 1px solid #30363d !important;
+            color: #ffffff !important;
+            padding: 5px 12px;
+            font-size: 14px;
+            border-radius: 6px;
+        }
+        .form-control:focus {
+            border-color: #58a6ff !important;
+            box-shadow: 0 0 0 3px rgba(31, 111, 235, 0.3) !important;
+            outline: none;
+        }
+        .btn-reset {
+            background-color: #238636;
+            color: white;
+            width: 100%;
+            border: 1px solid rgba(240, 246, 252, 0.1);
+            border-radius: 6px;
+            padding: 8px;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+        .btn-reset:hover {
+            background-color: #2ea043;
+        }
+    </style>
+</head>
+<body>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+<div class="reset-container">
+    <a href="/">
+        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="brand-logo">
+    </a>
+    
+    <div class="reset-card">
+        <h5 class="text-center mb-4">{{ __('messages.reset_password_title') }}</h5>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+        <form method="POST" action="{{ route('password.store') }}">
+            @csrf
+            
+            <div class="mb-3">
+                <label class="form-label">{{ __('messages.new_password') }}</label>
+                <input type="password" name="password" class="form-control" required autocomplete="new-password" autofocus>
+                @error('password')
+                    <span class="text-danger" style="font-size: 12px;">{{ $message }}</span>
+                @enderror
+            </div>
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
+            <div class="mb-3">
+                <label class="form-label">{{ __('messages.confirm_password') }}</label>
+                <input type="password" name="password_confirmation" class="form-control" required autocomplete="new-password">
+                @error('password_confirmation')
+                    <span class="text-danger" style="font-size: 12px;">{{ $message }}</span>
+                @enderror
+            </div>
 
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
+            <button type="submit" class="btn btn-reset">
+                {{ __('messages.reset_password') }}
+            </button>
+        </form>
+    </div>
+</div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</body>
+</html>
