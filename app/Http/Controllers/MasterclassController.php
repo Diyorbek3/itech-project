@@ -3,77 +3,125 @@
 namespace App\Http\Controllers;
 
 use App\Models\MasterClass;
+use App\Models\MasterclassRegistration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Http; // <--- MUHIM: buni qo'shing
-use Carbon\Carbon; // Sanani formatlash uchun
+use Illuminate\Support\Facades\Http;
+use Carbon\Carbon;
 
 class MasterClassController extends Controller
 {
     /**
-     * Ro'yxatdan o'tish (Telegramga yuborish)
+     * Masterclassga ro'yxatdan o'tish (Telegram + Database)
      */
     public function register(Request $request)
     {
+        // Validatsiya
         $request->validate([
-            'name' => 'required|min:3',
-            'phone' => 'required',
+            'name' => 'required|min:2|max:255',
+            'phone' => 'required|min:9|max:20',
             'masterclass_id' => 'required|exists:master_classes,id'
         ]);
 
+        // Masterclass ma'lumotlarini olish
         $mc = MasterClass::find($request->masterclass_id);
 
-        $token = "8663915534:AAE9pdupJqYuKXLAjLElNV_Ql1ewaop_TLE";
-        $chat_id = "8124664417";
-        
-        $text = "🚀 **Yangi ariza (Masterclass)**\n\n";
-        $text .= "🎓 Kurs: " . ($mc ? $mc->title : 'Noma\'lum') . "\n";
-        $text .= "👤 Ism: " . $request->name . "\n";
-        $text .= "📞 Tel: " . $request->phone . "\n";
+        // EMAIL NI Olish
+        $email = null;
+        if (auth()->check()) {
+            $email = auth()->user()->email;
+        } else {
+            $email = $request->email ?? 'Kiritilmagan';
+        }
 
-        // Laravel Http client orqali yuborish
-        Http::post("https://api.telegram.org/bot{$token}/sendMessage", [
-            'chat_id' => $chat_id,
-            'text' => $text,
-            'parse_mode' => 'Markdown'
+        if (empty($email)) {
+            $email = 'Kiritilmagan';
+        }
+
+        // Database ga saqlash
+        $registration = MasterclassRegistration::create([
+            'masterclass_id' => $request->masterclass_id,
+            'user_id' => auth()->check() ? auth()->id() : null,
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $email,
+            'status' => 'pending',
+            'telegram_sent' => false,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
-        return response()->json(['message' => 'Muvaffaqiyatli ro\'yxatdan o\'tdingiz!']);
-    }
+        // ========== TELEGRAMGA XABAR YUBORISH (TO'G'RILANGAN) ==========
+        $token = env('TELEGRAM_BOT_TOKEN');
+        $chatId = env('TELEGRAM_CHAT_ID');
+        $topicId = env('TELEGRAM_TOPIC_ID_MASTERCLASS');
 
-    /**
-     * AJAX uchun: Modalga ma'lumot qaytarish
-     */
-    public function show($id) 
-    {
-        $masterClass = MasterClass::findOrFail($id);
-        
+        if ($token && $chatId && $topicId) {
+            $text = "🚀 **Yangi ariza (Masterclass)**\n\n";
+            $text .= "🆔 ID: " . $registration->id . "\n";
+            $text .= "🎓 Kurs: " . ($mc ? $mc->title : 'Noma\'lum') . "\n";
+            $text .= "👤 Ism: " . $request->name . "\n";
+            $text .= "📞 Tel: " . $request->phone . "\n";
+            $text .= "📧 Email: " . $email . "\n";
+            $text .= "⏳ Status: Kutilmoqda (pending)\n";
+            $text .= "📅 Vaqt: " . now()->format('d.m.Y H:i:s');
+            $text .= "\n\n📊 Dashboard: " . url('/dashboard');
+
+            try {
+                Http::post("https://api.telegram.org/bot{$token}/sendMessage", [
+                    'chat_id' => $chatId,
+                    'message_thread_id' => (int)$topicId,
+                    'text' => $text,
+                    'parse_mode' => 'Markdown'
+                ]);
+
+                $registration->telegram_sent = true;
+                $registration->save();
+
+                \Log::info('Masterclass arizasi Telegramga yuborildi (Master topic)', [
+                    'topic_id' => $topicId,
+                    'registration_id' => $registration->id
+                ]);
+
+            } catch (\Exception $e) {
+                \Log::error('Masterclass Telegram xatosi: ' . $e->getMessage());
+            }
+        } else {
+            \Log::warning('Telegram sozlamalari topilmadi (Masterclass)', [
+                'token' => $token ? 'bor' : 'yo\'q',
+                'chatId' => $chatId ? 'bor' : 'yo\'q',
+                'topicId' => $topicId ? 'bor' : 'yo\'q'
+            ]);
+        }
+
         return response()->json([
-            'title' => $masterClass->title,
-            'description' => $masterClass->description,
-            'date' => Carbon::parse($masterClass->event_date)->format('d-M, Y'),
-            'time' => Carbon::parse($masterClass->event_date)->format('H:i'),
-            'image' => asset('storage/' . $masterClass->image),
+            'success' => true,
+            'message' => 'Muvaffaqiyatli ro\'yxatdan o\'tdingiz! Tez orada siz bilan bog\'lanamiz.',
+            'registration_id' => $registration->id
         ]);
     }
 
-    // --- Qolgan metodlar (Index, Store, Update va h.k.) o'zgarishsiz qoladi ---
-    
-    public function index() {
-        $masterClasses = MasterClass::latest()->paginate(6); 
+    // ========== MASTERCLASS CRUD METODLARI ==========
+
+    public function index()
+    {
+        $masterClasses = MasterClass::latest()->paginate(6);
         return view('career.index', compact('masterClasses'));
     }
 
-    public function create() {
+    public function create()
+    {
         return view('master_classes.create');
     }
-        
-    public function adminIndex() {
+
+    public function adminIndex()
+    {
         $masterClasses = MasterClass::orderBy('id', 'desc')->paginate(10);
         return view('master_classes.admin_index', compact('masterClasses'));
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required',
@@ -90,12 +138,14 @@ class MasterClassController extends Controller
         return redirect()->route('master_class.admin_index')->with('success', 'Muvaffaqiyatli qo\'shildi!');
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $mc = MasterClass::findOrFail($id);
         return view('master_classes.edit', compact('mc'));
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         $mc = MasterClass::findOrFail($id);
 
         $data = $request->validate([
@@ -117,7 +167,8 @@ class MasterClassController extends Controller
         return redirect()->route('master_class.admin_index')->with('success', 'Yangilandi!');
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $item = MasterClass::findOrFail($id);
         if ($item->image) {
             Storage::disk('public')->delete($item->image);

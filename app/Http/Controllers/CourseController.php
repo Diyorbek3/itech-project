@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\CourseRegistration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
 
 class CourseController extends Controller
 {
@@ -72,12 +74,9 @@ class CourseController extends Controller
             ]);
 
             $data = $request->except('image', '_token');
-
-            // Boolean qiymatlarni to'g'rilash
             $data['has_certificate'] = $request->has('has_certificate') ? 1 : 0;
             $data['has_mentor_support'] = $request->has('has_mentor_support') ? 1 : 0;
 
-            // Rasm yuklash
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
@@ -101,11 +100,13 @@ class CourseController extends Controller
             ], 500);
         }
     }
+
     public function tableRows()
-{
-    $courses = Course::all();
-    return view('courses.table_rows', compact('courses'));
-}
+    {
+        $courses = Course::all();
+        return view('courses.table_rows', compact('courses'));
+    }
+
     public function edit($id)
     {
         try {
@@ -151,14 +152,10 @@ class CourseController extends Controller
             ]);
 
             $data = $request->except('image', '_token', '_method');
-
-            // Boolean qiymatlarni to'g'rilash
             $data['has_certificate'] = $request->has('has_certificate') ? 1 : 0;
             $data['has_mentor_support'] = $request->has('has_mentor_support') ? 1 : 0;
 
-            // Rasm yuklash
             if ($request->hasFile('image')) {
-                // Eski rasmni o'chirish
                 if ($course->image && Storage::disk('public')->exists('courses/' . $course->image)) {
                     Storage::disk('public')->delete('courses/' . $course->image);
                 }
@@ -190,7 +187,6 @@ class CourseController extends Controller
         try {
             $course = Course::findOrFail($id);
             
-            // Rasmni o'chirish
             if ($course->image && Storage::disk('public')->exists('courses/' . $course->image)) {
                 Storage::disk('public')->delete('courses/' . $course->image);
             }
@@ -211,7 +207,7 @@ class CourseController extends Controller
         }
     }
 
-    // ========== KURSGA YOZILISH ==========
+    // ========== KURSGA YOZILISH (TELEGRAM BILAN) ==========
     public function enrollSubmit(Request $request)
     {
         try {
@@ -224,16 +220,68 @@ class CourseController extends Controller
                 'course_id' => 'nullable|integer'
             ]);
 
+            // 1. DATABASE GA SAQLASH
+            $registration = CourseRegistration::create([
+                'course_id' => $request->course_id,
+                'user_id' => auth()->check() ? auth()->id() : null,
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'message' => $request->message,
+                'status' => 'pending',
+                'telegram_sent' => false
+            ]);
+
             Log::info('Yangi kursga yozilish:', [
+                'id' => $registration->id,
                 'name' => $request->name,
                 'phone' => $request->phone,
                 'email' => $request->email,
                 'course_name' => $request->course_name,
-                'course_id' => $request->course_id,
-                'message' => $request->message,
-                'ip' => $request->ip(),
-                'time' => now(),
             ]);
+
+            // ========== TELEGRAMGA XABAR YUBORISH (TO'G'RILANGAN) ==========
+            $token = env('TELEGRAM_BOT_TOKEN');
+            $chatId = env('TELEGRAM_CHAT_ID');                    // TO'G'RILANDI!
+            $topicId = env('TELEGRAM_TOPIC_ID_COURSES');          // QO'SHILDI! (4)
+            
+            if ($token && $chatId && $topicId) {
+                $text = "📚 *Yangi ariza (Kurs)*\n\n";
+                $text .= "🆔 ID: " . $registration->id . "\n";
+                $text .= "📖 Kurs: " . $request->course_name . "\n";
+                $text .= "👤 Ism: " . $request->name . "\n";
+                $text .= "📞 Telefon: " . $request->phone . "\n";
+                $text .= "📧 Email: " . $request->email . "\n";
+                if ($request->message) {
+                    $text .= "💬 Xabar: " . $request->message . "\n";
+                }
+                $text .= "⏳ Status: Kutilmoqda\n";
+                $text .= "📅 Vaqt: " . now()->format('d.m.Y H:i:s');
+
+                $response = Http::post("https://api.telegram.org/bot{$token}/sendMessage", [
+                    'chat_id' => $chatId,
+                    'message_thread_id' => (int)$topicId,    // QO'SHILDI!
+                    'text' => $text,
+                    'parse_mode' => 'Markdown'
+                ]);
+                
+                if ($response->successful()) {
+                    $registration->telegram_sent = true;
+                    $registration->save();
+                    Log::info('Kurs arizasi Telegramga yuborildi (Courses topic)', [
+                        'topic_id' => $topicId,
+                        'registration_id' => $registration->id
+                    ]);
+                } else {
+                    Log::warning('Telegram xatosi: ' . $response->body());
+                }
+            } else {
+                Log::warning('Telegram sozlamalari topilmadi (Kurs)', [
+                    'token' => $token ? 'bor' : 'yo\'q',
+                    'chatId' => $chatId ? 'bor' : 'yo\'q',
+                    'topicId' => $topicId ? 'bor' : 'yo\'q'
+                ]);
+            }
 
             return response()->json([
                 'success' => true,
@@ -241,6 +289,7 @@ class CourseController extends Controller
             ]);
 
         } catch (\Exception $e) {
+            Log::error('Kursga yozilish xatolik: ' . $e->getMessage());
             return response()->json([
                 'success' => false,
                 'message' => 'Xatolik: ' . $e->getMessage()
