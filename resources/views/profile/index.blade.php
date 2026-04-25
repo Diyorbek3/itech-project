@@ -29,6 +29,9 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="change-password-tab" data-bs-toggle="tab" data-bs-target="#change-password" type="button" role="tab">{{ __("messages.change_password") }}</button>
             </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="security-question-tab" data-bs-toggle="tab" data-bs-target="#security-question" type="button" role="tab">{{ __("messages.security_question") }}</button>
+            </li>
         </ul>
 
         <div class="tab-content mt-3" id="myTabContent">
@@ -42,9 +45,11 @@
                                 <div class="avatar position-relative mt-2 mx-3">
                                     <img id="selectedAvatar"
                                          src="{{ $data['avatar'] ? Storage::url('avatars/' . $data['avatar']) : asset('images/avatar.png') }}"
+
                                          class="rounded-circle shadow-sm cursor-pointer" 
                                          onclick="openFileInput()"
-                                         style="width:80px; height:80px; object-fit: cover;" />
+                                         style="width:80px; height:80px; object-fit: cover;"
+                                         onerror="this.onerror=null; this.src='{{ asset('images/avatar.png') }}';" />
                                     <div class="position-absolute bottom-0 end-0">
                                         <i class="fas fa-pencil-alt fa-sm text-dark cursor-pointer" onclick="openFileInput()"></i>
                                     </div>
@@ -53,6 +58,11 @@
                             </div>
                             <div class="col-auto">
                                 <h5 class="mb-1">{{ $data['name'] ?? '' }}</h5>
+                                @if($data['avatar'])
+                                    <button type="button" class="btn btn-sm btn-outline-danger mt-2" id="deleteAvatarBtn">
+                                        <i class="fas fa-trash-alt me-1"></i> Rasm o'chirish
+                                    </button>
+                                @endif
                             </div>
                         </div>
 
@@ -106,6 +116,41 @@
                         </div>
                         <div class="px-3">
                             <button type="button" id="save_pass" class="btn btn-primary px-4" disabled>{{ __("messages.save_changes") }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="security-question" role="tabpanel">
+                <div class="card card-body mx-3 mx-md-4 mt-n6">
+                    <form id="securityQuestionForm">
+                        @csrf
+                        @method('PUT')
+                        <div class="row p-3">
+                            <div class="col-md-9">
+                                <div class="mb-3">
+                                    <label class="fw-bold mb-2">{{ __("messages.security_question") }}</label>
+                                    <select name="security_question" class="form-select border p-2" id="security_question_select">
+                                        <option value="" disabled {{ !($data['security_question'] ?? '') ? 'selected' : '' }}>{{ __("messages.select_question") }}</option>
+                                        <option value="Sizning birinchi maktabingiz raqami?" {{ ($data['security_question'] ?? '') == 'Sizning birinchi maktabingiz raqami?' ? 'selected' : '' }}>Sizning birinchi maktabingiz raqami?</option>
+                                        <option value="Sizning birinchi uy hayvoningiz ismi?" {{ ($data['security_question'] ?? '') == 'Sizning birinchi uy hayvoningiz ismi?' ? 'selected' : '' }}>Sizning birinchi uy hayvoningiz ismi?</option>
+                                        <option value="Onangizning qizlik familiyasi nima?" {{ ($data['security_question'] ?? '') == 'Onangizning qizlik familiyasi nima?' ? 'selected' : '' }}>Onangizning qizlik familiyasi nima?</option>
+                                        <option value="Siz tug'ilgan shahar nomi?" {{ ($data['security_question'] ?? '') == 'Siz tug\'ilgan shahar nomi?' ? 'selected' : '' }}>Siz tug'ilgan shahar nomi?</option>
+                                        <option value="custom">{{ __("messages.custom_question") }}</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 d-none" id="custom_question_container">
+                                    <label class="fw-bold mb-2">{{ __("messages.custom_question_label") }}</label>
+                                    <input type="text" name="custom_question" class="form-control border p-2" placeholder="{{ __("messages.custom_question_placeholder") }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="fw-bold mb-2">{{ __("messages.security_answer") }}</label>
+                                    <input type="password" name="security_answer" class="form-control border p-2" placeholder="{{ __("messages.security_answer_placeholder") }}">
+                                    <small class="text-muted">{{ __("messages.security_answer_hint") }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-3">
+                            <button type="button" id="save_security" class="btn btn-primary px-4">{{ __("messages.save_changes") }}</button>
                         </div>
                     </form>
                 </div>
@@ -177,6 +222,7 @@
                     if(res.success) {
                         Swal.fire({ icon: 'success', title: trans.success_title, text: trans.profile_updated, timer: 1500 });
                         setTimeout(() => location.reload(), 1500);
+
                     }
                 }
             });
@@ -233,6 +279,7 @@
                     }
                 });
             }, 'image/jpeg');
+
         });
 
         // 4. Password Validation
@@ -267,6 +314,67 @@
                     $('#password-match').html('');
                 } else {
                     Swal.fire(trans.error_title, res.message || trans.error_occurred, 'error');
+                }
+            });
+        });
+        // 6. Delete Avatar
+        $('#deleteAvatarBtn').on('click', function() {
+            Swal.fire({
+                title: 'Ishonchingiz komilmi?',
+                text: "Profil rasmi o'chiriladi!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: "Ha, o'chirilsin!",
+                cancelButtonText: 'Bekor qilish'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/profile/avatar',
+                        type: 'DELETE',
+                        data: { _token: '{{ csrf_token() }}' },
+                        success: function(res) {
+                            if(res.success) {
+                                Swal.fire('O\'chirildi!', res.message, 'success');
+                                $('#selectedAvatar').attr('src', res.default_url);
+                                $('#deleteAvatarBtn').fadeOut();
+                                // Barcha header avatarlarini yangilash
+                                $('.header-avatar').attr('src', res.default_url);
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        // 7. Security Question Save
+        $('#security_question_select').on('change', function() {
+            if ($(this).val() === 'custom') {
+                $('#custom_question_container').removeClass('d-none');
+            } else {
+                $('#custom_question_container').addClass('d-none');
+            }
+        });
+
+        $('#save_security').on('click', function() {
+            const data = {
+                security_question: $('#security_question_select').val() === 'custom' ? $('input[name="custom_question"]').val() : $('#security_question_select').val(),
+                security_answer: $('input[name="security_answer"]').val(),
+                _token: '{{ csrf_token() }}',
+                _method: 'PUT'
+            };
+
+            if (!data.security_question || !data.security_answer) {
+                Swal.fire('Xato!', 'Iltimos, savol va javobni kiriting', 'error');
+                return;
+            }
+
+            $.post('/profile/update-security', data, function(res) {
+                if(res.success) {
+                    Swal.fire('Muvaffaqiyat!', 'Xavfsizlik savoli saqlandi', 'success');
+                    $('input[name="security_answer"]').val('');
+                } else {
+                    Swal.fire('Xato!', res.message || 'Xatolik yuz berdi', 'error');
                 }
             });
         });

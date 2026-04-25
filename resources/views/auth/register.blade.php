@@ -165,6 +165,31 @@
                 </div>
             </div>
 
+            <div class="mt-3">
+                <label class="form-label">{{ __('messages.security_question') }}</label>
+                <select name="security_question" id="security_question" class="form-control" required>
+                    <option value="" disabled selected>{{ __('messages.select_question') }}</option>
+                    <option value="Sizning birinchi maktabingiz raqami?">Sizning birinchi maktabingiz raqami?</option>
+                    <option value="Sizning birinchi uy hayvoningiz ismi?">Sizning birinchi uy hayvoningiz ismi?</option>
+                    <option value="Onangizning qizlik familiyasi nima?">Onangizning qizlik familiyasi nima?</option>
+                    <option value="Siz tug'ilgan shahar nomi?">Siz tug'ilgan shahar nomi?</option>
+                    <option value="custom">{{ __('messages.custom_question') }}</option>
+                </select>
+            </div>
+
+            <div class="mt-3 d-none" id="custom_question_container">
+                <label class="form-label">{{ __('messages.custom_question_label') }}</label>
+                <input type="text" name="custom_question" id="custom_question" class="form-control" 
+                       placeholder="{{ __('messages.custom_question_placeholder') }}">
+            </div>
+
+            <div class="mt-3">
+                <label class="form-label">{{ __('messages.security_answer') }}</label>
+                <input type="text" name="security_answer" id="security_answer" class="form-control" 
+                       placeholder="{{ __('messages.security_answer_placeholder') }}" required>
+                <small class="text-white-50" style="font-size: 11px;">{{ __('messages.security_answer_hint') }}</small>
+            </div>
+
             <button type="submit" class="btn-register-style">
                 {{ __('messages.sign_up') }}
             </button>
@@ -193,6 +218,17 @@
         });
     });
 
+    document.getElementById('security_question').addEventListener('change', function() {
+        const customContainer = document.getElementById('custom_question_container');
+        if (this.value === 'custom') {
+            customContainer.classList.remove('d-none');
+            document.getElementById('custom_question').setAttribute('required', 'required');
+        } else {
+            customContainer.classList.add('d-none');
+            document.getElementById('custom_question').removeAttribute('required');
+        }
+    });
+
     document.getElementById('registerForm').addEventListener('submit', function(e) {
         e.preventDefault();
         
@@ -201,6 +237,9 @@
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value;
         const passwordConfirm = document.getElementById('password_confirmation').value;
+        const securityQuestion = document.getElementById('security_question').value;
+        const customQuestion = document.getElementById('custom_question').value.trim();
+        const securityAnswer = document.getElementById('security_answer').value.trim();
         
         const trans = {
             name_required: "{{ __('messages.name_required') }}",
@@ -233,6 +272,16 @@
         
         if (password !== passwordConfirm) {
             errors.push(trans.password_mismatch);
+        }
+
+        if (securityQuestion === '') {
+            errors.push('Xavfsizlik savolini tanlang');
+        } else if (securityQuestion === 'custom' && customQuestion === '') {
+            errors.push('Maxsus savolingizni kiriting');
+        }
+
+        if (securityAnswer === '') {
+            errors.push('Xavfsizlik savoliga javob kiriting');
         }
         
         if (errors.length > 0) {

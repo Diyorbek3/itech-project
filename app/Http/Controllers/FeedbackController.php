@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Feedback;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class FeedbackController extends Controller
@@ -21,8 +20,6 @@ class FeedbackController extends Controller
             $validated['created_by'] = auth()->user()->id;
             $feedback = Feedback::create($validated);
 
-            // Telegramga yuborish
-            $this->sendToTelegram($feedback);
 
             return response()->json([
                 'success' => true,
@@ -37,35 +34,6 @@ class FeedbackController extends Controller
         }
     }
 
-    private function sendToTelegram($feedback)
-    {
-        // ✅ TO'G'RI - .env faylidan o'qiydi
-        $token = env('TELEGRAM_BOT_TOKEN');
-        $chatId = env('TELEGRAM_CHAT_ID');
-
-        if (!$token || !$chatId) {
-            Log::warning('Telegram sozlamalari topilmadi');
-            return;
-        }
-
-        $message = "💬 <b>Yangi Feedback!</b>\n\n";
-        $message .= "👤 <b>Ism:</b> " . e($feedback->name) . "\n";
-        $message .= "📧 <b>Email:</b> " . e($feedback->email) . "\n";
-        $message .= "📝 <b>Xabar:</b> \n" . e($feedback->message) . "\n";
-        $message .= "⏰ <b>Vaqt:</b> " . now()->format('d.m.Y H:i');
-
-        try {
-            Http::post("https://api.telegram.org/bot{$token}/sendMessage", [
-                'chat_id' => $chatId,
-                'text' => $message,
-                'parse_mode' => 'HTML'
-            ]);
-            
-            Log::info('Telegramga yuborildi');
-        } catch (\Exception $e) {
-            Log::error('Telegram xatosi: ' . $e->getMessage());
-        }
-    }
 
     public function index()
     {
