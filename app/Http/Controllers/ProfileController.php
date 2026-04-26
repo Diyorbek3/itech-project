@@ -20,43 +20,45 @@ class ProfileController extends Controller
             'email'  => $user->email, 
             'name'   => $user->name,
             'avatar' => $user->avatar,
+            'security_question' => $user->security_question,
         ];
      
         return view('profile.index', compact('data'));
     }
 
     /**
-     * Ism va Avatarni yangilash (Xotirani tejash va keshni yangilash bilan)
+     * Ism, Email va Avatarni yangilash
      */
     public function putUpdate(Request $request)
     {
         $user = Auth::user();
 
+        // Validatsiya: email o'ziniki bo'lsa xato bermasligi uchun ID istisno qilindi
         $request->validate([
             'name'   => 'required|string|max:128',
+            'email'  => 'required|email|max:255|unique:users,email,' . $user->id,
             'avatar' => 'nullable|image|mimes:jpg,png,jpeg|max:2048', 
         ]);
 
         try {
+            // Ma'lumotlarni yangilash
             $user->name = $request->name;
+            $user->email = $request->email; 
 
             if ($request->hasFile('avatar')) {
-                // 1. Storage diskda 'avatars' papkasi borligini tekshirish
+                // 1. Papka borligini tekshirish
                 if (!Storage::disk('public')->exists('avatars')) {
                     Storage::disk('public')->makeDirectory('avatars');
                 }
 
-                // 2. XOTIRANI TEJASH: Eski rasmni o'chirish (default rasm bo'lmasa)
+                // 2. Eski rasmni o'chirish
                 if ($user->avatar && Storage::disk('public')->exists('avatars/' . $user->avatar)) {
                     Storage::disk('public')->delete('avatars/' . $user->avatar);
                 }
 
-                // 3. Yangi faylni olish va nomlash
+                // 3. Yangi faylni nomlash va saqlash
                 $file = $request->file('avatar');
-                // Fayl nomi unikalligi uchun vaqt va user ID dan foydalanamiz
                 $newFileName = 'user_' . $user->id . '_' . time() . '.jpg';
-                
-                // 4. Rasmni 'public' diskiga yuklash
                 Storage::disk('public')->putFileAs('avatars', $file, $newFileName);
                 
                 $user->avatar = $newFileName;
@@ -64,19 +66,23 @@ class ProfileController extends Controller
 
             $user->save();
 
-            // Brauzer keshini chetlab o'tish uchun vaqt qo'shamiz (?v=123)
-            $newAvatarUrl = asset('storage/avatars/' . $user->avatar) . '?v=' . time();
+            // Kesh muammosini oldini olish uchun URL
+            $newAvatarUrl = $user->avatar 
+                ? asset('storage/avatars/' . $user->avatar) . '?v=' . time() 
+                : asset('images/avatar.png');
 
             return response()->json([
                 'success'    => true, 
                 'message'    => 'Ma\'lumotlar muvaffaqiyatli yangilandi',
-                'avatar_url' => $newAvatarUrl
+                'avatar_url' => $newAvatarUrl,
+                'user_name'  => $user->name,
+                'user_email' => $user->email
             ]);
             
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false, 
-                'message' => 'Xatolik yuz berdi: ' . $e->getMessage()
+                'message' => 'Xatolik: ' . $e->getMessage()
             ], 500);
         }
     }
@@ -99,7 +105,7 @@ class ProfileController extends Controller
         if (!Hash::check($request->old_password, $user->password)) {
             return response()->json([
                 'success' => false, 
-                'message' => 'Eski parolingiz noto\'g\'ri kiritildi'
+                'message' => 'Eski parolingiz noto\'g\'ri'
             ], 422);
         }
 
@@ -108,12 +114,33 @@ class ProfileController extends Controller
 
         return response()->json([
             'success' => true, 
-            'message' => 'Parol muvaffaqiyatli o\'zgartirildi'
+            'message' => 'Parol o\'zgartirildi'
         ]);
     }
 
     /**
-     * Avatarni o'chirish (Serverdan ham o'chadi)
+     * Xavfsizlik savolini yangilash
+     */
+    public function putUpdateSecurity(Request $request)
+    {
+        $request->validate([
+            'security_question' => 'required|string|max:255',
+            'security_answer'   => 'required|string|max:255',
+        ]);
+
+        $user = Auth::user();
+        $user->security_question = $request->security_question;
+        $user->security_answer = Hash::make($request->security_answer);
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Xavfsizlik savoli saqlandi'
+        ]);
+    }
+
+    /**
+     * Avatarni o'chirish
      */
     public function deleteAvatar()
     {
@@ -131,7 +158,7 @@ class ProfileController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Rasm o\'chirildi',
-            'default_url' => asset('images/avatar.png') // Default rasm manzili
+            'default_url' => asset('images/avatar.png')
         ]);
     }
 }
