@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Models\Course;
 use App\Models\CourseRegistration;
-use App\Models\Feedback;
 use App\Models\MasterclassRegistration;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB; // DB klassini ulaymiz
 
 class DashboardController extends Controller
 {
@@ -17,8 +17,8 @@ class DashboardController extends Controller
         // ========== ASOSIY SONLAR ==========
         $totalContacts = Contact::count();
         $totalMasterclass = MasterclassRegistration::count();
-        $totalCourseRegistrations = CourseRegistration::count();  // KURS YOZILISHLAR
-        $totalFeedbacks = Feedback::count();  // FEEDBACKLAR
+        $totalCourseRegistrations = CourseRegistration::count();
+        $totalFeedbacks = DB::table('feedback')->count(); // Model ishlatilmadi
         $totalAll = $totalContacts + $totalMasterclass + $totalCourseRegistrations;
 
         // ========== MASTERCLASS STATUSLARI ==========
@@ -42,13 +42,11 @@ class DashboardController extends Controller
             ->take(50)
             ->get();
 
-        // ========== KURS YOZILISHLAR (COURSE REGISTRATIONS) ==========
+        // ========== KURS YOZILISHLAR ==========
         $courseRegistrations = CourseRegistration::with('course')
             ->orderBy('created_at', 'desc')
             ->take(50)
             ->get();
-
-     
 
         // ========== KURSLAR ==========
         $courses = Course::orderBy('created_at', 'desc')->get();
@@ -59,7 +57,7 @@ class DashboardController extends Controller
             ->orWhereNull('telegram_sent')
             ->count();
 
-        // ========== OXIRGI 7 KUN (FEEDBACK VA KURS QO'SHILDI) ==========
+        // ========== OXIRGI 7 KUN ==========
         $last7Days = collect();
         for ($i = 6; $i >= 0; $i--) {
             $date = Carbon::now()->subDays($i);
@@ -70,7 +68,7 @@ class DashboardController extends Controller
                 'contacts' => Contact::whereDate('created_at', $dateStr)->count(),
                 'masterclass' => MasterclassRegistration::whereDate('created_at', $dateStr)->count(),
                 'courses' => CourseRegistration::whereDate('created_at', $dateStr)->count(),
-                'feedbacks' => Feedback::whereDate('created_at', $dateStr)->count(),
+                'feedbacks' => DB::table('feedback')->whereDate('created_at', $dateStr)->count(), // DB ishlatildi
                 'total' => Contact::whereDate('created_at', $dateStr)->count() +
                     MasterclassRegistration::whereDate('created_at', $dateStr)->count() +
                     CourseRegistration::whereDate('created_at', $dateStr)->count()
@@ -89,7 +87,7 @@ class DashboardController extends Controller
                 'contacts' => Contact::whereBetween('created_at', [$startDate, $endDate])->count(),
                 'masterclass' => MasterclassRegistration::whereBetween('created_at', [$startDate, $endDate])->count(),
                 'courses' => CourseRegistration::whereBetween('created_at', [$startDate, $endDate])->count(),
-                'feedbacks' => Feedback::whereBetween('created_at', [$startDate, $endDate])->count(),
+                'feedbacks' => DB::table('feedback')->whereBetween('created_at', [$startDate, $endDate])->count(), // DB ishlatildi
                 'total' => Contact::whereBetween('created_at', [$startDate, $endDate])->count() +
                     MasterclassRegistration::whereBetween('created_at', [$startDate, $endDate])->count() +
                     CourseRegistration::whereBetween('created_at', [$startDate, $endDate])->count()
@@ -112,7 +110,6 @@ class DashboardController extends Controller
             'approvedPercent',
             'masterclassRegistrations',
             'courseRegistrations',
-        
             'courses',
             'telegramSentCount',
             'telegramNotSentCount',
@@ -195,8 +192,8 @@ class DashboardController extends Controller
     // ========== FEEDBACK O'CHIRISH ==========
     public function deleteFeedback($id)
     {
-        $feedback = Feedback::findOrFail($id);
-        $feedback->delete();
+        // Model o'rniga DB ishlatamiz
+        DB::table('feedback')->where('id', $id)->delete();
 
         return response()->json([
             'success' => true,
