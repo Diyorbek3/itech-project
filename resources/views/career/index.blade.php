@@ -944,7 +944,7 @@ $(document).ready(function() {
 <!-- 2. Наша команда -->
 <section class="team-section">
     <div class="container-fluid">
-        <h2 class="section-title">{{ __('messages.our_goal') }}</h2>
+        <h2 class="section-title">{{ __('messages.our_team') }}</h2>
         <div class="row">
             <!-- Mustafo Qodirov - team1.jpg -->
             <div class="col-lg-4 col-md-6">

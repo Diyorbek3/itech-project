@@ -176,6 +176,9 @@
                                     {{ __('messages.profile') }}
                                 </a></li>
                                 @if (auth()->user()->role_id == 1)
+                                <li><a class="dropdown-item" href="{{ route('dashboard') }}">
+                                    <i class="fas fa-chart-line me-2"></i> {{ __('messages.dashboard') }}
+                                </a></li>
                                 <li><a class="dropdown-item" href="/master-class">
                                     <i class="fas fa-chalkboard-user me-2"></i> {{ __('messages.master_class') }}
                                 </a></li>
@@ -183,9 +186,7 @@
                                 <li><a class="dropdown-item" href="{{ route('courses.index') }}">
                                     <i class="fas fa-book-open me-2"></i> {{ __('messages.courses') }}
                                 </a></li>
-                                <li><a class="dropdown-item" href="{{ route('dashboard') }}">
-                                    <i class="fas fa-chart-line me-2"></i> {{ __('messages.dashboard') }}
-                                </a></li>
+                                
                                 @endif
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">
