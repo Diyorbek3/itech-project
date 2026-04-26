@@ -22,6 +22,8 @@ class User extends Authenticatable
         'email',
         'password',
         'avatar', // Bu yerga avatar ustunini qo'shamiz
+        'security_question',
+        'security_answer',
     ];
 
     /**

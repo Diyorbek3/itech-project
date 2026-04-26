@@ -51,6 +51,7 @@
     <script src="{{ asset('js/purecounter.min.js') }}"></script>
     <script src="{{ asset('js/scripts.js') }}"></script>
 
+
     @yield('scripts')
 
     <script>

@@ -71,7 +71,36 @@ class ContactController extends Controller
                 Log::error('Telegramga yuborishda xatolik: ' . $e->getMessage());
             }
         } else {
-            Log::warning('Telegram sozlamalari topilmadi (Kontakt)');
+            Log::warning('Telegram sozlamalari topilmadi (Kontakt)');// ========== TO'G'RILANGAN QISM ==========
+$token = env('TELEGRAM_BOT_TOKEN');
+$chatId = env('TELEGRAM_CHAT_ID');                    // ← TO'G'RILANDI (CONTACT qo'shimchasiz)
+$topicId = env('TELEGRAM_TOPIC_ID_CONTACT');          // ← QO'SHILDI
+
+if ($token && $chatId && $topicId) {
+    $text = "🆕 YANGI ARIZA!\n\n";
+    $text .= "👤 Ism: " . $request->name . "\n";
+    $text .= "📧 Email: " . $request->email . "\n";
+    $text .= "📞 Telefon: " . $request->phone . "\n";
+    $text .= "⏰ Vaqt: " . now()->format('d.m.Y H:i');
+
+    try {
+        Http::post("https://api.telegram.org/bot{$token}/sendMessage", [
+            'chat_id' => $chatId,
+            'message_thread_id' => (int)$topicId,    // ← MUHIM! Topic ID qo'shildi
+            'parse_mode' => 'HTML',
+            'text' => $text
+        ]);
+        Log::info('Telegramga yuborildi (Contact topic)');
+    } catch (\Exception $e) {
+        Log::error('Telegramga yuborishda xatolik: ' . $e->getMessage());
+    }
+} else {
+    Log::warning('Telegram sozlamalari topilmadi', [
+        'token' => $token ? 'bor' : 'yo\'q',
+        'chatId' => $chatId ? 'bor' : 'yo\'q',
+        'topicId' => $topicId ? 'bor' : 'yo\'q'
+    ]);
+}
         }
 
         return response()->json([
