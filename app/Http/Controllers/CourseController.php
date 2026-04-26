@@ -240,11 +240,12 @@ class CourseController extends Controller
                 'course_name' => $request->course_name,
             ]);
 
-            // 2. TELEGRAMGA YUBORISH
+            // ========== TELEGRAMGA XABAR YUBORISH (TO'G'RILANGAN) ==========
             $token = env('TELEGRAM_BOT_TOKEN');
-            $chatId = env('TELEGRAM_CHAT_ID_COURSES');
+            $chatId = env('TELEGRAM_CHAT_ID');                    // TO'G'RILANDI!
+            $topicId = env('TELEGRAM_TOPIC_ID_COURSES');          // QO'SHILDI! (4)
             
-            if ($token && $chatId) {
+            if ($token && $chatId && $topicId) {
                 $text = "📚 *Yangi ariza (Kurs)*\n\n";
                 $text .= "🆔 ID: " . $registration->id . "\n";
                 $text .= "📖 Kurs: " . $request->course_name . "\n";
@@ -259,6 +260,7 @@ class CourseController extends Controller
 
                 $response = Http::post("https://api.telegram.org/bot{$token}/sendMessage", [
                     'chat_id' => $chatId,
+                    'message_thread_id' => (int)$topicId,    // QO'SHILDI!
                     'text' => $text,
                     'parse_mode' => 'Markdown'
                 ]);
@@ -266,12 +268,19 @@ class CourseController extends Controller
                 if ($response->successful()) {
                     $registration->telegram_sent = true;
                     $registration->save();
-                    Log::info('Telegramga yuborildi');
+                    Log::info('Kurs arizasi Telegramga yuborildi (Courses topic)', [
+                        'topic_id' => $topicId,
+                        'registration_id' => $registration->id
+                    ]);
                 } else {
                     Log::warning('Telegram xatosi: ' . $response->body());
                 }
             } else {
-                Log::warning('Telegram sozlamalari topilmadi');
+                Log::warning('Telegram sozlamalari topilmadi (Kurs)', [
+                    'token' => $token ? 'bor' : 'yo\'q',
+                    'chatId' => $chatId ? 'bor' : 'yo\'q',
+                    'topicId' => $topicId ? 'bor' : 'yo\'q'
+                ]);
             }
 
             return response()->json([
