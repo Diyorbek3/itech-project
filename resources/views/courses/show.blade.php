@@ -18,7 +18,7 @@
                         </div>
 
                         <h1 class="hero-title mb-3">{{ $course->title }}</h1>
-                        <p class="hero-subtitle">
+                        <p class="hero-subtitle" style="color: black;">
                             {{ $course->short_description ?? (app()->getLocale() == 'uz' ? 'Professional kurs bilan kelajagingizni quring' : (app()->getLocale() == 'ru' ? 'Постройте свое будущее с профессиональным курсом' : 'Build your future with professional course')) }}
                         </p>
 
