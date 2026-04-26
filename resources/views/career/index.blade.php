@@ -914,27 +914,27 @@ $(document).ready(function() {
 <!-- ========== 1. HISTORY SECTION ========== -->
 <section class="section bg-gradient text-white">
     <div class="container-fluid">
-        <h2 class="section-title text-black">ITech Academy haqida</h2>
+        <h2 class="section-title text-black">{{ __('messages.itech') }}</h2>
         <div class="row">
             <div class="col-md-4 mb-4">
                 <div class="text-white text-center p-3">
                     <i class="fas fa-rocket fa-3x mb-3"></i>
-                    <h4>Tajribamiz</h4>
-                    <p>Bir necha yillik tajriba va izlanishlar. 2022-yil 23-sentyabr (va 2021-yil norasmiy tashkil etilgan).</p>
+                    <h4>{{ __('messages.our_experience') }}</h4>
+                    <p>{{ __('messages.experience_text') }}.</p>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
                 <div class="text-white text-center p-3">
                     <i class="fas fa-users fa-3x mb-3"></i>
-                    <h4>Natijalarimiz</h4>
-                    <p>2000+ bitiruvchi, 90% ish bilan ta'minlangan (o'quv markaz yordamida).</p>
+                    <h4>{{ __('messages.our_results') }}</h4>
+                    <p>{{ __('messages.results_text') }}</p>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
                 <div class="text-white text-center p-3">
                     <i class="fas fa-code fa-3x mb-3"></i>
-                    <h4>Maqsadimiz</h4>
-                    <p>Yangi texnologiya asosida innovatsion yechimlar yaratib, yoshlarni ilmga va axborot texnologiyalarga qiziqtirish hamda global bozorga chiqa oladigan kadrlar yetkazishib berish.</p>
+                    <h4>{{ __('messages.our_goal') }}</h4>
+                    <p>{{ __('messages.goal_text') }}</p>
                 </div>
             </div>
         </div>
@@ -944,7 +944,7 @@ $(document).ready(function() {
 <!-- 2. Наша команда -->
 <section class="team-section">
     <div class="container-fluid">
-        <h2 class="section-title">Bizning jamoa</h2>
+        <h2 class="section-title">{{ __('messages.our_team') }}</h2>
         <div class="row">
             <!-- Mustafo Qodirov - team1.jpg -->
             <div class="col-lg-4 col-md-6">
@@ -954,7 +954,7 @@ $(document).ready(function() {
                          class="team-image">
                     <div class="team-info">
                         <h3 class="team-name">Mustafo Qodirov</h3>
-                        <p class="team-position">CEO</p>
+                        <p class="team-position">{{ __('messages.position_ceo') }}</p>
                         <div class="social-links">
                             <a href="https://t.me/itechacademy_uz"><i class="fab fa-telegram"></i></a>
                             <a href="https://www.instagram.com/itechacademy_uz?igsh=aWZ5anU4ZWN2MjI5"><i class="fab fa-instagram"></i></a>
@@ -971,7 +971,7 @@ $(document).ready(function() {
                          class="team-image">
                     <div class="team-info">
                         <h3 class="team-name">Azamatjon Ergashev</h3>
-                        <p class="team-position">Operation Director</p>
+                        <p class="team-position">{{ __('messages.position_operation_director') }}</p>
                         <div class="social-links">
                            <a href="https://t.me/itechacademy_uz"><i class="fab fa-telegram"></i></a>
                            <a href="https://www.instagram.com/itechacademy_uz?igsh=aWZ5anU4ZWN2MjI5"><i class="fab fa-instagram"></i></a>
@@ -988,7 +988,7 @@ $(document).ready(function() {
                          class="team-image">
                     <div class="team-info">
                         <h3 class="team-name">Gayratjon Mirzamahmudov</h3>
-                        <p class="team-position">Frontend Engineer</p>
+                        <p class="team-position">{{ __('messages.position_frontend') }}</p>
                         <div class="social-links">
                             <a href="https://t.me/itechacademy_uz"><i class="fab fa-telegram"></i></a>
                             <a href="https://www.instagram.com/itechacademy_uz?igsh=aWZ5anU4ZWN2MjI5"><i class="fab fa-instagram"></i></a>
@@ -1005,7 +1005,7 @@ $(document).ready(function() {
                          class="team-image">
                     <div class="team-info">
                         <h3 class="team-name">Eljahon Normominov</h3>
-                        <p class="team-position">Software Engineer</p>
+                        <p class="team-position">{{ __('messages.position_software') }}</p>
                         <div class="social-links">
                             <a href="https://t.me/itechacademy_uz"><i class="fab fa-telegram"></i></a>
                             <a href="https://www.instagram.com/itechacademy_uz?igsh=aWZ5anU4ZWN2MjI5"><i class="fab fa-instagram"></i></a>
@@ -1013,15 +1013,15 @@ $(document).ready(function() {
                     </div>
                 </div>
             </div>
-            <!-- Voldia Tadjimuratova - team3.jpg -->
+            <!-- Volida Tadjimuratova - team3.jpg -->
             <div class="col-lg-4 col-md-6">
                 <div class="team-card">
                     <img src="{{ asset('images/team3.jpg') }}" 
-                         alt="Voldia Tadjimuratova" 
+                         alt="Volida Tadjimuratova" 
                          class="team-image">
                     <div class="team-info">
-                        <h3 class="team-name">Voldia Tadjimuratova</h3>
-                        <p class="team-position">Finance Manager</p>
+                        <h3 class="team-name">Volida Tadjimuratova</h3>
+                        <p class="team-position">{{ __('messages.position_finance') }}</p>
                         <div class="social-links">
                             <a href="https://t.me/itechacademy_uz"><i class="fab fa-telegram"></i></a>
                             <a href="https://www.instagram.com/itechacademy_uz?igsh=aWZ5anU4ZWN2MjI5"><i class="fab fa-instagram"></i></a>
@@ -1038,7 +1038,7 @@ $(document).ready(function() {
                          class="team-image">
                     <div class="team-info">
                         <h3 class="team-name">Biloliddin Madiyorov</h3>
-                        <p class="team-position">Backend Engineer</p>
+                        <p class="team-position">{{ __('messages.position_backend') }}r</p>
                         <div class="social-links">
                             <a href="https://t.me/itechacademy_uz"><i class="fab fa-telegram"></i></a>
                             <a href="https://www.instagram.com/itechacademy_uz?igsh=aWZ5anU4ZWN2MjI5"><i class="fab fa-instagram"></i></a>
@@ -1053,15 +1053,15 @@ $(document).ready(function() {
 <!-- ========== 3. QUIZ SECTION ========== -->
 <section class="section bg-light">
     <div class="container">
-        <h2 class="section-title">IT bilimingizni sinab ko'ring</h2>
+        <h2 class="section-title">{{ __('messages.quiz_title') }}</h2>
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="quiz-card" id="quizStart">
                     <div class="text-center">
                         <i class="fas fa-brain fa-5x mb-4" style="color: var(--primary);"></i>
-                        <h3>Qiziqarli test</h3>
-                        <p>3 ta savol orqali bilimingizni aniqlang</p>
-                        <button class="btn btn-primary btn-lg px-5" onclick="startQuiz()">Testni boshlash <i class="fas fa-arrow-right"></i></button>
+                        <h3>{{ __('messages.quiz_interesting') }}</h3>
+                        <p>{{ __('messages.quiz_description') }}</p>
+                        <button class="btn btn-primary btn-lg px-5" onclick="startQuiz()">{{ __('messages.start_quiz') }} <i class="fas fa-arrow-right"></i></button>
                     </div>
                 </div>
                 <div class="quiz-card" id="quizContent" style="display: none;">
@@ -1075,7 +1075,7 @@ $(document).ready(function() {
 <!-- 4. MASTER CLASSES - Yangilangan tugma bilan -->
 <section class="masterclass-section section">
     <div class="container">
-        <h2 class="section-title text-center mb-5">Master class</h2>
+        <h2 class="section-title text-center mb-5">{{ __('messages.masterclass_title') }}</h2>
         <div class="row g-4">
             @forelse($masterClasses as $mc)
                 <div class="col-lg-4 col-md-6">
@@ -1109,7 +1109,7 @@ $(document).ready(function() {
             @empty
                 <div class="col-12 text-center py-5">
                     <img src="https://cdn-icons-png.flaticon.com/512/7486/7486744.png" width="80" class="opacity-50 mb-3">
-                    <p class="text-muted fs-5">Hozircha yangi master-klasslar yo'q.</p>
+                    <p class="text-muted fs-5">{{ __('messages.masterclass_not_found') }}</p>
                 </div>
             @endforelse
         </div>
@@ -1125,7 +1125,7 @@ $(document).ready(function() {
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header-custom d-flex justify-content-between align-items-center">
-                <h5 class="mb-0"><i class="fas fa-chalkboard-teacher me-2"></i> Masterclassga ro'yxatdan o'tish</h5>
+                <h5 class="mb-0"><i class="fas fa-chalkboard-teacher me-2"></i>Master class</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-4">
@@ -1167,7 +1167,7 @@ $(document).ready(function() {
 <!-- 5. Форма обратной связи -->
 <div id="contact" class="form-1 section bg-light">
     <div class="container">
-        <h2 class="section-title">Fikringizni qoldiring</h2>
+        <h2 class="section-title">{{ __('messages.feedback_title') }}</h2>
         <div class="row align-items-center">
             <div class="col-lg-6">
                 @if(file_exists(public_path('images/Fikr-mulohaza.png')))
@@ -1175,7 +1175,8 @@ $(document).ready(function() {
                 @else
                     <div class="text-center p-5 bg-white rounded shadow-sm">
                         <i class="fas fa-comments fa-5x" style="color: #4a90e2;"></i>
-                        <p class="mt-3">Fikr-mulohazalaringiz biz uchun muhim</p>
+                        <p class="mt-3">{{ __('messages.feedback_important') }}
+                        </p>
                     </div>
                 @endif
             </div>
@@ -1187,23 +1188,23 @@ $(document).ready(function() {
                         @csrf
                         <div class="mb-3">
                             <input type="text" name="name" id="name" class="form-control form-control-custom" 
-                                   placeholder="Ismingiz" 
+                                   placeholder="{{ __('messages.your_name') }}" 
                                    @if(auth()->check()) value="{{ auth()->user()->name }}" @endif
                                    required>
                         </div>
                         <div class="mb-3">
                             <input type="email" name="email" id="email" class="form-control form-control-custom" 
-                                   placeholder="Email manzilingiz"
+                                   placeholder="{{ __('messages.your_email') }}"
                                    @if(auth()->check()) value="{{ auth()->user()->email }}" @endif
                                    required>
                         </div>
                         <div class="mb-3">
                             <textarea name="message" id="message" class="form-control form-control-custom" 
-                                      placeholder="Fikringiz yoki takliflaringiz" required rows="5"></textarea>
+                                      placeholder="{{ __('messages.your_message') }}" required rows="5"></textarea>
                         </div>
                         <div class="form-group">
                             <button type="submit" id="submitBtn" class="btn-submit">
-                                <i class="fas fa-paper-plane me-2"></i> Yuborish
+                                <i class="fas fa-paper-plane me-2"></i> {{ __('messages.sent') }}
                             </button>
                         </div>
                     </form>
