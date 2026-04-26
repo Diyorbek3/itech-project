@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB; // DB facade qo'shildi
 
 class FeedbackController extends Controller
 {
@@ -18,11 +18,26 @@ class FeedbackController extends Controller
                 'message' => 'required|string|min:2',
             ]);
 
-            $validated['created_by'] = auth()->user()->id;
-            $feedback = Feedback::create($validated);
+            // Bazaga ma'lumotni modelisiz saqlash
+            $feedbackId = DB::table('feedback')->insertGetId([
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'message' => $validated['message'],
+                'created_by' => auth()->user()->id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            // Telegram uchun obyekt yasab olamiz (model o'rniga)
+            $feedbackData = (object)[
+                'id' => $feedbackId,
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'message' => $validated['message']
+            ];
 
             // Telegramga yuborish
-            $this->sendToTelegram($feedback);
+            $this->sendToTelegram($feedbackData);
 
             return response()->json([
                 'success' => true,
@@ -39,17 +54,12 @@ class FeedbackController extends Controller
 
     private function sendToTelegram($feedback)
     {
-        // ========== TELEGRAMGA XABAR YUBORISH (TO'G'RILANGAN) ==========
         $token = env('TELEGRAM_BOT_TOKEN');
-        $chatId = env('TELEGRAM_CHAT_ID');                    // TO'G'RILANDI!
-        $topicId = env('TELEGRAM_TOPIC_ID_FEEDBACK', 5);      // QO'SHILDI! (Feedback topic ID = 5)
+        $chatId = env('TELEGRAM_CHAT_ID'); 
+        $topicId = env('TELEGRAM_TOPIC_ID_FEEDBACK', 5);
 
         if (!$token || !$chatId || !$topicId) {
-            Log::warning('Telegram sozlamalari topilmadi (Feedback)', [
-                'token' => $token ? 'bor' : 'yo\'q',
-                'chatId' => $chatId ? 'bor' : 'yo\'q',
-                'topicId' => $topicId ? 'bor' : 'yo\'q'
-            ]);
+            Log::warning('Telegram sozlamalari topilmadi (Feedback)');
             return;
         }
 
@@ -62,18 +72,13 @@ class FeedbackController extends Controller
         try {
             $response = Http::post("https://api.telegram.org/bot{$token}/sendMessage", [
                 'chat_id' => $chatId,
-                'message_thread_id' => (int)$topicId,    // QO'SHILDI!
+                'message_thread_id' => (int)$topicId,
                 'text' => $message,
                 'parse_mode' => 'HTML'
             ]);
             
             if ($response->successful()) {
-                Log::info('Feedback Telegramga yuborildi (Feedback topic)', [
-                    'topic_id' => $topicId,
-                    'feedback_id' => $feedback->id
-                ]);
-            } else {
-                Log::warning('Feedback Telegram xatosi: ' . $response->body());
+                Log::info('Feedback Telegramga yuborildi', ['feedback_id' => $feedback->id]);
             }
         } catch (\Exception $e) {
             Log::error('Feedback Telegram xatosi: ' . $e->getMessage());
@@ -82,7 +87,8 @@ class FeedbackController extends Controller
 
     public function index()
     {
-        $feedbacks = Feedback::latest()->get();
+        // Model o'rniga Query Builder
+        $feedbacks = DB::table('feedback')->orderBy('created_at', 'desc')->get();
         return response()->json($feedbacks);
     }
 }
