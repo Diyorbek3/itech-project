@@ -258,6 +258,7 @@
                 let formData = new FormData();
                 formData.append('avatar', blob, 'avatar.jpg');
                 formData.append('name', $('input[name="name"]').val());
+                formData.append('email', $('input[name="email"]').val());
                 formData.append('_token', '{{ csrf_token() }}');
                 formData.append('_method', 'PUT');
 

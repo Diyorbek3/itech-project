@@ -10,7 +10,7 @@
                 <div class="shape shape-3"></div>
             </div>
             <div class="container position-relative">
-                <div class="row align-items-center py-5" style="">
+                <div class="row align-items-center p-5">
                     <div class="col-lg-7 text-white">
                         <div class="hero-badge mb-3">
                             <span
@@ -395,11 +395,16 @@
         }
 
         /* Hero Image - TUZATILGAN (rasm siqilmasligi uchun) */
-        .hero-image-wrapper {
-            position: relative;
-            display: inline-block;
-            max-width: 100%;
-        }
+        /* Hero Image - TUZATILGAN (rasm siqilmasligi va fon ramkada bo'lishi uchun) */
+.hero-image-wrapper {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
+    padding: 12px;
+    box-shadow: var(--shadow-xl);
+}
 
         .hero-image {
             width: auto;
@@ -450,16 +455,17 @@
         }
 
         .hero-icon-box {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 180px;
-            height: 180px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border-radius: var(--radius-lg);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    height: 180px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-lg);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 12px;
+}
 
         .hero-icon-box i {
             font-size: 5rem;

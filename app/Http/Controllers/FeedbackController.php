@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Feedback;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class FeedbackController extends Controller
@@ -20,6 +21,8 @@ class FeedbackController extends Controller
             $validated['created_by'] = auth()->user()->id;
             $feedback = Feedback::create($validated);
 
+            // Telegramga yuborish
+            $this->sendToTelegram($feedback);
 
             return response()->json([
                 'success' => true,
