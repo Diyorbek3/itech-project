@@ -3,16 +3,16 @@
 @section('styles')
     <style>
         .stat-card {
-            background: white;
+            background: #fff;
             border-radius: 24px;
             padding: 1.5rem;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-            height: 100%;
+            transition: transform .3s ease;
+            height: 100%
         }
 
         .stat-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px)
         }
 
         .stat-icon {
@@ -23,239 +23,313 @@
             align-items: center;
             justify-content: center;
             font-size: 1.8rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1rem
         }
 
         .stat-number {
             font-size: 2.5rem;
             font-weight: 800;
-            margin-bottom: 0.25rem;
+            margin-bottom: .25rem
         }
 
         .stat-label {
             color: #64748b;
-            font-size: 0.9rem;
-        }
-
-        .bg-blue-light {
-            background: #dbeafe;
-            color: #2563eb;
+            font-size: .9rem
         }
 
         .bg-purple-light {
             background: #e9d5ff;
-            color: #9333ea;
+            color: #9333ea
+        }
+
+        .bg-orange-light {
+            background: #ffedd5;
+            color: #ea580c
         }
 
         .bg-green-light {
             background: #dcfce7;
-            color: #16a34a;
+            color: #16a34a
         }
 
-        .chart-container {
-            background: white;
-            border-radius: 24px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        .bg-blue-light {
+            background: #dbeafe;
+            color: #2563eb
         }
 
+        .chart-container,
         .table-container {
-            background: white;
+            background: #fff;
             border-radius: 24px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05)
         }
 
         .table th {
             background: #f8fafc;
-            font-weight: 600;
+            font-weight: 600
         }
 
-        .status-badge {
-            padding: 5px 12px;
+        /* Feedback uchun maxsus stillar */
+        .feedback-card {
+            background: #fff;
             border-radius: 20px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #9333ea;
+            transition: all 0.3s ease;
+        }
+
+        .feedback-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .feedback-name {
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .feedback-email {
             font-size: 12px;
-            font-weight: 600;
+            color: #94a3b8;
         }
 
-        .status-pending {
-            background: #fef3c7;
-            color: #d97706;
+        .feedback-message {
+            color: #475569;
+            font-size: 14px;
+            margin-top: 8px;
+            line-height: 1.5;
         }
 
-        .status-approved {
-            background: #d1fae5;
-            color: #059669;
+        .feedback-date {
+            font-size: 11px;
+            color: #cbd5e1;
+            margin-top: 8px;
         }
 
-        .status-rejected {
-            background: #fee2e2;
-            color: #dc2626;
+        .feedback-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
         }
 
-        .status-cancelled {
-            background: #f3f4f6;
-            color: #6b7280;
+        .feedback-header {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        /* Kontaktlar uchun stillar */
+        .contact-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #3b82f6;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-name {
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .contact-email {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .contact-phone {
+            font-size: 12px;
+            color: #3b82f6;
+            margin-top: 5px;
+        }
+
+        .contact-message {
+            color: #475569;
+            font-size: 14px;
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        .contact-date {
+            font-size: 11px;
+            color: #cbd5e1;
+            margin-top: 8px;
+        }
+
+        .contact-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .contact-header {
+            display: flex;
+            gap: 12px;
+            align-items: center;
         }
     </style>
 @endsection
 
 @section('content')
-    <div class="container py-4">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <div>
-                <h2 class="fw-bold mb-1">📊 Dashboard / Analytics</h2>
-                <p class="text-muted">Bog'lanishlar statistikasi</p>
+   <div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-1">📊 {{ __('messages.admin_dashboard') }}</h2>
+            <p class="text-muted">{{ __('messages.all_statistics_and_registrations') }}</p>
+        </div>
+    </div>
+
+    {{-- STATISTICS CARDS (4 cards) --}}
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-icon bg-purple-light"><i class="fas fa-chalkboard-user"></i></div>
+                <div class="stat-number">{{ $totalMasterclass ?? 0 }}</div>
+                <div class="stat-label">{{ __('messages.masterclass_registrations') }}</div>
             </div>
         </div>
-
-        <!-- Stat Cards (ESKI HOLATDA) -->
-        <div class="row g-4 mb-4">
-            <div class="col-md-4">
-                <div class="stat-card">
-                    <div class="stat-icon bg-blue-light">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="stat-number">{{ $totalContacts }}</div>
-                    <div class="stat-label">Kontakt orqali bog'langanlar</div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="stat-card">
-                    <div class="stat-icon bg-purple-light">
-                        <i class="fas fa-chalkboard-user"></i>
-                    </div>
-                    <div class="stat-number">{{ $totalMasterclass }}</div>
-                    <div class="stat-label">Masterclass ga yozilganlar</div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="stat-card">
-                    <div class="stat-icon bg-green-light">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="stat-number">{{ $totalAll }}</div>
-                    <div class="stat-label">Jami bog'lanishlar</div>
-                </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-icon bg-orange-light"><i class="fas fa-book-open"></i></div>
+                <div class="stat-number">{{ $totalCourseRegistrations ?? 0 }}</div>
+                <div class="stat-label">{{ __('messages.course_registrations') }}</div>
             </div>
         </div>
-
-        <!-- Chart - Oxirgi 7 kun (ESKI HOLATDA) -->
-        <div class="chart-container">
-            <h5 class="fw-bold mb-3">📈 Oxirgi 7 kundagi bog'lanishlar</h5>
-            <canvas id="weeklyChart" height="100"></canvas>
-        </div>
-
-        <!-- Chart - Oylik (ESKI HOLATDA) -->
-        <div class="chart-container">
-            <h5 class="fw-bold mb-3">📊 Oylik bog'lanishlar statistikasi</h5>
-            <canvas id="monthlyChart" height="100"></canvas>
-        </div>
-
-        <!-- Jadval - Oxirgi 7 kun batafsil (ESKI HOLATDA) -->
-        <div class="table-container">
-            <h5 class="fw-bold mb-3">📋 Oxirgi 7 kun batafsil</h5>
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Sana</th>
-                            <th>Kontakt</th>
-                            <th>Masterclass</th>
-                            <th>Jami</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($last7Days as $day)
-                            <tr>
-                                <td>{{ $day['date'] }}</td>
-                                <td>{{ $day['contacts'] }}</td>
-                                <td>{{ $day['masterclass'] }}</td>
-                                <td><strong>{{ $day['total'] }}</strong></td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-icon bg-green-light"><i class="fas fa-comment-dots"></i></div>
+                <div class="stat-number">{{ $totalFeedbacks ?? 0 }}</div>
+                <div class="stat-label">{{ __('messages.feedbacks') }}</div>
             </div>
         </div>
-
-        <!-- YANGI QO'SHILGAN: Masterclass registratsiyalar jadvali -->
-        <div class="table-container">
-            <h5 class="fw-bold mb-3">
-                📋 Masterclassga yozilganlar ro'yxati
-                <span class="badge bg-primary ms-2">{{ $totalMasterclass }} ta</span>
-            </h5>
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Ism</th>
-                            <th>Telefon</th>
-                            <th>Email</th>
-                            <th>Masterclass</th>
-                            <th>Yozilgan sana</th>
-                            <th>Status</th>
-                            <th>Telegram</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($allRegistrations ?? [] as $reg)
-                            <tr>
-                                <td>{{ $reg->id }}</td>
-                                <td><strong>{{ $reg->name }}</strong></td>
-                                <td>{{ $reg->phone }}</td>
-                                <td>{{ $reg->email ?? '-' }}</td>
-                                <td>{{ $reg->masterclass->title ?? 'Noma\'lum' }}</td>
-                                <td>{{ $reg->created_at->format('d.m.Y H:i') }}</td>
-                                <td>
-                                    @php
-                                        $statusClass = [
-                                            'pending' => 'status-pending',
-                                            'approved' => 'status-approved',
-                                            'rejected' => 'status-rejected',
-                                            'cancelled' => 'status-cancelled'
-                                        ][$reg->status] ?? 'status-pending';
-
-                                        $statusText = [
-                                            'pending' => '⏳ Kutilmoqda',
-                                            'approved' => '✅ Tasdiqlangan',
-                                            'rejected' => '❌ Rad etilgan',
-                                            'cancelled' => '🚫 Bekor qilingan'
-                                        ][$reg->status] ?? $reg->status;
-                                    @endphp
-                                    <span class="status-badge {{ $statusClass }}">
-                                        {{ $statusText }}
-                                    </span>
-                                </td>
-                                <td>
-                                    @if($reg->telegram_sent)
-                                        <span class="badge bg-success">✅ Yuborilgan</span>
-                                    @else
-                                        <span class="badge bg-secondary">⏳ Yuborilmagan</span>
-                                    @endif
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="8" class="text-center py-4">
-                                    <p class="text-muted mb-0">Hozircha hech kim masterclassga yozilmagan</p>
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-icon bg-blue-light"><i class="fas fa-envelope"></i></div>
+                <div class="stat-number">{{ $totalContacts ?? 0 }}</div>
+                <div class="stat-label">{{ __('messages.contacts') }}</div>
             </div>
         </div>
     </div>
+
+    {{-- CHARTS --}}
+    <div class="chart-container">
+        <h5 class="fw-bold mb-3">📈 {{ __('messages.last_7_days_registrations') }}</h5>
+        <canvas id="weeklyChart" height="100"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <h5 class="fw-bold mb-3">📊 {{ __('messages.monthly_statistics') }}</h5>
+        <canvas id="monthlyChart" height="100"></canvas>
+    </div>
+
+    {{-- MASTERCLASS REGISTRATIONS TABLE --}}
+    <div class="table-container">
+        <h5 class="fw-bold mb-3">📋 {{ __('messages.masterclass_registrations_list') }}
+            <span class="badge bg-primary ms-2">{{ $totalMasterclass ?? 0 }}</span>
+        </h5>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>{{ __('messages.id') }}</th>
+                        <th>{{ __('messages.name') }}</th>
+                        <th>{{ __('messages.phone') }}</th>
+                        <th>{{ __('messages.email') }}</th>
+                        <th>{{ __('messages.masterclass') }}</th>
+                        <th>{{ __('messages.date') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($masterclassRegistrations ?? [] as $reg)
+                        <tr>
+                            <td>{{ $reg->id }}</td>
+                            <td><strong>{{ $reg->name }}</strong></td>
+                            <td>{{ $reg->phone }}</td>
+                            <td>{{ $reg->email ?? '-' }}</td>
+                            <td>{{ $reg->masterclass->title ?? __('messages.unknown') }}</td>
+                            <td>{{ $reg->created_at->format('d.m.Y H:i') }}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6" class="text-center py-4">
+                                <p class="text-muted mb-0">{{ __('messages.no_masterclass_registrations') }}</p>
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {{-- COURSE REGISTRATIONS TABLE --}}
+    <div class="table-container">
+        <h5 class="fw-bold mb-3">📚 {{ __('messages.course_registrations_list') }}
+            <span class="badge bg-primary ms-2">{{ $totalCourseRegistrations ?? 0 }}</span>
+        </h5>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>{{ __('messages.id') }}</th>
+                        <th>{{ __('messages.name') }}</th>
+                        <th>{{ __('messages.phone') }}</th>
+                        <th>{{ __('messages.email') }}</th>
+                        <th>{{ __('messages.course') }}</th>
+                        <th>{{ __('messages.date') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($courseRegistrations ?? [] as $reg)
+                        <tr>
+                            <td>{{ $reg->id }}</td>
+                            <td><strong>{{ $reg->name }}</strong></td>
+                            <td>{{ $reg->phone }}</td>
+                            <td>{{ $reg->email ?? '-' }}</td>
+                            <td>{{ $reg->course->title ?? __('messages.unknown') }}</td>
+                            <td>{{ $reg->created_at->format('d.m.Y H:i') }}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6" class="text-center py-4">
+                                <p class="text-muted mb-0">{{ __('messages.no_course_registrations') }}</p>
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('scripts')
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Oxirgi 7 kun grafigi (ESKI HOLATDA)
+        // Weekly Chart (Jami o'rniga Feedback)
         const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
         new Chart(weeklyCtx, {
             type: 'bar',
@@ -263,21 +337,27 @@
                 labels: @json($last7Days->pluck('date')),
                 datasets: [
                     {
-                        label: 'Kontakt',
-                        data: @json($last7Days->pluck('contacts')),
-                        backgroundColor: '#3b82f6',
-                        borderRadius: 8
-                    },
-                    {
                         label: 'Masterclass',
                         data: @json($last7Days->pluck('masterclass')),
                         backgroundColor: '#9333ea',
                         borderRadius: 8
                     },
                     {
-                        label: 'Jami',
-                        data: @json($last7Days->pluck('total')),
-                        backgroundColor: '#10b981',
+                        label: 'Kurslar',
+                        data: @json($last7Days->pluck('courses')),
+                        backgroundColor: '#ea580c',
+                        borderRadius: 8
+                    },
+                    {
+                        label: 'Kontaktlar',
+                        data: @json($last7Days->pluck('contacts')),
+                        backgroundColor: '#3b82f6',
+                        borderRadius: 8
+                    },
+                    {
+                        label: 'Feedback',
+                        data: @json($last7Days->pluck('feedbacks')),
+                        backgroundColor: '#16a34a',
                         borderRadius: 8
                     }
                 ]
@@ -291,21 +371,13 @@
             }
         });
 
-        // Oylik grafigi (ESKI HOLATDA)
+        // Monthly Chart (Jami o'rniga Feedback)
         const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
         new Chart(monthlyCtx, {
             type: 'line',
             data: {
                 labels: @json($monthlyData->pluck('month')),
                 datasets: [
-                    {
-                        label: 'Kontakt',
-                        data: @json($monthlyData->pluck('contacts')),
-                        borderColor: '#3b82f6',
-                        backgroundColor: 'rgba(59,130,246,0.1)',
-                        fill: true,
-                        tension: 0.4
-                    },
                     {
                         label: 'Masterclass',
                         data: @json($monthlyData->pluck('masterclass')),
@@ -315,10 +387,26 @@
                         tension: 0.4
                     },
                     {
-                        label: 'Jami',
-                        data: @json($monthlyData->pluck('total')),
-                        borderColor: '#10b981',
-                        backgroundColor: 'rgba(16,185,129,0.1)',
+                        label: 'Kurslar',
+                        data: @json($monthlyData->pluck('courses')),
+                        borderColor: '#ea580c',
+                        backgroundColor: 'rgba(234,88,12,0.1)',
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Kontaktlar',
+                        data: @json($monthlyData->pluck('contacts')),
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59,130,246,0.1)',
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Feedback',
+                        data: @json($monthlyData->pluck('feedbacks')),
+                        borderColor: '#16a34a',
+                        backgroundColor: 'rgba(22,163,74,0.1)',
                         fill: true,
                         tension: 0.4
                     }
@@ -333,4 +421,5 @@
             }
         });
     </script>
+
 @endsection

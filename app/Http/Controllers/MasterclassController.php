@@ -135,7 +135,7 @@ class MasterClassController extends Controller
         }
 
         MasterClass::create($data);
-        return redirect()->route('master_class.admin_index')->with('success', 'Muvaffaqiyatli qo\'shildi!');
+        return redirect()->route('master_class.admin_index')->with('success', 'Muvaffaqiyatli qo‘shildi!');
     }
 
     public function edit($id)
@@ -174,6 +174,6 @@ class MasterClassController extends Controller
             Storage::disk('public')->delete($item->image);
         }
         $item->delete();
-        return back()->with('success', 'O\'chirildi!');
+        return back()->with('success', 'O‘chirildi!');
     }
 }

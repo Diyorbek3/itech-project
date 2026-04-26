@@ -139,7 +139,21 @@ Route::get('/courses', [CourseController::class, 'index'])->name('courses.index'
 
 // ========== KURSGA YOZILISH ROUTE (TELEGRAM BILAN) ==========
 Route::post('/course-enroll', [CourseController::class, 'enrollSubmit'])->name('course.enroll');
-
+// Dashboard routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    
+    // Status update
+    Route::post('/dashboard/update-status/{id}', [DashboardController::class, 'updateStatus'])->name('dashboard.update.status');
+    Route::post('/dashboard/update-course-status/{id}', [DashboardController::class, 'updateCourseStatus'])->name('dashboard.update.course.status');
+    
+    // Show details
+    Route::get('/dashboard/registration/{id}', [DashboardController::class, 'showRegistration'])->name('dashboard.registration.show');
+    Route::get('/dashboard/course-registration/{id}', [DashboardController::class, 'showCourseRegistration'])->name('dashboard.course.show');
+    
+    // Delete feedback
+    Route::delete('/dashboard/feedback/{id}', [DashboardController::class, 'deleteFeedback'])->name('dashboard.feedback.delete');
+});
 // ---------------------------------------------------------
 // 9. LARAVEL AUTH
 // ---------------------------------------------------------
