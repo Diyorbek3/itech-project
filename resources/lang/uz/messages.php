@@ -20,6 +20,17 @@ return [
     'learn_more' => 'Batafsil',
     'contact' => 'Bog‘lanish',
 
+    // ==================== HOME PAGE (rasmdagi va siz bergan HTML uchun) ====================
+   'invitation_title' => 'Biz bilan o‘rganishni boshlang',
+    'invitation_desc1' => 'Biz sizga zamonaviy bilim va amaliy ko‘nikmalar beramiz.',
+    'invitation_desc2' => 'Tajribali ustozlar bilan birga real loyihalarda ishlaysiz.',
+    'invitation_desc3' => 'Olingan bilimlar sizga muvaffaqiyat keltiradi.',
+    'invitation_desc4' => 'Natijada esa sizni kutayotgan ish imkoniyatlariga ega bo‘lasiz.',
+    'feature1' => 'Tajribali ustozlar',
+    'feature2' => 'Amaliy darslar',
+    'feature3' => 'Ishga joylashishda yordam',
+    'start_button' => 'Boshlash',
+    
     // ==================== STATISTICS ====================
     'graduates' => 'Bitiruvchilar',
     'active_courses' => 'Faol Kurslar',
