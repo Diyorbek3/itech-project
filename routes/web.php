@@ -10,7 +10,7 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MasterClassController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Admin\TestController;
+use App\Http\Controllers\Admin\MyTestController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -120,21 +120,12 @@ Route::post('/course-enroll', [CourseController::class, 'enrollSubmit'])->name('
 require __DIR__ . '/auth.php';
 
 // =============================================
-// 9. ADMIN TEST BOSHQARUVI (TO'G'RILANGAN)
+// ADMIN TEST BOSHQARUVI (MyTestController)
 // =============================================
 
-// Admin testlar uchun routelar
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-    // Testlar ro'yxati (index)
-    Route::get('/tests', function () {
-        return view('admin.tests.index');
-    })->name('tests.index');
-    
-    // TestController resource (agar kerak bo'lsa)
-    Route::resource('test', TestController::class)->except(['index']);
+    Route::resource('my-tests', MyTestController::class);
 });
 
-// Asosiy test sahifasi (hamma uchun ochiq yoki auth bilan)
-Route::get('/test', function () {
-    return view('admin.tests.index');
-})->name('test');
+// Asosiy test sahifasi
+Route::get('/test', [MyTestController::class, 'index'])->name('test');

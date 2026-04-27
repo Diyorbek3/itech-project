@@ -1,222 +1,422 @@
-<!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ __('Test Management') }} | ITECH Academy</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+@extends('admin.layouts.app')
+
+@section('title', __('messages.test_management'))
+@section('content')
+
+<style>
+    .stat-card {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: 24px;
+        padding: 24px;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(102,126,234,0.1);
+    }
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(102,126,234,0.15);
+    }
+    .stat-value {
+        font-size: 2.5rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 8px;
+    }
+    .stat-label {
+        color: #64748b;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
     
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #f0f2f5; padding-top: 80px; }
-        
-        /* Navigation - asosiy sayt bilan bir xil */
-        .navbar { box-shadow: 0 2px 10px rgba(0,0,0,0.08); background: white !important; }
-        .navbar-brand img { width: 70px; height: 70px; object-fit: cover; }
-        .btn-outline-sm { border: 1px solid #e2e8f0; background: transparent; transition: all 0.3s; border-radius: 30px; text-decoration: none; color: #1e293b; font-size: 13px; display: flex; align-items: center; gap: 8px; }
-        .btn-outline-sm:hover { background: linear-gradient(135deg, #667eea, #764ba2); border-color: transparent; color: white; }
-        .rounded-circle-5 { border-radius: 30px; padding: 8px 18px; }
-        .rounded-circle-3 { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        .nav-link { font-weight: 500; color: #1e293b; transition: all 0.3s; }
-        .nav-link:hover { color: #667eea; }
-        .dropdown-menu { border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: none; }
-        .dropdown-item { font-size: 13px; padding: 8px 20px; }
-        .dropdown-item:hover { background: #f1f5f9; }
-        .header-avatar { width: 30px; height: 30px; object-fit: cover; }
-        
-        /* Test Panel */
-        .test-panel { padding: 20px 30px; }
-        .panel-title { margin-bottom: 25px; }
-        .panel-title h1 { font-size: 1.8rem; font-weight: 600; color: #1e293b; }
-        .panel-title p { color: #64748b; margin-top: 5px; }
-        
-        .stat-card { background: white; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); height: 100%; }
-        .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-        .stat-icon { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.5rem; }
-        .stat-value { font-size: 1.8rem; font-weight: 700; color: #1e293b; }
-        .stat-label { color: #64748b; font-size: 0.8rem; margin-top: 5px; }
-        
-        .weather-card { background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 15px; padding: 20px; color: white; height: 100%; }
-        .weather-temp { font-size: 2rem; font-weight: bold; }
-        
-        .search-bar { background: white; border-radius: 15px; padding: 15px 20px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .data-table { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .data-table thead { background: #f8fafc; }
-        .data-table th { padding: 12px 15px; font-weight: 600; color: #1e293b; font-size: 0.85rem; }
-        .data-table td { padding: 12px 15px; color: #475569; vertical-align: middle; font-size: 0.85rem; }
-        
-        .badge { padding: 4px 10px; border-radius: 15px; font-size: 0.7rem; font-weight: 600; }
-        .badge-active { background: #10b981; color: white; }
-        .badge-pending { background: #f59e0b; color: white; }
-        .badge-archived { background: #ef4444; color: white; }
-        
-        .btn-gradient { background: linear-gradient(135deg, #667eea, #764ba2); border: none; padding: 8px 20px; border-radius: 10px; color: white; font-weight: 500; font-size: 0.85rem; transition: all 0.3s; }
-        .btn-gradient:hover { transform: scale(1.02); }
-        .btn-icon { background: transparent; border: none; padding: 5px; margin: 0 2px; border-radius: 6px; cursor: pointer; }
-        .btn-icon:hover { background: #f1f5f9; }
-        
-        .form-control, .form-select { border-radius: 10px; border: 1px solid #e2e8f0; padding: 8px 12px; font-size: 0.85rem; }
-        .modal-header { background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 12px 12px 0 0; }
-        
-        footer { background: white; padding: 15px 30px; text-align: center; border-top: 1px solid #eef2f6; margin-top: 30px; color: #64748b; font-size: 12px; }
-        
-        @media (max-width: 768px) { .test-panel { padding: 15px; } }
-    </style>
-</head>
-<body>
+    .search-bar {
+        background: white;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        margin-bottom: 30px;
+    }
+    
+    .data-table {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    .data-table thead {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+    }
+    .data-table th {
+        padding: 16px 20px;
+        font-weight: 600;
+        border: none;
+    }
+    .data-table td {
+        padding: 16px 20px;
+        vertical-align: middle;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    .data-table tr {
+        transition: all 0.2s;
+    }
+    .data-table tr:hover {
+        background: #f8fafc;
+    }
+    
+    mark {
+        background: #fef08a;
+        color: #1e293b;
+        padding: 2px 6px;
+        border-radius: 8px;
+        font-weight: 600;
+        animation: highlightPulse 0.3s ease;
+    }
+    
+    @keyframes highlightPulse {
+        0% { background: #fde047; transform: scale(1.02); }
+        100% { background: #fef08a; transform: scale(1); }
+    }
+    
+    .row-delete {
+        animation: fadeOut 0.3s ease-out forwards;
+    }
+    @keyframes fadeOut {
+        0% { opacity: 1; transform: translateX(0); }
+        100% { opacity: 0; transform: translateX(-20px); display: none; }
+    }
+    
+    .search-info {
+        background: #e0e7ff;
+        border-radius: 30px;
+        padding: 6px 16px;
+        margin-top: 12px;
+        display: inline-block;
+        font-size: 0.8rem;
+        color: #4338ca;
+    }
+    
+    .badge-active {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        padding: 6px 14px;
+        border-radius: 30px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+    .badge-pending {
+        background: linear-gradient(135deg, #f59e0b, #d97706);
+        color: white;
+        padding: 6px 14px;
+        border-radius: 30px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+    
+    .btn-gradient {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border: none;
+        padding: 10px 24px;
+        border-radius: 30px;
+        color: white;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    .btn-gradient:hover {
+        transform: scale(1.02);
+        box-shadow: 0 5px 20px rgba(102,126,234,0.4);
+    }
+    
+    .btn-outline-icon {
+        background: transparent;
+        border: 1px solid #e2e8f0;
+        padding: 8px 12px;
+        border-radius: 12px;
+        margin: 0 4px;
+        transition: all 0.2s;
+    }
+    .btn-outline-icon:hover {
+        background: #f1f5f9;
+        transform: translateY(-2px);
+    }
+    
+    .swal2-popup {
+        border-radius: 24px !important;
+    }
+    .swal2-confirm {
+        background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+        box-shadow: none !important;
+    }
+    .swal2-cancel {
+        background: #e2e8f0 !important;
+        color: #1e293b !important;
+    }
+</style>
 
-<!-- ==================== HEADER - ASOSIY SAYT BILAN BIR XIL ==================== -->
-<nav class="navbar navbar-expand-lg fixed-top bg-white shadow-sm">
-    <div class="container position-relative">
-        <a class="navbar-brand" href="/">
-            <img src="{{ asset('images/logo.png') }}" class="img-fluid rounded-circle" style="width: 70px; height: 70px;" alt="logo">
-        </a>
-
-        <!-- Mobile -->
-        <div class="d-flex align-items-center gap-2 ms-auto d-lg-none">
-            <div class="dropdown">
-                <a class="btn-outline-sm dropdown-toggle d-flex align-items-center justify-content-center px-3 py-2" href="#" role="button" data-bs-toggle="dropdown" style="font-size: 12px; border-radius: 16px; height: 42px;">
-                    <img src="{{ asset('flags/'.app()->getLocale().'.png') }}" style="width: 16px; height: 11px;"> {{ strtoupper(app()->getLocale()) }}
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="javascript:void(0)" onclick="switchLanguage('en')">🇬🇧 English</a></li>
-                    <li><a class="dropdown-item" href="javascript:void(0)" onclick="switchLanguage('ru')">🇷🇺 Russian</a></li>
-                    <li><a class="dropdown-item" href="javascript:void(0)" onclick="switchLanguage('uz')">🇺🇿 Uzbek</a></li>
-                </ul>
-            </div>
-            <a class="btn-outline-sm px-3 py-2 d-flex align-items-center justify-content-center" href="/#contact" style="min-width: 110px;">{{ __('messages.contact_us') }}</a>
-        </div>
-
-        <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- Desktop -->
-        <div class="collapse navbar-collapse justify-content-center" id="navbarsExampleDefault">
-            <ul class="navbar-nav mx-auto gap-4">
-                <li class="nav-item"><a class="nav-link" href="/#header">{{ __('messages.about_us') }}</a></li>
-                <li class="nav-item"><a class="nav-link" href="/#details">{{ __('messages.why_us') }}</a></li>
-                <li class="nav-item"><a class="nav-link" href="/#services">{{ __('messages.courses') }}</a></li>
-                <li class="nav-item"><a class="nav-link" href="/#projects">{{ __('messages.projects') }}</a></li>
-            </ul>
-
-            <div class="d-none d-lg-flex align-items-center gap-3 ms-auto">
-                <div class="dropdown">
-                    <a class="btn-outline-sm dropdown-toggle d-flex align-items-center justify-content-center px-3 py-2" href="#" role="button" data-bs-toggle="dropdown" style="font-size: 12px; border-radius: 16px; height: 42px;">
-                        <img src="{{ asset('flags/'.app()->getLocale().'.png') }}" style="width: 16px; height: 11px;"> {{ strtoupper(app()->getLocale()) }}
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="switchLanguage('en')">🇬🇧 English</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="switchLanguage('ru')">🇷🇺 Russian</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="switchLanguage('uz')">🇺🇿 Uzbek</a></li>
-                    </ul>
-                </div>
-                <a class="btn-outline-sm rounded-circle-5" href="/#contact">{{ __('messages.contact_us') }}</a>
-
-                @guest
-                    <a class="btn-outline-sm rounded-circle-3" href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i></a>
-                    <a class="btn-outline-sm rounded-circle-3" href="{{ route('register') }}"><i class="fas fa-user-plus"></i></a>
-                @else
-                    <div class="dropdown">
-                        <a class="btn-outline-sm dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" style="padding: 5px 10px;">
-                            <img src="{{ Auth::user()->avatar ? asset('storage/avatars/'.Auth::user()->avatar) : asset('images/avatar.png') }}" class="rounded-circle me-2 header-avatar" style="width: 30px; height: 30px; object-fit: cover;">
-                            <span>{{ Auth::user()->name }}</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="/profile"><i class="fas fa-user me-2"></i> {{ __('messages.profile') }}</a></li>
-                            <li><a class="dropdown-item" href="/test"><i class="fas fa-clipboard-list me-2"></i> Test</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><form method="POST" action="{{ route('logout') }}">@csrf<button type="submit" class="dropdown-item text-danger"><i class="fas fa-sign-out-alt me-2"></i> {{ __('messages.logout') }}</button></form></li>
-                        </ul>
-                    </div>
-                @endguest
-            </div>
-        </div>
-    </div>
-</nav>
-
-<!-- ==================== TEST PANEL CONTENT ==================== -->
-<div class="test-panel">
-    <div class="panel-title">
-        <h1><i class="fas fa-flask"></i> {{ __('Test Boshqaruvi Paneli') }}</h1>
-        <p>{{ __('Testlarni boshqarish, qoshish va tahrirlash') }}</p>
-    </div>
-
+<div class="container mt-4">
     <div class="row mb-4">
-        <div class="col-md-3 mb-3"><div class="stat-card"><div class="stat-icon" style="background: #667eea20; color:#667eea;"><i class="fas fa-tasks"></i></div><div class="stat-value" id="totalTests">24</div><div class="stat-label">{{ __('Jami testlar') }}</div></div></div>
-        <div class="col-md-3 mb-3"><div class="stat-card"><div class="stat-icon" style="background: #10b98120; color:#10b981;"><i class="fas fa-user-check"></i></div><div class="stat-value" id="totalParts">156</div><div class="stat-label">{{ __('Qatnashchilar') }}</div></div></div>
-        <div class="col-md-3 mb-3"><div class="stat-card"><div class="stat-icon" style="background: #f59e0b20; color:#f59e0b;"><i class="fas fa-chart-line"></i></div><div class="stat-value" id="avgScore">78%</div><div class="stat-label">{{ __('Uracha natija') }}</div></div></div>
-        <div class="col-md-3 mb-3"><div class="weather-card"><div class="weather-temp">19°C</div><div><i class="fas fa-cloud-sun"></i> {{ __('Partly cloudy') }}</div></div></div>
+        <div class="col-md-4 mb-3">
+            <div class="stat-card">
+                <div class="stat-value" id="totalTests">0</div>
+                <div class="stat-label">{{ __('messages.total_tests') }}</div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="stat-card">
+                <div class="stat-value" id="totalParts">0</div>
+                <div class="stat-label">{{ __('messages.participants') }}</div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="stat-card">
+                <div class="stat-value" id="avgScore">0%</div>
+                <div class="stat-label">{{ __('messages.avg_score') }}</div>
+            </div>
+        </div>
     </div>
 
     <div class="search-bar">
-        <div class="row">
-            <div class="col-md-5 mb-2"><input type="text" class="form-control" id="searchInput" placeholder="{{ __('Test nomi boyicha qidirish...') }}"></div>
-            <div class="col-md-3 mb-2"><select class="form-select" id="statusFilter"><option value="all">{{ __('Barcha holatlar') }}</option><option value="active">{{ __('Faol') }}</option><option value="pending">{{ __('Kutilmoqda') }}</option></select></div>
-            <div class="col-md-4"><button class="btn-gradient w-100" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fas fa-plus"></i> {{ __('Yangi test qoshish') }}</button></div>
+        <div class="row align-items-center g-3">
+            <div class="col-md-5">
+                <div class="input-group">
+                    <span class="input-group-text bg-transparent border-end-0">🔍</span>
+                    <input type="text" class="form-control border-start-0" id="searchInput" placeholder="{{ __('messages.search') }}">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" id="statusFilter">
+                    <option value="all">{{ __('messages.all_status') }}</option>
+                    <option value="active">{{ __('messages.active') }}</option>
+                    <option value="pending">{{ __('messages.pending') }}</option>
+                </select>
+            </div>
+            <div class="col-md-4 text-end">
+                <button class="btn-gradient w-100" data-bs-toggle="modal" data-bs-target="#addModal">
+                    <i class="fas fa-plus me-2"></i>{{ __('messages.add_test') }}
+                </button>
+            </div>
         </div>
+        <div id="searchInfo" class="mt-2" style="min-height: 44px;"></div>
     </div>
 
     <div class="data-table">
         <table class="table mb-0">
-            <thead><tr><th>ID</th><th>{{ __('Test nomi') }}</th><th>{{ __('Kategoriya') }}</th><th>{{ __('Savollar') }}</th><th>{{ __('Vaqt') }}</th><th>{{ __('Qatnashchilar') }}</th><th>{{ __('Holati') }}</th><th>{{ __('Harakatlar') }}</th></tr></thead>
+            <thead>
+                <tr><th>ID</th><th>{{ __('messages.test_name') }}</th><th>{{ __('messages.category') }}</th><th>{{ __('messages.questions') }}</th><th>{{ __('messages.time') }}</th><th>{{ __('messages.participants') }}</th><th>{{ __('messages.status') }}</th><th>{{ __('messages.actions') }}</th></tr>
+            </thead>
             <tbody id="tableBody"></tbody>
         </table>
     </div>
 </div>
 
-<footer><p>© 2026 ITECH Academy. {{ __('Barcha huquqlar himoyalangan') }}</p></footer>
+<!-- Add Modal -->
+<div class="modal fade" id="addModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title"><i class="fas fa-plus me-2"></i>{{ __('messages.add_test') }}</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">{{ __('messages.test_name') }}</label>
+                    <input type="text" class="form-control" id="testName" placeholder="Masalan: Laravel Test">
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">{{ __('messages.category') }}</label>
+                        <select class="form-select" id="testCat">
+                            <option>Backend</option><option>Frontend</option><option>AI</option><option>Security</option><option>Digital Kids</option><option>Robototexnika</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">{{ __('messages.status') }}</label>
+                        <select class="form-select" id="testStatus">
+                            <option value="active">{{ __('messages.active') }}</option>
+                            <option value="pending">{{ __('messages.pending') }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">{{ __('messages.questions') }}</label>
+                        <input type="number" class="form-control" id="testQ" value="20">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">{{ __('messages.time_min') }}</label>
+                        <input type="number" class="form-control" id="testTime" value="30">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-light" data-bs-dismiss="modal">{{ __('messages.cancel') }}</button>
+                <button class="btn-gradient" onclick="addTest()">{{ __('messages.save') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!-- Modal -->
-<div class="modal fade" id="addModal" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">{{ __('Yangi test qoshish') }}</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div><div class="modal-body"><input type="text" class="form-control mb-2" id="testName" placeholder="{{ __('Test nomi') }}"><select class="form-select mb-2" id="testCat"><option>Backend</option><option>Frontend</option><option>AI</option></select><input type="number" class="form-control mb-2" id="testQ" placeholder="{{ __('Savollar') }}" value="20"><input type="number" class="form-control mb-2" id="testTime" placeholder="{{ __('Vaqt') }}" value="30"><select class="form-select" id="testStatus"><option value="active">{{ __('Faol') }}</option><option value="pending">{{ __('Kutilmoqda') }}</option></select></div><div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Bekor qilish') }}</button><button class="btn-gradient" onclick="addTest()">{{ __('Saqlash') }}</button></div></div></div></div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-let tests = [
-    {id:1,name:"Laravel Asoslari",cat:"Backend",q:25,time:45,parts:48,status:"active"},
-    {id:2,name:"PHP Dasturlash",cat:"Backend",q:30,time:60,parts:62,status:"active"},
-    {id:3,name:"React.js",cat:"Frontend",q:28,time:50,parts:41,status:"active"},
-    {id:4,name:"Python AI",cat:"AI",q:35,time:75,parts:35,status:"pending"}
-];
-let nextId=5;
+let tests = @json($tests);
+let nextId = tests.length ? Math.max(...tests.map(t => t.id)) + 1 : 1;
+let currentLang = '{{ app()->getLocale() }}';
+let csrfToken = '{{ csrf_token() }}';
 
-function renderTable(){
-    let search=document.getElementById('searchInput').value.toLowerCase();
-    let filter=document.getElementById('statusFilter').value;
-    let filtered=tests.filter(t=>t.name.toLowerCase().includes(search)&&(filter=='all'||t.status==filter));
-    let html='';
-    filtered.forEach(t=>{
-        let statusText=t.status=='active'?'Faol':'Kutilmoqda';
-        let statusClass=t.status=='active'?'badge-active':'badge-pending';
-        html+=`<tr><td>${t.id}</td><td><b>${t.name}</b></td><td>${t.cat}</td><td>${t.q}</td><td>${t.time} min</td><td>${t.parts}</td><td><span class="badge ${statusClass}">${statusText}</span></td><td><button class="btn-icon" onclick="view(${t.id})"><i class="fas fa-eye"></i></button> <button class="btn-icon" onclick="edit(${t.id})"><i class="fas fa-edit"></i></button> <button class="btn-icon" onclick="del(${t.id})"><i class="fas fa-trash"></i></button></td></tr>`;
+function getStatusText(status) {
+    if(status == 'active') {
+        if(currentLang == 'uz') return 'Faol';
+        if(currentLang == 'ru') return 'Активный';
+        return 'Active';
+    } else {
+        if(currentLang == 'uz') return 'Kutilmoqda';
+        if(currentLang == 'ru') return 'Ожидание';
+        return 'Pending';
+    }
+}
+
+function getStatusClass(status) {
+    return status == 'active' ? 'badge-active' : 'badge-pending';
+}
+
+function highlightText(text, search) {
+    if (!search || search.trim() === '') return text;
+    const regex = new RegExp(`(${search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+}
+
+function renderTable() {
+    let search = document.getElementById('searchInput').value;
+    let searchLower = search.toLowerCase();
+    let filter = document.getElementById('statusFilter').value;
+    
+    let filtered = tests.filter(t => t.name.toLowerCase().includes(searchLower) && (filter == 'all' || t.status == filter));
+    
+    let searchInfo = document.getElementById('searchInfo');
+    if (search && filtered.length > 0) {
+        searchInfo.innerHTML = `<div class="search-info">🔍 "${search}" bo'yicha ${filtered.length} ta test topildi</div>`;
+    } else if (search && filtered.length === 0) {
+        searchInfo.innerHTML = `<div class="search-info" style="background: #fee2e2; color:#dc2626;">🔍 "${search}" bo'yicha hech qanday test topilmadi</div>`;
+    } else {
+        searchInfo.innerHTML = '';
+    }
+    
+    let html = '';
+    filtered.forEach(t => {
+        let highlightedName = highlightText(t.name, search);
+        html += `<tr id="row-${t.id}">
+            <td><strong>${t.id}</strong></td>
+            <td><span class="fw-semibold">${highlightedName}</span></td>
+            <td>${t.category}</td>
+            <td>${t.questions}</td>
+            <td>${t.time} min</td>
+            <td>${t.participants}</td>
+            <td><span class="${getStatusClass(t.status)}">${getStatusText(t.status)}</span></td>
+            <td>
+                <button class="btn-outline-icon" onclick="viewTest(${t.id})"><i class="fas fa-eye text-primary"></i></button>
+                <button class="btn-outline-icon" onclick="editTest(${t.id})"><i class="fas fa-edit text-warning"></i></button>
+                <button class="btn-outline-icon" onclick="deleteTest(${t.id})"><i class="fas fa-trash text-danger"></i></button>
+            </td>
+         </tr>`;
     });
-    if(filtered.length==0) html='<tr><td colspan="8" class="text-center">Hech qanday test topilmadi</td></tr>';
-    document.getElementById('tableBody').innerHTML=html;
-    document.getElementById('totalTests').innerText=tests.length;
-    let parts=tests.reduce((s,t)=>s+t.parts,0);
-    document.getElementById('totalParts').innerText=parts;
-    document.getElementById('avgScore').innerText=tests.length?Math.round(parts/tests.length)+'%':'0%';
+    if(filtered.length == 0 && !search) {
+        html = `<tr><td colspan="8" class="text-center py-4">{{ __('messages.no_data') }}</td></tr>`;
+    } else if(filtered.length == 0 && search) {
+        html = `<tr><td colspan="8" class="text-center py-4">😕 "${search}" bo'yicha hech narsa topilmadi</td></tr>`;
+    }
+    document.getElementById('tableBody').innerHTML = html;
+    document.getElementById('totalTests').innerText = tests.length;
+    let parts = tests.reduce((s,t) => s + (t.participants || 0), 0);
+    document.getElementById('totalParts').innerText = parts;
+    let avg = tests.length ? Math.round(parts / tests.length) : 0;
+    document.getElementById('avgScore').innerHTML = avg + '%';
 }
 
-function addTest(){
-    let name=document.getElementById('testName').value;
-    if(!name){alert("Nomi kiriting");return;}
-    tests.push({id:nextId++,name:name,cat:document.getElementById('testCat').value,q:parseInt(document.getElementById('testQ').value)||20,time:parseInt(document.getElementById('testTime').value)||30,parts:0,status:document.getElementById('testStatus').value});
-    renderTable();
-    bootstrap.Modal.getInstance(document.getElementById('addModal')).hide();
-    document.getElementById('testName').value='';
+function addTest() {
+    let name = document.getElementById('testName').value;
+    if(!name) {
+        Swal.fire({ icon: 'warning', title: '{{ __("messages.enter_name") }}', confirmButtonColor: '#667eea' });
+        return;
+    }
+    
+    fetch('{{ route("admin.my-tests.store") }}', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken },
+        body: JSON.stringify({
+            name: name,
+            category: document.getElementById('testCat').value,
+            questions: parseInt(document.getElementById('testQ').value) || 20,
+            time: parseInt(document.getElementById('testTime').value) || 30,
+            participants: 0,
+            status: document.getElementById('testStatus').value
+        })
+    })
+    .then(res => res.json())
+    .then(newTest => {
+        tests.push(newTest);
+        nextId = Math.max(...tests.map(t => t.id)) + 1;
+        renderTable();
+        bootstrap.Modal.getInstance(document.getElementById('addModal')).hide();
+        document.getElementById('testName').value = '';
+        Swal.fire({ icon: 'success', title: '✅ {{ __("messages.added") }}', showConfirmButton: false, timer: 1500 });
+    });
 }
-function view(id){let t=tests.find(t=>t.id==id);alert(`${t.name}\n${t.cat}\nSavol:${t.q}\nVaqt:${t.time} min\nQatnash:${t.parts}`);}
-function edit(id){let t=tests.find(t=>t.id==id);let newName=prompt("Yangi nom:",t.name);if(newName){t.name=newName;renderTable();}}
-function del(id){if(confirm("O'chirilsinmi?")){tests=tests.filter(t=>t.id!=id);renderTable();}}
-function switchLanguage(l){window.location.href='/language/'+l;}
 
-document.getElementById('searchInput').addEventListener('keyup',renderTable);
-document.getElementById('statusFilter').addEventListener('change',renderTable);
+function viewTest(id) {
+    let t = tests.find(t => t.id == id);
+    Swal.fire({
+        title: '📋 {{ __("messages.test_info") }}',
+        html: `<div style="text-align:left"><p><strong>📌 {{ __("messages.test_name") }}:</strong> ${t.name}</p><p><strong>📂 {{ __("messages.category") }}:</strong> ${t.category}</p><p><strong>❓ {{ __("messages.questions") }}:</strong> ${t.questions}</p><p><strong>⏱️ {{ __("messages.time") }}:</strong> ${t.time} min</p><p><strong>👥 {{ __("messages.participants") }}:</strong> ${t.participants}</p><p><strong>🏷️ {{ __("messages.status") }}:</strong> ${getStatusText(t.status)}</p></div>`,
+        icon: 'info', confirmButtonColor: '#667eea', confirmButtonText: '{{ __("messages.close") }}'
+    });
+}
+
+function editTest(id) {
+    let t = tests.find(t => t.id == id);
+    Swal.fire({
+        title: '✏️ {{ __("messages.edit_test") }}', input: 'text', inputValue: t.name,
+        inputPlaceholder: '{{ __("messages.test_name") }}', showCancelButton: true,
+        confirmButtonText: '{{ __("messages.save") }}', cancelButtonText: '{{ __("messages.cancel") }}',
+        confirmButtonColor: '#667eea', cancelButtonColor: '#e2e8f0',
+        inputValidator: (value) => { if (!value) return '{{ __("messages.enter_name") }}'; }
+    }).then((result) => {
+        if (result.isConfirmed && result.value) {
+            fetch(`/admin/my-tests/${id}`, {
+                method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken },
+                body: JSON.stringify({ ...t, name: result.value.trim() })
+            }).then(res => res.json()).then(updated => {
+                let index = tests.findIndex(t => t.id == id);
+                tests[index] = updated;
+                renderTable();
+                Swal.fire({ icon: 'success', title: '✅ {{ __("messages.updated") }}', showConfirmButton: false, timer: 1500 });
+            });
+        }
+    });
+}
+
+function deleteTest(id) {
+    let t = tests.find(t => t.id == id);
+    Swal.fire({
+        title: '⚠️ {{ __("messages.confirm_delete") }}', html: `<p>{{ __("messages.delete_warning") }}</p><p class="fw-bold text-danger">"${t.name}"</p>`,
+        icon: 'warning', showCancelButton: true, confirmButtonColor: '#ef4444', cancelButtonColor: '#e2e8f0',
+        confirmButtonText: '🗑️ {{ __("messages.yes_delete") }}', cancelButtonText: '{{ __("messages.cancel") }}', reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`/admin/my-tests/${id}`, { method: 'DELETE', headers: { 'X-CSRF-TOKEN': csrfToken } })
+            .then(() => {
+                tests = tests.filter(t => t.id != id);
+                renderTable();
+                Swal.fire({ icon: 'success', title: '✅ {{ __("messages.deleted") }}', showConfirmButton: false, timer: 1500 });
+            });
+        }
+    });
+}
+
+document.getElementById('searchInput').addEventListener('keyup', renderTable);
+document.getElementById('statusFilter').addEventListener('change', renderTable);
 renderTable();
 </script>
-</body>
-</html>
+
+@endsection

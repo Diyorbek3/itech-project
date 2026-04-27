@@ -1,0 +1,28 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('tests', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');              // Test nomi
+            $table->string('category');           // Kategoriya
+            $table->integer('questions');         // Savollar soni
+            $table->integer('time');              // Vaqt (minut)
+            $table->integer('participants')->default(0); // Qatnashchilar
+            $table->enum('status', ['active', 'pending', 'archived'])->default('active');
+            $table->text('description')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('tests');
+    }
+};
