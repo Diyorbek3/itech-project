@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\HomeController;
@@ -8,6 +9,9 @@ use App\Http\Controllers\MyCourceController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MasterClassController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Admin\MyTestController;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\App;
@@ -18,9 +22,7 @@ use Illuminate\Support\Facades\App;
 |--------------------------------------------------------------------------
 */
 
-// ---------------------------------------------------------
 // 1. ASOSIY SAHIFA VA TILNI BOSHQARISH
-// ---------------------------------------------------------
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('language/{locale}', function ($locale) {
@@ -32,20 +34,17 @@ Route::get('language/{locale}', function ($locale) {
     return redirect()->back();
 })->name('language.switch');
 
-// ---------------------------------------------------------
 // 2. PROFIL VA SHAXSIY MA'LUMOTLAR
-// ---------------------------------------------------------
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::put('/profile/update', [ProfileController::class, 'putUpdate'])->name('profile.update');
     Route::put('/profile/update-password', [ProfileController::class, 'putNewPassword'])->name('profile.update-password');
+    Route::put('/profile/update-security', [ProfileController::class, 'putUpdateSecurity'])->name('profile.update-security');
     Route::delete('/profile/avatar', [ProfileController::class, 'deleteAvatar'])->name('profile.avatar.delete');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// ---------------------------------------------------------
 // 3. KURSLAR BO'LIMI
-// ---------------------------------------------------------
 Route::prefix('courses')->group(function () {
     Route::get('/python', [CourseController::class, 'python'])->name('courses.python');
     Route::get('/frontend', [CourseController::class, 'frontend'])->name('courses.frontend');
@@ -69,10 +68,9 @@ Route::prefix('courses')->group(function () {
 });
 
 Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+Route::get('/courses/{course}', [CourseController::class, 'show'])->name('courses.show');
 
-// ---------------------------------------------------------
-// 4. FEEDBACK (FIKRLAR)
-// ---------------------------------------------------------
+// 4. FEEDBACK
 Route::post('/feedback/store', [FeedbackController::class, 'store'])->name('feedback.store');
 Route::get('/feedbacks', [FeedbackController::class, 'index']);
 Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
@@ -80,18 +78,12 @@ Route::delete('/feedback/{id}', [FeedbackController::class, 'destroy'])->name('f
 Route::get('/feedback/statistics', [FeedbackController::class, 'statistics'])->name('feedback.statistics');
 Route::get('/user/{userId}/feedbacks', [FeedbackController::class, 'getUserFeedbacks'])->name('feedback.user');
 
-// ---------------------------------------------------------
-// 5. KARYERA (Career) - MASTERCLASS
-// ---------------------------------------------------------
+// 5. KARYERA VA MASTERCLASS
 Route::get('/career', [CareerController::class, 'index'])->name('career.index');
-
-// Masterclass routes - CareerController orqali
 Route::get('/masterclass/{id}', [CareerController::class, 'getMasterclass'])->name('masterclass.detail');
 Route::post('/masterclass/register', [CareerController::class, 'registerForMasterclass'])->name('masterclass.register');
 
-// ---------------------------------------------------------
-// 6. MENING KURSLARIM (Dashboard/LMS)
-// ---------------------------------------------------------
+// 6. MENING KURSLARIM
 Route::prefix('my-courses')->middleware('auth')->group(function () {
     Route::get('/', [MyCourceController::class, 'index'])->name('my-courses.index');
     Route::post('/', [MyCourceController::class, 'store'])->name('my-courses.store');
@@ -102,19 +94,10 @@ Route::prefix('my-courses')->middleware('auth')->group(function () {
     Route::delete('/delete-category/{categoryId}', [MyCourceController::class, 'deleteCategory'])->name('my-courses.delete-category');
 });
 
-Route::resource('courses', CourseController::class);
-Route::get('/courses/table', [CourseController::class, 'tableRows'])->name('courses.table');
-
-use App\Http\Controllers\DashboardController;
-
+// 7. DASHBOARD VA ADMIN MASTERCLASS
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-});
-
-// ---------------------------------------------------------
-// 7. MASTERCLASSLARNI BOSHQARISH (Admin)
-// ---------------------------------------------------------
-Route::middleware(['auth'])->group(function () {
+    
     Route::get('/admin/master-class', [MasterClassController::class, 'adminIndex'])->name('master_class.admin_index');
     Route::get('/master-class', [MasterClassController::class, 'adminIndex'])->name('master_class.admin');
     Route::get('/master-class/create', [MasterClassController::class, 'create'])->name('master_class.create');
@@ -123,31 +106,26 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/master-class/{id}/update', [MasterClassController::class, 'update'])->name('master_class.update');
     Route::delete('/master-class/{id}', [MasterClassController::class, 'destroy'])->name('master_class.destroy');
     
-    Route::get('/masterclass/{id}/info', [MasterClassController::class, 'getInfo'])->name('masterclass.info');
-    Route::post('/masterclass/register', [MasterClassController::class, 'register'])->name('masterclass.register');
-});
-
-// ---------------------------------------------------------
-// 8. ALOQA (Contact) - ITech Academy uchun
-// ---------------------------------------------------------
-Route::post('/contact-send', [ContactController::class, 'sendContact'])->name('contact.send');
-Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
-
-// ========== KURSGA YOZILISH ROUTE (TELEGRAM BILAN) ==========
-Route::post('/course-enroll', [CourseController::class, 'enrollSubmit'])->name('course.enroll');
-
-// ---------------------------------------------------------
-// 9. LARAVEL AUTH
-// ---------------------------------------------------------
-require __DIR__ . '/auth.php';
-
-// Dashboard route
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
     Route::patch('/admin/masterclass-register/{id}/status', [DashboardController::class, 'updateStatus'])
         ->name('admin.masterclass.updateStatus');
     
     Route::get('/admin/masterclass-register/{id}', [DashboardController::class, 'showRegistration'])
         ->name('admin.masterclass.show');
 });
+
+// 8. BOSHQA
+Route::post('/contact-send', [ContactController::class, 'sendContact'])->name('contact.send');
+Route::post('/course-enroll', [CourseController::class, 'enrollSubmit'])->name('course.enroll');
+
+require __DIR__ . '/auth.php';
+
+// =============================================
+// ADMIN TEST BOSHQARUVI (MyTestController)
+// =============================================
+
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('my-tests', MyTestController::class);
+});
+
+// Asosiy test sahifasi
+Route::get('/test', [MyTestController::class, 'index'])->name('test');

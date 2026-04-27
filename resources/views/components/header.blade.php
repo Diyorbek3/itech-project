@@ -58,14 +58,21 @@
                     </a>
                 @else
                     <div class="dropdown">
-                        <a class="btn-outline-sm d-flex align-items-center justify-content-center rounded-circle"
+                        <a class="btn-outline-sm d-flex align-items-center justify-content-center rounded-circle p-0 overflow-hidden"
                            href="#" data-bs-toggle="dropdown"
-                           style="width: 42px; height: 42px;">
-                            <i class="fas fa-user-circle"></i>
+                           style="width: 42px; height: 42px; border: 2px solid #eee;">
+                            <img src="{{ Auth::user()->avatar ? asset('storage/avatars/' . Auth::user()->avatar) : asset('images/avatar.png') }}"
+                                 class="header-avatar"
+                                 style="width: 100%; height: 100%; object-fit: cover;"
+                                 onerror="this.onerror=null; this.src='{{ asset('images/avatar.png') }}';">
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="/profile">
-                                <i class="fas fa-user me-2"></i> {{ __('messages.profile') }}
+                                <img src="{{ Auth::user()->avatar ? asset('storage/avatars/' . Auth::user()->avatar) : asset('images/avatar.png') }}"
+                                     class="rounded-circle me-2 header-avatar" 
+                                     style="width: 20px; height: 20px; object-fit: cover;"
+                                     onerror="this.onerror=null; this.src='{{ asset('images/avatar.png') }}';">
+                                {{ __('messages.profile') }}
                             </a></li>
                             @if (auth()->user()->role_id == 1)
                             <li><a class="dropdown-item" href="/my-courses">
@@ -78,6 +85,11 @@
                                 <i class="fas fa-chart-line me-2"></i> {{ __('messages.careers') }}
                             </a></li>
                             @endif
+                            <!-- ============ TEST MENYUSI QO'SHILDI ============ -->
+                            <li><a class="dropdown-item" href="/test">
+                                <i class="fas fa-clipboard-list me-2"></i> Test
+                            </a></li>
+                            <!-- ============================================= -->
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -154,15 +166,19 @@
                         <div class="dropdown">
                             <a class="btn-outline-sm dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" style="padding: 5px 10px;">
                                 <img id="headerAvatar" 
-                                         src="{{ Auth::user()->avatar ? Storage::url('avatars/' . Auth::user()->avatar) : asset('images/avatar.png') }}"
-                                     class="rounded-circle me-2" 
+                                         src="{{ Auth::user()->avatar ? asset('storage/avatars/' . Auth::user()->avatar) : asset('images/avatar.png') }}"
+                                     class="rounded-circle me-2 header-avatar" 
                                      style="width: 30px; height: 30px; object-fit: cover;"
                                      onerror="this.onerror=null; this.src='{{ asset('images/avatar.png') }}';">
                                 <span id="headerUserName">{{ Auth::user()->name }}</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="/profile">
-                                    <i class="fas fa-user me-2"></i> {{ __('messages.profile') }}
+                                    <img src="{{ Auth::user()->avatar ? asset('storage/avatars/' . Auth::user()->avatar) : asset('images/avatar.png') }}"
+                                         class="rounded-circle me-2 header-avatar" 
+                                         style="width: 20px; height: 20px; object-fit: cover;"
+                                         onerror="this.onerror=null; this.src='{{ asset('images/avatar.png') }}';">
+                                    {{ __('messages.profile') }}
                                 </a></li>
                                 @if (auth()->user()->role_id == 1)
                                 <li><a class="dropdown-item" href="/master-class">
@@ -176,6 +192,11 @@
                                     <i class="fas fa-chart-line me-2"></i> {{ __('messages.dashboard') }}
                                 </a></li>
                                 @endif
+                                <!-- ============ TEST MENYUSI QO'SHILDI ============ -->
+                                <li><a class="dropdown-item" href="/test">
+                                    <i class="fas fa-clipboard-list me-2"></i> Test
+                                </a></li>
+                                <!-- ============================================= -->
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf

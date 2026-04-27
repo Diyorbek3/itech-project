@@ -26,15 +26,14 @@ class MasterClassController extends Controller
         // Masterclass ma'lumotlarini olish
         $mc = MasterClass::find($request->masterclass_id);
 
-        // EMAIL NI Olish (agar user tizimga kirgan bo'lsa)
+        // EMAIL NI Olish
         $email = null;
         if (auth()->check()) {
-            $email = auth()->user()->email;  // Auth userning emaili
+            $email = auth()->user()->email;
         } else {
             $email = $request->email ?? 'Kiritilmagan';
         }
 
-        // Agar email bo'sh bo'lsa
         if (empty($email)) {
             $email = 'Kiritilmagan';
         }
@@ -52,11 +51,12 @@ class MasterClassController extends Controller
             'updated_at' => now()
         ]);
 
-        // ========== TELEGRAMGA XABAR YUBORISH ==========
+        // ========== TELEGRAMGA XABAR YUBORISH (TO'G'RILANGAN) ==========
         $token = env('TELEGRAM_BOT_TOKEN');
-        $chatId = env('TELEGRAM_CHAT_ID_MASTERCLASS');
+        $chatId = env('TELEGRAM_CHAT_ID');
+        $topicId = env('TELEGRAM_TOPIC_ID_MASTERCLASS');
 
-        if ($token && $chatId) {
+        if ($token && $chatId && $topicId) {
             $text = "🚀 **Yangi ariza (Masterclass)**\n\n";
             $text .= "🆔 ID: " . $registration->id . "\n";
             $text .= "🎓 Kurs: " . ($mc ? $mc->title : 'Noma\'lum') . "\n";
@@ -70,6 +70,7 @@ class MasterClassController extends Controller
             try {
                 Http::post("https://api.telegram.org/bot{$token}/sendMessage", [
                     'chat_id' => $chatId,
+                    'message_thread_id' => (int)$topicId,
                     'text' => $text,
                     'parse_mode' => 'Markdown'
                 ]);
@@ -77,11 +78,20 @@ class MasterClassController extends Controller
                 $registration->telegram_sent = true;
                 $registration->save();
 
+                \Log::info('Masterclass arizasi Telegramga yuborildi (Master topic)', [
+                    'topic_id' => $topicId,
+                    'registration_id' => $registration->id
+                ]);
+
             } catch (\Exception $e) {
                 \Log::error('Masterclass Telegram xatosi: ' . $e->getMessage());
             }
         } else {
-            \Log::warning('Telegram sozlamalari topilmadi (Masterclass)');
+            \Log::warning('Telegram sozlamalari topilmadi (Masterclass)', [
+                'token' => $token ? 'bor' : 'yo\'q',
+                'chatId' => $chatId ? 'bor' : 'yo\'q',
+                'topicId' => $topicId ? 'bor' : 'yo\'q'
+            ]);
         }
 
         return response()->json([

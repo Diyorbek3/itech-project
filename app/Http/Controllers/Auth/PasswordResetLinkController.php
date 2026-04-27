@@ -29,16 +29,19 @@ class PasswordResetLinkController extends Controller
             'email' => ['required', 'email'],
         ]);
 
-        // We will send the password reset link to this user. Once we have attempted
-        // to send the link, we will examine the response then see the message we
-        // need to show to the user. Finally, we'll send out a proper response.
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
+        $user = \App\Models\User::where('email', $request->email)->first();
 
-        return $status == Password::RESET_LINK_SENT
-                    ? back()->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                        ->withErrors(['email' => __($status)]);
+        if (!$user) {
+            return back()->withErrors(['email' => __('messages.user_not_found')]);
+        }
+
+        if (!$user->security_question) {
+            return back()->withErrors(['email' => __('messages.security_question_not_set')]);
+        }
+
+        // Store email in session to be used in the next step
+        session(['reset_email' => $request->email]);
+
+        return redirect()->route('password.security-question');
     }
 }

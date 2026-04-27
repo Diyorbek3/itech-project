@@ -202,7 +202,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($masterclassRegistrations ?? [] as $reg)
+                        @forelse($allRegistrations ?? [] as $reg)
                             <tr>
                                 <td>{{ $reg->id }}</td>
                                 <td><strong>{{ $reg->name }}</strong></td>
